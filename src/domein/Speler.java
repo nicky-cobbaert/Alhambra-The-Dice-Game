@@ -56,3 +56,4 @@ public class Speler
 	}
 
 }
+//Dit is een commit van Sverre Lippens
