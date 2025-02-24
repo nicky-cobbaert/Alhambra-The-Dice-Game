@@ -56,6 +56,7 @@ public class Speler
 	}
 
 }
+//Dit is een commit van Jelle Van Horen
 //Dit is een commit van Sverre Lippens
 // Dit is een commit van Wout Gheysels
 // Dit is een commit van Lars De Wever
