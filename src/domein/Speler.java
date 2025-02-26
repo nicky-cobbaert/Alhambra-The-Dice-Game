@@ -7,6 +7,7 @@ public class Speler
     private int geboortejaar;
     private int aantalGewonnen, aantalGespeeld;
     
+    private final static int HUIDIG_JAAR = 2025;    
 
     public Speler(String gebruikersnaam,int  geboortejaar) 
     {
@@ -28,6 +29,10 @@ public class Speler
 	}
 
 	private void setGebruikersnaam(String gebruikersnaam) {
+		if (gebruikersnaam==null || gebruikersnaam.isEmpty() || gebruikersnaam.isBlank() || gebruikersnaam.length()<6) {
+			throw new IllegalArgumentException("Ongeldige gebruikersnaam");
+		}
+		
 		this.gebruikersnaam = gebruikersnaam;
 	}
 
@@ -36,6 +41,9 @@ public class Speler
 	}
 
 	private void setGeboortejaar(int geboortejaar) {
+		if (geboortejaar+6>HUIDIG_JAAR || geboortejaar+100<HUIDIG_JAAR) {
+			throw new IllegalArgumentException("Je moet tussen de leeftijd van 6 en 100 zijn om dit spel te mogen spelen");
+		}
 		this.geboortejaar = geboortejaar;
 	}
 
@@ -44,6 +52,9 @@ public class Speler
 	}
 
 	private void setAantalGewonnen(int aantalGewonnen) {
+		if (aantalGewonnen<0) {
+			throw new IllegalArgumentException("Je moet een positief getal (of 0) aantal gewonnen spellen hebben");
+		}
 		this.aantalGewonnen = aantalGewonnen;
 	}
 
@@ -52,6 +63,9 @@ public class Speler
 	}
 
 	private void setAantalGespeeld(int aantalGespeeld) {
+		if (aantalGespeeld<0) {
+			throw new IllegalArgumentException("Je moet een positief getal (of 0) aantal gespeelde spellen hebben");
+		}
 		this.aantalGespeeld = aantalGespeeld;
 	}
 

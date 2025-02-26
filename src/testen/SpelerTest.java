@@ -3,9 +3,8 @@ package testen;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -17,7 +16,7 @@ class SpelerTest
 {
 	private Speler speler;
 	private final int geboortejaar = 2025;
-
+	
 	@Test
 	void maakSpeler_alleGegevensCorrect_maaktObject() 
 	{
