@@ -1,19 +1,21 @@
 package persistentie;
 
-import domein.Speler;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import domein.Speler;
 
 public class SpelerMapper {
 
-    private static final String INSERT_SPELER = "INSERT INTO G100.speler (gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld)"
+    private static final String INSERT_SPELER = "INSERT INTO G74.speler (gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld)"
             + "VALUES (?, ?, ?, ?)";
     
-    private static final String GEEF_SPELER = "SELECT * FROM G100.speler WHERE gebruikersnaam = ?";
+    private static final String GEEF_SPELER = "SELECT * FROM G74.speler WHERE gebruikersnaam = ?";
             
     public void voegToe(Speler speler) 
     {
@@ -56,4 +58,13 @@ public class SpelerMapper {
         return speler;
     }
 
+    //Dit is voor de DTO te kunnen opstellen. Als de databank werkt mag dit weg!
+    public List<Speler> geefAlleSpelers(){
+    	List<Speler> spelers = new ArrayList<>();
+    	
+    	spelers.add(new Speler("bestaatAl",2003));
+    	spelers.add(new Speler("bestaatOokAl",1999,4,10));
+    	
+    	return spelers;
+    }
 }
