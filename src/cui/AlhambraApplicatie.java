@@ -36,6 +36,7 @@ public class AlhambraApplicatie {
 			System.out.printf("1. Registreer nieuwe speler %n2. Start nieuw spel %n3. Afsluiten %nUw Keuze > ");
 			keuze = input.nextInt();
 			
+			input.nextLine();
 		} while (keuze<1||keuze>3);
 		
 		return keuze;
@@ -46,7 +47,7 @@ public class AlhambraApplicatie {
 		int geboortejaar;
 		
 		System.out.printf("Geef uw gebruikersnaam in > ");
-		gebruikersnaam = input.next();
+		gebruikersnaam = input.nextLine();
 		
 		System.out.printf("Geef uw geboortejaar in > ");
 		geboortejaar = input.nextInt();
