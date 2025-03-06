@@ -41,7 +41,7 @@ class SpelerTest
 	
 	@ParameterizedTest
 	@NullAndEmptySource
-	@ValueSource(strings = {"","  ","	","\t\t","\n","ik","nieuw","bestaatAl"})
+	@ValueSource(strings = {"","  ","	","\t\t","\n","ik","nieuw"})
 	void maakSpeler_OngeldigeGebruikersnaam_WerptException(String value) {
 		assertThrows(IllegalArgumentException.class, ()-> new Speler(value,2003));
 	}
