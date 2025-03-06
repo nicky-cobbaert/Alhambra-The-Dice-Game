@@ -27,6 +27,7 @@ public class AlhambraApplicatie {
 			
 			keuze = menu();
 		} 
+		System.out.println("Bedankt om te spelen. Hopelijk tot een volgende keer!");
 	}
 	
 	private int menu() {
@@ -37,6 +38,10 @@ public class AlhambraApplicatie {
 			keuze = input.nextInt();
 			
 			input.nextLine();
+			
+			if (keuze<1||keuze>3) {
+				System.out.printf("%nOngeldige keuze, probeer opnieuw! %n%n");
+			}
 		} while (keuze<1||keuze>3);
 		
 		return keuze;
