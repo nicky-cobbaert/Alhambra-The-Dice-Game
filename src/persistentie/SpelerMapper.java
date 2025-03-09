@@ -65,8 +65,9 @@ public class SpelerMapper {
     	List<Speler> alleSpelers = new ArrayList<Speler>();
     	try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
     			PreparedStatement query = conn.prepareStatement("SELECT * FROM speler")){
-    		try(ResultSet rs = query.executeQuery()) {
-    			if(rs.next())
+    		try (ResultSet rs = query.executeQuery()) {
+    			
+    			while(rs.next())
     			{
     				String gebruikersnaam = rs.getString("Gebruikers");
     				int geboortejaar = rs.getInt("geboortejaar");

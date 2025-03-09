@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import utils.Kleuren;
+
 public class Spel {
     private final List<String> beschikbareKleuren;
     private final List<Speler> gekozenSpelers;

@@ -72,13 +72,13 @@ public class DomeinController {
 
         return resultaat;
     }
-    
-    public List<Speler> geefBeschikbareSpelers(){
-    	return spel.geefBeschikbareSpelers(spelerRepo.geefAlleSpelers());
-    }
-    
+    //Deze hebben volgens mij geen nut, staan ook niet in DCD!
+//    public List<Speler> geefBeschikbareSpelers(){
+//    	return spel.geefBeschikbareSpelers(spelerRepo.geefAlleSpelers());
+//    }
+//    
     public List<String> geefBeschikbareKleuren(){
     	return spel.getBeschikbareKleuren();
     }
-    
+//    
 }

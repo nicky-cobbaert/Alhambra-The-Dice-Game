@@ -20,7 +20,7 @@ class SpelerTest
 	@Test
 	void maakSpeler_alleGegevensCorrect_maaktObject() 
 	{
-		speler = new Speler("avatars", 2003, 4,25);
+		speler = new Speler("avatars", 2003, 4,25,null);
 		Assertions.assertEquals("avatars", speler.getGebruikersnaam());
 		Assertions.assertEquals(2003, speler.getGeboortejaar());
 		Assertions.assertEquals(4, speler.getAantalGewonnen());
