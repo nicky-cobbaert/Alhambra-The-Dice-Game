@@ -48,7 +48,7 @@ public class SpelerMapper {
                     int aantalGewonnen = rs.getInt("aantalGewonnen");
                     int aantalGespeeld = rs.getInt("aantalGespeeld");
 
-                    speler = new Speler(gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld);               
+                    speler = new Speler(gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld,null);               
                 }
             }
         } catch (SQLException ex) {
@@ -58,6 +58,31 @@ public class SpelerMapper {
         return speler;
     }
 
+    
+    // er moet nog mogelijk worden gemaakt om alle spelers te krijgen ui de database
+    
+    public List<Speler> geefAlleSpelers(){
+    	List<Speler> alleSpelers = new ArrayList<Speler>();
+    	try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+    			PreparedStatement query = conn.prepareStatement("SELECT * FROM speler")){
+    		try(ResultSet rs = query.executeQuery()) {
+    			if(rs.next())
+    			{
+    				String gebruikersnaam = rs.getString("Gebruikers");
+    				int geboortejaar = rs.getInt("geboortejaar");
+                    int aantalGewonnen = rs.getInt("aantalGewonnen");
+                    int aantalGespeeld = rs.getInt("aantalGespeeld");
+                    
+                    alleSpelers.add(new Speler(gebruikersnaam,geboortejaar,aantalGewonnen,aantalGespeeld,null));
+    			}
+    		}
+    	}catch (SQLException ex) {
+    		throw new RuntimeException(ex);
+    	}
+    	return alleSpelers;
+    }
+    
+    
     //Dit is voor de DTO te kunnen opstellen. Als de databank werkt mag dit weg!
 //    public List<Speler> geefAlleSpelers(){
 //    	List<Speler> spelers = new ArrayList<>();

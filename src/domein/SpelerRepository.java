@@ -48,13 +48,13 @@ public class SpelerRepository {
     
     public List<Speler> geefAlleSpelers() { 
     	
-    	List<Speler> spelers = new ArrayList<>();
-    	
-    	for (Speler s : spelers) {
-    		spelers.add(s);
+    	List<Speler> alleSpelers = new ArrayList<>();
+ 
+    	for (Speler s : mapper.geefAlleSpelers()) { // spelers vervangen door this.spelers
+    		alleSpelers.add(s);
     	}
     	
-    	return spelers;
+    	return alleSpelers;
     }
     
 

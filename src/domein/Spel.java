@@ -45,7 +45,7 @@ public class Spel {
 
       
         Random rand = new Random();
-        startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()-1));
+        startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
 
         System.out.println("Het spel is gestart!");
         System.out.println("Startspeler: " + startSpeler.getGebruikersnaam());
@@ -59,5 +59,17 @@ public class Spel {
 
     public Speler getStartSpeler() {
         return startSpeler;
+    }
+    
+    public List<Speler> geefBeschikbareSpelers(List<Speler> alleSpelers){
+    	List<Speler> bs = new ArrayList<Speler>();
+    	
+    	for(Speler s: alleSpelers) {
+    		if(!gekozenSpelers.contains(s)) {
+    			bs.add(s);
+    		}
+    	}
+    	
+    	return bs;
     }
 }

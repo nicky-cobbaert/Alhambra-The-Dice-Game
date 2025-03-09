@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.Objects;
 
 public class Speler 
 {
@@ -80,6 +81,30 @@ public class Speler
 		public void setKleur(String kleur) { // probleem bij klasse Spel dus public
 			this.kleur = kleur;
 		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(gebruikersnaam);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Speler other = (Speler) obj;
+			return Objects.equals(gebruikersnaam, other.gebruikersnaam);
+		}
+
+		@Override
+		public String toString() {
+			return "Speler [gebruikersnaam=" + gebruikersnaam + ", geboortejaar=" + geboortejaar + "]";
+		}
+		
+		
 
 }
 //Dit is een commit van Jelle Van Horen

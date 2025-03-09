@@ -22,6 +22,10 @@ public class DomeinController {
         spelerRepo.voegToe(nieuweSpeler);
     }
     
+    public void maakNieuwSpel() {
+    	spel = new Spel();
+    }
+    
     public void startSpel() {
     	spel.startSpel();
     }
@@ -30,8 +34,8 @@ public class DomeinController {
     	return spelerRepo.geefAlleSpelers();
     }
     
-    public void kiesSpelerEnKleur() {
-    	// dit snappen we niet?
+    public void kiesSpelerEnKleur(Speler s,String kleur) {
+    	spel.kiesSpeler(s, kleur);
     }
     
     public List<SpelerDTO> zetGekozenSpelersOmNaarDTO(List<Speler> spelers) { //geen return type in DCD?
@@ -67,6 +71,14 @@ public class DomeinController {
         }
 
         return resultaat;
+    }
+    
+    public List<Speler> geefBeschikbareSpelers(){
+    	return spel.geefBeschikbareSpelers(spelerRepo.geefAlleSpelers());
+    }
+    
+    public List<String> geefBeschikbareKleuren(){
+    	return spel.getBeschikbareKleuren();
     }
     
 }
