@@ -57,18 +57,7 @@ public class SpelerRepository {
     	return spelers;
     }
     
-//    public SpelerDTO[] geefAlleSpelers() {
-//		SpelerDTO[] resultaat = new SpelerDTO[spelers.size()];
-//
-//		int index = 0;
-//
-//		for (Speler s : spelers) {
-//			resultaat[index++] = new SpelerDTO(
-//					s.getGebruikersnaam(),s.getGeboortejaar(),
-//					s.getAantalGespeeld(),s.getAantalGewonnen());
-//		}
-//		return resultaat;
-//	}
+
 
    
 }

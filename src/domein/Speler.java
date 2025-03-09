@@ -73,7 +73,7 @@ public class Speler
 		this.aantalGespeeld = aantalGespeeld;
 	}
 	
-	 public String getKleur() {
+	    public String getKleur() {
 			return kleur;
 		}
 

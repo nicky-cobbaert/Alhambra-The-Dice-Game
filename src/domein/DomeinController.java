@@ -34,18 +34,20 @@ public class DomeinController {
     	// dit snappen we niet?
     }
     
-    public SpelerDTO[] zetGekozenSpelersOmNaarDTO(List<Speler> spelers) { //geen return type in DCD?
+    public List<SpelerDTO> zetGekozenSpelersOmNaarDTO(List<Speler> spelers) { //geen return type in DCD?
     	
-    	   SpelerDTO[] resultaat = new SpelerDTO[spelers.size()];
+    	   List<SpelerDTO> resultaat = new ArrayList<>();
     	    
     	    for (int i = 0; i < spelers.size(); i++) {
     	        Speler speler = spelers.get(i);
-    	        resultaat[i] = new SpelerDTO(
+    	        SpelerDTO sp = new SpelerDTO(
     	            speler.getGebruikersnaam(),
     	            speler.getGeboortejaar(),
     	            speler.getAantalGespeeld(),
     	            speler.getAantalGewonnen()
     	        );
+    	        
+    	        resultaat.add(sp);
     	    }
     	    
     	    return resultaat;

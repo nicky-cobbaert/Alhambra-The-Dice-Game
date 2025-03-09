@@ -27,7 +27,7 @@ public class Spel {
 
     public void kiesSpeler(Speler speler, String kleur) {
         if (gekozenSpelers.size() >= 6) {
-            throw new IllegalStateException("Er mogen maximaal 6 spelers meedoen.");
+            throw new IllegalArgumentException("Er mogen maximaal 6 spelers meedoen.");
         }
         if (!beschikbareKleuren.contains(kleur)) {
             throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
@@ -40,12 +40,12 @@ public class Spel {
 
     public void startSpel() {
         if (gekozenSpelers.size() < 3) {
-            throw new IllegalStateException("Er moeten minstens 3 spelers zijn om het spel te starten.");
+            throw new IllegalArgumentException("Er moeten minstens 3 spelers zijn om het spel te starten.");
         }
 
       
         Random rand = new Random();
-        startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
+        startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()-1));
 
         System.out.println("Het spel is gestart!");
         System.out.println("Startspeler: " + startSpeler.getGebruikersnaam());
