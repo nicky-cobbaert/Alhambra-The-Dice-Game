@@ -6,20 +6,24 @@ public class Speler
     private String gebruikersnaam;
     private int geboortejaar;
     private int aantalGewonnen, aantalGespeeld;
+    private String kleur; //waarom geen getters/setters?
     
-    private final static int HUIDIG_JAAR = 2025;    
+   
 
-    public Speler(String gebruikersnaam,int  geboortejaar) 
+	private final static int HUIDIG_JAAR = 2025; //moet dit niet op dcd?    
+
+    public Speler(String gebruikersnaam, int  geboortejaar) 
     {
-    	this(gebruikersnaam,geboortejaar,0,0);
+    	this(gebruikersnaam,geboortejaar,0,0,"blauw");
     }
     
-    public Speler(String gebruikersnaam,int  geboortejaar, int aantalGewonnen, int aantalGespeeld) 
+    public Speler(String gebruikersnaam,int  geboortejaar, int aantalGewonnen, int aantalGespeeld, String kleur) 
     {
     	setGebruikersnaam(gebruikersnaam);
     	setGeboortejaar(geboortejaar);
     	setAantalGewonnen(aantalGewonnen);
     	setAantalGespeeld(aantalGespeeld);
+    	setKleur(kleur);
     }
     
     
@@ -68,6 +72,14 @@ public class Speler
 		}
 		this.aantalGespeeld = aantalGespeeld;
 	}
+	
+	 public String getKleur() {
+			return kleur;
+		}
+
+		public void setKleur(String kleur) { // probleem bij klasse Spel dus public
+			this.kleur = kleur;
+		}
 
 }
 //Dit is een commit van Jelle Van Horen

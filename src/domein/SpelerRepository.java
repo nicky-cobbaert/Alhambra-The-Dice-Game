@@ -1,11 +1,14 @@
 package domein;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import exceptions.GebruikersnaamInGebruikException;
 import persistentie.SpelerMapper;
 
 public class SpelerRepository {
+	
+	private final List<Speler> spelers;
 
     private final SpelerMapper mapper;
     
@@ -15,7 +18,7 @@ public class SpelerRepository {
     public SpelerRepository() 
     {
         mapper = new SpelerMapper();
-        
+        spelers = new ArrayList<Speler>();
         //Dit is voor de 'DTO'
 //        spelers=mapper.geefAlleSpelers();
     }
@@ -42,5 +45,31 @@ public class SpelerRepository {
 //        }
 //    	return false;
     }  
+    
+    public List<Speler> geefAlleSpelers() { 
+    	
+    	List<Speler> spelers = new ArrayList<>();
+    	
+    	for (Speler s : spelers) {
+    		spelers.add(s);
+    	}
+    	
+    	return spelers;
+    }
+    
+//    public SpelerDTO[] geefAlleSpelers() {
+//		SpelerDTO[] resultaat = new SpelerDTO[spelers.size()];
+//
+//		int index = 0;
+//
+//		for (Speler s : spelers) {
+//			resultaat[index++] = new SpelerDTO(
+//					s.getGebruikersnaam(),s.getGeboortejaar(),
+//					s.getAantalGespeeld(),s.getAantalGewonnen());
+//		}
+//		return resultaat;
+//	}
+
+   
 }
 
