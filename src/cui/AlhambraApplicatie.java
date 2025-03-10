@@ -114,13 +114,16 @@ public class AlhambraApplicatie {
 	private String geefKeuzeKleur(List<String> kleuren){
 		/* nog niet duidelijk of we een enum gaan gebruiken en hoe de kleur keuze gaat werken 
 		 * dus enkel begin code*/
+		int keuze;
 		do {
 			System.out.println("Kies uit 1 van volgende beschikbare kleuren:");
 			/*zelfde principe als bij geefKeuzeSpeler()*/
 			for (int index = 0; index < kleuren.size(); index ++) {
 				System.out.printf("%d. %s%n", index+1 , kleuren.get(index).toString());
 			}
-		}while(false);
-		return "blauw";//Even iets ingevuld zodat ik verder kon testen, mag uiteraard aangepast worden!
+			System.out.printf("Geef hier het nummer voor de kleur die je wilt selecteren voor dit spel in >");
+			keuze = input.nextInt();
+		}while(keuze < 1||keuze > kleuren.size());
+		return kleuren.get(keuze-1);//Even iets ingevuld zodat ik verder kon testen, mag uiteraard aangepast worden!
 	}
 }
