@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import domein.DomeinController;
 import domein.Speler;
+import dto.SpelerDTO;
 
 public class AlhambraApplicatie {
 	
@@ -91,7 +92,12 @@ public class AlhambraApplicatie {
 			}
 			
 		} while (keuzeNieuw != 2&&gekozenSpelers.size()<6 /*|| gekozenSpelers.size()>3*/); // Er moeten 3 spelers meespelen, dit kan pas nadat kleuren is geïmplementeerd!
-		
+		System.out.println("volgende Spelers nemen deel aan het Spel: ");
+		for (Speler s:dc.geefDeelnemerVanSpel()) {
+			System.out.println(s.toString());
+		}
+		System.out.println();
+		//dc.startSpel();
 		System.out.println("Spel is gespeeld!");
 	}
 	private Speler geefKeuzeSpeler(List<Speler> lijstVanSpelers) {
