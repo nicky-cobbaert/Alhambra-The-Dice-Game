@@ -91,7 +91,7 @@ public class AlhambraApplicatie {
 				alleBeschikbareKleuren.remove(kleur);
 			}
 			
-		} while (keuzeNieuw != 2&&gekozenSpelers.size()<6 /*|| gekozenSpelers.size()>3*/); // Er moeten 3 spelers meespelen, dit kan pas nadat kleuren is geïmplementeerd!
+		} while (keuzeNieuw != 2&&gekozenSpelers.size()<6 || gekozenSpelers.size()>3); // Er moeten 3 spelers meespelen, dit kan pas nadat kleuren is geïmplementeerd!
 		System.out.println("volgende Spelers nemen deel aan het Spel: ");
 		for (Speler s:dc.geefDeelnemerVanSpel()) {
 			System.out.println(s.toString());
