@@ -28,10 +28,10 @@ public class Spel {
     }
 
     public void kiesSpeler(Speler speler, String kleur) {
-        if (gekozenSpelers.size() >= 6) {
+        if (gekozenSpelers.size() >= 6) { // Onnodige code, is opgevangen in de console zelf met een break
             throw new IllegalArgumentException("Er mogen maximaal 6 spelers meedoen.");
         }
-        if (!beschikbareKleuren.contains(kleur)) {
+        if (!beschikbareKleuren.contains(kleur)) { // Ook eigenlijk onnodige code, geven een lijst met alle beschikbare kleuren en moet daartussen kiezen dus kan geen gekozen kleur pakken...
             throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
         }
         

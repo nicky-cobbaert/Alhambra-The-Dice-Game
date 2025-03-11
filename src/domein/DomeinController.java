@@ -80,9 +80,9 @@ public class DomeinController {
 //    public List<Speler> geefBeschikbareSpelers(){
 //    	return spel.geefBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 //    }
-//    
+
     public List<String> geefBeschikbareKleuren(){
     	return spel.getBeschikbareKleuren();
     }
-//    
+   
 }

@@ -74,31 +74,40 @@ public class AlhambraApplicatie {
 		List<String> alleBeschikbareKleuren = dc.geefBeschikbareKleuren();
 		
 		do {
-			System.out.printf("Wilt u nog een speler toevoegen?%nTyp '1' voor ja \t Typ '2' voor neen%n jouw keuze > ");
+			System.out.printf("Wilt u nog een speler toevoegen?%nTyp '1' voor ja \t Typ '2' voor neen%nJouw keuze > ");
 			keuzeNieuw = input.nextInt();
 
 			if (keuzeNieuw != 1 && keuzeNieuw != 2) {
 				System.out.println("Dit was niet een van de opties, probeer opnieuw!");
-			}
-			if (keuzeNieuw == 1) {
-				Speler speler = geefKeuzeSpeler(alleBeschikbareSpelers);
-				String kleur = geefKeuzeKleur(alleBeschikbareKleuren);
+			} else {
+				if (keuzeNieuw == 1) {
+					Speler speler = geefKeuzeSpeler(alleBeschikbareSpelers);
+					String kleur = geefKeuzeKleur(alleBeschikbareKleuren);
 				
-				gekozenSpelers.add(speler);
-				dc.kiesSpelerEnKleur(speler, kleur);
+					gekozenSpelers.add(speler);
+					dc.kiesSpelerEnKleur(speler, kleur);
 				
-				alleBeschikbareSpelers.remove(speler);
-				alleBeschikbareKleuren.remove(kleur);
-			}
+					alleBeschikbareSpelers.remove(speler);
+					alleBeschikbareKleuren = dc.geefBeschikbareKleuren();
+				}
 			
-		} while (keuzeNieuw != 2&&gekozenSpelers.size()<6 || gekozenSpelers.size()>3); // Er moeten 3 spelers meespelen, dit kan pas nadat kleuren is geïmplementeerd!
-		System.out.println("volgende Spelers nemen deel aan het Spel: ");
+				if (keuzeNieuw==2 && gekozenSpelers.size()<3) {
+					System.out.println("Er moeten minstens 3 spelers meespelen!");
+				}
+			}
+			if (gekozenSpelers.size()==6) { //Als er 6 spelers geselecteerd zijn gaat hij uit de whileloop en gaat hij verder naar het spel
+				break;	
+			}
+		} while (keuzeNieuw != 2 || gekozenSpelers.size()<3); // Er moeten 3 spelers meespelen, dit kan pas nadat kleuren is geïmplementeerd!
+									//Bovenstaande code is opgevangen in dc.startSpel hieronder! (staat momenteel in commentaar)
+		
+		System.out.println("Volgende spelers nemen deel aan het spel: ");
 		for (Speler s:dc.geefDeelnemerVanSpel()) {
 			System.out.println(s.toString());
 		}
 		System.out.println();
-		//dc.startSpel();
-		System.out.println("Spel is gespeeld!");
+//		dc.startSpel();
+		System.out.println("Het spel is gespeeld!");
 	}
 	private Speler geefKeuzeSpeler(List<Speler> lijstVanSpelers) {
 		int keuze;
