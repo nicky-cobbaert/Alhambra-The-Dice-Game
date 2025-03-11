@@ -1,12 +1,14 @@
 package cui;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import domein.DomeinController;
 import domein.Speler;
 import dto.SpelerDTO;
+import exceptions.GebruikersnaamInGebruikException;
 
 public class AlhambraApplicatie {
 	
@@ -22,15 +24,27 @@ public class AlhambraApplicatie {
 	
 	public void startApplicatie() {
 		int keuze = menu();
+		boolean isGeldig = true;
 		
-		while (keuze != 3) {
-			switch (keuze) {
-				case 1 -> registreerNieuweSpeler();
-				case 2 -> startNieuwSpel();
+		do {
+			try {
+				while (keuze != 3) {
+					switch (keuze) {
+						case 1 -> registreerNieuweSpeler();
+						case 2 -> startNieuwSpel();
+					}
+					
+					keuze = menu();
+				} 
+			isGeldig = false;
+			} catch (InputMismatchException e) {
+				System.out.println(e.getMessage());
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			} catch (GebruikersnaamInGebruikException e) {
+				System.out.println(e.getMessage());
 			}
-			
-			keuze = menu();
-		} 
+		} while (isGeldig);
 		System.out.printf("Bedankt om te spelen. Hopelijk tot een volgende keer!");
 	}
 	
@@ -40,8 +54,6 @@ public class AlhambraApplicatie {
 		do {
 			System.out.printf("1. Registreer nieuwe speler %n2. Start nieuw spel %n3. Afsluiten %nUw Keuze > ");
 			keuze = input.nextInt();
-			
-			input.nextLine();
 			
 			if (keuze<1||keuze>3) {
 				System.out.printf("%nOngeldige keuze, probeer opnieuw! %n%n");
@@ -54,6 +66,8 @@ public class AlhambraApplicatie {
 	private void registreerNieuweSpeler() {
 		String gebruikersnaam;
 		int geboortejaar;
+		
+		input.nextLine();
 		
 		System.out.printf("Geef uw gebruikersnaam in > ");
 		gebruikersnaam = input.nextLine();
