@@ -41,6 +41,9 @@ public class Spel {
 		if (gekozenSpelers.size() >= 6) { // Onnodige code, is opgevangen in de console zelf met een break
 			throw new IllegalArgumentException("Er mogen maximaal 6 spelers meedoen.");
 		}
+		if (kleur == null || kleur.isBlank()) {
+			throw new IllegalArgumentException("Er is geen kleur gekozen");
+		}
 
 		/**
 		 * if (!beschikbareKleuren.contains(kleur)) { // Ook eigenlijk onnodige code,
@@ -50,24 +53,25 @@ public class Spel {
 		 */
 
 		/** ---------KleurStringNaarEnum--------------- */
-		switch (kleur.toLowerCase()) {
-		case "blauw" -> huidigeKleur = Kleuren.BLAUW;
-		case "groen" -> huidigeKleur = Kleuren.GROEN;
-		case "wit" -> huidigeKleur = Kleuren.WIT;
-		case "geel" -> huidigeKleur = Kleuren.GEEL;
-		case "oranje" -> huidigeKleur = Kleuren.ORANJE;
-		case "rood" -> huidigeKleur = Kleuren.ROOD;
-		default -> throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
-		}
+
+		huidigeKleur = Kleuren.valueOf(kleur.toUpperCase());
+
+//		switch (kleur.toLowerCase()) {
+//		case "blauw" -> huidigeKleur = Kleuren.BLAUW;
+//		case "groen" -> huidigeKleur = Kleuren.GROEN;
+//		case "wit" -> huidigeKleur = Kleuren.WIT;
+//		case "geel" -> huidigeKleur = Kleuren.GEEL;
+//		case "oranje" -> huidigeKleur = Kleuren.ORANJE;
+//		case "rood" -> huidigeKleur = Kleuren.ROOD;
+//		default -> throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
+//		}
 		/** ------------------------------------------- */
 
-		if (!(beschikbareKleuren.contains(huidigeKleur))) {
-			throw new IllegalArgumentException("Deze kleur is al gekozen!");
-		}
-		
+
+
 		speler.setKleur(huidigeKleur); // was niet zichtbaar*
 		gekozenSpelers.add(speler);
-		beschikbareKleuren.remove(huidigeKleur); 
+		beschikbareKleuren.remove(huidigeKleur);
 	}
 
 	public void startSpel() {
@@ -82,8 +86,8 @@ public class Spel {
 		System.out.println("Startspeler: " + startSpeler.getGebruikersnaam());
 
 		for (Speler speler : gekozenSpelers) {
-			System.out.println("Speler: " + speler.getGebruikersnaam() + ", Kleur: " + speler.getKleur().toString().toLowerCase()
-					+ ", Leeftijd: " + speler.getGeboortejaar());
+			System.out.println("Speler: " + speler.getGebruikersnaam() + ", Kleur: "
+					+ speler.getKleur().toString().toLowerCase() + ", Leeftijd: " + speler.getGeboortejaar());
 		}
 	}
 
