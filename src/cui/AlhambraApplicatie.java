@@ -22,22 +22,26 @@ public class AlhambraApplicatie {
 	}
 	
 	public void startApplicatie() {
-		int keuze = menu();
+		int keuze;
 		boolean isGeldig = true;
 		
 		do {
 			try {
+				keuze = menu();
+				
 				while (keuze != 3) {
 					switch (keuze) {
 						case 1 -> registreerNieuweSpeler();
 						case 2 -> startNieuwSpel();
 					}
-					
+				
 					keuze = menu();
 				} 
 			isGeldig = false;
+			
 			} catch (InputMismatchException e) {
-				System.out.println(e.getMessage());
+				System.out.printf("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!%n");
+				input.nextLine();
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			} catch (GebruikersnaamInGebruikException e) {
@@ -72,7 +76,7 @@ public class AlhambraApplicatie {
 		gebruikersnaam = input.nextLine();
 		
 		System.out.printf("Geef uw geboortejaar in > ");
-		geboortejaar = Integer.parseInt(input.nextLine()); // parseint gebruikt om buffer te legen (indien try-catch)
+		geboortejaar = input.nextInt(); // parseint gebruikt om buffer te legen (indien try-catch)
 		
 		dc.registreerSpeler(gebruikersnaam, geboortejaar);
 	}
@@ -88,7 +92,7 @@ public class AlhambraApplicatie {
 		
 		do {
 			System.out.printf("Wilt u nog een speler toevoegen?%nTyp '1' voor ja \t Typ '2' voor neen%nJouw keuze > ");
-			keuzeNieuw = Integer.parseInt(input.nextLine()); 
+			keuzeNieuw = input.nextInt(); 
 
 			if (keuzeNieuw != 1 && keuzeNieuw != 2) {
 				System.out.println("Dit was niet een van de opties, probeer opnieuw!");
@@ -131,7 +135,7 @@ public class AlhambraApplicatie {
 				System.out.printf("%d. %s%n", index , lijstVanSpelers.get(index-1).toString()); //Alleen gebruikersnaam genoeg? 
 			}
 			System.out.printf("Geef hier het nummer voor de speler die je wilt selecteren voor dit spel in > ");
-			keuze = Integer.parseInt(input.nextLine());
+			keuze = input.nextInt();
 			if(keuze > lijstVanSpelers.size() || keuze < 1) {
 				System.out.println("Foutieve waarde ingegeven, probeer opnieuw! ");
 			}
