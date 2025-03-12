@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import domein.DomeinController;
 import domein.Speler;
-import dto.SpelerDTO;
 import exceptions.GebruikersnaamInGebruikException;
 
 public class AlhambraApplicatie {

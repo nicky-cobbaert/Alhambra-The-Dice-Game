@@ -2,12 +2,14 @@ package domein;
 
 import java.util.Objects;
 
+import utils.Kleuren;
+
 public class Speler 
 {
     private String gebruikersnaam;
     private int geboortejaar;
     private int aantalGewonnen, aantalGespeeld;
-    private String kleur; //waarom geen getters/setters?
+    private Kleuren kleur; //waarom geen getters/setters?
     
    
 
@@ -15,10 +17,10 @@ public class Speler
 
     public Speler(String gebruikersnaam, int  geboortejaar) 
     {
-    	this(gebruikersnaam,geboortejaar,0,0,"blauw");
+    	this(gebruikersnaam,geboortejaar,0,0,Kleuren.BLAUW);
     }
     
-    public Speler(String gebruikersnaam,int  geboortejaar, int aantalGewonnen, int aantalGespeeld, String kleur) 
+    public Speler(String gebruikersnaam,int  geboortejaar, int aantalGewonnen, int aantalGespeeld, Kleuren kleur) 
     {
     	setGebruikersnaam(gebruikersnaam);
     	setGeboortejaar(geboortejaar);
@@ -74,11 +76,11 @@ public class Speler
 		this.aantalGespeeld = aantalGespeeld;
 	}
 	
-	    public String getKleur() {
+	    public Kleuren getKleur() {
 			return kleur;
 		}
 
-		public void setKleur(String kleur) { // probleem bij klasse Spel dus public
+		public void setKleur(Kleuren kleur) { // probleem bij klasse Spel dus public
 			this.kleur = kleur;
 		}
 
@@ -111,3 +113,4 @@ public class Speler
 //Dit is een commit van Sverre Lippens
 // Dit is een commit van Wout Gheysels
 // Dit is een commit van Lars De Wever
+//Dit is een commit van Nicky Cobbaert

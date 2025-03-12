@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.SpelerDTO;
+import utils.Kleuren;
 
 public class DomeinController {
 
@@ -82,7 +83,16 @@ public class DomeinController {
 //    }
 
     public List<String> geefBeschikbareKleuren(){
-    	return spel.getBeschikbareKleuren();
+    	
+    	List<String> lijst = new ArrayList<String>();
+    	
+    	/**----kleur wordt een string--------*/
+    	
+    	for (Kleuren kleur : spel.getBeschikbareKleuren()) {
+    		lijst.add(kleur.toString().toLowerCase());
+    	}
+    	
+    	return lijst;
     }
    
 }

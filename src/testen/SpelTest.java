@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import domein.Spel;
 import persistentie.SpelerMapper;
-import utils.Kleuren;
 
 class SpelTest {
 
@@ -27,8 +26,8 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), Kleuren.BLAUW);
-		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), Kleuren.WIT);
+		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), "BLAUW");
+		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), "WIT");
 
 		assertThrows(IllegalArgumentException.class, () -> spel.startSpel());
 	}
@@ -39,9 +38,9 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), Kleuren.BLAUW);
-		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), Kleuren.WIT);
-		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), Kleuren.GEEL);
+		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), "BLAUW");
+		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), "WIT");
+		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "GEEL");
 
 		assertEquals(3, spel.getGekozenSpelers().size());
 	}
@@ -52,10 +51,10 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), Kleuren.BLAUW);
-		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), Kleuren.WIT);
-		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), Kleuren.GEEL);
-		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), Kleuren.GROEN);
+		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), "BLAUW");
+		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), "WIT");
+		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "GEEL");
+		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GROEN");
 
 		assertEquals(3, spel.getGekozenSpelers().size());
 	}
@@ -66,12 +65,12 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), Kleuren.BLAUW);
-		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), Kleuren.WIT);
-		spel.kiesSpeler(sm.geefSpeler("JelleVanHoren"), Kleuren.ROOD);
-		spel.kiesSpeler(sm.geefSpeler("WoutGHEYSELS"), Kleuren.GROEN);
-		spel.kiesSpeler(sm.geefSpeler("Sverre"), Kleuren.ORANJE);
-		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), Kleuren.GEEL);
+		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), "BLAUW");
+		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), "WIT");
+		spel.kiesSpeler(sm.geefSpeler("JelleVanHoren"), "ROOD");
+		spel.kiesSpeler(sm.geefSpeler("WoutGHEYSELS"), "GROEN");
+		spel.kiesSpeler(sm.geefSpeler("Sverre"), "ORANJE");
+		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "GEEL");
 
 		assertEquals(6, spel.getGekozenSpelers().size());
 	}
@@ -82,15 +81,15 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), Kleuren.BLAUW);
-		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), Kleuren.WIT);
-		spel.kiesSpeler(sm.geefSpeler("JelleVanHoren"), Kleuren.ROOD);
-		spel.kiesSpeler(sm.geefSpeler("WoutGHEYSELS"), Kleuren.GROEN);
-		spel.kiesSpeler(sm.geefSpeler("Sverre"), Kleuren.ORANJE);
-		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), Kleuren.GEEL);
+		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), "BLAUW");
+		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), "WIT");
+		spel.kiesSpeler(sm.geefSpeler("JelleVanHoren"), "ROOD");
+		spel.kiesSpeler(sm.geefSpeler("WoutGHEYSELS"), "GROEN");
+		spel.kiesSpeler(sm.geefSpeler("Sverre"), "ORANJE");
+		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
 
 		assertThrows(IllegalArgumentException.class,
-				() -> spel.kiesSpeler(sm.geefSpeler("ada lovelace"), Kleuren.GEEL));
+				() -> spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "GEEL"));
 	}
 
 	
@@ -102,16 +101,16 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 		
-		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), Kleuren.BLAUW);
-		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), Kleuren.WIT);
-		spel.kiesSpeler(sm.geefSpeler("JelleVanHoren"), Kleuren.ROOD);
-		spel.kiesSpeler(sm.geefSpeler("WoutGHEYSELS"), Kleuren.GROEN);
-		spel.kiesSpeler(sm.geefSpeler("Sverre"), Kleuren.ORANJE);
-		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), Kleuren.GEEL);
-		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), Kleuren.ROOD );
+		spel.kiesSpeler(sm.geefSpeler("AeersteInDeRijTest"), "BLAUW");
+		spel.kiesSpeler(sm.geefSpeler("ZlaatsteInDeRijTest"), "WIT");
+		spel.kiesSpeler(sm.geefSpeler("JelleVanHoren"), "ROOD");
+		spel.kiesSpeler(sm.geefSpeler("WoutGHEYSELS"), "GROEN");
+		spel.kiesSpeler(sm.geefSpeler("Sverre"), "ORANJE");
+		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
+		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
 		
 		assertThrows(IllegalArgumentException.class, ()-> 
-			spel.kiesSpeler(sm.geefSpeler("ada lovelace"), Kleuren.BLAUW ));
+			spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "BLAUW" ));
 	}
 
 }
