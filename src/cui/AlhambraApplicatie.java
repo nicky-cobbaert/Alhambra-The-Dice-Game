@@ -72,7 +72,7 @@ public class AlhambraApplicatie {
 		gebruikersnaam = input.nextLine();
 		
 		System.out.printf("Geef uw geboortejaar in > ");
-		geboortejaar = input.nextInt();
+		geboortejaar = Integer.parseInt(input.nextLine()); // parseint gebruikt om buffer te legen (indien try-catch)
 		
 		dc.registreerSpeler(gebruikersnaam, geboortejaar);
 	}
@@ -88,7 +88,7 @@ public class AlhambraApplicatie {
 		
 		do {
 			System.out.printf("Wilt u nog een speler toevoegen?%nTyp '1' voor ja \t Typ '2' voor neen%nJouw keuze > ");
-			keuzeNieuw = input.nextInt();
+			keuzeNieuw = Integer.parseInt(input.nextLine()); 
 
 			if (keuzeNieuw != 1 && keuzeNieuw != 2) {
 				System.out.println("Dit was niet een van de opties, probeer opnieuw!");
@@ -131,7 +131,7 @@ public class AlhambraApplicatie {
 				System.out.printf("%d. %s%n", index , lijstVanSpelers.get(index-1).toString()); //Alleen gebruikersnaam genoeg? 
 			}
 			System.out.printf("Geef hier het nummer voor de speler die je wilt selecteren voor dit spel in > ");
-			keuze = input.nextInt();
+			keuze = Integer.parseInt(input.nextLine());
 			if(keuze > lijstVanSpelers.size() || keuze < 1) {
 				System.out.println("Foutieve waarde ingegeven, probeer opnieuw! ");
 			}

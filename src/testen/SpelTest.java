@@ -3,12 +3,16 @@ package testen;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import domein.Spel;
+import exceptions.VerkeerdAantalDobbelstenenException;
 import persistentie.SpelerMapper;
 
 class SpelTest {
@@ -138,43 +142,152 @@ class SpelTest {
 
 	}
 
-	/*Er zal nooit een speler of kleur meerdere keren gekozen worden omdat die uit de kieslijst verdwijnt
+	/*
+	 * Er zal nooit een speler of kleur meerdere keren gekozen worden omdat die uit
+	 * de kieslijst verdwijnt
 	 * 
 	 * 
-	 *@Test
-	void startSpel_SpelerAlGekozen_WerptExceptie() {
+	 * @Test void startSpel_SpelerAlGekozen_WerptExceptie() {
+	 * 
+	 * SpelerMapper sm = new SpelerMapper(); Spel spel = new Spel();
+	 * 
+	 * spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+	 * spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
+	 * spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
+	 * 
+	 * assertThrows(IllegalArgumentException.class, () -> {
+	 * spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "GROEN");
+	 * 
+	 * });
+	 * 
+	 * }
+	 * 
+	 * void startSpel_KleurAlGekozen_WerptExceptie() {
+	 * 
+	 * SpelerMapper sm = new SpelerMapper(); Spel spel = new Spel();
+	 * 
+	 * spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
+	 * spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
+	 * 
+	 * assertThrows(IllegalArgumentException.class, () -> {
+	 * spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ORANJE");
+	 * 
+	 * });
+	 * 
+	 * }
+	 */
+	
+	/**
 
+	@Test
+	void startSpel_VeelTeWeinigDobbelstenen_WerptExceptie() {
+
+		
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
 		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
 		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
+		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+		
+		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
+		
+		for (int i = 0 ; i <3 ; i++ ) {
+			dobbelstenen.add(new Dobbelsteen);
+		}
 
-		assertThrows(IllegalArgumentException.class, () -> {
-			spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "GROEN");
-
-		});
+		assertThrows(VerkeerdAantalDobbelstenenException.class, () -> {spel.startSpel() ;}); 
 
 	}
 
-	void startSpel_KleurAlGekozen_WerptExceptie() {
+	@Test
+	void startSpel_NetTeWeinigDobbelstenen_WerptExceptie() {
 
+		
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
 		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
 		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
+		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+		
+		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
+		
+		for (int i = 0 ; i <7 ; i++ ) {
+			dobbelstenen.add(new Dobbelsteen);
+		}
 
-		assertThrows(IllegalArgumentException.class, () -> {
-			spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ORANJE");
+		assertThrows(VerkeerdAantalDobbelstenenException.class, () -> {spel.startSpel() ;}); 
 
-		});
+	}
 
-	}*/
+	@Test
+	void startSpel_GenoegDobbelstenen_StartSpel() {
+
+		
+		SpelerMapper sm = new SpelerMapper();
+		Spel spel = new Spel();
+
+		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
+		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
+		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+		
+		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
+		
+		for (int i = 0 ; i <8 ; i++ ) {
+			dobbelstenen.add(new Dobbelsteen);
+		}
+
+		assertEquals(8, spel.geefDobbelstenen().size());
+
+	}
+
+	@Test
+	void startSpel_NetTeVeelDobbelstenen_WerptExceptie() {
+
+		
+		SpelerMapper sm = new SpelerMapper();
+		Spel spel = new Spel();
+
+		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
+		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
+		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+		
+		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
+		
+		for (int i = 0 ; i <8 ; i++ ) {
+			dobbelstenen.add(new Dobbelsteen);
+		}
+
+		assertThrows(VerkeerdAantalDobbelstenenException.class, () -> {dobbelstenen.add(new Dobbelsteen);}); 
+
+	}
+
+	@Test
+	void startSpel_VeelTeVeelDobbelstenen_WerptExceptie() {
+
+		
+		SpelerMapper sm = new SpelerMapper();
+		Spel spel = new Spel();
+
+		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
+		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
+		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+		
+		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
+		
+		for (int i = 0 ; i <8 ; i++ ) {
+			dobbelstenen.add(new Dobbelsteen);
+		}
+
+		assertThrows(VerkeerdAantalDobbelstenenException.class, () -> {
+			dobbelstenen.add(new Dobbelsteen);
+			dobbelstenen.add(new Dobbelsteen);s
+			dobbelstenen.add(new Dobbelsteen);}); 
+
+	}
 	
+	*/
 	
 
-	
-	
 }
