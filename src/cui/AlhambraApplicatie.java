@@ -147,7 +147,7 @@ public class AlhambraApplicatie {
 	}
 	private Speler geefKeuzeSpeler(List<Speler> lijstVanSpelers) {
 		int keuze = 0;
-		boolean isGeldig = true;
+		boolean isGeldig = false;
 		do {
 			try {
 				System.out.println("Kies uit 1 van volgende spelers:");
@@ -158,7 +158,7 @@ public class AlhambraApplicatie {
 				System.out.printf("Geef hier het nummer voor de speler die je wilt selecteren voor dit spel in > ");
 			keuze = input.nextInt();
 			isGeldig = keuze <= lijstVanSpelers.size() && keuze >= 1;
-			if(!isGeldig|| keuze == -1) {
+			if(!isGeldig) {
 				throw new IllegalArgumentException();
 				}
 			}catch(InputMismatchException e) {
