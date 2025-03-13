@@ -1,5 +1,7 @@
 package dto;
 
-public record SpelerDTO(String gebruikersnaam, int geboortejaar, int aantalGespeeld, int aantalGewonnen) {
+import utils.Kleuren;
+
+public record SpelerDTO(String gebruikersnaam, int geboortejaar, int aantalGespeeld, int aantalGewonnen, Kleuren kleur) {
 
 }

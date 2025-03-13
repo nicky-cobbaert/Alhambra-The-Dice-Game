@@ -26,7 +26,7 @@ public class AlhambraApplicatie {
 		boolean isGeldig = true;
 		
 		do {
-			try {
+//			try {
 				keuze = menu();
 				
 				while (keuze != 3) {
@@ -39,14 +39,12 @@ public class AlhambraApplicatie {
 				} 
 			isGeldig = false;
 			
-			} catch (InputMismatchException e) {
-				System.out.printf("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!%n");
-				input.nextLine();
-			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
-			} catch (GebruikersnaamInGebruikException e) {
-				System.out.println(e.getMessage());
-			}
+//			} catch (InputMismatchException e) {
+//				System.err.printf("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!%n");
+//				input.nextLine();
+//			} catch (IllegalArgumentException e) {
+//				System.err.println(e.getMessage());
+//			} 
 		} while (isGeldig);
 		System.out.printf("Bedankt om te spelen. Hopelijk tot een volgende keer!");
 	}
@@ -59,7 +57,7 @@ public class AlhambraApplicatie {
 			keuze = input.nextInt();
 			
 			if (keuze<1||keuze>3) {
-				System.out.printf("%nOngeldige keuze, probeer opnieuw! %n%n");
+				System.err.printf("Ongeldige keuze, probeer opnieuw! %n");
 			}
 		} while (keuze<1||keuze>3);
 		
@@ -70,15 +68,29 @@ public class AlhambraApplicatie {
 		String gebruikersnaam;
 		int geboortejaar;
 		
+		boolean isGeldig = true;
+		
 		input.nextLine();
-		
-		System.out.printf("Geef uw gebruikersnaam in > ");
-		gebruikersnaam = input.nextLine();
-		
-		System.out.printf("Geef uw geboortejaar in > ");
-		geboortejaar = input.nextInt(); // parseint gebruikt om buffer te legen (indien try-catch)
-		
-		dc.registreerSpeler(gebruikersnaam, geboortejaar);
+		do {
+			try {
+				System.out.printf("Geef uw gebruikersnaam in > ");
+				gebruikersnaam = input.nextLine();
+				
+				System.out.printf("Geef uw geboortejaar in > ");
+				geboortejaar = input.nextInt(); 
+				
+				dc.registreerSpeler(gebruikersnaam, geboortejaar);
+				
+				isGeldig = false;
+			} catch (InputMismatchException e) {
+				System.err.printf("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!%n");
+				input.nextLine();
+			} catch (IllegalArgumentException e) {
+				System.err.println(e.getMessage());
+			} catch (GebruikersnaamInGebruikException e) {
+				System.err.println(e.getMessage());
+			}
+		} while (!isGeldig);
 	}
 	
 	
@@ -110,7 +122,7 @@ public class AlhambraApplicatie {
 				}
 			
 				if (keuzeNieuw==2 && gekozenSpelers.size()<3) {
-					System.out.println("Er moeten minstens 3 spelers meespelen!");
+					System.err.println("Er moeten minstens 3 spelers meespelen!");
 				}
 			}
 			if (gekozenSpelers.size()==6) { //Als er 6 spelers geselecteerd zijn gaat hij uit de whileloop en gaat hij verder naar het spel
@@ -125,7 +137,7 @@ public class AlhambraApplicatie {
 		
 		System.out.println("Volgende spelers nemen deel aan het spel: ");
 		for (Speler s:dc.geefDeelnemerVanSpel()) {
-			System.out.println(s.toString());
+			System.out.println(s.toString()); // Gebruikersnaam en kleur?
 		}
 		System.out.println();
 //		dc.startSpel();
@@ -180,7 +192,8 @@ public class AlhambraApplicatie {
 				throw new IllegalArgumentException();
 			}
 			}catch(InputMismatchException e) {
-				System.err.println(e.getMessage());
+				System.err.println("voer nu eens AUB een getal in!");
+				input.nextLine();
 			}
 			catch(IllegalArgumentException e) {
 				System.err.println("Foutieve waarde ingegeven, probeer opnieuw! ");
