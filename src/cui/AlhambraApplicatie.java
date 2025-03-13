@@ -1,12 +1,12 @@
 package cui;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import domein.DomeinController;
-import domein.Speler;
+import dto.GekozenSpelersDTO;
+import dto.SpelerDTO;
 import exceptions.GebruikersnaamInGebruikException;
 
 public class AlhambraApplicatie {
@@ -14,8 +14,6 @@ public class AlhambraApplicatie {
 	Scanner input = new Scanner(System.in);
 
 	DomeinController dc = new DomeinController();
-	
-	List<Speler> gekozenSpelers = new ArrayList<>(); //Moet overal in de applicatie beschikbaar zijn dus zet ik deze hier en niet in de methode zelf!
 	
 	public AlhambraApplicatie(DomeinController dc) {
 		this.dc = dc;
@@ -99,7 +97,7 @@ public class AlhambraApplicatie {
 		dc.maakNieuwSpel();
 		int keuzeNieuw = 0;
 		
-		List<Speler> alleBeschikbareSpelers = dc.geefAlleSpelers();
+		List<SpelerDTO> alleBeschikbareSpelers = dc.geefBeschikbareSpelers();
 		List<String> alleBeschikbareKleuren = dc.geefBeschikbareKleuren();
 		
 		do {
@@ -111,41 +109,36 @@ public class AlhambraApplicatie {
 				System.err.println("Dit was niet een van de opties, probeer opnieuw!");
 			} else {
 				if (keuzeNieuw == 1) {
-					Speler speler = geefKeuzeSpeler(alleBeschikbareSpelers);
+					int speler = geefKeuzeSpeler(alleBeschikbareSpelers);
 					String kleur = geefKeuzeKleur(alleBeschikbareKleuren);
-				
-					gekozenSpelers.add(speler);
+			
 					dc.kiesSpelerEnKleur(speler, kleur);
-				
-					alleBeschikbareSpelers.remove(speler);
+		
+					alleBeschikbareSpelers = dc.geefBeschikbareSpelers(); //dit is DTO
 					alleBeschikbareKleuren = dc.geefBeschikbareKleuren();
 				}
 			
-				if (keuzeNieuw==2 && gekozenSpelers.size()<3) {
-					System.err.println("Er moeten minstens 3 spelers meespelen!");
-				}
+//				if (keuzeNieuw==2 && gekozenSpelers.size()<3) { dc.startSpel();
+//					System.err.println("Er moeten minstens 3 spelers meespelen!");
+//				} Wordt opgevangen maar nog niet correct -> Gaat naar hoofdmenu
 			}
-			if (gekozenSpelers.size()==6) { //Als er 6 spelers geselecteerd zijn gaat hij uit de whileloop en gaat hij verder naar het spel
-				break;	
-			}
+		
 			}catch(InputMismatchException e) {
 				System.err.println("Zorg dat je het juiste ingeeft");
-				input.nextLine();
+				input.nextLine(); // Verlagen naar lijn 132? Helpt dit bovenstaand probleem van naar hoofdmenu gaan? 
 			}
-		} while (keuzeNieuw != 2 || gekozenSpelers.size()<3); // Er moeten 3 spelers meespelen, dit kan pas nadat kleuren is geïmplementeerd!
-									//Bovenstaande code is opgevangen in dc.startSpel hieronder! (staat momenteel in commentaar)
+		} while (keuzeNieuw != 2); 
+		dc.startSpel();
 		
-		//dc.startSpel();
-		System.out.println("Volgende spelers nemen deel aan het spel: ");
-		for (Speler s:dc.geefDeelnemerVanSpel()) {
-			System.out.println(s.toString()); // Gebruikersnaam en kleur?
+		System.out.println("Het spel is gestart!");
+		System.out.println("Startspeler: "+ dc.geefStartspeler());
+		for (GekozenSpelersDTO dto : dc.geefGekozenSpelers()) {
+			System.out.println("Speler: " + dto.gebruikersnaam() + ", Kleur: "
+					+ dto.kleur().toString().toLowerCase() + ", Leeftijd: " + dto.geboortejaar());
 		}
-		System.out.println();
-//		dc.startSpel();
 		System.out.println("Het spel is gespeeld!");
-		gekozenSpelers=null;
 	}
-	private Speler geefKeuzeSpeler(List<Speler> lijstVanSpelers) {
+	private int geefKeuzeSpeler(List<SpelerDTO> lijstVanSpelers) {
 		int keuze = 0;
 		boolean isGeldig = false;
 		do {
@@ -171,7 +164,7 @@ public class AlhambraApplicatie {
 				System.err.println("er is iets fout gegaan");
 			}
 		}while (!isGeldig)/* 7 moet worden vervangen door size van de lijst zodat er kan worden gekozen voor een beschikbare speler*/;
-		return lijstVanSpelers.get(keuze-1);
+		return keuze-1;
 	}
 	
 	private String geefKeuzeKleur(List<String> kleuren){

@@ -9,6 +9,7 @@ import utils.Kleuren;
 public class Spel {
 	private final List<Kleuren> beschikbareKleuren;
 	private final List<Speler> gekozenSpelers;
+	private List<Speler> beschikbareSpelers;
 	private Speler startSpeler;
 
 	public Spel() {
@@ -22,8 +23,13 @@ public class Spel {
 		for (Kleuren kleur : Kleuren.values()) {
 			this.beschikbareKleuren.add(kleur);
 		}
-
+		this.beschikbareSpelers = new ArrayList<>();
+		
 		this.gekozenSpelers = new ArrayList<>();
+	}
+	
+	public void setBeschikbareSpelers(List<Speler> spelers) {
+		this.beschikbareSpelers = spelers;
 	}
 
 	public List<Kleuren> getBeschikbareKleuren() {
@@ -34,7 +40,7 @@ public class Spel {
 		return gekozenSpelers;
 	}
 
-	public void kiesSpeler(Speler speler, String kleur) {
+	public void kiesSpeler(int speler, String kleur) {
 
 		Kleuren huidigeKleur;
 
@@ -44,13 +50,6 @@ public class Spel {
 		if (kleur == null || kleur.isBlank()) { // onnodige code 
 			throw new IllegalArgumentException("Er is geen kleur gekozen");
 		}
-
-		/**
-		 * if (!beschikbareKleuren.contains(kleur)) { // Ook eigenlijk onnodige code,
-		 * geven een lijst met alle beschikbare kleuren en moet daartussen kiezen dus
-		 * kan geen gekozen kleur pakken... throw new IllegalArgumentException("Deze
-		 * kleur is niet beschikbaar."); }
-		 */
 
 		/** ---------KleurStringNaarEnum--------------- */
 
@@ -69,8 +68,9 @@ public class Spel {
 
 
 
-		speler.setKleur(huidigeKleur); // was niet zichtbaar*
-		gekozenSpelers.add(speler);
+		beschikbareSpelers.get(speler).setKleur(huidigeKleur); // was niet zichtbaar*
+		gekozenSpelers.add(beschikbareSpelers.get(speler));
+		beschikbareSpelers.remove(speler);
 		beschikbareKleuren.remove(huidigeKleur);
 	}
 
@@ -82,28 +82,13 @@ public class Spel {
 		Random rand = new Random();
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
 
-		System.out.println("Het spel is gestart!");//geen sysout
-		System.out.println("Startspeler: " + startSpeler.getGebruikersnaam());
-
-		for (Speler speler : gekozenSpelers) {
-			System.out.println("Speler: " + speler.getGebruikersnaam() + ", Kleur: "
-					+ speler.getKleur().toString().toLowerCase() + ", Leeftijd: " + speler.getGeboortejaar());
-		}
 	}
 
-	public Speler getStartSpeler() {
-		return startSpeler;
+	public String getStartSpeler() {
+		return startSpeler.getGebruikersnaam();
 	}
 
-	public List<Speler> geefBeschikbareSpelers(List<Speler> alleSpelers) {
-		List<Speler> bs = new ArrayList<Speler>();
-
-		for (Speler s : alleSpelers) {
-			if (!gekozenSpelers.contains(s)) {
-				bs.add(s);
-			}
-		}
-
-		return bs;
+	public List<Speler> geefBeschikbareSpelers() {
+		return beschikbareSpelers;
 	}
 }

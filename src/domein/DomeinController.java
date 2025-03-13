@@ -3,6 +3,7 @@ package domein;
 import java.util.ArrayList;
 import java.util.List;
 
+import dto.GekozenSpelersDTO;
 import dto.SpelerDTO;
 import utils.Kleuren;
 
@@ -25,6 +26,7 @@ public class DomeinController {
     
     public void maakNieuwSpel() {
     	spel = new Spel();
+    	spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
     }
     
     public void startSpel() {
@@ -35,54 +37,60 @@ public class DomeinController {
     	return spelerRepo.geefAlleSpelers();
     }
     
-    public void kiesSpelerEnKleur(Speler s,String kleur) {
+    public void kiesSpelerEnKleur(int s,String kleur) {
     	spel.kiesSpeler(s, kleur);
     }
     
-    public List<SpelerDTO> zetGekozenSpelersOmNaarDTO(List<Speler> spelers) { //geen return type in DCD?
+    public List<SpelerDTO> geefBeschikbareSpelers() { //geen return type in DCD?
     	
+    	   List<Speler> speler = spel.geefBeschikbareSpelers();
     	   List<SpelerDTO> resultaat = new ArrayList<>();
     	    
-    	    for (int i = 0; i < spelers.size(); i++) {
-    	        Speler speler = spelers.get(i);
-    	        SpelerDTO sp = new SpelerDTO(
-    	            speler.getGebruikersnaam(),
-    	            speler.getGeboortejaar(),
-    	            speler.getAantalGespeeld(),
-    	            speler.getAantalGewonnen(),
-    	            speler.getKleur()
-    	        );
-    	        
-    	        resultaat.add(sp);
-    	    }
+//    	    for (int i = 0; i < spelers.size(); i++) {
+//    	        Speler speler = spelers.get(i);
+//    	        SpelerDTO sp = new SpelerDTO(
+//    	            speler.getGebruikersnaam(),
+//    	            speler.getGeboortejaar(),
+//    	            speler.getAantalGespeeld(),
+//    	            speler.getAantalGewonnen(),
+//    	            speler.getKleur()
+//    	        );
+//    	        
+//    	        resultaat.add(sp);
+//    	    }
+    	   for (Speler s : speler) {
+    		   SpelerDTO sp = new SpelerDTO(
+       	            s.getGebruikersnaam(),
+       	            s.getGeboortejaar(),
+       	            s.getAantalGespeeld(),
+       	            s.getAantalGewonnen()       	          
+   	        );
+    		   resultaat.add(sp);
+    	   }	   
     	    
     	    return resultaat;
 	
     }
-    
-    public List<SpelerDTO> geefGekozenSpelers() {
-        List<SpelerDTO> resultaat = new ArrayList<>();
 
-        for (Speler s : spelerRepo.geefAlleSpelers()) {
-            resultaat.add(new SpelerDTO(
-                s.getGebruikersnaam(),
-                s.getGeboortejaar(),
-                s.getAantalGespeeld(),
-                s.getAantalGewonnen()
-                ,s.getKleur()
-            ));
-        }
-
-        return resultaat;
-    }
     
-    public List<Speler> geefDeelnemerVanSpel(){
-    	return spel.getGekozenSpelers();
+    public List<GekozenSpelersDTO> geefGekozenSpelers(){
+    	List<Speler> speler = spel.getGekozenSpelers();
+    	List<GekozenSpelersDTO> resultaat = new ArrayList<>();
+    	
+    	for (Speler s : speler) {
+ 		   GekozenSpelersDTO sp = new GekozenSpelersDTO(
+    	            s.getGebruikersnaam(),
+    	            s.getGeboortejaar(),
+    	            s.getAantalGespeeld(),
+    	            s.getAantalGewonnen(),
+    	            s.getKleur()
+	        );
+ 		   resultaat.add(sp);
+ 	   }	   
+ 	    
+ 	    return resultaat;
     }
-    //Deze hebben volgens mij geen nut, staan ook niet in DCD!
-//    public List<Speler> geefBeschikbareSpelers(){
-//    	return spel.geefBeschikbareSpelers(spelerRepo.geefAlleSpelers());
-//    }
+ 
 
     public List<String> geefBeschikbareKleuren(){
     	
@@ -96,5 +104,7 @@ public class DomeinController {
     	
     	return lijst;
     }
-   
+    public String geefStartspeler() {
+    	return spel.getStartSpeler();
+    }
 }
