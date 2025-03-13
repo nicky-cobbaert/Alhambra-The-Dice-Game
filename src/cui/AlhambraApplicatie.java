@@ -68,11 +68,12 @@ public class AlhambraApplicatie {
 		String gebruikersnaam;
 		int geboortejaar;
 		
-		boolean isGeldig = true;
+		boolean nogHerhalen = true;
 		
-		input.nextLine();
 		do {
 			try {
+				input.nextLine();
+				
 				System.out.printf("Geef uw gebruikersnaam in > ");
 				gebruikersnaam = input.nextLine();
 				
@@ -81,17 +82,15 @@ public class AlhambraApplicatie {
 				
 				dc.registreerSpeler(gebruikersnaam, geboortejaar);
 				
-				
+				nogHerhalen = false;
 			} catch (InputMismatchException e) {
 				System.err.println("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!");
-				input.nextLine();
 			} catch (IllegalArgumentException e) {
 				System.err.println(e.getMessage());
 			} catch (GebruikersnaamInGebruikException e) {
 				System.err.println(e.getMessage());
 			}
-			isGeldig = false;
-		} while (!isGeldig);
+		} while (nogHerhalen);
 	}
 	
 	
@@ -136,6 +135,7 @@ public class AlhambraApplicatie {
 		} while (keuzeNieuw != 2 || gekozenSpelers.size()<3); // Er moeten 3 spelers meespelen, dit kan pas nadat kleuren is geïmplementeerd!
 									//Bovenstaande code is opgevangen in dc.startSpel hieronder! (staat momenteel in commentaar)
 		
+		//dc.startSpel();
 		System.out.println("Volgende spelers nemen deel aan het spel: ");
 		for (Speler s:dc.geefDeelnemerVanSpel()) {
 			System.out.println(s.toString()); // Gebruikersnaam en kleur?
@@ -143,6 +143,7 @@ public class AlhambraApplicatie {
 		System.out.println();
 //		dc.startSpel();
 		System.out.println("Het spel is gespeeld!");
+		gekozenSpelers=null;
 	}
 	private Speler geefKeuzeSpeler(List<Speler> lijstVanSpelers) {
 		int keuze = 0;
@@ -160,16 +161,15 @@ public class AlhambraApplicatie {
 			if(!isGeldig|| keuze == -1) {
 				throw new IllegalArgumentException();
 				}
-			}
-			catch(InputMismatchException  e) {
-				System.err.println("voer AUB een getal in");
+			}catch(InputMismatchException e) {
+				System.err.println("voer nu eens AUB een getal in!");
 				input.nextLine();
-			}catch(IllegalArgumentException e) {
-				System.err.println("Foutieve waarde ingegeven, probeer opnieuw! ");
 			}
-			catch(Exception e) {
-			System.err.println("er is iets fout gegaan");
-		}
+			catch(IllegalArgumentException e) {
+				System.err.println("Foutieve waarde ingegeven, probeer opnieuw! ");
+			}catch(Exception e) {
+				System.err.println("er is iets fout gegaan");
+			}
 		}while (!isGeldig)/* 7 moet worden vervangen door size van de lijst zodat er kan worden gekozen voor een beschikbare speler*/;
 		return lijstVanSpelers.get(keuze-1);
 	}

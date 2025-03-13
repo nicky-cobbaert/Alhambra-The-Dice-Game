@@ -82,7 +82,7 @@ public class Spel {
 		Random rand = new Random();
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
 
-		System.out.println("Het spel is gestart!");
+		System.out.println("Het spel is gestart!");//geen sysout
 		System.out.println("Startspeler: " + startSpeler.getGebruikersnaam());
 
 		for (Speler speler : gekozenSpelers) {
