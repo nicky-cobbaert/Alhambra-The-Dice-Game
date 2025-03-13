@@ -26,7 +26,7 @@ public class AlhambraApplicatie {
 		boolean isGeldig = true;
 		
 		do {
-//			try {
+			try {
 				keuze = menu();
 				
 				while (keuze != 3) {
@@ -39,12 +39,12 @@ public class AlhambraApplicatie {
 				} 
 			isGeldig = false;
 			
-//			} catch (InputMismatchException e) {
-//				System.err.printf("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!%n");
-//				input.nextLine();
-//			} catch (IllegalArgumentException e) {
-//				System.err.println(e.getMessage());
-//			} 
+			} catch (InputMismatchException e) {
+				System.err.printf("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!%n");
+				input.nextLine();
+			} catch (IllegalArgumentException e) {
+				System.err.println(e.getMessage());
+			} 
 		} while (isGeldig);
 		System.out.printf("Bedankt om te spelen. Hopelijk tot een volgende keer!");
 	}
