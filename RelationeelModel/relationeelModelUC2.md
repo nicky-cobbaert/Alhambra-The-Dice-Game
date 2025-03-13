@@ -7,4 +7,4 @@ Deelnemer (<u>gebruikersnaam, kleur</u>, spelid)
 <br>IR: Vreemde sleutel **spelid** verwijst naar spelid van **Spel** en is **verplicht**.
 
 Spel (<u>spelid</u>, gebruikersnaam, kleur)
-<br>IR: Vreemde sleutel **gebruikersnaam, kleur** verwijst naar gebruikersnaam, kleur van **Deelnemer** (isGewonnenSpeler) en is **optioneel**.
+<br>IR: Vreemde sleutel **gebruikersnaam, kleur** verwijst naar gebruikersnaam, kleur van **Deelnemer** (isGewonnenSpeler) en is **verplicht**.
