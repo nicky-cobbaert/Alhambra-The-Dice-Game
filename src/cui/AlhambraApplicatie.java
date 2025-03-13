@@ -85,17 +85,18 @@ public class AlhambraApplicatie {
 	// volgende code is een work in progress
 	private void startNieuwSpel() {
 		dc.maakNieuwSpel();
-		int keuzeNieuw;
+		int keuzeNieuw = 0;
 		
 		List<Speler> alleBeschikbareSpelers = dc.geefAlleSpelers();
 		List<String> alleBeschikbareKleuren = dc.geefBeschikbareKleuren();
 		
 		do {
+			try {
 			System.out.printf("Wilt u nog een speler toevoegen?%nTyp '1' voor ja \t Typ '2' voor neen%nJouw keuze > ");
 			keuzeNieuw = input.nextInt(); 
 
 			if (keuzeNieuw != 1 && keuzeNieuw != 2) {
-				System.out.println("Dit was niet een van de opties, probeer opnieuw!");
+				System.err.println("Dit was niet een van de opties, probeer opnieuw!");
 			} else {
 				if (keuzeNieuw == 1) {
 					Speler speler = geefKeuzeSpeler(alleBeschikbareSpelers);
@@ -115,6 +116,10 @@ public class AlhambraApplicatie {
 			if (gekozenSpelers.size()==6) { //Als er 6 spelers geselecteerd zijn gaat hij uit de whileloop en gaat hij verder naar het spel
 				break;	
 			}
+			}catch(InputMismatchException e) {
+				System.err.println("Zorg dat je het juiste ingeeft");
+				input.nextLine();
+			}
 		} while (keuzeNieuw != 2 || gekozenSpelers.size()<3); // Er moeten 3 spelers meespelen, dit kan pas nadat kleuren is geïmplementeerd!
 									//Bovenstaande code is opgevangen in dc.startSpel hieronder! (staat momenteel in commentaar)
 		
@@ -127,27 +132,42 @@ public class AlhambraApplicatie {
 		System.out.println("Het spel is gespeeld!");
 	}
 	private Speler geefKeuzeSpeler(List<Speler> lijstVanSpelers) {
-		int keuze;
+		int keuze = 0;
+		boolean isGeldig = true;
 		do {
-			System.out.println("Kies uit 1 van volgende spelers:");
+			try {
+				System.out.println("Kies uit 1 van volgende spelers:");
 			//dit geeft de lijst van spelers mee aan de console
-			 for (int index = 1; index <= lijstVanSpelers.size(); index ++) {
-				System.out.printf("%d. %s%n", index , lijstVanSpelers.get(index-1).toString()); //Alleen gebruikersnaam genoeg? 
+				for (int index = 1; index <= lijstVanSpelers.size(); index ++) {
+					System.out.printf("%d. %s%n", index , lijstVanSpelers.get(index-1).toString()); //Alleen gebruikersnaam genoeg? 
 			}
-			System.out.printf("Geef hier het nummer voor de speler die je wilt selecteren voor dit spel in > ");
+				System.out.printf("Geef hier het nummer voor de speler die je wilt selecteren voor dit spel in > ");
 			keuze = input.nextInt();
-			if(keuze > lijstVanSpelers.size() || keuze < 1) {
-				System.out.println("Foutieve waarde ingegeven, probeer opnieuw! ");
+			isGeldig = keuze <= lijstVanSpelers.size() && keuze >= 1;
+			if(!isGeldig|| keuze == -1) {
+				throw new IllegalArgumentException();
+				}
 			}
-		}while (keuze > lijstVanSpelers.size() || keuze < 1)/* 7 moet worden vervangen door size van de lijst zodat er kan worden gekozen voor een beschikbare speler*/;
+			catch(InputMismatchException  e) {
+				System.err.println("voer AUB een getal in");
+				input.nextLine();
+			}catch(IllegalArgumentException e) {
+				System.err.println("Foutieve waarde ingegeven, probeer opnieuw! ");
+			}
+			catch(Exception e) {
+			System.err.println("er is iets fout gegaan");
+		}
+		}while (!isGeldig)/* 7 moet worden vervangen door size van de lijst zodat er kan worden gekozen voor een beschikbare speler*/;
 		return lijstVanSpelers.get(keuze-1);
 	}
 	
 	private String geefKeuzeKleur(List<String> kleuren){
 		/* nog niet duidelijk of we een enum gaan gebruiken en hoe de kleur keuze gaat werken 
 		 * dus enkel begin code*/
-		int keuze;
+		int keuze = 0;
+		boolean isGeldig = false;
 		do {
+			try {
 			System.out.println("Kies uit 1 van volgende beschikbare kleuren:");
 			/*zelfde principe als bij geefKeuzeSpeler()*/
 			for (int index = 0; index < kleuren.size(); index ++) {
@@ -155,7 +175,19 @@ public class AlhambraApplicatie {
 			}
 			System.out.printf("Geef hier het nummer voor de kleur die je wilt selecteren voor dit spel in >");
 			keuze = input.nextInt();
-		}while(keuze < 1||keuze > kleuren.size());
+			isGeldig = keuze >= 1 && keuze <= kleuren.size();
+			if(!isGeldig) {
+				throw new IllegalArgumentException();
+			}
+			}catch(InputMismatchException e) {
+				System.err.println(e.getMessage());
+			}
+			catch(IllegalArgumentException e) {
+				System.err.println("Foutieve waarde ingegeven, probeer opnieuw! ");
+			}catch(Exception e) {
+				System.err.println("er is iets fout gegaan");
+			}
+		}while(!isGeldig);
 		return kleuren.get(keuze-1);//Even iets ingevuld zodat ik verder kon testen, mag uiteraard aangepast worden!
 	}
 }
