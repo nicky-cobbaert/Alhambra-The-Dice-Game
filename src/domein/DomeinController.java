@@ -49,7 +49,8 @@ public class DomeinController {
     	            speler.getGebruikersnaam(),
     	            speler.getGeboortejaar(),
     	            speler.getAantalGespeeld(),
-    	            speler.getAantalGewonnen()
+    	            speler.getAantalGewonnen(),
+    	            speler.getKleur()
     	        );
     	        
     	        resultaat.add(sp);
@@ -68,6 +69,7 @@ public class DomeinController {
                 s.getGeboortejaar(),
                 s.getAantalGespeeld(),
                 s.getAantalGewonnen()
+                ,s.getKleur()
             ));
         }
 

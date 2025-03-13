@@ -41,7 +41,7 @@ public class Spel {
 		if (gekozenSpelers.size() >= 6) { // Onnodige code, is opgevangen in de console zelf met een break
 			throw new IllegalArgumentException("Er mogen maximaal 6 spelers meedoen.");
 		}
-		if (kleur == null || kleur.isBlank()) {
+		if (kleur == null || kleur.isBlank()) { // onnodige code 
 			throw new IllegalArgumentException("Er is geen kleur gekozen");
 		}
 
