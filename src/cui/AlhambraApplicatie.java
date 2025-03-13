@@ -81,15 +81,16 @@ public class AlhambraApplicatie {
 				
 				dc.registreerSpeler(gebruikersnaam, geboortejaar);
 				
-				isGeldig = false;
+				
 			} catch (InputMismatchException e) {
-				System.err.printf("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!%n");
+				System.err.println("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!");
 				input.nextLine();
 			} catch (IllegalArgumentException e) {
 				System.err.println(e.getMessage());
 			} catch (GebruikersnaamInGebruikException e) {
 				System.err.println(e.getMessage());
 			}
+			isGeldig = false;
 		} while (!isGeldig);
 	}
 	
