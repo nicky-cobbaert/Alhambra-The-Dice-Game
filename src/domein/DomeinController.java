@@ -3,7 +3,6 @@ package domein;
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.GekozenSpelersDTO;
 import dto.SpelerDTO;
 import utils.Kleuren;
 
@@ -38,32 +37,21 @@ public class DomeinController {
     }
     
     public void kiesSpelerEnKleur(int s,String kleur) {
-    	spel.kiesSpeler(s, kleur);
+    	spel.kiesSpeler(s, kleur); //s is de plaats in de arrayList!
     }
     
-    public List<SpelerDTO> geefBeschikbareSpelers() { //geen return type in DCD?
+    public List<SpelerDTO> geefBeschikbareSpelers() { 
     	
     	   List<Speler> speler = spel.geefBeschikbareSpelers();
     	   List<SpelerDTO> resultaat = new ArrayList<>();
-    	    
-//    	    for (int i = 0; i < spelers.size(); i++) {
-//    	        Speler speler = spelers.get(i);
-//    	        SpelerDTO sp = new SpelerDTO(
-//    	            speler.getGebruikersnaam(),
-//    	            speler.getGeboortejaar(),
-//    	            speler.getAantalGespeeld(),
-//    	            speler.getAantalGewonnen(),
-//    	            speler.getKleur()
-//    	        );
-//    	        
-//    	        resultaat.add(sp);
-//    	    }
+
     	   for (Speler s : speler) {
     		   SpelerDTO sp = new SpelerDTO(
        	            s.getGebruikersnaam(),
        	            s.getGeboortejaar(),
        	            s.getAantalGespeeld(),
-       	            s.getAantalGewonnen()       	          
+       	            s.getAantalGewonnen(),
+       	            null
    	        );
     		   resultaat.add(sp);
     	   }	   
@@ -73,12 +61,12 @@ public class DomeinController {
     }
 
     
-    public List<GekozenSpelersDTO> geefGekozenSpelers(){
+    public List<SpelerDTO> geefGekozenSpelers(){
     	List<Speler> speler = spel.getGekozenSpelers();
-    	List<GekozenSpelersDTO> resultaat = new ArrayList<>();
+    	List<SpelerDTO> resultaat = new ArrayList<>();
     	
     	for (Speler s : speler) {
- 		   GekozenSpelersDTO sp = new GekozenSpelersDTO(
+ 		   SpelerDTO sp = new SpelerDTO(
     	            s.getGebruikersnaam(),
     	            s.getGeboortejaar(),
     	            s.getAantalGespeeld(),

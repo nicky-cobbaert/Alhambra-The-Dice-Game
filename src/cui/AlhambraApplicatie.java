@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import domein.DomeinController;
-import dto.GekozenSpelersDTO;
 import dto.SpelerDTO;
 import exceptions.GebruikersnaamInGebruikException;
 
@@ -96,12 +95,15 @@ public class AlhambraApplicatie {
 	private void startNieuwSpel() {
 		dc.maakNieuwSpel();
 		int keuzeNieuw = 0;
+		boolean nogHerhalen = true;
 		
 		List<SpelerDTO> alleBeschikbareSpelers = dc.geefBeschikbareSpelers();
 		List<String> alleBeschikbareKleuren = dc.geefBeschikbareKleuren();
 		
 		do {
-			try {
+		try {
+		do {
+//			try {
 			System.out.printf("Wilt u nog een speler toevoegen?%nTyp '1' voor ja \t Typ '2' voor neen%nJouw keuze > ");
 			keuzeNieuw = input.nextInt(); 
 
@@ -123,18 +125,25 @@ public class AlhambraApplicatie {
 //				} Wordt opgevangen maar nog niet correct -> Gaat naar hoofdmenu
 			}
 		
-			}catch(InputMismatchException e) {
-				System.err.println("Zorg dat je het juiste ingeeft");
-				input.nextLine(); // Verlagen naar lijn 132? Helpt dit bovenstaand probleem van naar hoofdmenu gaan? 
-			}
+//			}catch(InputMismatchException e) {
+//				System.err.println("Geef het getal in van de keuze dat je wilt maken!");
+//				input.nextLine(); // Verlagen naar lijn 132? Helpt dit bovenstaand probleem van naar hoofdmenu gaan? 
+//			}
 		} while (keuzeNieuw != 2); 
 		dc.startSpel();
-		
+		nogHerhalen=false;
+		}catch(InputMismatchException e) {
+			System.err.println("Geef het getal in van de keuze dat je wilt maken!");
+			input.nextLine(); // Verlagen naar lijn 132? Helpt dit bovenstaand probleem van naar hoofdmenu gaan? 
+		} catch (IllegalArgumentException e) {
+			System.err.println(e.getMessage());
+		}
+		}while (nogHerhalen);
 		System.out.println("Het spel is gestart!");
 		System.out.println("Startspeler: "+ dc.geefStartspeler());
-		for (GekozenSpelersDTO dto : dc.geefGekozenSpelers()) {
-			System.out.println("Speler: " + dto.gebruikersnaam() + ", Kleur: "
-					+ dto.kleur().toString().toLowerCase() + ", Leeftijd: " + dto.geboortejaar());
+		System.out.println("Volgende spelers nemen deel aan dit spel: ");
+		for (SpelerDTO dto : dc.geefGekozenSpelers()) {
+			System.out.printf("Speler: %s, kleur: %s, geboortejaar: %d%n",dto.gebruikersnaam(),dto.kleur().toString().toLowerCase(),dto.geboortejaar());
 		}
 		System.out.println("Het spel is gespeeld!");
 	}
@@ -146,7 +155,7 @@ public class AlhambraApplicatie {
 				System.out.println("Kies uit 1 van volgende spelers:");
 			//dit geeft de lijst van spelers mee aan de console
 				for (int index = 1; index <= lijstVanSpelers.size(); index ++) {
-					System.out.printf("%d. %s%n", index , lijstVanSpelers.get(index-1).toString()); //Alleen gebruikersnaam genoeg? 
+					System.out.printf("%d. \t %s met als geboortejaar %d%n", index , lijstVanSpelers.get(index-1).gebruikersnaam(),lijstVanSpelers.get(index-1).geboortejaar()); //Alleen gebruikersnaam genoeg? 
 			}
 				System.out.printf("Geef hier het nummer voor de speler die je wilt selecteren voor dit spel in > ");
 			keuze = input.nextInt();
@@ -155,13 +164,13 @@ public class AlhambraApplicatie {
 				throw new IllegalArgumentException();
 				}
 			}catch(InputMismatchException e) {
-				System.err.println("voer nu eens AUB een getal in!");
+				System.err.println("Geef het getal van de speler die je wilt kiezen in!");
 				input.nextLine();
 			}
 			catch(IllegalArgumentException e) {
 				System.err.println("Foutieve waarde ingegeven, probeer opnieuw! ");
 			}catch(Exception e) {
-				System.err.println("er is iets fout gegaan");
+				System.err.println("Er is iets fout gegaan");
 			}
 		}while (!isGeldig)/* 7 moet worden vervangen door size van de lijst zodat er kan worden gekozen voor een beschikbare speler*/;
 		return keuze-1;

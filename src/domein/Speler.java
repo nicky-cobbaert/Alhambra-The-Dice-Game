@@ -105,9 +105,6 @@ public class Speler
 		public String toString() {
 			return "Speler [gebruikersnaam=" + gebruikersnaam + ", geboortejaar=" + geboortejaar + "]";
 		}
-		
-		
-
 }
 //Dit is een commit van Jelle Van Horen
 //Dit is een commit van Sverre Lippens

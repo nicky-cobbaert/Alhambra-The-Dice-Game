@@ -82,15 +82,4 @@ public class SpelerMapper {
     	}
     	return alleSpelers;
     }
-    
-    
-    //Dit is voor de DTO te kunnen opstellen. Als de databank werkt mag dit weg!
-//    public List<Speler> geefAlleSpelers(){
-//    	List<Speler> spelers = new ArrayList<>();
-//    	
-//    	spelers.add(new Speler("bestaatAl",2003));
-//    	spelers.add(new Speler("bestaatOokAl",1999,4,10));
-//    	
-//    	return spelers;
-//    }
 }
