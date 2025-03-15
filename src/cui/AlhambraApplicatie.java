@@ -91,7 +91,6 @@ public class AlhambraApplicatie {
 	}
 	
 	
-	// volgende code is een work in progress
 	private void startNieuwSpel() {
 		dc.maakNieuwSpel();
 		int keuzeNieuw = 0;
@@ -103,8 +102,7 @@ public class AlhambraApplicatie {
 		do {
 		try {
 		do {
-//			try {
-			System.out.printf("Wilt u nog een speler toevoegen?%nTyp '1' voor ja \t Typ '2' voor neen%nJouw keuze > ");
+			System.out.printf("Wilt u nog een speler toevoegen?%nTyp '1' voor ja \t\t Typ '2' voor neen%nJouw keuze > ");
 			keuzeNieuw = input.nextInt(); 
 
 			if (keuzeNieuw != 1 && keuzeNieuw != 2) {
@@ -116,25 +114,17 @@ public class AlhambraApplicatie {
 			
 					dc.kiesSpelerEnKleur(speler, kleur);
 		
-					alleBeschikbareSpelers = dc.geefBeschikbareSpelers(); //dit is DTO
-					alleBeschikbareKleuren = dc.geefBeschikbareKleuren();
+					alleBeschikbareSpelers = dc.geefBeschikbareSpelers(); //dit is een lijst van SpelerDTO
+					alleBeschikbareKleuren = dc.geefBeschikbareKleuren(); //dit is een lijst van Strings
 				}
 			
-//				if (keuzeNieuw==2 && gekozenSpelers.size()<3) { dc.startSpel();
-//					System.err.println("Er moeten minstens 3 spelers meespelen!");
-//				} Wordt opgevangen maar nog niet correct -> Gaat naar hoofdmenu
 			}
-		
-//			}catch(InputMismatchException e) {
-//				System.err.println("Geef het getal in van de keuze dat je wilt maken!");
-//				input.nextLine(); // Verlagen naar lijn 132? Helpt dit bovenstaand probleem van naar hoofdmenu gaan? 
-//			}
 		} while (keuzeNieuw != 2); 
 		dc.startSpel();
 		nogHerhalen=false;
 		}catch(InputMismatchException e) {
 			System.err.println("Geef het getal in van de keuze dat je wilt maken!");
-			input.nextLine(); // Verlagen naar lijn 132? Helpt dit bovenstaand probleem van naar hoofdmenu gaan? 
+			input.nextLine();  
 		} catch (IllegalArgumentException e) {
 			System.err.println(e.getMessage());
 		}
@@ -143,7 +133,7 @@ public class AlhambraApplicatie {
 		System.out.println("Startspeler: "+ dc.geefStartspeler());
 		System.out.println("Volgende spelers nemen deel aan dit spel: ");
 		for (SpelerDTO dto : dc.geefGekozenSpelers()) {
-			System.out.printf("Speler: %s, kleur: %s, geboortejaar: %d%n",dto.gebruikersnaam(),dto.kleur().toString().toLowerCase(),dto.geboortejaar());
+			System.out.printf("Speler: %-20s, kleur: %-6s, geboortejaar: %d%n",dto.gebruikersnaam(),dto.kleur().toString().toLowerCase(),dto.geboortejaar());
 		}
 		System.out.println("Het spel is gespeeld!");
 	}
@@ -153,9 +143,9 @@ public class AlhambraApplicatie {
 		do {
 			try {
 				System.out.println("Kies uit 1 van volgende spelers:");
-			//dit geeft de lijst van spelers mee aan de console
+			//dit geeft de lijst van spelerDTOs mee aan de console
 				for (int index = 1; index <= lijstVanSpelers.size(); index ++) {
-					System.out.printf("%d. \t %s met als geboortejaar %d%n", index , lijstVanSpelers.get(index-1).gebruikersnaam(),lijstVanSpelers.get(index-1).geboortejaar()); //Alleen gebruikersnaam genoeg? 
+					System.out.printf("%d. \t %-20s met als geboortejaar %d%n", index , lijstVanSpelers.get(index-1).gebruikersnaam(),lijstVanSpelers.get(index-1).geboortejaar()); //Alleen gebruikersnaam genoeg? 
 			}
 				System.out.printf("Geef hier het nummer voor de speler die je wilt selecteren voor dit spel in > ");
 			keuze = input.nextInt();
@@ -172,19 +162,17 @@ public class AlhambraApplicatie {
 			}catch(Exception e) {
 				System.err.println("Er is iets fout gegaan");
 			}
-		}while (!isGeldig)/* 7 moet worden vervangen door size van de lijst zodat er kan worden gekozen voor een beschikbare speler*/;
+		}while (!isGeldig);
 		return keuze-1;
 	}
 	
 	private String geefKeuzeKleur(List<String> kleuren){
-		/* nog niet duidelijk of we een enum gaan gebruiken en hoe de kleur keuze gaat werken 
-		 * dus enkel begin code*/
 		int keuze = 0;
 		boolean isGeldig = false;
 		do {
 			try {
 			System.out.println("Kies uit 1 van volgende beschikbare kleuren:");
-			/*zelfde principe als bij geefKeuzeSpeler()*/
+			//zelfde principe als bij geefKeuzeSpeler()
 			for (int index = 0; index < kleuren.size(); index ++) {
 				System.out.printf("%d. %s%n", index+1 , kleuren.get(index).toString());
 			}
@@ -195,7 +183,7 @@ public class AlhambraApplicatie {
 				throw new IllegalArgumentException();
 			}
 			}catch(InputMismatchException e) {
-				System.err.println("voer nu eens AUB een getal in!");
+				System.err.println("Enkel getallen kunnen worden meegegeven om een kleur te kiezen!");
 				input.nextLine();
 			}
 			catch(IllegalArgumentException e) {
@@ -204,6 +192,6 @@ public class AlhambraApplicatie {
 				System.err.println("er is iets fout gegaan");
 			}
 		}while(!isGeldig);
-		return kleuren.get(keuze-1);//Even iets ingevuld zodat ik verder kon testen, mag uiteraard aangepast worden!
+		return kleuren.get(keuze-1);
 	}
 }
