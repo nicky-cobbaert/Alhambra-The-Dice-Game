@@ -59,6 +59,26 @@ public class DomeinController {
     	    return resultaat;
 	
     }
+    
+    private static String kleurgever(Kleuren kleur) {
+
+		switch (kleur.toString().toLowerCase()) {
+		case "blauw":
+			return "\u001B[34m";
+		case "groen":
+			return "\u001B[32m";
+		case "wit":
+			return "\u001B[37m";
+		case "geel":
+			return "\u001B[33m";
+		case "oranje":
+			return "\033[38;2;255;165;0m";
+		case "rood":
+			return "\u001B[31m";
+		default:
+			throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
+		}
+	}
 
     
     public List<SpelerDTO> geefGekozenSpelers(){
