@@ -84,6 +84,15 @@ public class Spel {
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
 
 	}
+	public int geefAantalZetstenen() {
+		int ind = gekozenSpelers.size();
+		switch(ind){
+		case 3: return 5;
+		case 4: return 4;
+		case 5,6: return 3;
+		default: return 0;
+		}
+	}
 
 	public String getStartSpeler() {
 		return startSpeler.getGebruikersnaam();

@@ -95,4 +95,7 @@ public class DomeinController {
     public String geefStartspeler() {
     	return spel.getStartSpeler();
     }
+    public int geefAantalZetstenen() {
+    	return spel.geefAantalZetstenen();
+    }
 }
