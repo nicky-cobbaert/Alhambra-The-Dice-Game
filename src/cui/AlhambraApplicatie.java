@@ -119,6 +119,9 @@ public class AlhambraApplicatie {
 				}
 			
 			}
+			if (dc.geefGekozenSpelers().size()==6) {
+				break;
+			}
 		} while (keuzeNieuw != 2); 
 		dc.startSpel();
 		nogHerhalen=false;
@@ -133,7 +136,7 @@ public class AlhambraApplicatie {
 		System.out.println("Startspeler: "+ dc.geefStartspeler());
 		System.out.println("Volgende spelers nemen deel aan dit spel: ");
 		for (SpelerDTO dto : dc.geefGekozenSpelers()) {
-			System.out.printf("Speler: %-20s, kleur: %-6s, geboortejaar: %d%n",dto.gebruikersnaam(),dto.kleur().toString().toLowerCase(),dto.geboortejaar());
+			System.out.printf("Speler: %-20s kleur: %-6s geboortejaar: %d%n",dto.gebruikersnaam()+",",dto.kleur()+",".toString().toLowerCase(),dto.geboortejaar());
 		}
 		System.out.println("Het spel is gespeeld!");
 	}
