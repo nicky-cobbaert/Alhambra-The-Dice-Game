@@ -12,7 +12,7 @@ public class AlhambraApplicatie {
 	
 	Scanner input = new Scanner(System.in);
 
-	DomeinController dc = new DomeinController();
+	DomeinController dc ;
 	
 	public AlhambraApplicatie(DomeinController dc) {
 		this.dc = dc;
