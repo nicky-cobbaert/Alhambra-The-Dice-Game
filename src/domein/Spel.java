@@ -1,5 +1,6 @@
 package domein;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -79,7 +80,7 @@ public class Spel {
 			throw new IllegalArgumentException("Er moeten minstens 3 spelers zijn om het spel te starten.");
 		}
 
-		Random rand = new Random();
+		SecureRandom rand = new SecureRandom();
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
 
 	}
