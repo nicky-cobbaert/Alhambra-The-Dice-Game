@@ -102,7 +102,7 @@ public class AlhambraApplicatie {
 		do {
 		try {
 		do {
-			System.out.printf("Wilt u nog een speler toevoegen?%nTyp '1' voor ja \t\t Typ '2' voor neen%nJouw keuze > ");
+			System.out.printf("Wilt u nog een speler toevoegen?%n1. Voeg speler toe%n2. Start het spel%nJouw keuze > ");
 			keuzeNieuw = input.nextInt(); 
 
 			if (keuzeNieuw != 1 && keuzeNieuw != 2) {
