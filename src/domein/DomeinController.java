@@ -32,10 +32,10 @@ public class DomeinController {
     	spel.startSpel();
     }
     
-    public List<Speler> geefAlleSpelers() { 
-    	return spelerRepo.geefAlleSpelers();
-    }
-    
+//    public List<Speler> geefAlleSpelers() { 
+//    	return spelerRepo.geefAlleSpelers();
+//    }
+//    
     public void kiesSpelerEnKleur(int s,String kleur) {
     	spel.kiesSpeler(s, kleur); //s is de plaats in de arrayList!
     }
@@ -45,7 +45,7 @@ public class DomeinController {
     	   List<Speler> speler = spel.geefBeschikbareSpelers();
     	   List<SpelerDTO> resultaat = new ArrayList<>();
 
-    	   for (Speler s : speler) {
+    	   for (Speler s : speler) { 			//Aparte methode voor maken, dubbele code!
     		   SpelerDTO sp = new SpelerDTO(
        	            s.getGebruikersnaam(),
        	            s.getGeboortejaar(),

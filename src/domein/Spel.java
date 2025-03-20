@@ -79,6 +79,7 @@ public class Spel {
 		if (gekozenSpelers.size() < 3) {
 			throw new IllegalArgumentException("Er moeten minstens 3 spelers zijn om het spel te starten.");
 		}
+		// size > 6 -> Exception!
 
 		SecureRandom rand = new SecureRandom();
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
