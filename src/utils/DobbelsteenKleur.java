@@ -1,5 +1,7 @@
 package utils;
 
-public enum DobbelsteenKleur {BLAUW,ROOD,BRUIN,GRIJS,GROEN,PAARS;
+
+public enum DobbelsteenKleur { blauw /*(paviljoen)*/,rood/*(harem)*/,bruin/*(arcaden)*/
+	,grijs/*(woning)*/,groen/*(tuin)*/,paars/*(toren)*/
 
 }

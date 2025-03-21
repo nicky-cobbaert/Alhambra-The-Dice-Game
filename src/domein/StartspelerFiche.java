@@ -1,6 +1,6 @@
 package domein;
 
-public class StartspelerFiche {
+public class StartspelerFiche extends Fiche {
 	
 	private Speler bijSpeler;
 	
@@ -8,8 +8,8 @@ public class StartspelerFiche {
 		return bijSpeler;
 	}
 	
-	public StartspelerFiche(Speler startSpeler) {
-		
+	public StartspelerFiche(int positie,Speler startSpeler) {
+		super(positie);
 	}
 	
-}
+} 
