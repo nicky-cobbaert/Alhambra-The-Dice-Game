@@ -13,10 +13,10 @@ public class Spel {
 	private Speler startSpeler;
 
 	/*
-	 private Spel speeltSpel;
+	 private Spel speeltSpel; geen idee wat deze is 'van Jelle'
 	 private List<Dobbelsteen> dobbelstenen;
-	 private Spel startspelerfiche
-	 private Spel spelbord
+	 private Startspelerfiche startspelerfiche
+	 private Spelbord spelbord
 	 private List<Bonusfiche> bonusfiches;
 	 */
 	

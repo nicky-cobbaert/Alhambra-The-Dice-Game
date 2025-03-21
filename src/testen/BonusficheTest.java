@@ -12,7 +12,7 @@ public class BonusficheTest {
 
 	private final static int GELDIGE_WAARDE = 452;
 	private final static int MAX_GELDIGE_WAARDE = 683;
-	private final static int MIN_GELIDGE_WAARDE = 111;
+	private final static int MIN_GELDIGE_WAARDE = 111;
 	
 	
     @ParameterizedTest
@@ -22,7 +22,7 @@ public class BonusficheTest {
     }
     
     @ParameterizedTest
-    @ValueSource(ints = {152, 652, 412, 482, 451, 453, GELDIGE_WAARDE, MIN_GELIDGE_WAARDE, MAX_GELDIGE_WAARDE }) // Inclusief 083 
+    @ValueSource(ints = {152, 652, 412, 482, 451, 453, GELDIGE_WAARDE, MIN_GELDIGE_WAARDE, MAX_GELDIGE_WAARDE }) // Inclusief 083 
     public void bonusfiche_GeldigePosities_GooitException(int positie) {
         Bonusfiche bonusfiche = new Bonusfiche(positie, 2);
         assertEquals(positie, bonusfiche.getPositie());
