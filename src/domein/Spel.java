@@ -3,12 +3,11 @@ package domein;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import utils.Kleuren;
+import utils.SpelerKleur;
 
 public class Spel {
-	private final List<Kleuren> beschikbareKleuren;
+	private final List<SpelerKleur> beschikbareKleuren;
 	private final List<Speler> gekozenSpelers;
 	private List<Speler> beschikbareSpelers;
 	private Speler startSpeler;
@@ -16,14 +15,12 @@ public class Spel {
 	public Spel() {
 
 		/** ------EnumOmzetting----------- */
-		this.beschikbareKleuren = new ArrayList<>();
+		this.beschikbareKleuren = Speler.geefAlleKleuren();
 		/**
 		 * Collections.addAll(beschikbareKleuren, "blauw", "groen", "wit", "geel",
 		 * "oranje", "rood");
 		 */
-		for (Kleuren kleur : Kleuren.values()) {
-			this.beschikbareKleuren.add(kleur);
-		}
+		
 		this.beschikbareSpelers = new ArrayList<>();
 		
 		this.gekozenSpelers = new ArrayList<>();
@@ -33,7 +30,7 @@ public class Spel {
 		this.beschikbareSpelers = spelers;
 	}
 
-	public List<Kleuren> getBeschikbareKleuren() {
+	public List<SpelerKleur> getBeschikbareKleuren() {
 		return beschikbareKleuren;
 	}
 
@@ -43,9 +40,9 @@ public class Spel {
 
 	public void kiesSpeler(int speler, String kleur) {
 
-		Kleuren huidigeKleur;
+		SpelerKleur huidigeKleur;
 
-		if (gekozenSpelers.size() >= 6) { // Onnodige code, is opgevangen in de console zelf met een break
+		if (gekozenSpelers.size() > 6) { // Onnodige code, is opgevangen in de console zelf met een break
 			throw new IllegalArgumentException("Er mogen maximaal 6 spelers meedoen.");
 		}
 		if (kleur == null || kleur.isBlank()) { // onnodige code 
@@ -54,7 +51,7 @@ public class Spel {
 
 		/** ---------KleurStringNaarEnum--------------- */
 
-		huidigeKleur = Kleuren.valueOf(kleur.toUpperCase());
+		huidigeKleur = SpelerKleur.valueOf(kleur.toUpperCase());
 
 //		switch (kleur.toLowerCase()) {
 //		case "blauw" -> huidigeKleur = Kleuren.BLAUW;
@@ -76,22 +73,42 @@ public class Spel {
 	}
 
 	public void startSpel() {
-		if (gekozenSpelers.size() < 3) {
+		if (gekozenSpelers.size() < 3 || gekozenSpelers.size() > 6) {
 			throw new IllegalArgumentException("Er moeten minstens 3 spelers zijn om het spel te starten.");
 		}
 		// size > 6 -> Exception!
-
+		geefSpelersZetstenen();
+		
 		SecureRandom rand = new SecureRandom();
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
-
+	}
+	public void speelRonde() {
+		// TODO UC3 code
+	}
+	public void beïndigSpel() {
+		clearSpelersVanAttributenNaSpelEindigt();
+		// TODO UC3 code
+	}
+	private void clearSpelersVanAttributenNaSpelEindigt() {
+		for(Speler sp:gekozenSpelers) {
+			sp.clearAttributenNaSpel();
+		}
 	}
 	public int geefAantalZetstenen() {
-		int ind = gekozenSpelers.size();
-		switch(ind){
-		case 3: return 5;
-		case 4: return 4;
-		case 5,6: return 3;
-		default: return 0;
+		
+		return gekozenSpelers.get(0).getZetstenen().size();
+	}
+	
+	private void geefSpelersZetstenen() {
+		int zetsteenAantal;
+		switch(gekozenSpelers.size()){
+		case 3: zetsteenAantal = 5;
+		case 4: zetsteenAantal = 4;
+		case 5,6: zetsteenAantal = 3;
+		default: zetsteenAantal = 0;
+		}
+		for(Speler sp:gekozenSpelers) {
+			sp.maakZetstenenAan(zetsteenAantal);
 		}
 	}
 

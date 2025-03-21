@@ -5,11 +5,11 @@ import java.util.List;
 
 import dto.SpelerDTO;
 import utils.Kleuren;
+import utils.SpelerKleur;
 
 public class DomeinController {
 
     private final SpelerRepository spelerRepo;
-    private Speler huidigeSpeler; //stond op DCD maar wordt nog niets mee gedaan
     private Spel spel;
 
     public DomeinController() {
@@ -43,24 +43,27 @@ public class DomeinController {
     public List<SpelerDTO> geefBeschikbareSpelers() { 
     	
     	   List<Speler> speler = spel.geefBeschikbareSpelers();
-    	   List<SpelerDTO> resultaat = new ArrayList<>();
-
-    	   for (Speler s : speler) { 			//Aparte methode voor maken, dubbele code!
-    		   SpelerDTO sp = new SpelerDTO(
-       	            s.getGebruikersnaam(),
-       	            s.getGeboortejaar(),
-       	            s.getAantalGespeeld(),
-       	            s.getAantalGewonnen(),
-       	            null
-   	        );
-    		   resultaat.add(sp);
-    	   }	   
-    	    
-    	    return resultaat;
+    	   return zetSpelersOmNaarSpelerDTOs(speler);
 	
     }
+    private List<SpelerDTO> zetSpelersOmNaarSpelerDTOs(List<Speler> spelers){
+    	List<SpelerDTO> resultaat = new ArrayList<>();
+
+ 	   for (Speler s : spelers) { 			//Aparte methode voor maken, dubbele code!
+ 		   SpelerDTO sp = new SpelerDTO(
+    	            s.getGebruikersnaam(),
+    	            s.getGeboortejaar(),
+    	            s.getAantalGespeeld(),
+    	            s.getAantalGewonnen(),
+    	            null
+	        );
+ 		   resultaat.add(sp);
+ 	   }	   
+ 	    
+ 	    return resultaat;
+    }
     
-    private static String kleurgever(Kleuren kleur) {
+    private static String kleurgever(SpelerKleur kleur) {
 
 		switch (kleur.toString().toLowerCase()) {
 		case "blauw":
@@ -83,34 +86,13 @@ public class DomeinController {
     
     public List<SpelerDTO> geefGekozenSpelers(){
     	List<Speler> speler = spel.getGekozenSpelers();
-    	List<SpelerDTO> resultaat = new ArrayList<>();
-    	
-    	for (Speler s : speler) {
- 		   SpelerDTO sp = new SpelerDTO(
-    	            s.getGebruikersnaam(),
-    	            s.getGeboortejaar(),
-    	            s.getAantalGespeeld(),
-    	            s.getAantalGewonnen(),
-    	            s.getKleur()
-	        );
- 		   resultaat.add(sp);
- 	   }	   
- 	    
- 	    return resultaat;
+    	return zetSpelersOmNaarSpelerDTOs(speler);
     }
  
 
-    public List<String> geefBeschikbareKleuren(){
+    public List<SpelerKleur> geefBeschikbareSpelerKleuren(){
     	
-    	List<String> lijst = new ArrayList<String>();
-    	
-    	/**----kleur wordt een string--------*/
-    	
-    	for (Kleuren kleur : spel.getBeschikbareKleuren()) {
-    		lijst.add(kleur.toString().toLowerCase());
-    	}
-    	
-    	return lijst;
+    	return spel.getBeschikbareKleuren();
     }
     public String geefStartspeler() {
     	return spel.getStartSpeler();

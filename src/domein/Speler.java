@@ -1,32 +1,32 @@
 package domein;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import utils.Kleuren;
+import utils.SpelerKleur;
 
 public class Speler 
 {
     private String gebruikersnaam;
     private int geboortejaar;
     private int aantalGewonnen, aantalGespeeld;
-    private Kleuren kleur; //waarom geen getters/setters?
-    
-   
+    private SpelerKleur kleur;
+    private List<Zetsteen> zetstenen;
 
-	private final static int HUIDIG_JAAR = 2025; //moet dit niet op dcd?    
+	private final static int HUIDIG_JAAR = 2025;   
 
     public Speler(String gebruikersnaam, int  geboortejaar) 
     {
-    	this(gebruikersnaam,geboortejaar,0,0,Kleuren.BLAUW);
+    	this(gebruikersnaam,geboortejaar,0,0);
     }
     
-    public Speler(String gebruikersnaam,int  geboortejaar, int aantalGewonnen, int aantalGespeeld, Kleuren kleur) 
+    public Speler(String gebruikersnaam,int  geboortejaar, int aantalGewonnen, int aantalGespeeld) 
     {
     	setGebruikersnaam(gebruikersnaam);
     	setGeboortejaar(geboortejaar);
     	setAantalGewonnen(aantalGewonnen);
     	setAantalGespeeld(aantalGespeeld);
-    	setKleur(kleur);
     }
     
     
@@ -76,13 +76,44 @@ public class Speler
 		this.aantalGespeeld = aantalGespeeld;
 	}
 	
-	    public Kleuren getKleur() {
+	public static List<SpelerKleur> geefAlleKleuren() {
+		List<SpelerKleur> spelerKleuren = new ArrayList<SpelerKleur>();
+		for (SpelerKleur kleur : SpelerKleur.values()) {
+			spelerKleuren.add(kleur);
+		}
+		return spelerKleuren;
+	}
+	
+	public SpelerKleur getKleur() {
 			return kleur;
 		}
 
-		public void setKleur(Kleuren kleur) { // probleem bij klasse Spel dus public
+	public void setKleur(SpelerKleur kleur) { // probleem bij klasse Spel dus public
 			this.kleur = kleur;
 		}
+	
+	public List<Zetsteen> getZetstenen(){
+		return this.zetstenen;
+	}
+	
+	private void setZetstenen(List<Zetsteen> zetstenenen) {
+		this.zetstenen = zetstenenen;
+	}
+	
+	public void maakZetstenenAan(int aantalZetstenen) {
+		List<Zetsteen> zetstenen = new ArrayList<Zetsteen>();
+		
+		for (int i = 0; i < aantalZetstenen;i++) {
+			Zetsteen zetsteen = new Zetsteen();
+			zetstenen.add(zetsteen);
+		}
+		setZetstenen(zetstenen);
+	}
+	
+	public void clearAttributenNaSpel() {
+		setKleur(null);
+		setZetstenen(null);
+	}
 
 		@Override
 		public int hashCode() {
@@ -106,8 +137,3 @@ public class Speler
 			return "Speler [gebruikersnaam=" + gebruikersnaam + ", geboortejaar=" + geboortejaar + "]";
 		}
 }
-//Dit is een commit van Jelle Van Horen
-//Dit is een commit van Sverre Lippens
-// Dit is een commit van Wout Gheysels
-// Dit is een commit van Lars De Wever
-//Dit is een commit van Nicky Cobbaert
