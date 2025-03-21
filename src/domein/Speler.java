@@ -14,6 +14,10 @@ public class Speler
     private SpelerKleur kleur;
     private List<Zetsteen> zetstenen;
 
+    /* 
+    private List<Gebouwsteen> gebouwstenen
+    */
+    
 	private final static int HUIDIG_JAAR = 2025;   
 
     public Speler(String gebruikersnaam, int  geboortejaar) 

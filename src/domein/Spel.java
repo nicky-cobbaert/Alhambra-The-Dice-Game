@@ -12,6 +12,14 @@ public class Spel {
 	private List<Speler> beschikbareSpelers;
 	private Speler startSpeler;
 
+	/*
+	 private Spel speeltSpel;
+	 private List<Dobbelsteen> dobbelstenen;
+	 private Spel startspelerfiche
+	 private Spel spelbord
+	 private List<Bonusfiche> bonusfiches;
+	 */
+	
 	public Spel() {
 
 		/** ------EnumOmzetting----------- */
