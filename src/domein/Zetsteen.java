@@ -7,5 +7,10 @@ public class Zetsteen {
 	public Zetsteen() {
 		
 	}
+	
+	
+	public int getPositie() { // Snel getter toegevoegd voor mijn methode
+        return positie;
+    }
 
 }
