@@ -50,7 +50,7 @@ public class Spel {
 	public void kiesSpeler(int speler, SpelerKleur kleur) {
 
 
-		if (gekozenSpelers.size() > 6) { // Onnodige code, is opgevangen in de console zelf met een break
+		if (gekozenSpelers.size() >= 6) { // Onnodige code, is opgevangen in de console zelf met een break
 			throw new IllegalArgumentException("Er mogen maximaal 6 spelers meedoen.");
 		}
 		if (kleur == null /* moet niet meer omdat we met enum werken 'Jelle'|| kleur.isBlank()*/) { // onnodige code 

@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import domein.Spel;
 import domein.SpelerRepository;
 import persistentie.SpelerMapper;
+import utils.SpelerKleur;
 
 class SpelTest {
 
@@ -38,8 +39,8 @@ class SpelTest {
 		SpelerRepository spelerRepo = new SpelerRepository();
 		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
-		spel.kiesSpeler( 1 , "Blauw");
-		spel.kiesSpeler(5, "WIT");
+		spel.kiesSpeler( 1 , SpelerKleur.BLAUW);
+		spel.kiesSpeler(5, SpelerKleur.WIT);
 
 		assertThrows(IllegalArgumentException.class, () -> spel.startSpel());
 	}
@@ -52,9 +53,9 @@ class SpelTest {
 		SpelerRepository spelerRepo = new SpelerRepository();
 		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 		
-		spel.kiesSpeler(1, "BLAUW");
-		spel.kiesSpeler(3, "WIT");
-		spel.kiesSpeler(4, "GEEL");
+		spel.kiesSpeler(1, SpelerKleur.BLAUW);
+		spel.kiesSpeler(3, SpelerKleur.WIT);
+		spel.kiesSpeler(4, SpelerKleur.GEEL);
 
 		assertEquals(3, spel.getGekozenSpelers().size());
 	}
@@ -67,10 +68,10 @@ class SpelTest {
 		SpelerRepository spelerRepo = new SpelerRepository();
 		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
-		spel.kiesSpeler(2, "BLAUW");
-		spel.kiesSpeler(1, "WIT");
-		spel.kiesSpeler(0, "GEEL");
-		spel.kiesSpeler(3, "GROEN");
+		spel.kiesSpeler(2, SpelerKleur.BLAUW);
+		spel.kiesSpeler(1, SpelerKleur.WIT);
+		spel.kiesSpeler(0, SpelerKleur.GEEL);
+		spel.kiesSpeler(3, SpelerKleur.GROEN);
 
 		assertEquals(4, spel.getGekozenSpelers().size());
 	}
@@ -83,12 +84,12 @@ class SpelTest {
 		SpelerRepository spelerRepo = new SpelerRepository();
 		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
-		spel.kiesSpeler(0, "BLAUW");
-		spel.kiesSpeler(1, "WIT");
-		spel.kiesSpeler(2, "ROOD");
-		spel.kiesSpeler(3, "GROEN");
-		spel.kiesSpeler(4, "ORANJE");
-		spel.kiesSpeler(5, "GEEL");
+		spel.kiesSpeler(0, SpelerKleur.BLAUW);
+		spel.kiesSpeler(1, SpelerKleur.WIT);
+		spel.kiesSpeler(2, SpelerKleur.ROOD);
+		spel.kiesSpeler(3, SpelerKleur.GROEN);
+		spel.kiesSpeler(4, SpelerKleur.ORANJE);
+		spel.kiesSpeler(5, SpelerKleur.GEEL);
 
 		assertEquals(6, spel.getGekozenSpelers().size());
 	}
@@ -101,14 +102,14 @@ class SpelTest {
 		SpelerRepository spelerRepo = new SpelerRepository();
 		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
-		spel.kiesSpeler(0, "BLAUW");
-		spel.kiesSpeler(1, "WIT");
-		spel.kiesSpeler(2, "ROOD");
-		spel.kiesSpeler(3, "GROEN");
-		spel.kiesSpeler(4, "ORANJE");
-		spel.kiesSpeler(5, "GEEL");
+		spel.kiesSpeler(0, SpelerKleur.BLAUW);
+		spel.kiesSpeler(1, SpelerKleur.WIT);
+		spel.kiesSpeler(2, SpelerKleur.ROOD);
+		spel.kiesSpeler(3, SpelerKleur.GROEN);
+		spel.kiesSpeler(4, SpelerKleur.ORANJE);
+		spel.kiesSpeler(5, SpelerKleur.GEEL);
 
-		assertThrows(IllegalArgumentException.class, () -> spel.kiesSpeler(6, "GEEL"));
+		assertThrows(IllegalArgumentException.class, () -> spel.kiesSpeler(6, SpelerKleur.GEEL));
 	}
 
 	/** deze code loopt normaal al fout bij de 7de aanroep, misschien aanpassen */
@@ -120,23 +121,23 @@ class SpelTest {
 		SpelerRepository spelerRepo = new SpelerRepository();
 		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
-		spel.kiesSpeler(0, "BLAUW");
-		spel.kiesSpeler(1, "WIT");
-		spel.kiesSpeler(2, "ROOD");
-		spel.kiesSpeler(3, "GROEN");
-		spel.kiesSpeler(4, "ORANJE");
-		spel.kiesSpeler(5, "GEEL");
+		spel.kiesSpeler(0, SpelerKleur.BLAUW);
+		spel.kiesSpeler(1, SpelerKleur.WIT);
+		spel.kiesSpeler(2, SpelerKleur.ROOD);
+		spel.kiesSpeler(3, SpelerKleur.GROEN);
+		spel.kiesSpeler(4, SpelerKleur.ORANJE);
+		spel.kiesSpeler(5, SpelerKleur.GEEL);
 
 		assertThrows(IllegalArgumentException.class, () -> {
-			spel.kiesSpeler(6, "ROOD");
-			spel.kiesSpeler(7, "GEEL");
+			spel.kiesSpeler(6, SpelerKleur.ROOD);
+			spel.kiesSpeler(7, SpelerKleur.GEEL);
 		});
 
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = { "blablabla", "Appelblauwzeegroen" })
-	void startSpel_KleurOnbestaand_WerptExceptie(String kleur) {
+	void startSpel_KleurOnbestaand_WerptExceptie(SpelerKleur kleur) {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
@@ -148,7 +149,7 @@ class SpelTest {
 
 	@NullAndEmptySource
 	@ParameterizedTest
-	void startSpel_KleurNullOfLeeg_WerptExceptie(String kleur) {
+	void startSpel_KleurNullOfLeeg_WerptExceptie(SpelerKleur kleur) {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
