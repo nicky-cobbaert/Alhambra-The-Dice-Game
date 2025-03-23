@@ -13,14 +13,25 @@ public class ResultatenGebied implements Placeable{ // relatie met Zetsteen nog 
 	public void plaatsZetsteenNeer(Zetsteen zetsteen) {
 		if(isPlaatsBaar(zetsteen.getPositie()) == true) { 
 			zetstenen.add(zetsteen);
+		} else {
+			throw new IllegalArgumentException("Deze positie is onmogelijk!");
 		}
 		
 	}
 
 	@Override
 	public boolean isPlaatsBaar(int positie) {
+		int honderdtal = positie / 100;        
+	    int tiental = (positie / 10) % 10;    
+	    int eenheid = positie % 10;
+	    
+	    
+	    if(honderdtal >= 1 && honderdtal <= 6 && tiental >= 1 && tiental <= 8 && eenheid >= 1 && eenheid <= 3) {
+	    	return true; 
+	    } else {
+	    	return false;
+	    }
 		
-		return true; // nog aanpassen naargelang uc4
 	}
 
 }

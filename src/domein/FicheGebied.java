@@ -13,13 +13,20 @@ public class FicheGebied implements Placeable { // relatie met Fiche nog niet in
 	public void plaatsFicheNeer(Fiche fiche) {
 		if(isPlaatsBaar(fiche.getPositie()) == true) { 
 			gezettefiches.add(fiche);
+		} else {
+			throw new IllegalArgumentException("Deze positie is onmogelijk!");
 		}
 		
 	}
 
 	@Override
 	public boolean isPlaatsBaar(int positie) {
-		return true; // nog aanpassen naargelang uc4
+		if(positie >= 1 && positie <= 6) {
+			return true; 
+		}
+		else {
+			return false;
+		}
 	}
 
 }
