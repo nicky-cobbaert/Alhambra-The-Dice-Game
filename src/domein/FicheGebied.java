@@ -11,11 +11,26 @@ public class FicheGebied implements Placeable { // relatie met Fiche nog niet in
 	}
 	
 	public void plaatsFicheNeer(Fiche fiche) {
-		if(isPlaatsBaar(fiche.getPositie()) == true) { 
-			gezettefiches.add(fiche);
-		} else {
-			throw new IllegalArgumentException("Deze positie is onmogelijk!");
-		}
+//		if(isPlaatsBaar(fiche.getPositie()) == true) { 
+//			gezettefiches.add(fiche);
+//		} else {
+//			throw new IllegalArgumentException("Deze positie is onmogelijk!");
+//		}
+		
+		
+		int positie = fiche.getPositie();
+
+        if (!isPlaatsBaar(positie)) { 
+            throw new IllegalArgumentException("Deze positie is onmogelijk!");
+        }
+
+        for (Fiche f : gezettefiches) {
+            if (f.getPositie() == positie) {
+                throw new IllegalArgumentException("Er is al een gebouwsteen op deze positie!");
+            }
+        }
+
+        gezettefiches.add(fiche);
 		
 	}
 

@@ -10,12 +10,20 @@ public class ResultatenGebied implements Placeable{ // relatie met Zetsteen nog 
 
 	}
 
-	public void plaatsZetsteenNeer(Zetsteen zetsteen) {
-		if(isPlaatsBaar(zetsteen.getPositie()) == true) { 
-			zetstenen.add(zetsteen);
-		} else {
-			throw new IllegalArgumentException("Deze positie is onmogelijk!");
-		}
+	public void plaatsZetsteenNeer(Zetsteen zetsteen) {	
+		int positie = zetsteen.getPositie();
+
+        if (!isPlaatsBaar(positie)) { 
+            throw new IllegalArgumentException("Deze positie is onmogelijk!");
+        }
+
+        for (Zetsteen z : zetstenen) {
+            if (z.getPositie() == positie) {
+                throw new IllegalArgumentException("Er is al een gebouwsteen op deze positie!");
+            }
+        }
+
+        zetstenen.add(zetsteen);
 		
 	}
 

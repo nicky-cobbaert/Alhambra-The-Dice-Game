@@ -12,11 +12,19 @@ public class GebouwpuntenGebied implements Placeable{ //relatie met Gebouwsteen 
 	}
 
 	public void plaatsGebouwsteen(Gebouwsteen gebouwsteen) {
-		if(isPlaatsBaar(gebouwsteen.getPositie()) == true) { 
-			gebouwstenen.add(gebouwsteen);
-		} else {
-			throw new IllegalArgumentException("Deze positie is onmogelijk!");
-		}
+		  int positie = gebouwsteen.getPositie();
+
+	        if (!isPlaatsBaar(positie)) { 
+	            throw new IllegalArgumentException("Deze positie is onmogelijk!");
+	        }
+
+	        for (Gebouwsteen g : gebouwstenen) {
+	            if (g.getPositie() == positie) {
+	                throw new IllegalArgumentException("Er is al een gebouwsteen op deze positie!");
+	            }
+	        }
+
+	        gebouwstenen.add(gebouwsteen);
 		
 	}
 	
