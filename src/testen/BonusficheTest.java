@@ -19,13 +19,13 @@ public class BonusficheTest {
     @ParameterizedTest
     @ValueSource(ints = {-5, 0 , 7 , 10}) 
     public void bonusfiche_OngeldigePosities_GooitException(int positie) {
-        assertThrows(IllegalArgumentException.class, () -> new Bonusfiche(2));
+        assertThrows(IllegalArgumentException.class, () -> new Bonusfiche());
     }
     
     @ParameterizedTest
     @ValueSource(ints = {GELDIGE_WAARDE, MIN_GELDIGE_WAARDE, MAX_GELDIGE_WAARDE }) 
     public void bonusfiche_GeldigePosities_GooitException(int positie) {
-        Bonusfiche bonusfiche = new Bonusfiche(2);
+        Bonusfiche bonusfiche = new Bonusfiche();
         assertEquals(positie, bonusfiche.getPositie());
     }	
 	

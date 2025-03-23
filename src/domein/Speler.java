@@ -13,6 +13,7 @@ public class Speler
     private int aantalGewonnen, aantalGespeeld;
     private SpelerKleur kleur;
     private List<Zetsteen> zetstenen;
+    private List<Gebouwsteen> gebouwstenen;
 
     /* 
     private List<Gebouwsteen> gebouwstenen
@@ -112,6 +113,15 @@ public class Speler
 			zetstenen.add(zetsteen);
 		}
 		setZetstenen(zetstenen);
+	}
+	public void maakGebouwstenenAan() {
+		List<Gebouwsteen> gebouwstenen = new ArrayList<Gebouwsteen>();
+		
+		for (int i = 0; i < 6;i++) {
+			Gebouwsteen gebouwsteen = new Gebouwsteen();
+			gebouwstenen.add(gebouwsteen);
+		}
+		this.gebouwstenen = gebouwstenen;
 	}
 	
 	public void clearAttributenNaSpel() {

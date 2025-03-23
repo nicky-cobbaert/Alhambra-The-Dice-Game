@@ -7,7 +7,9 @@ public class Spelbord {
 	private GebouwpuntenGebied gebouwpuntengebied;
 
 	public Spelbord() {
-		
+		fichegebied = new FicheGebied();
+		resultatengebied = new ResultatenGebied();
+		gebouwpuntengebied = new GebouwpuntenGebied();
 	}
 
 }

@@ -13,8 +13,7 @@ public class Spel {
 	private Speler startSpeler;// is dit nog nodig 'Jelle'
 	private static final int MAXIMUM_AANTAL_BONUSFICHES = 16;
 	private static final int MAXIMUM_AANTAL_DOBBELSTENEN = 8;
-	private static final int MINIMUMWAARDE_BONUSFICHES = 1;
-	private static final int MAXIMUMWAARDE_BONUSFICHES = 3;
+
 
 	// private Spel speeltSpel; geen idee wat deze is 'van Jelle'
 
@@ -37,17 +36,20 @@ public class Spel {
 		 * aanmaken---------------------------------------------------
 		 */
 
+		this.dobbelstenen = new ArrayList<Dobbelsteen>();
 		for (int i = 0; i < MAXIMUM_AANTAL_DOBBELSTENEN; i++) {
 			dobbelstenen.add(new Dobbelsteen());
 		}
 
+		this.bonusfiches = new ArrayList<Bonusfiche>();
 		for (int i = 0; i < 16; i++) {
-			bonusfiches.add(new Bonusfiche(
-					new SecureRandom().nextInt(MINIMUMWAARDE_BONUSFICHES, MAXIMUMWAARDE_BONUSFICHES + 1)));
+			bonusfiches.add(new Bonusfiche());
 		}
+		spelbord = new Spelbord();
+		startspelerfiche = new StartspelerFiche();
 		
 		/**
-		 * ---einde Dobbelsteen, bonusfiches
+		 * ---einde Dobbelsteen, bonusfiches , spelbord
 		 * aanmaken-----------------------------------------------------------------
 		 */
 
@@ -102,6 +104,7 @@ public class Spel {
 		}
 		// size > 6 -> Exception!
 		geefSpelersZetstenen();
+		geefSpelerGebouwstenen();
 
 		SecureRandom rand = new SecureRandom();
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
@@ -130,17 +133,23 @@ public class Spel {
 	private void geefSpelersZetstenen() {
 		int zetsteenAantal;
 		switch (gekozenSpelers.size()) {
-		case 3:
-			zetsteenAantal = 5;
-		case 4:
-			zetsteenAantal = 4;
-		case 5, 6:
-			zetsteenAantal = 3;
-		default:
-			zetsteenAantal = 0;
+		case 3 ->{
+			zetsteenAantal = 5;}
+		case 4 -> {
+			zetsteenAantal = 4;}
+		case 5, 6 ->{
+			zetsteenAantal = 3;}
+		default->{
+			zetsteenAantal = 0;}
 		}
 		for (Speler sp : gekozenSpelers) {
 			sp.maakZetstenenAan(zetsteenAantal);
+		}
+	}
+	
+	private void geefSpelerGebouwstenen() {
+		for (Speler sp : gekozenSpelers) {
+			sp.maakGebouwstenenAan();;
 		}
 	}
 

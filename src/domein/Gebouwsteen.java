@@ -8,7 +8,7 @@ public class Gebouwsteen {
 		
 	}
 	
-	public int getPositie(){ //toegevoegd voor mijn methode
+	public int getPositie(){ //toegevoegd voor mijn methode 'welke methode?' 
 		return positie;
 	}
 	
