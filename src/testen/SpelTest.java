@@ -203,9 +203,9 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
-		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
-		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+		spel.kiesSpeler(1, SpelerKleur.BLAUW);
+		spel.kiesSpeler(3, SpelerKleur.WIT);
+		spel.kiesSpeler(4, SpelerKleur.GEEL);
 		
 		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
 		
@@ -224,9 +224,9 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
-		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
-		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+		spel.kiesSpeler(1, SpelerKleur.BLAUW);
+		spel.kiesSpeler(3, SpelerKleur.WIT);
+		spel.kiesSpeler(4, SpelerKleur.GEEL);
 		
 		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
 		
@@ -245,9 +245,9 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
-		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
-		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+		spel.kiesSpeler(1, SpelerKleur.BLAUW);
+		spel.kiesSpeler(3, SpelerKleur.WIT);
+		spel.kiesSpeler(4, SpelerKleur.GEEL);
 		
 		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
 		
@@ -266,9 +266,9 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
-		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
-		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+		spel.kiesSpeler(1, SpelerKleur.BLAUW);
+		spel.kiesSpeler(3, SpelerKleur.WIT);
+		spel.kiesSpeler(4, SpelerKleur.GEEL);
 		
 		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
 		
@@ -287,9 +287,9 @@ class SpelTest {
 		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
 
-		spel.kiesSpeler(sm.geefSpeler("Kathleen Booth"), "GEEL");
-		spel.kiesSpeler(sm.geefSpeler("ada lovelace"), "ORANGJE");
-		spel.kiesSpeler(sm.geefSpeler("Terry Davis"), "ROOD");
+		spel.kiesSpeler(1, SpelerKleur.BLAUW);
+		spel.kiesSpeler(3, SpelerKleur.WIT);
+		spel.kiesSpeler(4, SpelerKleur.GEEL);
 		
 		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
 		
@@ -303,8 +303,8 @@ class SpelTest {
 			dobbelstenen.add(new Dobbelsteen);}); 
 
 	}
-	
 	*/
+	
 	
 
 }
