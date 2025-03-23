@@ -54,7 +54,7 @@ public class DomeinController {
     	            s.getGeboortejaar(),
     	            s.getAantalGespeeld(),
     	            s.getAantalGewonnen(),
-    	            null
+    	            s.getKleur()
 	        );
  		   resultaat.add(sp);
  	   }	   

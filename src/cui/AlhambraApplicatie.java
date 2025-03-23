@@ -137,7 +137,7 @@ public class AlhambraApplicatie {
 		System.out.println("Startspeler: "+ dc.geefStartspeler());
 		System.out.println("Volgende spelers nemen deel aan dit spel: ");
 		for (SpelerDTO dto : dc.geefGekozenSpelers()) {
-			System.out.printf("Speler: %-20s kleur: %-6s geboortejaar: %d met aantal zetstenen: %d%n",dto.gebruikersnaam()+",",dto.kleur()+",".toString().toLowerCase(),dto.geboortejaar(),dc.geefAantalZetstenen());
+			System.out.printf("Speler: %-20s kleur: %-6s geboortejaar: %d met aantal zetstenen: %d%n",dto.gebruikersnaam()+",",dto.kleur().toString().toLowerCase()+",",dto.geboortejaar(),dc.geefAantalZetstenen());
 		}
 		System.out.println("Het spel is gespeeld!");
 	}
