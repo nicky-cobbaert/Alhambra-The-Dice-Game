@@ -42,4 +42,10 @@ public class ResultatenGebied implements Placeable{ // relatie met Zetsteen nog 
 		
 	}
 
+	public List<Zetsteen> getZetstenen() { //methode voor testen
+		return zetstenen;
+	}
+
+	
+
 }

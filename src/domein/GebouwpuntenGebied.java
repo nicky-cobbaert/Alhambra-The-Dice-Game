@@ -11,7 +11,7 @@ public class GebouwpuntenGebied implements Placeable{ //relatie met Gebouwsteen 
 		
 	}
 
-	public void plaatsGebouwsteen(Gebouwsteen gebouwsteen) {
+	public void plaatsGebouwsteenNeer(Gebouwsteen gebouwsteen) {
 		  int positie = gebouwsteen.getPositie();
 
 	        if (!isPlaatsBaar(positie)) { 
@@ -39,6 +39,10 @@ public class GebouwpuntenGebied implements Placeable{ //relatie met Gebouwsteen 
 	    	return false;
 	    }
 		
+	}
+
+	public List<Gebouwsteen> getGebouwstenen() { //getter voor test
+		return gebouwstenen;
 	}
 
 }

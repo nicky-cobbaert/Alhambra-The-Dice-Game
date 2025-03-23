@@ -44,4 +44,8 @@ public class FicheGebied implements Placeable { // relatie met Fiche nog niet in
 		}
 	}
 
+	public List<Fiche> getGezettefiches() { //methode voor testen
+		return gezettefiches;
+	}
+
 }
