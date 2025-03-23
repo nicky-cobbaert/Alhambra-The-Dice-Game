@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.SpelerDTO;
-import utils.Kleuren;
 import utils.SpelerKleur;
 
 public class DomeinController {
@@ -36,7 +35,7 @@ public class DomeinController {
 //    	return spelerRepo.geefAlleSpelers();
 //    }
 //    
-    public void kiesSpelerEnKleur(int s,String kleur) {
+    public void kiesSpelerEnKleur(int s,SpelerKleur kleur) {
     	spel.kiesSpeler(s, kleur); //s is de plaats in de arrayList!
     }
     

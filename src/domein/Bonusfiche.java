@@ -6,7 +6,7 @@ public class Bonusfiche extends Fiche {
 	
 	
 	public Bonusfiche(int positie, int waarde) {
-		super(positie);
+		super();
 		this.waarde = waarde;
 	}
 

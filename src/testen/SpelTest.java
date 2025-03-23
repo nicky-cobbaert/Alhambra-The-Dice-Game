@@ -15,7 +15,7 @@ import persistentie.SpelerMapper;
 
 class SpelTest {
 
-	
+	// TODO in spelltest moet nog met enums worden gewerkt
 
 	
 	@Test

@@ -4,8 +4,7 @@ public class Fiche {
 
 	int positie;
 	
-	public Fiche(int positie) {
-		plaatsNeer(positie);
+	public Fiche() {
 		
 	}
 

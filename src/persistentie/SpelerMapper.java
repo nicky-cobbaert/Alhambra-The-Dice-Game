@@ -48,7 +48,7 @@ public class SpelerMapper {
                     int aantalGewonnen = rs.getInt("aantalGewonnen");
                     int aantalGespeeld = rs.getInt("aantalGespeeld");
 
-                    speler = new Speler(gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld,null);               
+                    speler = new Speler(gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld);               
                 }
             }
         } catch (SQLException ex) {
@@ -74,7 +74,7 @@ public class SpelerMapper {
                     int aantalGewonnen = rs.getInt("aantalGewonnen");
                     int aantalGespeeld = rs.getInt("aantalGespeeld");
                     
-                    alleSpelers.add(new Speler(gebruikersnaam,geboortejaar,aantalGewonnen,aantalGespeeld,null));
+                    alleSpelers.add(new Speler(gebruikersnaam,geboortejaar,aantalGewonnen,aantalGespeeld));
     			}
     		}
     	}catch (SQLException ex) {

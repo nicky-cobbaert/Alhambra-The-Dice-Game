@@ -10,19 +10,20 @@ public class Spel {
 	private final List<SpelerKleur> beschikbareKleuren;
 	private final List<Speler> gekozenSpelers;
 	private List<Speler> beschikbareSpelers;
-	private Speler startSpeler;
+	private Speler startSpeler;// is dit nog nodig 'Jelle'
 
-	/*
-	 private Spel speeltSpel; geen idee wat deze is 'van Jelle'
+	
+	// private Spel speeltSpel; geen idee wat deze is 'van Jelle'
+	
 	 private List<Dobbelsteen> dobbelstenen;
-	 private Startspelerfiche startspelerfiche
-	 private Spelbord spelbord
+	 private StartspelerFiche startspelerfiche;
+	 private Spelbord spelbord;
 	 private List<Bonusfiche> bonusfiches;
-	 */
+	 
 	
 	public Spel() {
 
-		/** ------EnumOmzetting----------- */
+		/** niet echt nodig 'Jelle' ------EnumOmzetting----------- */
 		this.beschikbareKleuren = Speler.geefAlleKleuren();
 		/**
 		 * Collections.addAll(beschikbareKleuren, "blauw", "groen", "wit", "geel",
@@ -46,20 +47,19 @@ public class Spel {
 		return gekozenSpelers;
 	}
 
-	public void kiesSpeler(int speler, String kleur) {
+	public void kiesSpeler(int speler, SpelerKleur kleur) {
 
-		SpelerKleur huidigeKleur;
 
 		if (gekozenSpelers.size() > 6) { // Onnodige code, is opgevangen in de console zelf met een break
 			throw new IllegalArgumentException("Er mogen maximaal 6 spelers meedoen.");
 		}
-		if (kleur == null || kleur.isBlank()) { // onnodige code 
+		if (kleur == null /* moet niet meer omdat we met enum werken 'Jelle'|| kleur.isBlank()*/) { // onnodige code 
 			throw new IllegalArgumentException("Er is geen kleur gekozen");
 		}
 
 		/** ---------KleurStringNaarEnum--------------- */
 
-		huidigeKleur = SpelerKleur.valueOf(kleur.toUpperCase());
+		
 
 //		switch (kleur.toLowerCase()) {
 //		case "blauw" -> huidigeKleur = Kleuren.BLAUW;
@@ -74,10 +74,10 @@ public class Spel {
 
 
 
-		beschikbareSpelers.get(speler).setKleur(huidigeKleur); // was niet zichtbaar*
+		beschikbareSpelers.get(speler).setKleur(kleur); // was niet zichtbaar*
 		gekozenSpelers.add(beschikbareSpelers.get(speler));
 		beschikbareSpelers.remove(speler);
-		beschikbareKleuren.remove(huidigeKleur);
+		beschikbareKleuren.remove(kleur);
 	}
 
 	public void startSpel() {

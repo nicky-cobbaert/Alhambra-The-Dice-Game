@@ -7,6 +7,7 @@ import java.util.Scanner;
 import domein.DomeinController;
 import dto.SpelerDTO;
 import exceptions.GebruikersnaamInGebruikException;
+import utils.SpelerKleur;
 
 public class AlhambraApplicatie {
 	
@@ -97,7 +98,7 @@ public class AlhambraApplicatie {
 		boolean nogHerhalen = true;
 		
 		List<SpelerDTO> alleBeschikbareSpelers = dc.geefBeschikbareSpelers();
-		List<String> alleBeschikbareKleuren = dc.geefBeschikbareKleuren();
+		List<SpelerKleur> alleBeschikbareKleuren = dc.geefBeschikbareSpelerKleuren();
 		
 		do {
 		try {
@@ -110,12 +111,12 @@ public class AlhambraApplicatie {
 			} else {
 				if (keuzeNieuw == 1) {
 					int speler = geefKeuzeSpeler(alleBeschikbareSpelers);
-					String kleur = geefKeuzeKleur(alleBeschikbareKleuren);
+					SpelerKleur kleur = geefKeuzeKleur(alleBeschikbareKleuren);
 			
 					dc.kiesSpelerEnKleur(speler, kleur);
 		
 					alleBeschikbareSpelers = dc.geefBeschikbareSpelers(); //dit is een lijst van SpelerDTO
-					alleBeschikbareKleuren = dc.geefBeschikbareKleuren(); //dit is een lijst van Strings
+					alleBeschikbareKleuren = dc.geefBeschikbareSpelerKleuren(); //dit is een lijst van Strings
 				}
 			
 			}
@@ -169,19 +170,19 @@ public class AlhambraApplicatie {
 		return keuze-1;
 	}
 	
-	private String geefKeuzeKleur(List<String> kleuren){
+	private SpelerKleur geefKeuzeKleur(List<SpelerKleur> alleBeschikbareKleuren){
 		int keuze = 0;
 		boolean isGeldig = false;
 		do {
 			try {
 			System.out.println("Kies uit 1 van volgende beschikbare kleuren:");
 			//zelfde principe als bij geefKeuzeSpeler()
-			for (int index = 0; index < kleuren.size(); index ++) {
-				System.out.printf("%d. %s%n", index+1 , kleuren.get(index).toString());
+			for (int index = 0; index < alleBeschikbareKleuren.size(); index ++) {
+				System.out.printf("%d. %s%n", index+1 , alleBeschikbareKleuren.get(index).toString());
 			}
 			System.out.printf("Geef hier het nummer voor de kleur die je wilt selecteren voor dit spel in >");
 			keuze = input.nextInt();
-			isGeldig = keuze >= 1 && keuze <= kleuren.size();
+			isGeldig = keuze >= 1 && keuze <= alleBeschikbareKleuren.size();
 			if(!isGeldig) {
 				throw new IllegalArgumentException();
 			}
@@ -195,6 +196,6 @@ public class AlhambraApplicatie {
 				System.err.println("er is iets fout gegaan");
 			}
 		}while(!isGeldig);
-		return kleuren.get(keuze-1);
+		return alleBeschikbareKleuren.get(keuze-1);
 	}
 }
