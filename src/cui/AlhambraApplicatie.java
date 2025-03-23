@@ -124,7 +124,7 @@ public class AlhambraApplicatie {
 				break;
 			}
 		} while (keuzeNieuw != 2); 
-		
+		dc.startSpel();
 		nogHerhalen=false;
 		}catch(InputMismatchException e) {
 			System.err.println("Geef het getal in van de keuze dat je wilt maken!");
@@ -133,7 +133,6 @@ public class AlhambraApplicatie {
 			System.err.println(e.getMessage());
 		}
 		}while (nogHerhalen);
-		dc.startSpel();
 		System.out.println("Het spel is gestart!");
 		System.out.println("Startspeler: "+ dc.geefStartspeler());
 		System.out.println("Volgende spelers nemen deel aan dit spel: ");
