@@ -17,6 +17,7 @@ public class Spel {
 	private StartspelerFiche startspelerfiche;
 	private Spelbord spelbord;
 	private List<Bonusfiche> bonusfiches;
+	private List<Speler> winnaar;
 
 	public Spel() {
 
@@ -150,5 +151,12 @@ public class Spel {
 
 	public List<Speler> geefBeschikbareSpelers() {
 		return beschikbareSpelers;
+	}
+
+	public Speler berekenWinnaar() {
+		
+		//Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
+		SecureRandom sr = new SecureRandom();
+		return gekozenSpelers.get(sr.nextInt(0,gekozenSpelers.size()));
 	}
 }

@@ -99,4 +99,13 @@ public class DomeinController {
     public int geefAantalZetstenen() {
     	return spel.geefAantalZetstenen();
     }
+    
+    public void updateGewonnen() {
+    	spelerRepo.updateGewonnen(spel.berekenWinnaar().getGebruikersnaam());
+    }
+    public void updateGespeeld() {
+    	for(Speler s : spel.getGekozenSpelers()) {
+    		spelerRepo.updateGespeeld(s.getGebruikersnaam());
+    	}
+    }
 }

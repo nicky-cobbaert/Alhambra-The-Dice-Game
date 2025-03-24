@@ -16,6 +16,8 @@ public class SpelerMapper {
     
     private static final String GEEF_SPELER = "SELECT * FROM speler WHERE Gebruikers = ?";
     
+    private static final String UPDATE_GEWONNEN = "UPDATE speler SET aantalGewonnen = aantalGewonnen + 1 WHERE gebruikers like ?";
+    private static final String UPDATE_GESPEELD = "UPDATE speler SET aantalGespeeld = aantalGespeeld + 1 WHERE gebruikers like ?";
             
     public void voegToe(Speler speler) 
     {
@@ -81,5 +83,30 @@ public class SpelerMapper {
     		throw new RuntimeException(ex);
     	}
     	return alleSpelers;
+    }
+    
+    public void updateGewonnen(String gebruikersnaam) {
+    	try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(UPDATE_GEWONNEN)) 
+        {
+            query.setString(1, gebruikersnaam);
+            
+            query.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    public void updateGespeeld(String gebruikersnaam) {
+    	try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+                PreparedStatement query = conn.prepareStatement(UPDATE_GESPEELD)) 
+        {
+            query.setString(1, gebruikersnaam);
+            
+            query.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }

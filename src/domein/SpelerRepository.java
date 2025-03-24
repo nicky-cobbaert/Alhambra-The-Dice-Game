@@ -38,6 +38,13 @@ public class SpelerRepository {
     	
     	return alleSpelers;
     }
+    
+    public void updateGewonnen(String gebruikersnaam) {
+    	mapper.updateGewonnen(gebruikersnaam);
+    }
    
+    public void updateGespeeld(String gebruikersnaam) {
+    	mapper.updateGespeeld(gebruikersnaam);
+    }
 }
 

@@ -144,6 +144,9 @@ public class AlhambraApplicatie {
 			// TO-DO
 			System.out.printf("Ronde %d is gespeeld! %n",i); //plaatsvervanger voor UC4
 		}
+		
+		dc.updateGespeeld();
+		dc.updateGewonnen();
 		System.out.println("Het spel is gespeeld!");
 	}
 	private int geefKeuzeSpeler(List<SpelerDTO> lijstVanSpelers) {
