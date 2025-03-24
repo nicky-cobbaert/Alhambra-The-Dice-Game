@@ -2,10 +2,10 @@ package domein;
 
 import java.util.List;
 
-public class GebouwpuntenGebied implements Placeable{ //relatie met Gebouwsteen nog niet in orde op dcd? NOG EENS HERBEKIJKEN NIET AANGEPAST
+public class GebouwpuntenGebied implements Placeable{
 	
 	
-	private List<Gebouwsteen> gebouwstenen;
+	private List<Gebouwsteen> gezetteGebouwstenen;
 
 	public GebouwpuntenGebied() {
 		
@@ -18,13 +18,13 @@ public class GebouwpuntenGebied implements Placeable{ //relatie met Gebouwsteen 
 	            throw new IllegalArgumentException("Deze positie is onmogelijk!");
 	        }
 
-	        for (Gebouwsteen g : gebouwstenen) {
+	        for (Gebouwsteen g : gezetteGebouwstenen) {
 	            if (g.getPositie() == positie) {
 	                throw new IllegalArgumentException("Er is al een gebouwsteen op deze positie!");
 	            }
 	        }
 
-	        gebouwstenen.add(gebouwsteen);
+	        gezetteGebouwstenen.add(gebouwsteen);
 		
 	}
 	
@@ -42,7 +42,7 @@ public class GebouwpuntenGebied implements Placeable{ //relatie met Gebouwsteen 
 	}
 
 	public List<Gebouwsteen> getGebouwstenen() { //getter voor test
-		return gebouwstenen;
+		return gezetteGebouwstenen;
 	}
 
 }

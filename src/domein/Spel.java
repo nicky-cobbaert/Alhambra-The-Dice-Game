@@ -10,13 +10,9 @@ public class Spel {
 	private final List<SpelerKleur> beschikbareKleuren;
 	private final List<Speler> gekozenSpelers;
 	private List<Speler> beschikbareSpelers;
-	private Speler startSpeler;// is dit nog nodig 'Jelle'
+	private Speler startSpeler;
 	private static final int MAXIMUM_AANTAL_BONUSFICHES = 16;
 	private static final int MAXIMUM_AANTAL_DOBBELSTENEN = 8;
-
-
-	// private Spel speeltSpel; geen idee wat deze is 'van Jelle'
-
 	private List<Dobbelsteen> dobbelstenen;
 	private StartspelerFiche startspelerfiche;
 	private Spelbord spelbord;
@@ -24,12 +20,7 @@ public class Spel {
 
 	public Spel() {
 
-		/* niet echt nodig 'Jelle' ------EnumOmzetting----------- */
 		this.beschikbareKleuren = Speler.geefAlleKleuren();
-		/*
-		 * Collections.addAll(beschikbareKleuren, "blauw", "groen", "wit", "geel",
-		 * "oranje", "rood");
-		 */
 
 		/**
 		 * --Dobbelsteen, bonusfiches
@@ -79,18 +70,6 @@ public class Spel {
 			throw new IllegalArgumentException("Er is geen kleur gekozen");
 		}
 
-		/** ---------KleurStringNaarEnum--------------- */
-
-//		switch (kleur.toLowerCase()) {
-//		case "blauw" -> huidigeKleur = Kleuren.BLAUW;
-//		case "groen" -> huidigeKleur = Kleuren.GROEN;
-//		case "wit" -> huidigeKleur = Kleuren.WIT;
-//		case "geel" -> huidigeKleur = Kleuren.GEEL;
-//		case "oranje" -> huidigeKleur = Kleuren.ORANJE;
-//		case "rood" -> huidigeKleur = Kleuren.ROOD;
-//		default -> throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
-//		}
-		/** ------------------------------------------- */
 
 		beschikbareSpelers.get(speler).setKleur(kleur); // was niet zichtbaar*
 		gekozenSpelers.add(beschikbareSpelers.get(speler));

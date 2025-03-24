@@ -93,7 +93,7 @@ public class Speler
 			return kleur;
 		}
 
-	public void setKleur(SpelerKleur kleur) { // probleem bij klasse Spel dus public
+	public void setKleur(SpelerKleur kleur) {
 			this.kleur = kleur;
 		}
 	

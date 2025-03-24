@@ -116,7 +116,7 @@ public class AlhambraApplicatie {
 					dc.kiesSpelerEnKleur(speler, kleur);
 		
 					alleBeschikbareSpelers = dc.geefBeschikbareSpelers(); //dit is een lijst van SpelerDTO
-					alleBeschikbareKleuren = dc.geefBeschikbareSpelerKleuren(); //dit is een lijst van Strings
+					alleBeschikbareKleuren = dc.geefBeschikbareSpelerKleuren(); //dit is een lijst van SpelerKleur
 				}
 			
 			}
@@ -178,7 +178,7 @@ public class AlhambraApplicatie {
 			System.out.println("Kies uit 1 van volgende beschikbare kleuren:");
 			//zelfde principe als bij geefKeuzeSpeler()
 			for (int index = 0; index < alleBeschikbareKleuren.size(); index ++) {
-				System.out.printf("%d. %s%n", index+1 , alleBeschikbareKleuren.get(index).toString());
+				System.out.printf("%d. %s%n", index+1 , alleBeschikbareKleuren.get(index).toString().toLowerCase());
 			}
 			System.out.printf("Geef hier het nummer voor de kleur die je wilt selecteren voor dit spel in >");
 			keuze = input.nextInt();

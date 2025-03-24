@@ -18,7 +18,7 @@ public class Dobbelsteen {
 
 	public void dobbel() {
 		int index = new SecureRandom().nextInt(1, DobbelsteenKleur.values().length);
-		this.kleur = DobbelsteenKleur.values()[index];
+		this.kleur = DobbelsteenKleur.values()[index - 1];
 	}
 
 }

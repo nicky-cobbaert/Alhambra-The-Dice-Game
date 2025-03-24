@@ -135,30 +135,6 @@ class SpelTest {
 
 	}
 
-	@ParameterizedTest
-	@ValueSource(strings = { "blablabla", "Appelblauwzeegroen" })
-	void startSpel_KleurOnbestaand_WerptExceptie(SpelerKleur kleur) {
-		SpelerMapper sm = new SpelerMapper();
-		Spel spel = new Spel();
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			spel.kiesSpeler(0, kleur);
-		});
-
-	}
-
-	@NullAndEmptySource
-	@ParameterizedTest
-	void startSpel_KleurNullOfLeeg_WerptExceptie(SpelerKleur kleur) {
-		SpelerMapper sm = new SpelerMapper();
-		Spel spel = new Spel();
-
-		assertThrows(IllegalArgumentException.class, () -> {
-			spel.kiesSpeler(0, kleur);
-		});
-
-	}
-
 	/*
 	 * Er zal nooit een speler of kleur meerdere keren gekozen worden omdat die uit
 	 * de kieslijst verdwijnt

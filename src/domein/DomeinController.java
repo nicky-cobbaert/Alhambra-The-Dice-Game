@@ -48,7 +48,7 @@ public class DomeinController {
     private List<SpelerDTO> zetSpelersOmNaarSpelerDTOs(List<Speler> spelers){
     	List<SpelerDTO> resultaat = new ArrayList<>();
 
- 	   for (Speler s : spelers) { 			//Aparte methode voor maken, dubbele code!
+ 	   for (Speler s : spelers) { 
  		   SpelerDTO sp = new SpelerDTO(
     	            s.getGebruikersnaam(),
     	            s.getGeboortejaar(),

@@ -2,7 +2,7 @@ package domein;
 
 import java.util.List;
 
-public class FicheGebied implements Placeable { // relatie met Fiche nog niet in orde op dcd? NOG NIET AANGEPAST IN DCD
+public class FicheGebied implements Placeable {
 	
 	private List<Fiche> gezettefiches; // naam veranderen naar gewoon fiches?
 
