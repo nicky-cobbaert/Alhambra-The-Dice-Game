@@ -91,6 +91,18 @@ public class Spel {
 
 	public void speelRonde() {
 		// TODO UC3 code
+		//UC3 -> Bonusfiches + startspelersfiche van positie veranderen
+		SecureRandom random = new SecureRandom();
+		int positieStartSpelerFiche = random.nextInt(1,7);
+		
+		startspelerfiche.plaatsNeer(positieStartSpelerFiche);
+		for(int i=1;i<7;i++) {
+			if (i!=positieStartSpelerFiche) {
+				int indexWaarde = random.nextInt(0,bonusfiches.size());
+				bonusfiches.get(indexWaarde).plaatsNeer(i);
+				bonusfiches.remove(indexWaarde);
+			}
+		}
 	}
 
 	public void beïndigSpel() {

@@ -139,6 +139,11 @@ public class AlhambraApplicatie {
 		for (SpelerDTO dto : dc.geefGekozenSpelers()) {
 			System.out.printf("Speler: %-20s kleur: %-6s geboortejaar: %d met aantal zetstenen: %d%n",dto.gebruikersnaam()+",",dto.kleur().toString().toLowerCase()+",",dto.geboortejaar(),dc.geefAantalZetstenen());
 		}
+		
+		for (int i=1; i<=3; i++) {
+			// TO-DO
+			System.out.printf("Ronde %d is gespeeld! %n",i); //plaatsvervanger voor UC4
+		}
 		System.out.println("Het spel is gespeeld!");
 	}
 	private int geefKeuzeSpeler(List<SpelerDTO> lijstVanSpelers) {
