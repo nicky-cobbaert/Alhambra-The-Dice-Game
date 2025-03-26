@@ -18,14 +18,10 @@ class SpelTest {
 
 	// TODO in spelltest moet nog met enums worden gewerkt
 
-	
 	@Test
 	void startSpel_AantalSpelersVeelTeLaag_WerptExceptie() {
 
-		
-		
 		Spel spel = new Spel();
-
 
 		assertThrows(IllegalArgumentException.class, () -> spel.startSpel());
 	}
@@ -39,7 +35,7 @@ class SpelTest {
 		SpelerRepository spelerRepo = new SpelerRepository();
 		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
-		spel.kiesSpeler( 1 , SpelerKleur.BLAUW);
+		spel.kiesSpeler(1, SpelerKleur.BLAUW);
 		spel.kiesSpeler(5, SpelerKleur.WIT);
 
 		assertThrows(IllegalArgumentException.class, () -> spel.startSpel());
@@ -52,7 +48,7 @@ class SpelTest {
 		Spel spel = new Spel();
 		SpelerRepository spelerRepo = new SpelerRepository();
 		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
-		
+
 		spel.kiesSpeler(1, SpelerKleur.BLAUW);
 		spel.kiesSpeler(3, SpelerKleur.WIT);
 		spel.kiesSpeler(4, SpelerKleur.GEEL);
@@ -169,118 +165,167 @@ class SpelTest {
 	 * 
 	 * }
 	 */
-	
+
 	/**
+	 * 
+	 * @Test void startSpel_VeelTeWeinigDobbelstenen_WerptExceptie() {
+	 * 
+	 * 
+	 *       SpelerMapper sm = new SpelerMapper(); Spel spel = new Spel();
+	 * 
+	 *       spel.kiesSpeler(1, SpelerKleur.BLAUW); spel.kiesSpeler(3,
+	 *       SpelerKleur.WIT); spel.kiesSpeler(4, SpelerKleur.GEEL);
+	 * 
+	 *       List<Dobbelsteen> dobbelstenen = new ArrayList<>();
+	 * 
+	 *       for (int i = 0 ; i <3 ; i++ ) { dobbelstenen.add(new Dobbelsteen); }
+	 * 
+	 *       assertThrows(VerkeerdAantalDobbelstenenException.class, () ->
+	 *       {spel.startSpel() ;});
+	 * 
+	 *       }
+	 * 
+	 * @Test void startSpel_NetTeWeinigDobbelstenen_WerptExceptie() {
+	 * 
+	 * 
+	 *       SpelerMapper sm = new SpelerMapper(); Spel spel = new Spel();
+	 * 
+	 *       spel.kiesSpeler(1, SpelerKleur.BLAUW); spel.kiesSpeler(3,
+	 *       SpelerKleur.WIT); spel.kiesSpeler(4, SpelerKleur.GEEL);
+	 * 
+	 *       List<Dobbelsteen> dobbelstenen = new ArrayList<>();
+	 * 
+	 *       for (int i = 0 ; i <7 ; i++ ) { dobbelstenen.add(new Dobbelsteen); }
+	 * 
+	 *       assertThrows(VerkeerdAantalDobbelstenenException.class, () ->
+	 *       {spel.startSpel() ;});
+	 * 
+	 *       }
+	 * 
+	 * @Test void startSpel_GenoegDobbelstenen_StartSpel() {
+	 * 
+	 * 
+	 *       SpelerMapper sm = new SpelerMapper(); Spel spel = new Spel();
+	 * 
+	 *       spel.kiesSpeler(1, SpelerKleur.BLAUW); spel.kiesSpeler(3,
+	 *       SpelerKleur.WIT); spel.kiesSpeler(4, SpelerKleur.GEEL);
+	 * 
+	 *       List<Dobbelsteen> dobbelstenen = new ArrayList<>();
+	 * 
+	 *       for (int i = 0 ; i <8 ; i++ ) { dobbelstenen.add(new Dobbelsteen); }
+	 * 
+	 *       assertEquals(8, spel.geefDobbelstenen().size());
+	 * 
+	 *       }
+	 * 
+	 * @Test void startSpel_NetTeVeelDobbelstenen_WerptExceptie() {
+	 * 
+	 * 
+	 *       SpelerMapper sm = new SpelerMapper(); Spel spel = new Spel();
+	 * 
+	 *       spel.kiesSpeler(1, SpelerKleur.BLAUW); spel.kiesSpeler(3,
+	 *       SpelerKleur.WIT); spel.kiesSpeler(4, SpelerKleur.GEEL);
+	 * 
+	 *       List<Dobbelsteen> dobbelstenen = new ArrayList<>();
+	 * 
+	 *       for (int i = 0 ; i <8 ; i++ ) { dobbelstenen.add(new Dobbelsteen); }
+	 * 
+	 *       assertThrows(VerkeerdAantalDobbelstenenException.class, () ->
+	 *       {dobbelstenen.add(new Dobbelsteen);});
+	 * 
+	 *       }
+	 * 
+	 * @Test void startSpel_VeelTeVeelDobbelstenen_WerptExceptie() {
+	 * 
+	 * 
+	 *       SpelerMapper sm = new SpelerMapper(); Spel spel = new Spel();
+	 * 
+	 *       spel.kiesSpeler(1, SpelerKleur.BLAUW); spel.kiesSpeler(3,
+	 *       SpelerKleur.WIT); spel.kiesSpeler(4, SpelerKleur.GEEL);
+	 * 
+	 *       List<Dobbelsteen> dobbelstenen = new ArrayList<>();
+	 * 
+	 *       for (int i = 0 ; i <8 ; i++ ) { dobbelstenen.add(new Dobbelsteen); }
+	 * 
+	 *       assertThrows(VerkeerdAantalDobbelstenenException.class, () -> {
+	 *       dobbelstenen.add(new Dobbelsteen); dobbelstenen.add(new Dobbelsteen);s
+	 *       dobbelstenen.add(new Dobbelsteen);});
+	 * 
+	 *       }
+	 */
 
 	@Test
-	void startSpel_VeelTeWeinigDobbelstenen_WerptExceptie() {
+	void maakZetStenenAan_BijDrieSpelers_WijstVijfZetstenenToe() {
 
-		
-		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
+		SpelerRepository spelerRepo = new SpelerRepository();
+		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
-		spel.kiesSpeler(1, SpelerKleur.BLAUW);
-		spel.kiesSpeler(3, SpelerKleur.WIT);
-		spel.kiesSpeler(4, SpelerKleur.GEEL);
-		
-		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
-		
-		for (int i = 0 ; i <3 ; i++ ) {
-			dobbelstenen.add(new Dobbelsteen);
-		}
+		spel.kiesSpeler(2, SpelerKleur.ROOD);
+		spel.kiesSpeler(3, SpelerKleur.GROEN);
+		spel.kiesSpeler(4, SpelerKleur.ORANJE);
 
-		assertThrows(VerkeerdAantalDobbelstenenException.class, () -> {spel.startSpel() ;}); 
+		spel.startSpel();
+
+		assertEquals(5, spel.geefAantalZetstenen());
 
 	}
 
 	@Test
-	void startSpel_NetTeWeinigDobbelstenen_WerptExceptie() {
+	void maakZetStenenAan_BijVierSpelers_WijstVierZetstenenToe() {
 
-		
-		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
+		SpelerRepository spelerRepo = new SpelerRepository();
+		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
-		spel.kiesSpeler(1, SpelerKleur.BLAUW);
-		spel.kiesSpeler(3, SpelerKleur.WIT);
-		spel.kiesSpeler(4, SpelerKleur.GEEL);
-		
-		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
-		
-		for (int i = 0 ; i <7 ; i++ ) {
-			dobbelstenen.add(new Dobbelsteen);
-		}
+		spel.kiesSpeler(2, SpelerKleur.ROOD);
+		spel.kiesSpeler(3, SpelerKleur.GROEN);
+		spel.kiesSpeler(4, SpelerKleur.ORANJE);
+		spel.kiesSpeler(5, SpelerKleur.BLAUW);
 
-		assertThrows(VerkeerdAantalDobbelstenenException.class, () -> {spel.startSpel() ;}); 
+		spel.startSpel();
+
+		assertEquals(4, spel.geefAantalZetstenen());
 
 	}
 
 	@Test
-	void startSpel_GenoegDobbelstenen_StartSpel() {
+	void maakZetStenenAan_BijVijfSpelers_WijstDrieZetstenenToe() {
 
-		
-		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
+		SpelerRepository spelerRepo = new SpelerRepository();
+		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
-		spel.kiesSpeler(1, SpelerKleur.BLAUW);
-		spel.kiesSpeler(3, SpelerKleur.WIT);
-		spel.kiesSpeler(4, SpelerKleur.GEEL);
-		
-		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
-		
-		for (int i = 0 ; i <8 ; i++ ) {
-			dobbelstenen.add(new Dobbelsteen);
-		}
+		spel.kiesSpeler(2, SpelerKleur.ROOD);
+		spel.kiesSpeler(3, SpelerKleur.GROEN);
+		spel.kiesSpeler(4, SpelerKleur.ORANJE);
+		spel.kiesSpeler(5, SpelerKleur.BLAUW);
+		spel.kiesSpeler(6, SpelerKleur.GEEL);
 
-		assertEquals(8, spel.geefDobbelstenen().size());
+		spel.startSpel();
+
+		assertEquals(3, spel.geefAantalZetstenen());
 
 	}
 
 	@Test
-	void startSpel_NetTeVeelDobbelstenen_WerptExceptie() {
+	void maakZetStenenAan_BijZesSpelers_WijstDrieZetstenenToe() {
 
-		
-		SpelerMapper sm = new SpelerMapper();
 		Spel spel = new Spel();
+		SpelerRepository spelerRepo = new SpelerRepository();
+		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
-		spel.kiesSpeler(1, SpelerKleur.BLAUW);
-		spel.kiesSpeler(3, SpelerKleur.WIT);
-		spel.kiesSpeler(4, SpelerKleur.GEEL);
-		
-		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
-		
-		for (int i = 0 ; i <8 ; i++ ) {
-			dobbelstenen.add(new Dobbelsteen);
-		}
+		spel.kiesSpeler(2, SpelerKleur.ROOD);
+		spel.kiesSpeler(3, SpelerKleur.GROEN);
+		spel.kiesSpeler(4, SpelerKleur.ORANJE);
+		spel.kiesSpeler(5, SpelerKleur.BLAUW);
+		spel.kiesSpeler(6, SpelerKleur.GEEL);
+		spel.kiesSpeler(7, SpelerKleur.WIT);
 
-		assertThrows(VerkeerdAantalDobbelstenenException.class, () -> {dobbelstenen.add(new Dobbelsteen);}); 
+		spel.startSpel();
+
+		assertEquals(3, spel.geefAantalZetstenen());
 
 	}
-
-	@Test
-	void startSpel_VeelTeVeelDobbelstenen_WerptExceptie() {
-
-		
-		SpelerMapper sm = new SpelerMapper();
-		Spel spel = new Spel();
-
-		spel.kiesSpeler(1, SpelerKleur.BLAUW);
-		spel.kiesSpeler(3, SpelerKleur.WIT);
-		spel.kiesSpeler(4, SpelerKleur.GEEL);
-		
-		List<Dobbelsteen> dobbelstenen = new ArrayList<>();
-		
-		for (int i = 0 ; i <8 ; i++ ) {
-			dobbelstenen.add(new Dobbelsteen);
-		}
-
-		assertThrows(VerkeerdAantalDobbelstenenException.class, () -> {
-			dobbelstenen.add(new Dobbelsteen);
-			dobbelstenen.add(new Dobbelsteen);s
-			dobbelstenen.add(new Dobbelsteen);}); 
-
-	}
-	*/
-	
-	
 
 }

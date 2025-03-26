@@ -39,7 +39,7 @@ public class Spel {
 		}
 		spelbord = new Spelbord();
 		startspelerfiche = new StartspelerFiche();
-		
+
 		/**
 		 * ---einde Dobbelsteen, bonusfiches , spelbord
 		 * aanmaken-----------------------------------------------------------------
@@ -71,7 +71,6 @@ public class Spel {
 			throw new IllegalArgumentException("Er is geen kleur gekozen");
 		}
 
-
 		beschikbareSpelers.get(speler).setKleur(kleur); // was niet zichtbaar*
 		gekozenSpelers.add(beschikbareSpelers.get(speler));
 		beschikbareSpelers.remove(speler);
@@ -92,14 +91,14 @@ public class Spel {
 
 	public void speelRonde() {
 		// TODO UC3 code
-		//UC3 -> Bonusfiches + startspelersfiche van positie veranderen
+		// UC3 -> Bonusfiches + startspelersfiche van positie veranderen
 		SecureRandom random = new SecureRandom();
-		int positieStartSpelerFiche = random.nextInt(1,7);
-		
+		int positieStartSpelerFiche = random.nextInt(1, 7);
+
 		startspelerfiche.plaatsNeer(positieStartSpelerFiche);
-		for(int i=1;i<7;i++) {
-			if (i!=positieStartSpelerFiche) {
-				int indexWaarde = random.nextInt(0,bonusfiches.size());
+		for (int i = 1; i < 7; i++) {
+			if (i != positieStartSpelerFiche) {
+				int indexWaarde = random.nextInt(0, bonusfiches.size());
 				bonusfiches.get(indexWaarde).plaatsNeer(i);
 				bonusfiches.remove(indexWaarde);
 			}
@@ -109,6 +108,7 @@ public class Spel {
 	public void beïndigSpel() {
 		clearSpelersVanAttributenNaSpelEindigt();
 		// TODO UC3 code
+
 	}
 
 	private void clearSpelersVanAttributenNaSpelEindigt() {
@@ -125,23 +125,28 @@ public class Spel {
 	private void geefSpelersZetstenen() {
 		int zetsteenAantal;
 		switch (gekozenSpelers.size()) {
-		case 3 ->{
-			zetsteenAantal = 5;}
+		case 3 -> {
+			zetsteenAantal = 5;
+		}
 		case 4 -> {
-			zetsteenAantal = 4;}
-		case 5, 6 ->{
-			zetsteenAantal = 3;}
-		default->{
-			zetsteenAantal = 0;}
+			zetsteenAantal = 4;
+		}
+		case 5, 6 -> {
+			zetsteenAantal = 3;
+		}
+		default -> {
+			zetsteenAantal = 0;
+		}
 		}
 		for (Speler sp : gekozenSpelers) {
 			sp.maakZetstenenAan(zetsteenAantal);
 		}
 	}
-	
+
 	private void geefSpelerGebouwstenen() {
 		for (Speler sp : gekozenSpelers) {
-			sp.maakGebouwstenenAan();;
+			sp.maakGebouwstenenAan();
+			;
 		}
 	}
 
@@ -154,9 +159,20 @@ public class Spel {
 	}
 
 	public Speler berekenWinnaar() {
-		
-		//Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
+
+		// Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
 		SecureRandom sr = new SecureRandom();
-		return gekozenSpelers.get(sr.nextInt(0,gekozenSpelers.size()));
+		return gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()));
+
+		/**
+		 * Code voor winnaar te berekenen
+		 * 
+		 * Speler huidigHoogste = gekozenSpelers.get(0);
+		 * 
+		 * for (Speler speler : gekozenSpelers) { if (speler.getPunten() >
+		 * huidigeHoogste.getPunten()) { huidigHoogste = speler; } }
+		 * 
+		 * return huidigHoogste;
+		 */
 	}
 }
