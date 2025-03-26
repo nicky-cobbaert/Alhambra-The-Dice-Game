@@ -138,8 +138,9 @@ public class AlhambraApplicatie {
 		System.out.println("Startspeler: " + dc.geefStartspeler());
 		System.out.println("Volgende spelers nemen deel aan dit spel: ");
 		for (SpelerDTO dto : dc.geefGekozenSpelers()) {
-			System.out.printf("Speler: %-20s kleur: %-6s geboortejaar: %d met aantal zetstenen: %d%n",
-					dto.gebruikersnaam() + ",", dto.kleur().toString().toLowerCase() + ",", dto.geboortejaar(),
+			System.out.printf("Speler: %-20s kleur: %s%-6s%s geboortejaar: %d met aantal zetstenen: %d%n",
+					dto.gebruikersnaam() + ",", DomeinController.kleurGever(dto.kleur()),
+					dto.kleur().toString().toLowerCase(), "\u001B[0m" + ",", dto.geboortejaar(),
 					dc.geefAantalZetstenen());
 		}
 
@@ -190,16 +191,20 @@ public class AlhambraApplicatie {
 			try {
 				System.out.println("Kies uit 1 van volgende beschikbare kleuren:");
 				// zelfde principe als bij geefKeuzeSpeler()
-				
-				// De eerste %s (String) geeft kleur aan de 2de %s , de laatste %s geeft signaal
-				// dat het kleuren moet stoppen.
+
+				/*
+				 * De eerste %s (String) geeft kleur aan de 2de %s , de laatste %s geeft signaal
+				 * dat het kleuren moet stoppen. Door deze reset van kleuren verdwijnt wel de
+				 * groene inputkleur die standaart te zien is, er is geen manier om dit te
+				 * herstellen.
+				 */
+
 				for (int index = 0; index < alleBeschikbareKleuren.size(); index++) {
-					System.out.printf("%d. %s%s%s%n", index + 1, DomeinController.kleurGever(alleBeschikbareKleuren.get(index)) ,
-							alleBeschikbareKleuren.get(index).toString().toLowerCase() , "\u001B[0m");
-				} 
-				
-				
-				
+					System.out.printf("%d. %s%s%s%n", index + 1,
+							DomeinController.kleurGever(alleBeschikbareKleuren.get(index)),
+							alleBeschikbareKleuren.get(index).toString().toLowerCase(), "\u001B[0m");
+				}
+
 				System.out.printf("Geef hier het nummer voor de kleur die je wilt selecteren voor dit spel in >");
 				keuze = input.nextInt();
 				isGeldig = keuze >= 1 && keuze <= alleBeschikbareKleuren.size();
