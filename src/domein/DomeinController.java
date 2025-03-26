@@ -62,7 +62,7 @@ public class DomeinController {
  	    return resultaat;
     }
     
-    private static String kleurgever(SpelerKleur kleur) {
+    public static String kleurGever(SpelerKleur kleur) {
 
 		switch (kleur.toString().toLowerCase()) {
 		case "blauw":
@@ -72,9 +72,9 @@ public class DomeinController {
 		case "wit":
 			return "\u001B[37m";
 		case "geel":
-			return "\u001B[33m";
+			return "\033[38;2;254;193;7m";
 		case "oranje":
-			return "\033[38;2;255;165;0m";
+			return "\033[38;2;255;147;0m";
 		case "rood":
 			return "\u001B[31m";
 		default:
