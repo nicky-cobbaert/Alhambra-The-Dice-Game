@@ -34,7 +34,7 @@ public class Spel {
 		}
 
 		this.bonusfiches = new ArrayList<Bonusfiche>();
-		for (int i = 0; i < 16; i++) {
+		for (int i = 0; i < MAXIMUM_AANTAL_BONUSFICHES; i++) {
 			bonusfiches.add(new Bonusfiche());
 		}
 		spelbord = new Spelbord();
