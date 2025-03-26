@@ -141,7 +141,7 @@ public class AlhambraApplicatie {
 		}
 		
 		for (int i=1; i<=3; i++) {
-			// TO-DO
+			dc.speelRonde();
 			System.out.printf("Ronde %d is gespeeld! %n",i); //plaatsvervanger voor UC4
 		}
 		

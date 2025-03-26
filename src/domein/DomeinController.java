@@ -108,4 +108,7 @@ public class DomeinController {
     		spelerRepo.updateGespeeld(s.getGebruikersnaam());
     	}
     }
+    public void speelRonde() {
+    	spel.speelRonde();
+    }
 }
