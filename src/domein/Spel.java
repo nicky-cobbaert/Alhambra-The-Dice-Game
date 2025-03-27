@@ -163,8 +163,7 @@ public class Spel {
 		// Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
 		SecureRandom sr = new SecureRandom();
 		winnaar = new ArrayList<>();
-//		Speler s = gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size())); //Dit kunnen ook meerdere spelers zijn!
-		winnaar.add(gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size())));
+		winnaar.add(gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()))); //Dit kunnen ook meerdere spelers zijn!
 		return winnaar;
 
 		/**
