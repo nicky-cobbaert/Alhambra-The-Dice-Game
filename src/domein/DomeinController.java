@@ -101,7 +101,9 @@ public class DomeinController {
     }
     
     public void updateGewonnen() {
-    	spelerRepo.updateGewonnen(spel.berekenWinnaar().getGebruikersnaam());
+    	for (Speler s : spel.berekenWinnaar()) {
+    		spelerRepo.updateGewonnen(s.getGebruikersnaam());
+    	}
     }
     public void updateGespeeld() {
     	for(Speler s : spel.getGekozenSpelers()) {

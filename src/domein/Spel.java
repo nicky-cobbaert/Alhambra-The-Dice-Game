@@ -158,11 +158,13 @@ public class Spel {
 		return beschikbareSpelers;
 	}
 
-	public Speler berekenWinnaar() {
+	public List<Speler> berekenWinnaar() {
 
 		// Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
 		SecureRandom sr = new SecureRandom();
-		return gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()));
+		Speler s = gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size())); //Dit kunnen ook meerdere spelers zijn!
+		winnaar.add(s);
+		return winnaar;
 
 		/**
 		 * Code voor winnaar te berekenen
