@@ -148,10 +148,20 @@ public class AlhambraApplicatie {
 			dc.speelRonde();
 			System.out.printf("Ronde %d is gespeeld! %n", i); // plaatsvervanger voor UC4
 		}
-
+		dc.berekenWinnaar();
 		dc.updateGespeeld();
 		dc.updateGewonnen();
 		System.out.println("Het spel is gespeeld!");
+		
+		for(SpelerDTO speler : dc.geefGekozenSpelers()) {
+			int wins = speler.aantalGewonnen();
+			System.out.printf("Speler: %-20s heeft al %d gewonnen op %d spelletjes!%n",speler.gebruikersnaam()+",", 
+					dc.geefWinnaars().contains(speler) ? speler.aantalGewonnen()+1:speler.aantalGewonnen(),speler.aantalGespeeld()+1);
+		}
+		System.out.println("Deze speler heeft gewonnen:");
+		for(SpelerDTO s : dc.geefWinnaars()) {
+			System.out.println(s.gebruikersnaam());
+		}
 	}
 
 	private int geefKeuzeSpeler(List<SpelerDTO> lijstVanSpelers) {

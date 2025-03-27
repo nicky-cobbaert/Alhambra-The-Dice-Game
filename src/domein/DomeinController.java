@@ -101,9 +101,10 @@ public class DomeinController {
     }
     
     public void updateGewonnen() {
-    	for (Speler s : spel.berekenWinnaar()) {
+    	for (Speler s : spel.getWinnaar()) {
     		spelerRepo.updateGewonnen(s.getGebruikersnaam());
     	}
+    	
     }
     public void updateGespeeld() {
     	for(Speler s : spel.getGekozenSpelers()) {
@@ -112,5 +113,12 @@ public class DomeinController {
     }
     public void speelRonde() {
     	spel.speelRonde();
+    }
+    public List<SpelerDTO> geefWinnaars(){
+    	List<Speler> speler = spel.getWinnaar();
+    	return zetSpelersOmNaarSpelerDTOs(speler);
+    }
+    public void berekenWinnaar() {
+    	spel.berekenWinnaar();
     }
 }

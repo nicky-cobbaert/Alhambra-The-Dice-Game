@@ -165,7 +165,6 @@ public class Spel {
 		winnaar = new ArrayList<>();
 		winnaar.add(gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()))); //Dit kunnen ook meerdere spelers zijn!
 		return winnaar;
-
 		/**
 		 * Code voor winnaar te berekenen
 		 * 
@@ -176,5 +175,8 @@ public class Spel {
 		 * 
 		 * return huidigHoogste;
 		 */
+	}
+	public List<Speler> getWinnaar(){
+		return winnaar;
 	}
 }
