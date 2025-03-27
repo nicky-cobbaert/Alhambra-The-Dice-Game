@@ -161,22 +161,32 @@ public class Spel {
 	public List<Speler> berekenWinnaar() {
 
 		// Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
-		SecureRandom sr = new SecureRandom();
-		winnaar = new ArrayList<>();
-		winnaar.add(gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()))); //Dit kunnen ook meerdere spelers zijn!
-		return winnaar;
 		/**
-		 * Code voor winnaar te berekenen
-		 * 
-		 * Speler huidigHoogste = gekozenSpelers.get(0);
-		 * 
-		 * for (Speler speler : gekozenSpelers) { if (speler.getPunten() >
-		 * huidigeHoogste.getPunten()) { huidigHoogste = speler; } }
-		 * 
-		 * return huidigHoogste;
+		 * SecureRandom sr = new SecureRandom(); winnaar = new ArrayList<>();
+		 * winnaar.add(gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()))); //Dit
+		 * kunnen ook meerdere spelers zijn! return winnaar;
 		 */
+
+		List<Speler> spelersMetHoogstePunten = new ArrayList<Speler>();
+
+		for (Speler speler : gekozenSpelers) {
+			if (speler.getPunten() > spelersMetHoogstePunten.get(0).getPunten()) {
+				// .get(0) => er is normaal gezien maar 1 winnaar, anders hebben de andere
+				// winnaars ook dezelfde punten.
+				spelersMetHoogstePunten.clear();
+				spelersMetHoogstePunten.add(speler);
+			}
+
+			if (speler.getPunten() == spelersMetHoogstePunten.get(0).getPunten()) {
+				spelersMetHoogstePunten.add(speler);
+			}
+		}
+
+		return spelersMetHoogstePunten;
+
 	}
-	public List<Speler> getWinnaar(){
+
+	public List<Speler> getWinnaar() {
 		return winnaar;
 	}
 }
