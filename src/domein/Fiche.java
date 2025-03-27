@@ -15,7 +15,7 @@ public class Fiche {
 	public void plaatsNeer(int positie) {
 		
 		if (positie < 1 || positie > 6) {
-			throw new IllegalArgumentException(String.format("Ongeldige bonusfiche positie %d", positie));
+			throw new IllegalArgumentException(String.format("Ongeldig fiche positie %d", positie));
 		}
 		
 		// perongeluk zetsteen setter gemaakt hier ook verkeerde test
