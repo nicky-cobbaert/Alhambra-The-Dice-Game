@@ -12,4 +12,9 @@ public class Gebouwsteen {
 		return positie;
 	}
 	
+	
+	public void plaatsNeer(int positie) {
+		this.positie = positie;
+	}
+	
 }
