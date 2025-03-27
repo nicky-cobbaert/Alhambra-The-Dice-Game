@@ -72,8 +72,8 @@ public class Speler {
 		return aantalGespeeld;
 	}
 
-	private void setPunten(int punten) {
-		this.punten = punten;
+	public void voegPuntenToe(int punten) {
+		this.punten += punten;
 	}
 
 	public int getPunten() {

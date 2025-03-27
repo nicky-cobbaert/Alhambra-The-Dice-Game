@@ -3,13 +3,14 @@ package testen;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import domein.Spel;
+import domein.Speler;
 import domein.SpelerRepository;
 import persistentie.SpelerMapper;
 import utils.SpelerKleur;
@@ -328,4 +329,30 @@ class SpelTest {
 
 	}
 
+	@Test
+	void berekenWinnaar_DeWinnaarWordtBepaalt_ReturnedDeWinnaard() {
+	
+		int waarde;
+		List<Integer> puntenPerSpeler = new ArrayList<>();
+		
+		
+		Spel spel = new Spel();
+		SpelerRepository spelerRepo = new SpelerRepository();
+		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
+
+		spel.kiesSpeler(2, SpelerKleur.ROOD);
+		spel.kiesSpeler(3, SpelerKleur.GROEN);
+		spel.kiesSpeler(4, SpelerKleur.ORANJE);
+		
+		for (Speler speler : spel.getGekozenSpelers()) {
+			waarde = new SecureRandom().nextInt(1, 100);
+			speler.voegPuntenToe(waarde);
+			puntenPerSpeler.add(spel.getGekozenSpelers().indexOf(speler), waarde);
+		}
+		
+		assertEquals(puntenPerSpeler, null);
+		
+		
+	}
+	
 }
