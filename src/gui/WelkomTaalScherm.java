@@ -7,9 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
 
-public class WelkomTaalScherm extends GridPane{
+public class WelkomTaalScherm extends BorderPane{
+	
+	private MainMenuScherm mainMenu;
 	
 	private void loadFxmlScreen(String name) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
@@ -32,18 +34,19 @@ public class WelkomTaalScherm extends GridPane{
 
     @FXML
     private Button KnopENG;
-
+    	
     @FXML
     private Button KnopNL;
-
+    	
     @FXML
     void KnopENGklik(ActionEvent event) {
-
+    	// Geeft engels mee als taal!
     }
 
     @FXML
     void KnopNLklik(ActionEvent event) {
-
+    	mainMenu = new MainMenuScherm(dc,'N');
+    	this.setCenter(mainMenu);
     }
 	
 }
