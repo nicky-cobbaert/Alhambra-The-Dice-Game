@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" type="BorderPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
@@ -20,8 +21,14 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="registreerKnop" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="30.0" prefWidth="150.0" text="Registreer nieuwe speler" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-            <Button fx:id="speelSpelKnop" mnemonicParsing="false" onAction="#speelSpelKnopKlik" prefHeight="30.0" prefWidth="150.0" text="Speel een spel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <Button fx:id="registreerKnop" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="46.0" prefWidth="375.0" text="Registreer nieuwe speler" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <font>
+                  <Font name="Algerian" size="25.0" />
+               </font></Button>
+            <Button fx:id="speelSpelKnop" mnemonicParsing="false" onAction="#speelSpelKnopKlik" prefHeight="42.0" prefWidth="229.0" text="Speel een spel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <font>
+                  <Font name="Algerian" size="25.0" />
+               </font></Button>
          </children>
       </GridPane>
    </center>

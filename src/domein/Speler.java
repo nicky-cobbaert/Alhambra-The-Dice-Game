@@ -39,7 +39,7 @@ public class Speler {
 	private void setGebruikersnaam(String gebruikersnaam) {
 		if (gebruikersnaam == null || gebruikersnaam.isEmpty() || gebruikersnaam.isBlank()
 				|| gebruikersnaam.length() < 6) {
-			throw new IllegalArgumentException("Ongeldige gebruikersnaam");
+			throw new IllegalArgumentException("Ongeldige gebruikersnaam, uw gebruikersnaam moet minstens 6 karakters hebben!");
 		}
 
 		this.gebruikersnaam = gebruikersnaam;
