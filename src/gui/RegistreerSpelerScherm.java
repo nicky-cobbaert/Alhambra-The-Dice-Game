@@ -69,6 +69,7 @@ public class RegistreerSpelerScherm extends BorderPane{
     		dc.registreerSpeler(gebruikersnaam, geboortejaar);
     		
     		Alert alertGelukt = new Alert(AlertType.INFORMATION);
+    		alertGelukt.setTitle("Registratie gelukt!");
     		alertGelukt.setHeaderText("Gebruiker succesvol geregistreerd!");
     		alertGelukt.setContentText(String.format("%s met geboortejaar %d is succesvol toegevoegd!", gebruikersnaam, geboortejaar));
     		alertGelukt.showAndWait();
@@ -84,6 +85,7 @@ public class RegistreerSpelerScherm extends BorderPane{
     
     private void toonFoutMelding(String melding) {
     	Alert alertFout = new Alert(AlertType.ERROR);
+    	alertFout.setTitle("Registratie mislukt!");
     	alertFout.setHeaderText("Gebruiker kan niet geregistreerd worden!");
 		alertFout.setContentText(melding);
 		alertFout.showAndWait();

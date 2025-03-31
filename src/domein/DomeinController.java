@@ -121,4 +121,7 @@ public class DomeinController {
     public void berekenWinnaar() {
     	spel.berekenWinnaar();
     }
+    public boolean getIsEindeSpel() {
+    	return spel.getIsEindeSpel();
+    }
 }

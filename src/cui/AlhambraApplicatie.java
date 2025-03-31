@@ -144,10 +144,20 @@ public class AlhambraApplicatie {
 					dc.geefAantalZetstenen());
 		}
 
-		for (int i = 1; i <= 3; i++) {
+//		for (int i = 1; i <= 3; i++) {
+//			dc.speelRonde();
+//			System.out.printf("Ronde %d is gespeeld! %n", i); // plaatsvervanger voor UC4
+//		}
+		
+		int ronde=1;
+		
+		do {
 			dc.speelRonde();
-			System.out.printf("Ronde %d is gespeeld! %n", i); // plaatsvervanger voor UC4
-		}
+			System.out.printf("Ronde %d is gespeeld! %n",ronde);
+			ronde++;
+		}while (dc.getIsEindeSpel()== false);
+		
+		
 		dc.berekenWinnaar();
 		dc.updateGespeeld();
 		dc.updateGewonnen();

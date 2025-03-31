@@ -18,6 +18,8 @@ public class Spel {
 	private Spelbord spelbord;
 	private List<Bonusfiche> bonusfiches;
 	private List<Speler> winnaar;
+	private int ronde=0;
+	private boolean isEindeSpel=false;
 
 	public Spel() {
 
@@ -91,6 +93,7 @@ public class Spel {
 
 	public void speelRonde() {
 		// TODO UC3 code
+		ronde++;
 		// UC3 -> Bonusfiches + startspelersfiche van positie veranderen
 		SecureRandom random = new SecureRandom();
 		int positieStartSpelerFiche = random.nextInt(1, 7);
@@ -102,6 +105,12 @@ public class Spel {
 				bonusfiches.get(indexWaarde).plaatsNeer(i);
 				bonusfiches.remove(indexWaarde);
 			}
+		}
+		
+		//Code voor speelBeurt 
+		
+		if (ronde==3) {
+			isEindeSpel = true;
 		}
 	}
 
@@ -161,32 +170,35 @@ public class Spel {
 	public List<Speler> berekenWinnaar() {
 
 		// Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
-		/**
-		 * SecureRandom sr = new SecureRandom(); winnaar = new ArrayList<>();
-		 * winnaar.add(gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()))); //Dit
-		 * kunnen ook meerdere spelers zijn! return winnaar;
-		 */
+		
+		  SecureRandom sr = new SecureRandom(); winnaar = new ArrayList<>();
+		  winnaar.add(gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()))); //Ditkunnen ook meerdere spelers zijn! 
+		  return winnaar;
+		 
 
-		List<Speler> spelersMetHoogstePunten = new ArrayList<Speler>();
-
-		for (Speler speler : gekozenSpelers) {
-			if (speler.getPunten() > spelersMetHoogstePunten.get(0).getPunten()) {
-				// .get(0) => er is normaal gezien maar 1 winnaar, anders hebben de andere
-				// winnaars ook dezelfde punten.
-				spelersMetHoogstePunten.clear();
-				spelersMetHoogstePunten.add(speler);
-			}
-
-			if (speler.getPunten() == spelersMetHoogstePunten.get(0).getPunten()) {
-				spelersMetHoogstePunten.add(speler);
-			}
-		}
-
-		return spelersMetHoogstePunten;
+//		List<Speler> spelersMetHoogstePunten = new ArrayList<Speler>();
+//
+//		for (Speler speler : gekozenSpelers) {
+//			if (speler.getPunten() > spelersMetHoogstePunten.get(0).getPunten()) {
+//				// .get(0) => er is normaal gezien maar 1 winnaar, anders hebben de andere
+//				// winnaars ook dezelfde punten.
+//				spelersMetHoogstePunten.clear();
+//				spelersMetHoogstePunten.add(speler);
+//			}
+//
+//			if (speler.getPunten() == spelersMetHoogstePunten.get(0).getPunten()) {
+//				spelersMetHoogstePunten.add(speler);
+//			}
+//		}
+//
+//		return spelersMetHoogstePunten;
 
 	}
 
 	public List<Speler> getWinnaar() {
 		return winnaar;
+	}
+	public boolean getIsEindeSpel() {
+		return isEindeSpel;
 	}
 }
