@@ -125,3 +125,5 @@ public class DomeinController {
     	return spel.getIsEindeSpel();
     }
 }
+
+//TestCommit
