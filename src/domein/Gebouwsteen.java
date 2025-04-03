@@ -3,6 +3,7 @@ package domein;
 public class Gebouwsteen {
 
 	private int positie;
+	private int volgorde;
 	
 	public Gebouwsteen() {
 		
