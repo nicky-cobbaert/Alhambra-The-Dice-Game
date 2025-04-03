@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <fx:root type="BorderPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
@@ -39,7 +38,7 @@
                   <Font name="Algerian" size="37.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="150.0" prefWidth="730.0" text="Alhambra: The dice game" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="150.0" prefWidth="952.0" text="Alhambra: The dice game" GridPane.columnSpan="4" GridPane.rowIndex="1">
                <font>
                   <Font name="Algerian" size="53.0" />
                </font>
