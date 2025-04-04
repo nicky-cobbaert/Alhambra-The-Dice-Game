@@ -74,6 +74,7 @@ public class RegistreerSpelerScherm extends BorderPane{
     		alertGelukt.setContentText(String.format("%s met geboortejaar %d is succesvol toegevoegd!", gebruikersnaam, geboortejaar));
     		alertGelukt.showAndWait();
     		
+    		mms.terugNaarMain(taal);
     	} catch (NumberFormatException e) {
 			toonFoutMelding("Geef een geldig geboortejaar in!");
 		} catch (IllegalArgumentException e) {

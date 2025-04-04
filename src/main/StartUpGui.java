@@ -11,9 +11,10 @@ public class StartUpGui extends Application {
 	public void start(Stage primaryStage) {
 		DomeinController dc = new DomeinController();
 		WelkomTaalScherm wts = new WelkomTaalScherm(dc);
-		Scene scene = new Scene(wts, 900, 600);
+		Scene scene = new Scene(wts);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Alhambra: The Dice Game");
+		primaryStage.setMaximized(true);
 		primaryStage.show();
 	}
 
