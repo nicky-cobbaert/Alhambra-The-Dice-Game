@@ -171,9 +171,27 @@ public class Spel {
 
 		// Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
 		
-		  SecureRandom sr = new SecureRandom(); winnaar = new ArrayList<>();
-		  winnaar.add(gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()))); //Ditkunnen ook meerdere spelers zijn! 
-		  return winnaar;
+//		  SecureRandom sr = new SecureRandom(); winnaar = new ArrayList<>();
+//		  winnaar.add(gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()))); //Ditkunnen ook meerdere spelers zijn! 
+//		  return winnaar;
+		
+		winnaar = new ArrayList<Speler>(); // Initialiseer het veld
+	    int hoogstepunten = -1;
+
+	    if (gekozenSpelers != null) { // Voorkom NullPointerException als gekozenSpelers null is
+	        for (Speler speler : gekozenSpelers) {
+	            if (speler.getPunten() > hoogstepunten) {
+	                winnaar.clear();
+	                winnaar.add(speler);
+	                hoogstepunten = speler.getPunten();
+	            } else if (speler.getPunten() == hoogstepunten) {
+	                winnaar.add(speler);
+	            }
+	        }
+	    }
+
+	    return winnaar;
+	}
 		 
 
 //		List<Speler> spelersMetHoogstePunten = new ArrayList<Speler>();
@@ -193,7 +211,7 @@ public class Spel {
 //
 //		return spelersMetHoogstePunten;
 
-	}
+	
 
 	public List<Speler> getWinnaar() {
 		return winnaar;

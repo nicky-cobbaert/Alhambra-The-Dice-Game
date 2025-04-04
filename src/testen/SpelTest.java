@@ -2,9 +2,9 @@ package testen;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -332,26 +332,44 @@ class SpelTest {
 	@Test
 	void berekenWinnaar_DeWinnaarWordtBepaalt_ReturnedDeWinnaard() {
 	
-		int waarde;
-		List<Integer> puntenPerSpeler = new ArrayList<>();
-		
+//		int waarde;
+//		List<Integer> puntenPerSpeler = new ArrayList<>();
+//		
+//		
+//		Spel spel = new Spel();
+//		SpelerRepository spelerRepo = new SpelerRepository();
+//		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
+//
+//		spel.kiesSpeler(2, SpelerKleur.ROOD);
+//		spel.kiesSpeler(3, SpelerKleur.GROEN);
+//		spel.kiesSpeler(4, SpelerKleur.ORANJE);
+//		
+//		for (Speler speler : spel.getGekozenSpelers()) {
+//			waarde = new SecureRandom().nextInt(1, 100);
+//			speler.voegPuntenToe(waarde);
+//			puntenPerSpeler.add(spel.getGekozenSpelers().indexOf(speler), waarde);
+//		}
+//		
+//		assertEquals(puntenPerSpeler, null);
 		
 		Spel spel = new Spel();
 		SpelerRepository spelerRepo = new SpelerRepository();
 		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
-
+		
 		spel.kiesSpeler(2, SpelerKleur.ROOD);
 		spel.kiesSpeler(3, SpelerKleur.GROEN);
 		spel.kiesSpeler(4, SpelerKleur.ORANJE);
 		
-		for (Speler speler : spel.getGekozenSpelers()) {
-			waarde = new SecureRandom().nextInt(1, 100);
-			speler.voegPuntenToe(waarde);
-			puntenPerSpeler.add(spel.getGekozenSpelers().indexOf(speler), waarde);
-		}
-		
-		assertEquals(puntenPerSpeler, null);
-		
+		spel.getGekozenSpelers().get(0).voegPuntenToe(50);  
+	    spel.getGekozenSpelers().get(1).voegPuntenToe(70);  
+	    spel.getGekozenSpelers().get(2).voegPuntenToe(70);
+	    
+	    List<Speler> winnaars = spel.berekenWinnaar();
+	    
+	    assertEquals(2, winnaars.size());
+	    assertTrue(winnaars.contains(spel.getGekozenSpelers().get(1)));
+	    assertTrue(winnaars.contains(spel.getGekozenSpelers().get(2)));
+	    assertFalse(winnaars.contains(spel.getGekozenSpelers().get(0)));
 		
 	}
 	
