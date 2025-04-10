@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +17,16 @@ import javafx.scene.layout.BorderPane;
 public class SpelbordScherm extends BorderPane {
 
 	private final DomeinController dc;
+	
+	//Alle statussen van de dobbelstenen => False = niet geselecteerd, true = geselecteerd en dus niet meer mee rollen
+	private boolean statusDobbelsteenNulNul = false; 
+	private boolean statusDobbelsteenEenNul = false;
+	private boolean statusDobbelsteenNulEen = false;
+	private boolean statusDobbelsteenEenEen = false;
+	private boolean statusDobbelsteenNulTwee = false;
+	private boolean statusDobbelsteenEenTwee = false;
+	private boolean statusDobbelsteenNulDrie = false;
+	private boolean statusDobbelsteenEenDrie = false;
 	
 	private void loadFxmlScreen(String name) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
@@ -97,6 +108,17 @@ public class SpelbordScherm extends BorderPane {
     @FXML
     void dobbelsteenNulNulKlik(MouseEvent event) {
     	System.out.println("1");
+    	//Startcode om dobbelsteen te veranderen van image
+    	
+    	if (statusDobbelsteenNulNul = false) {
+    		//Dit moet in een switchcase gestoken worden zodat de juiste dobbelsteen hier terug komt te staan
+//    		dobbelsteenNulNul.setImage(new Image(getClass().getResource("Pad naar nieuwe image").toExternalForm()));
+    		statusDobbelsteenNulNul=true; //Dobbelsteen wordt geselecteerd
+    	} else { 
+    		//Dit moet ook in een switchcase gestoken worden zodat de juiste dobbelsteen hier terug komt te staan
+//    		dobbelsteenNulNul.setImage(new Image(getClass().getResource("Pad naar nieuwe image").toExternalForm()));
+    		statusDobbelsteenNulNul=false; //Dobbelsteen wordt gedeselecteerd
+    	}
     }
     
     @FXML
