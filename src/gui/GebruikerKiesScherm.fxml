@@ -10,13 +10,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<fx:root maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" type="BorderPane" xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root blendMode="DARKEN" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" type="BorderPane" xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -26,14 +27,17 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ListView fx:id="lijstSpelers" prefHeight="200.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ListView fx:id="lijstSpelers" prefHeight="200.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ListView>
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="535.0" text="Spelers: " GridPane.rowIndex="2" />
-            <TextField promptText="Zoek een speler:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="selecteerSpelerKnop" mnemonicParsing="false" onAction="#selecteerSpelerKnopOnAction" prefHeight="25.0" prefWidth="430.0" text="Kies deze Speler" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label alignment="CENTER_RIGHT" text="Spelers: " translateX="2.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <TextField fx:id="zoekBalk" promptText="Zoek een speler:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="zoekKnop" alignment="CENTER" mnemonicParsing="false" onAction="#zoekKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Zoek" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Button fx:id="terugKnop" mnemonicParsing="false" onAction="#terugKnopOnAction" text="Terug" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Kies een Speler" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
          </children>
       </GridPane>
    </center>
