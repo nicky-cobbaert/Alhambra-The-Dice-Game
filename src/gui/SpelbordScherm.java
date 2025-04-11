@@ -11,6 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 
 
@@ -42,6 +47,24 @@ public class SpelbordScherm extends BorderPane {
 	public SpelbordScherm(DomeinController dc) {
 		this.dc = dc;
 		loadFxmlScreen("SpelbordScherm.fxml");
+		
+		
+		//Code voor de achtergrond
+//		Image spelbordPNG = new Image(getClass().getResource("/images/AlhambraStad.png").toExternalForm(), true);
+//		
+//		BackgroundSize backgroundSize = new BackgroundSize(
+//				100, 100, true, true, true, false
+//	    );
+//
+//	    BackgroundImage spelbord = new BackgroundImage(
+//	    			spelbordPNG,
+//	                BackgroundRepeat.NO_REPEAT,
+//	                BackgroundRepeat.NO_REPEAT,
+//	                BackgroundPosition.CENTER,
+//	                backgroundSize
+//	    );
+//	        
+//	    this.setBackground(new Background(spelbord));
 	}
 	
 	@FXML
