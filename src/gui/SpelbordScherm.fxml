@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" type="BorderPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
@@ -228,7 +227,7 @@
                         </ImageView>
                         <ImageView fx:id="dobbelsteenNulNul" fitHeight="63.0" fitWidth="98.0" layoutX="107.0" layoutY="10.0" onMouseClicked="#dobbelsteenNulNulKlik" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
-                              <Image url="@../images/DobbelsteenAqua.png" />
+                              <Image url="@../images/DobbelsteenBLAUW.png" />
                            </image>
                            <GridPane.margin>
                               <Insets />
@@ -268,7 +267,7 @@
                      <children>
                         <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
-                              <Image url="@../images/DobbelsteenAqua.png" />
+                              <Image url="@../images/DobbelsteenBLAUW.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -349,7 +348,7 @@
                <children>
                   <ImageView fitHeight="59.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../images/DobbelsteenAqua.png" />
+                        <Image url="@../images/DobbelsteenBLAUW.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="59.0" fitWidth="66.0" layoutX="10.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">

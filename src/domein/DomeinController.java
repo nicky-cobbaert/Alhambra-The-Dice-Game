@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.SpelerDTO;
+import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
 
 public class DomeinController {
@@ -123,6 +124,10 @@ public class DomeinController {
     }
     public boolean getIsEindeSpel() {
     	return spel.getIsEindeSpel();
+    }
+    
+    public DobbelsteenKleur rol(int i) {
+    	return spel.rol(i-1);
     }
 }
 

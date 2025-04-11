@@ -11,17 +11,24 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import utils.DobbelsteenKleur;
+import utils.SpelerKleur;
 
 
 public class SpelbordScherm extends BorderPane {
 
 	private final DomeinController dc;
+	
+	//Dit is nodig zodat we de images kunnen veranderen
+	private DobbelsteenKleur kleurNulNul;
+	private DobbelsteenKleur kleurEenNul;
+	private DobbelsteenKleur kleurNulEen;
+	private DobbelsteenKleur kleurEenEen;
+	private DobbelsteenKleur kleurNulTwee;
+	private DobbelsteenKleur kleurEenTwee;
+	private DobbelsteenKleur kleurNulDrie;
+	private DobbelsteenKleur kleurEenDrie;
 	
 	//Alle statussen van de dobbelstenen => False = niet geselecteerd, true = geselecteerd en dus niet meer mee rollen
 	private boolean statusDobbelsteenNulNul = false; 
@@ -48,9 +55,16 @@ public class SpelbordScherm extends BorderPane {
 		this.dc = dc;
 		loadFxmlScreen("SpelbordScherm.fxml");
 		
+		//SpelTest
+		dc.maakNieuwSpel();
+		dc.kiesSpelerEnKleur(1, SpelerKleur.BLAUW);
+		dc.kiesSpelerEnKleur(2, SpelerKleur.GEEL);
+		dc.kiesSpelerEnKleur(3, SpelerKleur.GROEN);
+		dc.startSpel();
 		
+		RolKnopKlik(null);
 		//Code voor de achtergrond
-//		Image spelbordPNG = new Image(getClass().getResource("/images/AlhambraStad.png").toExternalForm(), true);
+//		Image spelbordPNG = new Image(getClass().getResource("/images/hierkomtdeachtergrond!.png").toExternalForm(), true);
 //		
 //		BackgroundSize backgroundSize = new BackgroundSize(
 //				100, 100, true, true, true, false
@@ -120,62 +134,167 @@ public class SpelbordScherm extends BorderPane {
 
     @FXML
     void RolKnopKlik(ActionEvent event) {
-    	System.out.println("Knop \"Rol\" is ingedrukt");
+    	for(int i = 1; i<=8; i++) {
+    		switch (i) {
+    		case 1 : if (statusDobbelsteenNulNul == false) {
+    			DobbelsteenKleur dk = dc.rol(i);
+    			kleurNulNul = dk;
+    			dobbelsteenNulNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
+    		}
+    		case 2 : if (statusDobbelsteenEenNul == false) {
+    			DobbelsteenKleur dk = dc.rol(i);
+    			kleurEenNul = dk;
+    			dobbelsteenEenNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
+    		}
+    		case 3 : if (statusDobbelsteenNulEen == false) {
+    			DobbelsteenKleur dk = dc.rol(i);
+    			kleurNulEen = dk;
+    			dobbelsteenNulEen.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
+    		}
+    		case 4 : if (statusDobbelsteenEenEen == false) {
+    			DobbelsteenKleur dk = dc.rol(i);
+    			kleurEenEen = dk;
+    			dobbelsteenEenEen.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
+    		}
+    		case 5 : if (statusDobbelsteenNulTwee == false) {
+    			DobbelsteenKleur dk = dc.rol(i);
+    			kleurNulTwee = dk;
+    			dobbelsteenNulTwee.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
+    		}
+    		case 6 : if (statusDobbelsteenEenTwee == false) {
+    			DobbelsteenKleur dk = dc.rol(i);
+    			kleurEenTwee = dk;
+    			dobbelsteenEenTwee.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
+    		}
+    		case 7 : if (statusDobbelsteenNulDrie == false) {
+    			DobbelsteenKleur dk = dc.rol(i);
+    			kleurNulDrie = dk;
+    			dobbelsteenNulDrie.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
+    		}
+    		case 8 : if (statusDobbelsteenEenDrie == false) {
+    			DobbelsteenKleur dk = dc.rol(i);
+    			kleurEenDrie = dk;
+    			dobbelsteenEenDrie.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
+    		}
+    		}
+    	}
     }
-
+    
     @FXML
     void SpeelKnopKlik(ActionEvent event) {
     	System.out.println("Knop \"Speel\" is ingedrukt");
+//    	System.out.println(kleurNulNul);
+//    	System.out.println(kleurEenNul);
+//    	System.out.println(kleurNulEen);
+//    	System.out.println(kleurEenEen);
+//    	System.out.println(kleurNulTwee);
+//    	System.out.println(kleurEenTwee);
+//    	System.out.println(kleurNulDrie);
+//    	System.out.println(kleurEenDrie);
     }
 
     @FXML
     void dobbelsteenNulNulKlik(MouseEvent event) {
     	System.out.println("1");
-    	//Startcode om dobbelsteen te veranderen van image
-    	
-    	if (statusDobbelsteenNulNul = false) {
-    		//Dit moet in een switchcase gestoken worden zodat de juiste dobbelsteen hier terug komt te staan
-//    		dobbelsteenNulNul.setImage(new Image(getClass().getResource("Pad naar nieuwe image").toExternalForm()));
+   	
+    	if (statusDobbelsteenNulNul == false) {
+    		dobbelsteenNulNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurNulNul+"select.png").toExternalForm()));
     		statusDobbelsteenNulNul=true; //Dobbelsteen wordt geselecteerd
-    	} else { 
-    		//Dit moet ook in een switchcase gestoken worden zodat de juiste dobbelsteen hier terug komt te staan
-//    		dobbelsteenNulNul.setImage(new Image(getClass().getResource("Pad naar nieuwe image").toExternalForm()));
+    	} else {
+    		dobbelsteenNulNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurNulNul+".png").toExternalForm()));
     		statusDobbelsteenNulNul=false; //Dobbelsteen wordt gedeselecteerd
     	}
+    	
     }
     
     @FXML
     void dobbelsteenEenNulKlik(MouseEvent event) {
     	System.out.println("2");
+    	
+    	if (statusDobbelsteenEenNul == false) {
+    		dobbelsteenEenNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurEenNul+"select.png").toExternalForm()));
+    		statusDobbelsteenEenNul=true; //Dobbelsteen wordt geselecteerd
+    	} else {
+    		dobbelsteenEenNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurEenNul+".png").toExternalForm()));
+    		statusDobbelsteenEenNul=false; //Dobbelsteen wordt gedeselecteerd
+    	}
     }
     
     @FXML
     void dobbelsteenNulEenKlik(MouseEvent event) {
     	System.out.println("3");
+    	
+    	if (statusDobbelsteenNulEen == false) {
+    		dobbelsteenNulEen.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurNulEen+"select.png").toExternalForm()));
+    		statusDobbelsteenNulEen=true; //Dobbelsteen wordt geselecteerd
+    	} else {
+    		dobbelsteenNulEen.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurNulEen+".png").toExternalForm()));
+    		statusDobbelsteenNulEen=false; //Dobbelsteen wordt gedeselecteerd
+    	}
     }
     
     @FXML
     void dobbelsteenEenEenKlik(MouseEvent event) {
     	System.out.println("4");
+    	
+    	if (statusDobbelsteenEenEen == false) {
+    		dobbelsteenEenEen.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurEenEen+"select.png").toExternalForm()));
+    		statusDobbelsteenEenEen=true; //Dobbelsteen wordt geselecteerd
+    	} else {
+    		dobbelsteenEenEen.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurEenEen+".png").toExternalForm()));
+    		statusDobbelsteenEenEen=false; //Dobbelsteen wordt gedeselecteerd
+    	}
     }
     
     @FXML
     void dobbelsteenNulTweeKlik(MouseEvent event) {
     	System.out.println("5");
+    	
+    	if (statusDobbelsteenNulTwee == false) {
+    		dobbelsteenNulTwee.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurNulTwee+"select.png").toExternalForm()));
+    		statusDobbelsteenNulTwee=true; //Dobbelsteen wordt geselecteerd
+    	} else {
+    		dobbelsteenNulTwee.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurNulTwee+".png").toExternalForm()));
+    		statusDobbelsteenNulTwee=false; //Dobbelsteen wordt gedeselecteerd
+    	}
     }
     
     @FXML
     void dobbelsteenEenTweeKlik(MouseEvent event) {
     	System.out.println("6");
+    	
+    	if (statusDobbelsteenEenTwee == false) {
+    		dobbelsteenEenTwee.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurEenTwee+"select.png").toExternalForm()));
+    		statusDobbelsteenEenTwee=true; //Dobbelsteen wordt geselecteerd
+    	} else {
+    		dobbelsteenEenTwee.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurEenTwee+".png").toExternalForm()));
+    		statusDobbelsteenEenTwee=false; //Dobbelsteen wordt gedeselecteerd
+    	}
     }
     
     @FXML
     void dobbelsteenNulDrieKlik(MouseEvent event) {
     	System.out.println("7");
+    	
+    	if (statusDobbelsteenNulDrie == false) {
+    		dobbelsteenNulDrie.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurNulDrie+"select.png").toExternalForm()));
+    		statusDobbelsteenNulDrie=true; //Dobbelsteen wordt geselecteerd
+    	} else {
+    		dobbelsteenNulDrie.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurNulDrie+".png").toExternalForm()));
+    		statusDobbelsteenNulDrie=false; //Dobbelsteen wordt gedeselecteerd
+    	}
     }
     
     @FXML
     void dobbelsteenEenDrieKlik(MouseEvent event) {
     	System.out.println("8");
+    	
+    	if (statusDobbelsteenEenDrie == false) {
+    		dobbelsteenEenDrie.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurEenDrie+"select.png").toExternalForm()));
+    		statusDobbelsteenEenDrie=true; //Dobbelsteen wordt geselecteerd
+    	} else {
+    		dobbelsteenEenDrie.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurEenDrie+".png").toExternalForm()));
+    		statusDobbelsteenEenDrie=false; //Dobbelsteen wordt gedeselecteerd
+    	}
     }
 }

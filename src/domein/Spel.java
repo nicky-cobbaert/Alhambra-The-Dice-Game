@@ -4,6 +4,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
 
 public class Spel {
@@ -218,5 +219,10 @@ public class Spel {
 	}
 	public boolean getIsEindeSpel() {
 		return isEindeSpel;
+	}
+	
+	public DobbelsteenKleur rol(int i) {
+		dobbelstenen.get(i).dobbel();
+		return dobbelstenen.get(i).getDobbelsteenKleur();
 	}
 }
