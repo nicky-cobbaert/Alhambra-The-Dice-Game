@@ -87,6 +87,9 @@ public class MainMenuScherm extends BorderPane{
 
     @FXML
     private Button speelSpelKnop;
+    
+    @FXML
+    private Button verlaatKnop;
 
     @FXML
     void registreerKnopKlik(ActionEvent event) {
@@ -98,6 +101,11 @@ public class MainMenuScherm extends BorderPane{
     void speelSpelKnopKlik(ActionEvent event) {
     	SpelbordScherm sbs = new SpelbordScherm(dc);
     	this.setCenter(sbs);
+    }
+    
+    @FXML
+    void verlaatKnopKlik(ActionEvent event) {
+
     }
     
     private void loadFxmlScreen(String name) {
