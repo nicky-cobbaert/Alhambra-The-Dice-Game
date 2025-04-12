@@ -6,8 +6,8 @@ public class Fiche {
 	
 	private FicheGebied ficheGebied;
 	
-	public Fiche() {
-		ficheGebied = new FicheGebied();
+	public Fiche(FicheGebied f) {
+		ficheGebied = f;
 	}
 
 	public int getPositie() {
@@ -30,7 +30,7 @@ public class Fiche {
 //	        if (positie % 10 < 1 || positie % 10 > 3) {
 //	            throw new IllegalArgumentException("Ongeldig aantal worpen: " + (positie % 10));
 //	        }
-	        
+	        this.positie=positie;
 	        ficheGebied.plaatsFicheNeer(this);
 	    }
 	}

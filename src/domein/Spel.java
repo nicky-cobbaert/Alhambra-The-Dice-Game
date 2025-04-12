@@ -36,13 +36,14 @@ public class Spel {
 		for (int i = 0; i < MAXIMUM_AANTAL_DOBBELSTENEN; i++) {
 			dobbelstenen.add(new Dobbelsteen());
 		}
-
+		spelbord = new Spelbord();
+		
 		this.bonusfiches = new ArrayList<Bonusfiche>();
 		for (int i = 0; i < MAXIMUM_AANTAL_BONUSFICHES; i++) {
-			bonusfiches.add(new Bonusfiche());
+			bonusfiches.add(new Bonusfiche(spelbord.getFicheGebied()));
 		}
-		spelbord = new Spelbord();
-		startspelerfiche = new StartspelerFiche();
+		
+		startspelerfiche = new StartspelerFiche(spelbord.getFicheGebied());
 
 		/**
 		 * ---einde Dobbelsteen, bonusfiches , spelbord

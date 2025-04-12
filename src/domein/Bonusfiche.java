@@ -9,8 +9,8 @@ public class Bonusfiche extends Fiche {
 	private static final int MAXIMUMWAARDE_BONUSFICHES = 3;
 	
 	
-	public Bonusfiche() {
-		super();
+	public Bonusfiche(FicheGebied f) {
+		super(f);
 		SecureRandom sr = new SecureRandom();
 		this.waarde = sr.nextInt(MINIMUMWAARDE_BONUSFICHES, MAXIMUMWAARDE_BONUSFICHES + 1);
 	}

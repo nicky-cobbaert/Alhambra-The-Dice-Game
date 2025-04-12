@@ -16,4 +16,7 @@ public class Spelbord {
 		return fichegebied.geefWaardeVanPositie(positie);
 	}
 	
+	public FicheGebied getFicheGebied() {
+		return fichegebied;
+	}
 }
