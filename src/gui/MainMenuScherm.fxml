@@ -11,9 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity"
-    prefHeight="600.0" prefWidth="900.0" type="BorderPane"
-    xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" type="BorderPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -28,23 +26,18 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <!-- Buttons on the left -->
-                <VBox alignment="CENTER" spacing="30" GridPane.columnIndex="1" GridPane.rowIndex="1" 
-                      GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                
+                <VBox alignment="CENTER" spacing="30" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <children>
-                        <!-- Registreer button -->
-                        <Button fx:id="registreerKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false"
-                            onAction="#registreerKnopKlik" prefHeight="46.0" 
-                            text="REGISTREER EEN SPELER">
+                       
+                        <Button fx:id="registreerKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="46.0" text="REGISTREER EEN SPELER">
                             <font>
                                 <Font name="Algerian" size="20.0" />
                             </font>
                         </Button>
 
-                        <!-- Speel button -->
-                        <Button fx:id="speelSpelKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false"
-                            onAction="#speelSpelKnopKlik" prefHeight="46.0" 
-                            text="SPEEL EEN SPEL">
+                       
+                        <Button fx:id="speelSpelKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false" onAction="#speelSpelKnopKlik" prefHeight="46.0" text="SPEEL EEN SPEL">
                             <font>
                                 <Font name="Algerian" size="20.0" />
                             </font>
@@ -55,10 +48,8 @@
                     </GridPane.margin>
                 </VBox>
                 
-                <!-- Wooden sign on the right -->
-                <ImageView fitHeight="300.0" fitWidth="250.0" pickOnBounds="true"
-                    preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" 
-                    GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                
+                <ImageView fitHeight="383.0" fitWidth="501.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                     <image>
                         <Image url="@../images/Bord.png" />
                     </image>
@@ -67,11 +58,8 @@
                     </GridPane.margin>
                 </ImageView>
 
-                <!-- Verlaat de stad button -->
-                <Button fx:id="verlaatKnop" mnemonicParsing="false" onAction="#verlaatKnopKlik"
-                    prefHeight="25.0" prefWidth="145.0" text="VERLAAT DE STAD"
-                    textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0"
-                    GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                
+                <Button fx:id="verlaatKnop" mnemonicParsing="false" onAction="#verlaatKnopKlik" prefHeight="25.0" prefWidth="145.0" text="VERLAAT DE STAD" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="TOP">
                     <font>
                         <Font name="Algerian" size="14.0" />
                     </font>
