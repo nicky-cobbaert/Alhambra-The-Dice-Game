@@ -12,4 +12,8 @@ public class Spelbord {
 		gebouwpuntengebied = new GebouwpuntenGebied();
 	}
 
+	public int geefWaardeVanPositie(int positie) {
+		return fichegebied.geefWaardeVanPositie(positie);
+	}
+	
 }

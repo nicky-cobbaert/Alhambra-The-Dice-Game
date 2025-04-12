@@ -26,7 +26,7 @@ public class FicheGebied implements Placeable {
 
         for (Fiche f : gezettefiches) {
             if (f.getPositie() == positie) {
-                throw new IllegalArgumentException("Er is al een gebouwsteen op deze positie!");
+                throw new IllegalArgumentException("Er is al een bonusfiche op deze positie!");
             }
         }
 
@@ -46,6 +46,14 @@ public class FicheGebied implements Placeable {
 
 	public List<Fiche> getGezettefiches() { //methode voor testen
 		return gezettefiches;
+	}
+	
+	public int geefWaardeVanPositie(int positie) {
+		if (gezettefiches.get(positie) instanceof Bonusfiche bonus) {
+			return bonus.getWaarde();
+		} else {
+			return 0; //0 = startspelerfiche
+		}
 	}
 
 }

@@ -130,8 +130,39 @@ public class SpelbordScherm extends BorderPane {
     private Label spelerZes;
 
     @FXML
-    private Label welkeRone;
+    private Label welkeRonde;
+    
+    @FXML
+    private ImageView fiche0;
 
+    @FXML
+    private ImageView fiche1;
+
+    @FXML
+    private ImageView fiche2;
+
+    @FXML
+    private ImageView fiche3;
+
+    @FXML
+    private ImageView fiche4;
+
+    @FXML
+    private ImageView fiche5;
+
+
+    private void plaatsFiches() {
+    	for(int i=0;i<6;i++) {
+    		int waarde = dc.geefWaardeVanPositie(i);
+    		
+    		switch(waarde) {
+    		case 0 : {
+    			
+    		}
+    		}
+    	}
+    }
+    
     @FXML
     void RolKnopKlik(ActionEvent event) {
     	for(int i = 1; i<=8; i++) {
