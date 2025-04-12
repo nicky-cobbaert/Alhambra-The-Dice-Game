@@ -3,6 +3,7 @@ package domein;
 import java.util.ArrayList;
 import java.util.List;
 
+import dto.SpelDTO;
 import dto.SpelerDTO;
 import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
@@ -129,6 +130,23 @@ public class DomeinController {
     public DobbelsteenKleur rol(int i) {
     	return spel.rol(i-1);
     }
+    public void wijzigPositieGebouwsteen() {
+    	
+    }
+    public void berekenBeloning() {
+    	
+    }
+    public void verwijderAssociatieGebouwenpuntenEnGebouwPuntenPositie() {
+    	
+    }
+    public void verwijderAssociatieSpelEnBonusFiches() {
+    	
+    }
+//    public List<SpelDTO> toonOverzichtSpel() {
+//    	
+//    }
+    
+    
 }
 
 //TestCommit
