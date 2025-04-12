@@ -149,7 +149,7 @@ public class DomeinController {
 //    	
 //    }
 
-	public List<String> kookMaar(String onzeNaam) {
+	public List<String> zoekDezeSpeler(String onzeNaam) {
 
 		List<String> goedeNamen = new ArrayList<>();
 
