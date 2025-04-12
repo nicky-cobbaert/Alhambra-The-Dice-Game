@@ -17,6 +17,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
 
@@ -71,21 +72,21 @@ public class SpelbordScherm extends BorderPane {
 		RolKnopKlik(null);
 		plaatsFiches();
 		//Code voor de achtergrond
-		Image spelbordPNG = new Image(getClass().getResource("/images/AlhambraStad.png").toExternalForm(), true);
-		
-		BackgroundSize backgroundSize = new BackgroundSize(
-				100, 100, true, true, true, false
-	    );
-
-	    BackgroundImage spelbord = new BackgroundImage(
-	    			spelbordPNG,
-	                BackgroundRepeat.NO_REPEAT,
-	                BackgroundRepeat.NO_REPEAT,
-	                BackgroundPosition.CENTER,
-	                backgroundSize
-	    );
-	        
-	    this.setBackground(new Background(spelbord));
+//		Image spelbordPNG = new Image(getClass().getResource("/images/AlhambraStad.png").toExternalForm(), true);
+//		
+//		BackgroundSize backgroundSize = new BackgroundSize(
+//				100, 100, true, true, true, false
+//	    );
+//
+//	    BackgroundImage spelbord = new BackgroundImage(
+//	    			spelbordPNG,
+//	                BackgroundRepeat.NO_REPEAT,
+//	                BackgroundRepeat.NO_REPEAT,
+//	                BackgroundPosition.CENTER,
+//	                backgroundSize
+//	    );
+//	    
+//	    this.setBackground(new Background(spelbord));
 	}
 	
 	@FXML
