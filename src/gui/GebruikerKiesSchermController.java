@@ -1,8 +1,10 @@
 package gui;
 
 import java.io.IOException;
+import java.util.List;
 
 import domein.DomeinController;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +43,7 @@ public class GebruikerKiesSchermController extends GridPane {
 	}
 
 	@FXML
-	private ListView<?> lijstSpelers;
+	private ListView<String> lijstSpelers;
 
 	@FXML
 	private Button selecteerSpelerKnop;
@@ -57,19 +59,23 @@ public class GebruikerKiesSchermController extends GridPane {
 
 	@FXML
 	void zoekKnopOnAction(ActionEvent event) {
-		try  {
-			if (zoekBalk.getText() == null || zoekBalk.getText().isBlank() ) {
+		try {
+			if (zoekBalk.getText() == null || zoekBalk.getText().isBlank()) {
 				throw new IllegalArgumentException("Dit is geen geldige naam!");
 			}
-			
+
 			String gezochteNaam = zoekBalk.getText();
+			List<String> goedeNamen = dc.zoekDezeSpeler(gezochteNaam);
+			
+			lijstSpelers.setItems((ObservableList<String>) goedeNamen);
 			
 			
 			
-		}catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			zoekBalk.setText(e.getMessage());
 		}
 	}
+
 	@FXML
 	void selecteerSpelerKnopOnAction(ActionEvent event) {
 
@@ -79,6 +85,5 @@ public class GebruikerKiesSchermController extends GridPane {
 	void terugKnopOnAction(ActionEvent event) {
 		mms.terugNaarMain(taal);
 	}
-
 
 }
