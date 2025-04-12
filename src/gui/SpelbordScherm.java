@@ -61,8 +61,10 @@ public class SpelbordScherm extends BorderPane {
 		dc.kiesSpelerEnKleur(2, SpelerKleur.GEEL);
 		dc.kiesSpelerEnKleur(3, SpelerKleur.GROEN);
 		dc.startSpel();
+		dc.speelRonde();
 		
 		RolKnopKlik(null);
+		plaatsFiches();
 		//Code voor de achtergrond
 //		Image spelbordPNG = new Image(getClass().getResource("/images/hierkomtdeachtergrond!.png").toExternalForm(), true);
 //		
@@ -155,12 +157,25 @@ public class SpelbordScherm extends BorderPane {
     	for(int i=0;i<6;i++) {
     		int waarde = dc.geefWaardeVanPositie(i);
     		
-    		switch(waarde) {
-    		case 0 : {
-    			
-    		}
+    		switch (i) {
+    		case 0 : fiche0.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		case 1 : fiche1.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		case 2 : fiche2.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		case 3 : fiche3.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		case 4 : fiche4.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		case 5 : fiche5.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
     		}
     	}
+    }
+    
+    private String welkeFiche(int waarde) {
+    	switch (waarde) {
+		case 0 : return "/images/StartspelerFiche.png";
+		case 1 : return "/images/FicheEen.png";
+		case 2 : return "/images/FicheTwee.png";
+		case 3 : return "/images/FicheDrie.png";
+		default : return "Fout";
+		}
     }
     
     @FXML

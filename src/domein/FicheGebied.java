@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FicheGebied implements Placeable {
@@ -7,7 +8,7 @@ public class FicheGebied implements Placeable {
 	private List<Fiche> gezettefiches; // naam veranderen naar gewoon fiches?
 
 	public FicheGebied() {
-
+		gezettefiches = new ArrayList<>();
 	}
 	
 	public void plaatsFicheNeer(Fiche fiche) {
@@ -17,17 +18,10 @@ public class FicheGebied implements Placeable {
 //			throw new IllegalArgumentException("Deze positie is onmogelijk!");
 //		}
 		
-		
 		int positie = fiche.getPositie();
 
         if (!isPlaatsBaar(positie)) { 
             throw new IllegalArgumentException("Deze positie is onmogelijk!");
-        }
-
-        for (Fiche f : gezettefiches) {
-            if (f.getPositie() == positie) {
-                throw new IllegalArgumentException("Er is al een bonusfiche op deze positie!");
-            }
         }
 
         gezettefiches.add(fiche);
@@ -36,7 +30,7 @@ public class FicheGebied implements Placeable {
 
 	@Override
 	public boolean isPlaatsBaar(int positie) {
-		if(positie >= 1 && positie <= 6) {
+		if(positie >= 0 && positie <= 6) {
 			return true; 
 		}
 		else {
@@ -49,10 +43,17 @@ public class FicheGebied implements Placeable {
 	}
 	
 	public int geefWaardeVanPositie(int positie) {
-		if (gezettefiches.get(positie) instanceof Bonusfiche bonus) {
-			return bonus.getWaarde();
+		Fiche f=null;
+		
+		for (Fiche gezet : gezettefiches) {
+			if (gezet.getPositie()==positie) {
+				f=gezet;
+			}
+		}
+		if (f instanceof Bonusfiche bonus) {
+			return bonus.getWaarde(); 
 		} else {
-			return 0; //0 = startspelerfiche
+			return 0; //startspelerfiche!
 		}
 	}
 
