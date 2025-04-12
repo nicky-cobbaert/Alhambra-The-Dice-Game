@@ -12,7 +12,13 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 
 public class MainMenuScherm extends BorderPane{
@@ -31,11 +37,13 @@ public class MainMenuScherm extends BorderPane{
 		MenuBar menubar = buildMenuBar();
 		setTop(menubar);
 		setTaal(taal);
+		setAchtergrondMarkt();
 	}
 	
 	public void terugNaarMain(char taal) {
 		loadFxmlScreen("MainMenuScherm.fxml");
 		setTaal(taal);
+		 setAchtergrondMarkt();
 	}
 	
 	private void setTaal(char taal) {
@@ -81,6 +89,22 @@ public class MainMenuScherm extends BorderPane{
 		
 		return menuBar;
 	}
+	
+	private void setAchtergrondMarkt() {
+        Image marktImage = new Image(getClass().getResource("/images/AchtergrondMarkt.png").toExternalForm());
+
+        BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+
+        BackgroundImage achtergrond = new BackgroundImage(
+            marktImage,
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundPosition.CENTER,
+            size
+        );
+
+        this.setBackground(new Background(achtergrond));
+    }
 
     @FXML
     private Button registreerKnop;
@@ -93,12 +117,14 @@ public class MainMenuScherm extends BorderPane{
 
     @FXML
     void registreerKnopKlik(ActionEvent event) {
+    	this.setBackground(null);
     	rss = new RegistreerSpelerScherm(dc,taal,this);
     	this.setCenter(rss);
     }
 
     @FXML
     void speelSpelKnopKlik(ActionEvent event) {
+    	this.setBackground(null);
     	SpelbordScherm sbs = new SpelbordScherm(dc);
     	this.setCenter(sbs);
     }

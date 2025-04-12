@@ -1,63 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 
-<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <GridPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="655000.0" minWidth="10.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="50000.0" minWidth="10.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="50000.0" minWidth="10.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="50000.0" minWidth="10.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="178.40000610351564" minHeight="10.0" prefHeight="178.40000610351564" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="231.8000244140625" minHeight="10.0" prefHeight="132.7999938964844" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="128.59998168945316" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <ImageView fitHeight="1223.0" fitWidth="2881.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-               <image>
-                  <Image url="@../images/AlhambraStad.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="KnopNL" mnemonicParsing="false" onAction="#KnopNLklik" prefHeight="50.0" prefWidth="200.0" text="Speel het spel!" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Algerian" size="20.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets right="50.0" />
-               </GridPane.margin>
-            </Button>
-            <Button fx:id="KnopENG" mnemonicParsing="false" onAction="#KnopENGklik" prefHeight="50.0" prefWidth="200.0" text="Play the game!" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Algerian" size="20.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="50.0" />
-               </GridPane.margin>
-            </Button>
-            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" prefHeight="179.0" prefWidth="593.0" text="Welkom bij/Welcome at" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="Algerian" size="37.0" />
-               </font>
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" prefHeight="Infinity" prefWidth="Infinity" maxHeight="Infinity" maxWidth="Infinity">
+    <center>
+        <VBox alignment="CENTER" spacing="20" prefHeight="Infinity" prefWidth="Infinity" maxHeight="Infinity" maxWidth="Infinity">
+            <Label text="Welkom bij/Welcome at" textAlignment="CENTER">
+                <font>
+                    <Font name="Algerian" size="37.0"/>
+                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="150.0" prefWidth="952.0" text="Alhambra: The dice game" textFill="WHITE" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="Algerian" size="53.0" />
-               </font>
+
+            <Label text="Alhambra: The dice game" textFill="WHITE" textAlignment="CENTER">
+                <font>
+                    <Font name="Algerian" size="53.0"/>
+                </font>
             </Label>
-         </children>
-      </GridPane>
-   </center>
+
+            <HBox alignment="CENTER" spacing="40">
+                <Button fx:id="KnopNL" text="Speel het spel!" onAction="#KnopNLklik" prefWidth="200" prefHeight="50">
+                    <font>
+                        <Font name="Algerian" size="20.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="KnopENG" text="Play the game!" onAction="#KnopENGklik" prefWidth="200" prefHeight="50">
+                    <font>
+                        <Font name="Algerian" size="20.0"/>
+                    </font>
+                </Button>
+            </HBox>
+        </VBox>
+    </center>
 </fx:root>
