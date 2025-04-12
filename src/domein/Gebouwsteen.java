@@ -4,9 +4,10 @@ public class Gebouwsteen {
 
 	private int positie;
 	private int volgorde;
+	private GebouwpuntenGebied gebouwpuntGebied;
 	
-	public Gebouwsteen() {
-		
+	public Gebouwsteen(GebouwpuntenGebied gebouwpuntenGebied) {
+		this.gebouwpuntGebied = gebouwpuntenGebied;
 	}
 	
 	public int getPositie(){ //toegevoegd voor mijn methode  
@@ -16,6 +17,13 @@ public class Gebouwsteen {
 	
 	public void plaatsNeer(int positie) {
 		this.positie = positie;
+		this.volgorde = 1;
+		gebouwpuntGebied.plaatsGebouwsteenNeer(this);
 	}
-	
+	public int getVolgorde() {
+		return this.volgorde;
+	}
+	public void plaatsNaast(int volgordeAndere) {
+		this.volgorde = 1 + volgordeAndere; 
+	}
 }

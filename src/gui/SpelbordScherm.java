@@ -11,6 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
@@ -61,24 +66,26 @@ public class SpelbordScherm extends BorderPane {
 		dc.kiesSpelerEnKleur(2, SpelerKleur.GEEL);
 		dc.kiesSpelerEnKleur(3, SpelerKleur.GROEN);
 		dc.startSpel();
+		dc.speelRonde();
 		
 		RolKnopKlik(null);
+		plaatsFiches();
 		//Code voor de achtergrond
-//		Image spelbordPNG = new Image(getClass().getResource("/images/hierkomtdeachtergrond!.png").toExternalForm(), true);
-//		
-//		BackgroundSize backgroundSize = new BackgroundSize(
-//				100, 100, true, true, true, false
-//	    );
-//
-//	    BackgroundImage spelbord = new BackgroundImage(
-//	    			spelbordPNG,
-//	                BackgroundRepeat.NO_REPEAT,
-//	                BackgroundRepeat.NO_REPEAT,
-//	                BackgroundPosition.CENTER,
-//	                backgroundSize
-//	    );
-//	        
-//	    this.setBackground(new Background(spelbord));
+		Image spelbordPNG = new Image(getClass().getResource("/images/AlhambraStad.png").toExternalForm(), true);
+		
+		BackgroundSize backgroundSize = new BackgroundSize(
+				100, 100, true, true, true, false
+	    );
+
+	    BackgroundImage spelbord = new BackgroundImage(
+	    			spelbordPNG,
+	                BackgroundRepeat.NO_REPEAT,
+	                BackgroundRepeat.NO_REPEAT,
+	                BackgroundPosition.CENTER,
+	                backgroundSize
+	    );
+	        
+	    this.setBackground(new Background(spelbord));
 	}
 	
 	@FXML
@@ -130,8 +137,52 @@ public class SpelbordScherm extends BorderPane {
     private Label spelerZes;
 
     @FXML
-    private Label welkeRone;
+    private Label welkeRonde;
+    
+    @FXML
+    private ImageView fiche0;
 
+    @FXML
+    private ImageView fiche1;
+
+    @FXML
+    private ImageView fiche2;
+
+    @FXML
+    private ImageView fiche3;
+
+    @FXML
+    private ImageView fiche4;
+
+    @FXML
+    private ImageView fiche5;
+
+
+    private void plaatsFiches() {
+    	for(int i=1;i<7;i++) {
+    		int waarde = dc.geefWaardeVanPositie(i);
+    		
+    		switch (i) { //Welke fiche je moet aanpassen
+    		case 1 : fiche0.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		case 2 : fiche1.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		case 3 : fiche2.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		case 4 : fiche3.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		case 5 : fiche4.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		case 6 : fiche5.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
+    		}
+    	}
+    }
+    
+    private String welkeFiche(int waarde) {
+    	switch (waarde) { //Welke waarde bij de fiche
+		case 0 : return "/images/StartspelerFiche.png";
+		case 1 : return "/images/FicheEen.png";
+		case 2 : return "/images/FicheTwee.png";
+		case 3 : return "/images/FicheDrie.png";
+		default : return "Fout";
+		}
+    }
+    
     @FXML
     void RolKnopKlik(ActionEvent event) {
     	for(int i = 1; i<=8; i++) {

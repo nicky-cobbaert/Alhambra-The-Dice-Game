@@ -18,6 +18,7 @@ public class Spel {
 	private StartspelerFiche startspelerfiche;
 	private Spelbord spelbord;
 	private List<Bonusfiche> bonusfiches;
+	private List<Bonusfiche> geplaatsteBonusfiches;
 	private List<Speler> winnaar;
 	private int ronde=0;
 	private boolean isEindeSpel=false;
@@ -35,13 +36,14 @@ public class Spel {
 		for (int i = 0; i < MAXIMUM_AANTAL_DOBBELSTENEN; i++) {
 			dobbelstenen.add(new Dobbelsteen());
 		}
-
+		spelbord = new Spelbord();
+		
 		this.bonusfiches = new ArrayList<Bonusfiche>();
 		for (int i = 0; i < MAXIMUM_AANTAL_BONUSFICHES; i++) {
-			bonusfiches.add(new Bonusfiche());
+			bonusfiches.add(new Bonusfiche(spelbord.getFicheGebied()));
 		}
-		spelbord = new Spelbord();
-		startspelerfiche = new StartspelerFiche();
+		
+		startspelerfiche = new StartspelerFiche(spelbord.getFicheGebied());
 
 		/**
 		 * ---einde Dobbelsteen, bonusfiches , spelbord
@@ -92,28 +94,7 @@ public class Spel {
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
 	}
 
-	public void speelRonde() {
-		// TODO UC3 code
-		ronde++;
-		// UC3 -> Bonusfiches + startspelersfiche van positie veranderen
-		SecureRandom random = new SecureRandom();
-		int positieStartSpelerFiche = random.nextInt(1, 7);
-
-		startspelerfiche.plaatsNeer(positieStartSpelerFiche);
-		for (int i = 1; i < 7; i++) {
-			if (i != positieStartSpelerFiche) {
-				int indexWaarde = random.nextInt(0, bonusfiches.size());
-				bonusfiches.get(indexWaarde).plaatsNeer(i);
-				bonusfiches.remove(indexWaarde);
-			}
-		}
-		
-		//Code voor speelBeurt 
-		
-		if (ronde==3) {
-			isEindeSpel = true;
-		}
-	}
+	
 
 	public void beïndigSpel() {
 		clearSpelersVanAttributenNaSpelEindigt();
@@ -155,7 +136,7 @@ public class Spel {
 
 	private void geefSpelerGebouwstenen() {
 		for (Speler sp : gekozenSpelers) {
-			sp.maakGebouwstenenAan();
+			sp.maakGebouwstenenAan(spelbord.getGebouwpuntenGebied());
 			;
 		}
 	}
@@ -168,7 +149,7 @@ public class Spel {
 		return beschikbareSpelers;
 	}
 
-	public List<Speler> berekenWinnaar() {
+	private void berekenWinnaar() {
 
 		// Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
 		
@@ -190,8 +171,6 @@ public class Spel {
 	            }
 	        }
 	    }
-
-	    return winnaar;
 	}
 		 
 
@@ -212,7 +191,51 @@ public class Spel {
 //
 //		return spelersMetHoogstePunten;
 
+	/*
+	 * dit is de volgorde van hoe een ronde wordt gespeeld
+	 */
 	
+	//1 fiches worden aangelegd
+	public void startRonde() {
+		// TODO UC3 code
+		ronde++;
+		// UC3 -> Bonusfiches + startspelersfiche van positie veranderen
+		SecureRandom random = new SecureRandom();
+		int positieStartSpelerFiche = random.nextInt(1, 7);
+
+		startspelerfiche.plaatsNeer(positieStartSpelerFiche);
+		for (int i = 1; i < 7; i++) {
+			if (i != positieStartSpelerFiche) {
+				int indexWaarde = random.nextInt(0, bonusfiches.size());
+				bonusfiches.get(indexWaarde).plaatsNeer(i);
+				bonusfiches.remove(indexWaarde);
+			}
+		}
+		
+		//Code voor speelBeurt 
+		
+		if (ronde==3) {
+			this.isEindeSpel = true;
+		}
+	}
+	
+	/*
+	 * TODO UC5 hier moet speelBeurt() komen ook opgesplitst
+	 */
+	
+	/*
+	 * einde UC5 om een beurt te kunnen spelen
+	 */
+	
+	//2 gebouwstenen worden verplaatst volgens hoe de zetstenen liggen
+	
+	//3 bonusfiches worden gegeven met hun punten aan de speler die het moet krijgen
+	
+	//4 zetstenenen worden weggehaald
+	
+	/*
+	 * alle code staat hierboven om een ronde te kunnen spelen
+	 */
 
 	public List<Speler> getWinnaar() {
 		return winnaar;
@@ -225,4 +248,9 @@ public class Spel {
 		dobbelstenen.get(i).dobbel();
 		return dobbelstenen.get(i).getDobbelsteenKleur();
 	}
+	
+	public int geefWaardeVanPositie(int positie){
+		return spelbord.geefWaardeVanPositie(positie);
+	}
+	
 }

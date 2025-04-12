@@ -158,7 +158,7 @@ public class AlhambraApplicatie {
 		}while (dc.getIsEindeSpel()== false);
 		
 		
-		dc.berekenWinnaar();
+		
 		dc.updateGespeeld();
 		dc.updateGewonnen();
 		System.out.println("Het spel is gespeeld!");

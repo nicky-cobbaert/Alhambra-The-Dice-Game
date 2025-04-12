@@ -110,6 +110,9 @@ public class Speler {
 	private void setZetstenen(List<Zetsteen> zetstenenen) {
 		this.zetstenen = zetstenenen;
 	}
+	private void setGebouwstenen(List<Gebouwsteen> gebouwstenen) {
+		this.gebouwstenen = gebouwstenen;
+	}
 
 	public void maakZetstenenAan(int aantalZetstenen) {
 		List<Zetsteen> zetstenen = new ArrayList<Zetsteen>();
@@ -121,19 +124,30 @@ public class Speler {
 		setZetstenen(zetstenen);
 	}
 
-	public void maakGebouwstenenAan() {
+	public void maakGebouwstenenAan(GebouwpuntenGebied gebouwpuntenGebied) {
 		List<Gebouwsteen> gebouwstenen = new ArrayList<Gebouwsteen>();
 
 		for (int i = 0; i < 6; i++) {
-			Gebouwsteen gebouwsteen = new Gebouwsteen();
+			Gebouwsteen gebouwsteen = new Gebouwsteen(gebouwpuntenGebied);
+			gebouwsteen.plaatsNeer(i*100);
 			gebouwstenen.add(gebouwsteen);
 		}
-		this.gebouwstenen = gebouwstenen;
+		setGebouwstenen(gebouwstenen);
+	}
+	
+	public void verplaatsGebouwsteen(int positie, int plaats) {
+		for(Gebouwsteen g :gebouwstenen) {
+			if (g.getPositie()/100 == positie) {
+				g.plaatsNeer(positie*100 + plaats);
+			}
+		}
 	}
 
 	public void clearAttributenNaSpel() {
 		setKleur(null);
 		setZetstenen(null);
+		setGebouwstenen(null);
+		
 	}
 
 	@Override
