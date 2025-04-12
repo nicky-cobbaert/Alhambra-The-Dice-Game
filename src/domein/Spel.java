@@ -94,28 +94,7 @@ public class Spel {
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
 	}
 
-	public void speelRonde() {
-		// TODO UC3 code
-		ronde++;
-		// UC3 -> Bonusfiches + startspelersfiche van positie veranderen
-		SecureRandom random = new SecureRandom();
-		int positieStartSpelerFiche = random.nextInt(1, 7);
-
-		startspelerfiche.plaatsNeer(positieStartSpelerFiche);
-		for (int i = 1; i < 7; i++) {
-			if (i != positieStartSpelerFiche) {
-				int indexWaarde = random.nextInt(0, bonusfiches.size());
-				bonusfiches.get(indexWaarde).plaatsNeer(i);
-				bonusfiches.remove(indexWaarde);
-			}
-		}
-		
-		//Code voor speelBeurt 
-		
-		if (ronde==3) {
-			this.isEindeSpel = true;
-		}
-	}
+	
 
 	public void beïndigSpel() {
 		clearSpelersVanAttributenNaSpelEindigt();
@@ -157,7 +136,7 @@ public class Spel {
 
 	private void geefSpelerGebouwstenen() {
 		for (Speler sp : gekozenSpelers) {
-			sp.maakGebouwstenenAan();
+			sp.maakGebouwstenenAan(spelbord.getGebouwpuntenGebied());
 			;
 		}
 	}
@@ -217,7 +196,28 @@ public class Spel {
 	 */
 	
 	//1 fiches worden aangelegd
-	
+	public void startRonde() {
+		// TODO UC3 code
+		ronde++;
+		// UC3 -> Bonusfiches + startspelersfiche van positie veranderen
+		SecureRandom random = new SecureRandom();
+		int positieStartSpelerFiche = random.nextInt(1, 7);
+
+		startspelerfiche.plaatsNeer(positieStartSpelerFiche);
+		for (int i = 1; i < 7; i++) {
+			if (i != positieStartSpelerFiche) {
+				int indexWaarde = random.nextInt(0, bonusfiches.size());
+				bonusfiches.get(indexWaarde).plaatsNeer(i);
+				bonusfiches.remove(indexWaarde);
+			}
+		}
+		
+		//Code voor speelBeurt 
+		
+		if (ronde==3) {
+			this.isEindeSpel = true;
+		}
+	}
 	
 	/*
 	 * TODO UC5 hier moet speelBeurt() komen ook opgesplitst

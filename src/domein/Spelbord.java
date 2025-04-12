@@ -19,4 +19,11 @@ public class Spelbord {
 	public FicheGebied getFicheGebied() {
 		return fichegebied;
 	}
+	
+	public GebouwpuntenGebied getGebouwpuntenGebied() {
+		return gebouwpuntengebied;
+	}
+	public ResultatenGebied getResultatenGebied() {
+		return resultatengebied;
+	}
 }

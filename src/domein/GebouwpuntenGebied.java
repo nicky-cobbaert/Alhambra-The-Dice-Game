@@ -20,7 +20,10 @@ public class GebouwpuntenGebied implements Placeable{
 
 	        for (Gebouwsteen g : gezetteGebouwstenen) {
 	            if (g.getPositie() == positie) {
-	                throw new IllegalArgumentException("Er is al een gebouwsteen op deze positie!");
+	                //throw new IllegalArgumentException("Er is al een gebouwsteen op deze positie!");
+	            	if (g.getVolgorde() >= gebouwsteen.getVolgorde()) {
+	            		gebouwsteen.plaatsNaast(g.getVolgorde());
+	            	}
 	            }
 	        }
 
