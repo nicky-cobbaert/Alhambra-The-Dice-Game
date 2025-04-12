@@ -112,7 +112,7 @@ public class Spel {
 		//Code voor speelBeurt 
 		
 		if (ronde==3) {
-			isEindeSpel = true;
+			this.isEindeSpel = true;
 		}
 	}
 
@@ -169,7 +169,7 @@ public class Spel {
 		return beschikbareSpelers;
 	}
 
-	public List<Speler> berekenWinnaar() {
+	private void berekenWinnaar() {
 
 		// Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
 		
@@ -191,8 +191,6 @@ public class Spel {
 	            }
 	        }
 	    }
-
-	    return winnaar;
 	}
 		 
 
@@ -213,7 +211,30 @@ public class Spel {
 //
 //		return spelersMetHoogstePunten;
 
+	/*
+	 * dit is de volgorde van hoe een ronde wordt gespeeld
+	 */
 	
+	//1 fiches worden aangelegd
+	
+	
+	/*
+	 * TODO UC5 hier moet speelBeurt() komen ook opgesplitst
+	 */
+	
+	/*
+	 * einde UC5 om een beurt te kunnen spelen
+	 */
+	
+	//2 gebouwstenen worden verplaatst volgens hoe de zetstenen liggen
+	
+	//3 bonusfiches worden gegeven met hun punten aan de speler die het moet krijgen
+	
+	//4 zetstenenen worden weggehaald
+	
+	/*
+	 * alle code staat hierboven om een ronde te kunnen spelen
+	 */
 
 	public List<Speler> getWinnaar() {
 		return winnaar;
