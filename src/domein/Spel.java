@@ -18,6 +18,7 @@ public class Spel {
 	private StartspelerFiche startspelerfiche;
 	private Spelbord spelbord;
 	private List<Bonusfiche> bonusfiches;
+	private List<Bonusfiche> geplaatsteBonusfiches;
 	private List<Speler> winnaar;
 	private int ronde=0;
 	private boolean isEindeSpel=false;
@@ -225,4 +226,9 @@ public class Spel {
 		dobbelstenen.get(i).dobbel();
 		return dobbelstenen.get(i).getDobbelsteenKleur();
 	}
+	
+	public int geefWaardeVanPositie(int positie){
+		return spelbord.geefWaardeVanPositie(positie);
+	}
+	
 }

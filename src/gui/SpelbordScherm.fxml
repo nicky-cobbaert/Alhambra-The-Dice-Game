@@ -53,11 +53,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/DobbelsteenGrijs.png" />
                            </image>
                         </ImageView>
+                        <ImageView fx:id="fiche3" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
                   <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
@@ -78,11 +79,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/DobbelsteenGroen.png" />
                            </image>
                         </ImageView>
+                        <ImageView fx:id="fiche4" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
                   <GridPane layoutX="111.0" layoutY="10.0" GridPane.columnIndex="2">
@@ -103,11 +105,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/DobbelsteenPaars.png" />
                            </image>
                         </ImageView>
+                        <ImageView fx:id="fiche5" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
                </children>
@@ -139,7 +142,7 @@
                         <Insets bottom="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <Label fx:id="welkeRone" alignment="CENTER" prefHeight="62.0" prefWidth="123.0" text="Ronde1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Label fx:id="welkeRonde" alignment="CENTER" prefHeight="62.0" prefWidth="123.0" text="Ronde1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font name="Algerian" size="25.0" />
                      </font>
@@ -265,11 +268,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/DobbelsteenBLAUW.png" />
                            </image>
                         </ImageView>
+                        <ImageView fx:id="fiche0" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
                   <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
@@ -290,11 +294,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/DobbelsteenRood.png" />
                            </image>
                         </ImageView>
+                        <ImageView fx:id="fiche1" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
                   <GridPane layoutX="111.0" layoutY="10.0" GridPane.columnIndex="2">
@@ -315,11 +320,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <ImageView fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/DobbelsteenBruin.png" />
                            </image>
                         </ImageView>
+                        <ImageView fx:id="fiche2" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
                </children>

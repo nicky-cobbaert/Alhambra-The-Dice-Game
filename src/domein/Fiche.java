@@ -2,7 +2,9 @@ package domein;
 
 public class Fiche {
 
-	int positie;
+	private int positie;
+	
+	private FicheGebied ficheGebied;
 	
 	public Fiche() {
 		
@@ -30,6 +32,8 @@ public class Fiche {
 //	        }
 
 	        this.positie = positie;
+	        
+	        ficheGebied.plaatsFicheNeer(this);
 	    }
 	}
 	

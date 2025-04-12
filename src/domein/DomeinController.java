@@ -188,6 +188,10 @@ public class DomeinController {
 
 	}
 
+	public int geefWaardeVanPositie(int positie) {
+		return spel.geefWaardeVanPositie(positie);
+	}
+	
 }
 
 //TestCommit
