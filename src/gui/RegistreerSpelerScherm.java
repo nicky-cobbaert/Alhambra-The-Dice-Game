@@ -9,8 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 
 public class RegistreerSpelerScherm extends BorderPane{
@@ -35,12 +41,31 @@ public class RegistreerSpelerScherm extends BorderPane{
 		loadFxmlScreen("RegistreerSpelerScherm.fxml");
 		setTaal(taal);
 		this.mms = mainMenu;
+		setZwembad();
 		
 	}
 	
 	private void setTaal(char taal) {
 		this.taal = taal;
 	}
+	
+	
+	
+	private void setZwembad() {
+        Image zwembadImage = new Image(getClass().getResource("/images/Zwembad.png").toExternalForm());
+
+        BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+
+        BackgroundImage achtergrond = new BackgroundImage(
+            zwembadImage,
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundRepeat.NO_REPEAT,
+            BackgroundPosition.CENTER,
+            size
+        );
+
+        this.setBackground(new Background(achtergrond));
+    }
 	
 	@FXML
     private Button gaTerugKnop;
@@ -56,6 +81,7 @@ public class RegistreerSpelerScherm extends BorderPane{
 
     @FXML
     void gaTerugKnopKlik(ActionEvent event) {
+    	this.setBackground(null);
     	mms.terugNaarMain(taal);
     }
 

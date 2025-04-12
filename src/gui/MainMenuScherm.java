@@ -131,7 +131,7 @@ public class MainMenuScherm extends BorderPane{
     
     @FXML
     void verlaatKnopKlik(ActionEvent event) {
-
+    	verlaatKnop.setOnAction(e -> Platform.exit());
     }
     
     private void loadFxmlScreen(String name) {
