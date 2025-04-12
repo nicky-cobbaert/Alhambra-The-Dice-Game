@@ -110,7 +110,7 @@ public class DomeinController {
 	}
 
 	public void speelRonde() {
-		spel.speelRonde();
+		spel.startRonde();
 	}
 
 	public List<SpelerDTO> geefWinnaars() {
@@ -118,9 +118,6 @@ public class DomeinController {
 		return zetSpelersOmNaarSpelerDTOs(speler);
 	}
 
-	public void berekenWinnaar() {
-		spel.berekenWinnaar();
-	}
 
 	public boolean getIsEindeSpel() {
 		return spel.getIsEindeSpel();
