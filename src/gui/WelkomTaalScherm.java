@@ -67,6 +67,7 @@ public class WelkomTaalScherm extends BorderPane {
 
     @FXML
     void KnopNLklik(ActionEvent event) {
+    	this.setBackground(null);
         mainMenu = new MainMenuScherm(dc, 'N');
         this.setCenter(mainMenu);
         

@@ -43,6 +43,7 @@ public class MainMenuScherm extends BorderPane{
 	public void terugNaarMain(char taal) {
 		loadFxmlScreen("MainMenuScherm.fxml");
 		setTaal(taal);
+		 setAchtergrondMarkt();
 	}
 	
 	private void setTaal(char taal) {
@@ -116,12 +117,14 @@ public class MainMenuScherm extends BorderPane{
 
     @FXML
     void registreerKnopKlik(ActionEvent event) {
+    	this.setBackground(null);
     	rss = new RegistreerSpelerScherm(dc,taal,this);
     	this.setCenter(rss);
     }
 
     @FXML
     void speelSpelKnopKlik(ActionEvent event) {
+    	this.setBackground(null);
     	SpelbordScherm sbs = new SpelbordScherm(dc);
     	this.setCenter(sbs);
     }
