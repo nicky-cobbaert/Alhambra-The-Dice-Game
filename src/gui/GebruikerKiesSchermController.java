@@ -5,24 +5,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domein.DomeinController;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
 import utils.SpelerKleur;
 
-public class GebruikerKiesSchermController extends GridPane {
+public class GebruikerKiesSchermController extends BorderPane {
 
 	private final DomeinController dc;
 	private char taal;
 	private MainMenuScherm mms;
 	private SpelerKleur voorlopigGekozenSpelerKleur;
 	private int voorlopigGekozenSpelerNaam;
-	
+
 	@FXML
 	private Button knopBlauw;
 
@@ -110,10 +113,10 @@ public class GebruikerKiesSchermController extends GridPane {
 
 	@FXML
 	void selecteerSpelerKnopOnAction(ActionEvent event) {
-		
+
 		voorlopigGekozenSpelerNaam = lijstSpelers.getSelectionModel().getSelectedIndex();
 		dc.kiesSpelerEnKleur(voorlopigGekozenSpelerNaam, voorlopigGekozenSpelerKleur);
-		
+
 		resetKnop.fire();
 	}
 
@@ -156,27 +159,48 @@ public class GebruikerKiesSchermController extends GridPane {
 	@FXML
 	void resetKnopOnAction(ActionEvent event) {
 		List<String> alleSpelers = new ArrayList<String>();
-		
-		dc.geefBeschikbareSpelers().forEach(speler ->{
+
+		dc.geefBeschikbareSpelers().forEach(speler -> {
 			alleSpelers.add(speler.gebruikersnaam());
 		});
-		
+
 		lijstSpelers.setItems((ObservableList<String>) alleSpelers);
-		
-	
+
 	}
 
 	@FXML
 	void verdergaanOnAction(ActionEvent event) {
-		
+
+		try {
+			if (dc.geefGekozenSpelers().size() < 3 || dc.geefGekozenSpelers().size() > 6) {
+				throw new IllegalArgumentException("Er moeten minstens 3 spelers , maximum 6 spelers deelnemen!");
+			}
+			this.setBackground(null);
+			SpelbordScherm sbs = new SpelbordScherm(dc);
+			this.setCenter(sbs);
+
+		} catch (IllegalArgumentException e) {
+			Alert verkeerdAantalSpelers = new Alert(AlertType.ERROR);
+			verkeerdAantalSpelers.setTitle("Het Spel kan niet worden gestart");
+			verkeerdAantalSpelers.setHeaderText("Het Spel kan niet worden gestart.");
+			verkeerdAantalSpelers.setContentText(e.getMessage());
+			verkeerdAantalSpelers.showAndWait();
+		}
+
 	}
 
 	@FXML
 	void verwijderSpelerOnAction(ActionEvent event) {
-		
-		int voorlopigTeVerwijderenSpeler = lijstSpelers.getSelectionModel().getSelectedIndex();
-		dc.verwijderSpelerEnKleur(voorlopigTeVerwijderenSpeler, voorlopigGekozenSpelerKleur);
-		
+
+		/*
+		 * int voorlopigTeVerwijderenSpeler =
+		 * lijstSpelers.getSelectionModel().getSelectedIndex();
+		 * dc.verwijderSpelerEnKleur(voorlopigTeVerwijderenSpeler,
+		 * voorlopigGekozenSpelerKleur);
+		 */
+
+		lijstGekozenSpelers.setItems(FXCollections.emptyObservableList());
+
 		resetKnop.fire();
 	}
 

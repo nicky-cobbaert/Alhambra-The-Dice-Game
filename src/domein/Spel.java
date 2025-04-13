@@ -97,7 +97,7 @@ public class Spel {
 		beschikbareSpelers.sort(null);
 		gekozenSpelers.sort(null);
 		
-		
+	
 	}*/
 
 	public void startSpel() {
@@ -165,7 +165,7 @@ public class Spel {
 		return beschikbareSpelers;
 	}
 
-	private void berekenWinnaar() {
+	public List<Speler> berekenWinnaar() {
 
 		// Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
 
@@ -187,6 +187,8 @@ public class Spel {
 				}
 			}
 		}
+		
+		return winnaar;
 	}
 
 //		List<Speler> spelersMetHoogstePunten = new ArrayList<Speler>();
