@@ -40,11 +40,11 @@ public class DomeinController {
 		spel.kiesSpeler(s, kleur); // s is de plaats in de arrayList!
 	}
 	
-	public void verwijderSpelerEnKleur(int s, SpelerKleur kleur) {
+	/*public void verwijderSpelerEnKleur(int s, SpelerKleur kleur) {
 		spel.verwijderGekozenSpeler(s, kleur); // s is de plaats in de arrayList!
 		
 	
-	}
+	}*/
 
 	public List<SpelerDTO> geefBeschikbareSpelers() {
 
