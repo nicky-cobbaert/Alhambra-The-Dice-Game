@@ -1,6 +1,7 @@
 package domein;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dto.SpelerDTO;
@@ -37,6 +38,12 @@ public class DomeinController {
 //    
 	public void kiesSpelerEnKleur(int s, SpelerKleur kleur) {
 		spel.kiesSpeler(s, kleur); // s is de plaats in de arrayList!
+	}
+	
+	public void verwijderSpelerEnKleur(int s, SpelerKleur kleur) {
+		spel.verwijderGekozenSpeler(s, kleur); // s is de plaats in de arrayList!
+		
+	
 	}
 
 	public List<SpelerDTO> geefBeschikbareSpelers() {
@@ -148,7 +155,7 @@ public class DomeinController {
 
 	public List<String> zoekDezeSpeler(String onzeNaam) {
 
-		List<String> goedeNamen = new ArrayList<>();
+		List<String> overeenkomstigeNamen = new ArrayList<>();
 
 		int meesteLetters = 0;
 
@@ -172,16 +179,16 @@ public class DomeinController {
 			} // einde for ( --------------------------
 
 			if (gelijkeLetters == meesteLetters) {
-				goedeNamen.add(naamVanLijst.gebruikersnaam());
+				overeenkomstigeNamen.add(naamVanLijst.gebruikersnaam());
 				meesteLetters = gelijkeLetters;
 			} else if (gelijkeLetters > meesteLetters) {
-				goedeNamen.clear();
-				goedeNamen.add(naamVanLijst.gebruikersnaam());
+				overeenkomstigeNamen.clear();
+				overeenkomstigeNamen.add(naamVanLijst.gebruikersnaam());
 				meesteLetters = gelijkeLetters;
 			}
 		} // einde iterator--------------------------------------
 
-		return goedeNamen;
+		return overeenkomstigeNamen;
 
 	}
 
