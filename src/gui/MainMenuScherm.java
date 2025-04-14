@@ -125,7 +125,7 @@ public class MainMenuScherm extends BorderPane{
     @FXML
     void speelSpelKnopKlik(ActionEvent event) {
     	this.setBackground(null);
-    	GebruikerKiesSchermController gks = new GebruikerKiesSchermController(dc, taal, this);
+    	GebruikerKiesScherm gks = new GebruikerKiesScherm(dc, taal, this);
     	this.setCenter(gks);
     }
     

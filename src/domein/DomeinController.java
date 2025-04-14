@@ -1,8 +1,9 @@
 package domein;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dto.SpelerDTO;
 import utils.DobbelsteenKleur;
@@ -84,6 +85,27 @@ public class DomeinController {
 			throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
 		}
 	}
+	
+	public static String kleurGeverGuiEditie(SpelerKleur kleur) {
+
+		switch (kleur.toString().toLowerCase()) {
+		case "blauw":
+			return "blue";
+		case "groen":
+			return "green";
+		case "wit":
+			return "white";
+		case "geel":
+			return "yellow";
+		case "oranje":
+			return "orange";
+		case "rood":
+			return "red";
+		default:
+			throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
+		}
+	}
+
 
 	public List<SpelerDTO> geefGekozenSpelers() {
 		List<Speler> speler = spel.getGekozenSpelers();
@@ -153,7 +175,7 @@ public class DomeinController {
 //    	
 //    }
 
-	public List<String> zoekDezeSpeler(String onzeNaam) {
+	public Map<String, Object> zoekDezeSpeler(String onzeNaam) {
 
 		List<String> overeenkomstigeNamen = new ArrayList<>();
 
@@ -176,7 +198,7 @@ public class DomeinController {
 					// aan de gezochte naam zijn letter
 				}
 
-			} // einde for ( --------------------------
+			} // einde for voor letters ( --------------------------
 
 			if (gelijkeLetters == meesteLetters) {
 				overeenkomstigeNamen.add(naamVanLijst.gebruikersnaam());
@@ -186,9 +208,14 @@ public class DomeinController {
 				overeenkomstigeNamen.add(naamVanLijst.gebruikersnaam());
 				meesteLetters = gelijkeLetters;
 			}
-		} // einde iterator--------------------------------------
+		} // einde for-lus voor alle spelers --------------------------------------
 
-		return overeenkomstigeNamen;
+		Map<String, Object> resultaat = new HashMap<>();
+        resultaat.put("overeenkomstigeNamen", overeenkomstigeNamen);
+        resultaat.put("meesteLetters", meesteLetters);
+
+		
+		return resultaat;
 
 	}
 

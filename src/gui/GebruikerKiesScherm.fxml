@@ -20,48 +20,58 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="60.0" prefWidth="60.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="60.0" prefWidth="60.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="300.0" prefWidth="450.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="300.0" prefWidth="400.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="25.0" prefWidth="25.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="50.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="-Infinity" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="25.0" prefHeight="100.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="5.0" percentHeight="8.0" prefHeight="25.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="-Infinity" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="5.0" percentHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ListView fx:id="lijstSpelers" prefHeight="140.0" prefWidth="331.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="6">
+            <ListView fx:id="lijstSpelers" prefHeight="140.0" prefWidth="331.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="6">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ListView>
-            <Button fx:id="selecteerSpelerKnop" mnemonicParsing="false" onAction="#selecteerSpelerKnopOnAction" prefHeight="25.0" prefWidth="425.0" text="Kies deze speler" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
-            <Label alignment="CENTER_RIGHT" text="Beschikbare Spelers: " translateX="2.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-            <TextField fx:id="zoekBalk" promptText="Zoek een speler:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="resetKnop" alignment="CENTER" mnemonicParsing="false" onAction="#resetKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Reset" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Button fx:id="terugKnop" cancelButton="true" mnemonicParsing="false" onAction="#terugKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Terug" GridPane.columnIndex="1" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
-            <Button fx:id="zoekKnop" alignment="CENTER" layoutX="684.0" layoutY="178.0" mnemonicParsing="false" onAction="#zoekKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Zoek" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <ListView fx:id="lijstGekozenSpelers" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" GridPane.rowSpan="6" />
-            <Button fx:id="knopGroen" mnemonicParsing="false" onAction="#knopGroenOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #062400; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(15, 121, 9, 1) 51%,                           rgba(0, 255, 89, 1) 100%);" text="Groen" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-            <Button fx:id="knopBlauw" mnemonicParsing="false" onAction="#knopBlauwOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #020024; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(9, 9, 121, 1) 51%,                           rgba(0, 212, 255, 1) 100%);" text="Blauw" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-            <Button fx:id="knopWit" mnemonicParsing="false" onAction="#knopWitOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #3d3d3d; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(61, 61, 61, 1) 0%,                           rgba(173, 172, 177, 1) 26%,                           rgba(236, 236, 236, 1) 53%,                           rgba(245, 245, 245, 1) 70%,                           rgba(251, 251, 251, 1) 88%,                           rgba(255, 255, 255, 1) 100%);;" text="Wit" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-            <Button fx:id="knopGeel" mnemonicParsing="false" onAction="#knopGeelOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #232400; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(104, 121, 9, 1) 51%,                           rgba(242, 255, 0, 1) 100%);" text="Geel" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" GridPane.valignment="TOP" />
-            <Button fx:id="knopOranje" mnemonicParsing="false" onAction="#knopOranjeOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #241000; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(121, 28, 9, 1) 51%,                           rgba(255, 140, 0, 1) 100%);" text="Oranje" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6" GridPane.valignment="TOP" />
-            <Button fx:id="knopRood" mnemonicParsing="false" onAction="#knopRoodOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #240000; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(121, 9, 9, 1) 51%,                           rgba(255, 0, 0, 1) 100%);" text="Rood" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" GridPane.valignment="TOP" />
-            <Button fx:id="verdergaanKnop" mnemonicParsing="false" onAction="#verdergaanOnAction" prefHeight="25.0" prefWidth="100.0" text="Verdergaan" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
-            <Button fx:id="verwijderSpelerKnop" mnemonicParsing="false" onAction="#verwijderSpelerOnAction" prefHeight="25.0" prefWidth="300.0" text="Verwijder gekozen spelers" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-            <Label text="Gekozen Spelers:" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <Button fx:id="selecteerSpelerKnop" mnemonicParsing="false" onAction="#selecteerSpelerKnopOnAction" prefHeight="25.0" prefWidth="425.0" text="Kies deze speler" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <Label alignment="CENTER_RIGHT" text="Beschikbare Spelers: " translateX="2.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+            <TextField fx:id="zoekBalk" promptText="Zoek een speler:" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <Button fx:id="resetKnop" alignment="CENTER" mnemonicParsing="false" onAction="#resetKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Reset" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <Button fx:id="terugKnop" cancelButton="true" mnemonicParsing="false" onAction="#terugKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Terug" GridPane.columnIndex="1" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+            <Button fx:id="zoekKnop" alignment="CENTER" layoutX="684.0" layoutY="178.0" mnemonicParsing="false" onAction="#zoekKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Zoek" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <ListView fx:id="lijstGekozenSpelers" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" GridPane.rowSpan="6" />
+            <Button fx:id="knopGroen" mnemonicParsing="false" onAction="#knopGroenOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #062400; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(15, 121, 9, 1) 51%,                           rgba(0, 255, 89, 1) 100%);" text="Groen" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+            <Button fx:id="knopBlauw" mnemonicParsing="false" onAction="#knopBlauwOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #020024; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(9, 9, 121, 1) 51%,                           rgba(0, 212, 255, 1) 100%);" text="Blauw" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Button fx:id="knopWit" mnemonicParsing="false" onAction="#knopWitOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #3d3d3d; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(61, 61, 61, 1) 0%,                           rgba(173, 172, 177, 1) 26%,                           rgba(236, 236, 236, 1) 53%,                           rgba(245, 245, 245, 1) 70%,                           rgba(251, 251, 251, 1) 88%,                           rgba(255, 255, 255, 1) 100%);;" text="Wit" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+            <Button fx:id="knopGeel" mnemonicParsing="false" onAction="#knopGeelOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #232400; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(104, 121, 9, 1) 51%,                           rgba(242, 255, 0, 1) 100%);" text="Geel" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6" GridPane.valignment="TOP" />
+            <Button fx:id="knopOranje" mnemonicParsing="false" onAction="#knopOranjeOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #241000; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(121, 28, 9, 1) 51%,                           rgba(255, 140, 0, 1) 100%);" text="Oranje" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" GridPane.valignment="TOP" />
+            <Button fx:id="knopRood" mnemonicParsing="false" onAction="#knopRoodOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #240000; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(121, 9, 9, 1) 51%,                           rgba(255, 0, 0, 1) 100%);" text="Rood" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.valignment="TOP" />
+            <Button fx:id="verdergaanKnop" mnemonicParsing="false" onAction="#verdergaanOnAction" prefHeight="25.0" prefWidth="100.0" text="Verdergaan" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <Button fx:id="verwijderSpelerKnop" mnemonicParsing="false" onAction="#verwijderSpelerOnAction" prefHeight="25.0" prefWidth="300.0" text="Verwijder gekozen spelers" GridPane.columnIndex="5" GridPane.rowIndex="10" />
+            <Label text="Gekozen Spelers:" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
             <Label prefHeight="45.0" prefWidth="224.0" text="Kies uw Spelers" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
+            <Label fx:id="overeenkomstigeLettersLabel" text="aantal overeenkomstige letters label" textFill="#4de0cc" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BASELINE" />
+            <Button fx:id="gekozenKleur0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 0;" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+            <Button fx:id="gekozenKleur1" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 0;" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+            <Button fx:id="gekozenKleur2" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 0;" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+            <Button fx:id="gekozenKleur4" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 0;" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+            <Button fx:id="gekozenKleur5" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 0;" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+            <Button fx:id="gekozenKleur3" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 0;" GridPane.columnIndex="6" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </center>
