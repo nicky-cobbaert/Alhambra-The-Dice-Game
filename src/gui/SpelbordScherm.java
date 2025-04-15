@@ -62,15 +62,16 @@ public class SpelbordScherm extends BorderPane {
 		loadFxmlScreen("SpelbordScherm.fxml");
 		
 		//SpelTest
-		dc.maakNieuwSpel();
-		dc.kiesSpelerEnKleur(1, SpelerKleur.BLAUW);
-		dc.kiesSpelerEnKleur(2, SpelerKleur.GEEL);
-		dc.kiesSpelerEnKleur(3, SpelerKleur.GROEN);
-		dc.startSpel();
-		dc.speelRonde();
-		
-		RolKnopKlik(null);
-		plaatsFiches();
+//		dc.maakNieuwSpel();
+//		dc.kiesSpelerEnKleur(1, SpelerKleur.BLAUW);
+//	
+//		dc.kiesSpelerEnKleur(2, SpelerKleur.GEEL);
+//		dc.kiesSpelerEnKleur(3, SpelerKleur.GROEN);
+//		dc.startSpel();
+//		dc.speelRonde();
+//		
+//		RolKnopKlik(null);
+//		plaatsFiches();
 		//Code voor de achtergrond
 //		Image spelbordPNG = new Image(getClass().getResource("/images/AlhambraStad.png").toExternalForm(), true);
 //		
