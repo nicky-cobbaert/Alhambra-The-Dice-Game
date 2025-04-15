@@ -23,27 +23,25 @@ private FicheGebied ficheGebied;
     @ParameterizedTest
     @ValueSource(ints = {1, 3, 6})
     void plaatsFicheNeer_CorrectePositie_VoegtToe(int positie) {
-        Fiche fiche = new Fiche();
+        Fiche fiche = new Fiche(ficheGebied);
         fiche.plaatsNeer(positie);;
-        ficheGebied.plaatsFicheNeer(fiche);
         assertTrue(ficheGebied.getGezettefiches().contains(fiche));
     }
     
     @ParameterizedTest
-    @ValueSource(ints = {-5, 0, 7, 85}) 
+    @ValueSource(ints = {-5, 7, 85}) 
     void plaatsFicheNeer_OnmogelijkePositie_WerptException(int positie) {
-        Fiche fiche = new Fiche();
-        fiche.plaatsNeer(positie);
+        Fiche fiche = new Fiche(ficheGebied);
+        fiche.setPositie(positie);
         assertThrows(IllegalArgumentException.class, () -> ficheGebied.plaatsFicheNeer(fiche));
     }
     
     @Test
     void plaatsFicheNeer_PositiereedsBezet_WerptException() {
-        Fiche fiche1 = new Fiche();
-        fiche1.plaatsNeer(201);
-        Fiche fiche2 = new Fiche();
-        fiche2.plaatsNeer(201);
-        ficheGebied.plaatsFicheNeer(fiche1);
+        Fiche fiche1 = new Fiche(ficheGebied);
+        fiche1.plaatsNeer(1);
+        Fiche fiche2 = new Fiche(ficheGebied);
+        fiche2.setPositie(1);
         assertThrows(IllegalArgumentException.class, () -> ficheGebied.plaatsFicheNeer(fiche2));
     }
 

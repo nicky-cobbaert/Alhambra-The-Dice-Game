@@ -6,24 +6,36 @@ public class Gebouwsteen {
 	private int volgorde;
 	private GebouwpuntenGebied gebouwpuntGebied;
 	
-	public Gebouwsteen(GebouwpuntenGebied gebouwpuntenGebied) {
-		this.gebouwpuntGebied = gebouwpuntenGebied;
+	public Gebouwsteen(GebouwpuntenGebied gebouwpuntGebied) {
+		this.gebouwpuntGebied = gebouwpuntGebied;
 	}
 	
 	public int getPositie(){ //toegevoegd voor mijn methode  
 		return positie;
 	}
 	
+	public void setPositie(int positie) {
+		this.positie = positie;
+	}
+	
 	
 	public void plaatsNeer(int positie) {
-		this.positie = positie;
-		this.volgorde = 1;
-		gebouwpuntGebied.plaatsGebouwsteenNeer(this);
+		gebouwpuntGebied.plaatsGebouwsteenNeer(this,positie);
+	}
+	
+	public void verplaats(int verplaatsing) {
+		if(verplaatsing <= 0||verplaatsing > 3) {
+			throw new IllegalArgumentException("de verplaatsing is te klein (<=0) of te groot (>3)");
+		}
+		gebouwpuntGebied.verplaatsGebouwsteen(this, verplaatsing);
 	}
 	public int getVolgorde() {
 		return this.volgorde;
 	}
+	public void setVolgorde(int volgorde) {
+		this.volgorde = volgorde;
+	}
 	public void plaatsNaast(int volgordeAndere) {
-		this.volgorde = 1 + volgordeAndere; 
+		setVolgorde(volgordeAndere + 1);
 	}
 }

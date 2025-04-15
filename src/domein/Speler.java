@@ -127,7 +127,7 @@ public class Speler {
 	public void maakGebouwstenenAan(GebouwpuntenGebied gebouwpuntenGebied) {
 		List<Gebouwsteen> gebouwstenen = new ArrayList<Gebouwsteen>();
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 1; i <= 6; i++) {
 			Gebouwsteen gebouwsteen = new Gebouwsteen(gebouwpuntenGebied);
 			gebouwsteen.plaatsNeer(i*100);
 			gebouwstenen.add(gebouwsteen);
@@ -135,10 +135,10 @@ public class Speler {
 		setGebouwstenen(gebouwstenen);
 	}
 	
-	public void verplaatsGebouwsteen(int positie, int plaats) {
+	public void verplaatsGebouwsteen(int positie, int verplaatsing) {
 		for(Gebouwsteen g :gebouwstenen) {
 			if (g.getPositie()/100 == positie) {
-				g.plaatsNeer(positie*100 + plaats);
+				g.verplaats(verplaatsing);
 			}
 		}
 	}

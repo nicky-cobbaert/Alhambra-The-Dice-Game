@@ -156,25 +156,6 @@ public class DomeinController {
 		return spel.rol(i - 1);
 	}
 
-	public void wijzigPositieGebouwsteen() {
-
-	}
-
-	public void berekenBeloning() {
-
-	}
-
-	public void verwijderAssociatieGebouwenpuntenEnGebouwPuntenPositie() {
-
-	}
-
-	public void verwijderAssociatieSpelEnBonusFiches() {
-
-	}
-//    public List<SpelDTO> toonOverzichtSpel() {
-//    	
-//    }
-
 	public Map<String, Object> zoekDezeSpeler(String onzeNaam) {
 
 		List<String> overeenkomstigeNamen = new ArrayList<>();

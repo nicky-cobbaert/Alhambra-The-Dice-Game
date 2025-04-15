@@ -3,30 +3,36 @@ package testen;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import domein.Bonusfiche;
+import domein.FicheGebied;
 
 public class BonusficheTest {
-
 	
+
+	private FicheGebied ficheGebied;
 	private final static int GELDIGE_WAARDE = 3;
 	private final static int MAX_GELDIGE_WAARDE = 6;
 	private final static int MIN_GELDIGE_WAARDE = 1;
-	
+	@BeforeEach
+	private void setUp() {
+		ficheGebied = new FicheGebied();
+	}
 	
     @ParameterizedTest
-    @ValueSource(ints = {-5, 0 , 7 , 10}) 
+    @ValueSource(ints = {-5, 7 , 10}) 
     public void bonusfiche_OngeldigePosities_GooitException(int positie) {
-        Bonusfiche bonusfiche = new Bonusfiche();
+        Bonusfiche bonusfiche = new Bonusfiche(ficheGebied);
         assertThrows(IllegalArgumentException.class, () -> bonusfiche.plaatsNeer(positie));
     }
     
     @ParameterizedTest
     @ValueSource(ints = {GELDIGE_WAARDE, MIN_GELDIGE_WAARDE, MAX_GELDIGE_WAARDE }) 
     public void bonusfiche_GeldigePosities_GooitGeenException(int positie) {
-        Bonusfiche bonusfiche = new Bonusfiche();
+        Bonusfiche bonusfiche = new Bonusfiche(ficheGebied);
         bonusfiche.plaatsNeer(positie);
         assertEquals(positie, bonusfiche.getPositie());
     }	

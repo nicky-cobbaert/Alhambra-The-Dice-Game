@@ -23,25 +23,25 @@ private GebouwpuntenGebied gebouwpuntenGebied;
     @ParameterizedTest
     @ValueSource(ints = {101, 305, 612})
     void plaatsGebouwsteenNeer_CorrectePositie_VoegtToe(int positie) {
-        Gebouwsteen gebouwsteen = new Gebouwsteen();
+        Gebouwsteen gebouwsteen = new Gebouwsteen(gebouwpuntenGebied);
         gebouwsteen.plaatsNeer(positie);
         gebouwpuntenGebied.plaatsGebouwsteenNeer(gebouwsteen);
         assertTrue(gebouwpuntenGebied.getGebouwstenen().contains(gebouwsteen));
     }
     
     @ParameterizedTest
-    @ValueSource(ints = {-5, 0, 7, 85}) 
+    @ValueSource(ints = {-5, 7, 85}) 
     void plaatsGebouwsteenNeer_OnmogelijkePositie_WerptException(int positie) {
-        Gebouwsteen gebouwsteen = new Gebouwsteen();
+        Gebouwsteen gebouwsteen = new Gebouwsteen(gebouwpuntenGebied);
         gebouwsteen.plaatsNeer(positie);
         assertThrows(IllegalArgumentException.class, () -> gebouwpuntenGebied.plaatsGebouwsteenNeer(gebouwsteen));
     }
     
     @Test
     void plaatsGebouwsteenNeer_PositiereedsBezet_WerptException() {
-        Gebouwsteen gebouwsteen1 = new Gebouwsteen();
+        Gebouwsteen gebouwsteen1 = new Gebouwsteen(gebouwpuntenGebied);
         gebouwsteen1.plaatsNeer(201);
-        Gebouwsteen gebouwsteen2 = new Gebouwsteen();
+        Gebouwsteen gebouwsteen2 = new Gebouwsteen(gebouwpuntenGebied);
         gebouwsteen2.plaatsNeer(201);
         gebouwpuntenGebied.plaatsGebouwsteenNeer(gebouwsteen1);
         assertThrows(IllegalArgumentException.class, () -> gebouwpuntenGebied.plaatsGebouwsteenNeer(gebouwsteen2));

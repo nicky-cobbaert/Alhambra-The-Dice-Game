@@ -221,7 +221,7 @@ public class Spel {
 		int positieStartSpelerFiche = random.nextInt(1, 7);
 
 		startspelerfiche.plaatsNeer(positieStartSpelerFiche);
-		for (int i = 1; i < 7; i++) {
+		for (int i = 1; i <= 6; i++) {
 			if (i != positieStartSpelerFiche) {
 				int indexWaarde = random.nextInt(0, bonusfiches.size());
 				bonusfiches.get(indexWaarde).plaatsNeer(i);

@@ -5,41 +5,42 @@ import java.util.List;
 
 public class FicheGebied implements Placeable {
 	
-	private List<Fiche> gezettefiches; // naam veranderen naar gewoon fiches?
+	private List<Fiche> fiches; // naam veranderen naar gewoon fiches?
 
 	public FicheGebied() {
-		gezettefiches = new ArrayList<>();
+		fiches = new ArrayList<>();
 	}
 	
-	public void plaatsFicheNeer(Fiche fiche) {
+	public void plaatsFicheNeer(Fiche fiche,int positie) {
 //		if(isPlaatsBaar(fiche.getPositie()) == true) { 
 //			gezettefiches.add(fiche);
 //		} else {
 //			throw new IllegalArgumentException("Deze positie is onmogelijk!");
 //		}
-		
-		int positie = fiche.getPositie();
 
         if (!isPlaatsBaar(positie)) { 
-            throw new IllegalArgumentException("Deze positie is onmogelijk!");
+            throw new IllegalArgumentException("Deze positie is onmogelijk! ficheGebied");
         }
-
-        gezettefiches.add(fiche);
+        fiche.setPositie(positie);
+        fiches.add(fiche);
 		
 	}
 
 	@Override
 	public boolean isPlaatsBaar(int positie) {
-		if(positie >= 0 && positie <= 6) {
-			return true; 
+		if(positie < 0 && positie > 6) {
+		return false;
 		}
-		else {
-			return false;
+		for(Fiche f : fiches) {
+			if(f.getPositie() == positie) {
+				return false;
+				}
 		}
+		return true;
 	}
 
 	public List<Fiche> getGezettefiches() { //methode voor testen
-		return gezettefiches;
+		return fiches;
 	}
 	
 	public int geefWaardeVanPositie(int positie) {
@@ -56,7 +57,7 @@ public class FicheGebied implements Placeable {
 //			return 0; //startspelerfiche!
 //		}
 		
-		for (Fiche fich : gezettefiches) {
+		for (Fiche fich : fiches) {
 			if (fich.getPositie()==positie) {
 				if (fich instanceof Bonusfiche bonus) {
 					return bonus.getWaarde(); 

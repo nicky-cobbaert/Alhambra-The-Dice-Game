@@ -13,6 +13,10 @@ public class Fiche {
 	public int getPositie() {
 		return positie;
 	}
+	
+	public void setPositie(int positie) {// methode enkel public voor de testen 'Jelle'
+		this.positie = positie;
+	}
 
 	public void plaatsNeer(int positie) {
 		
@@ -30,8 +34,7 @@ public class Fiche {
 //	        if (positie % 10 < 1 || positie % 10 > 3) {
 //	            throw new IllegalArgumentException("Ongeldig aantal worpen: " + (positie % 10));
 //	        }
-	        this.positie=positie;
-	        ficheGebied.plaatsFicheNeer(this);
+	        ficheGebied.plaatsFicheNeer(this,positie);
 	    }
 	}
 	

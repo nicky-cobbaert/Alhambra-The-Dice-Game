@@ -2,28 +2,28 @@ package domein;
 
 public class Spelbord {
 
-	private FicheGebied fichegebied;
-	private ResultatenGebied resultatengebied;
-	private GebouwpuntenGebied gebouwpuntengebied;
+	private FicheGebied ficheGebied;
+	private ResultatenGebied resultatenGebied;
+	private GebouwpuntenGebied gebouwpuntenGebied;
 
 	public Spelbord() {
-		fichegebied = new FicheGebied();
-		resultatengebied = new ResultatenGebied();
-		gebouwpuntengebied = new GebouwpuntenGebied();
+		ficheGebied = new FicheGebied();
+		resultatenGebied = new ResultatenGebied();
+		gebouwpuntenGebied = new GebouwpuntenGebied();
 	}
 
 	public int geefWaardeVanPositie(int positie) {
-		return fichegebied.geefWaardeVanPositie(positie);
+		return ficheGebied.geefWaardeVanPositie(positie);
 	}
 	
 	public FicheGebied getFicheGebied() {
-		return fichegebied;
+		return ficheGebied;
 	}
 	
 	public GebouwpuntenGebied getGebouwpuntenGebied() {
-		return gebouwpuntengebied;
+		return gebouwpuntenGebied;
 	}
 	public ResultatenGebied getResultatenGebied() {
-		return resultatengebied;
+		return resultatenGebied;
 	}
 }
