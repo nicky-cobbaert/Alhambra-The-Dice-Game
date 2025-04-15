@@ -99,32 +99,52 @@ public class GebruikerKiesScherm extends BorderPane {
 
 	@FXML
 	void knopGeelOnAction(ActionEvent event) {
-		voorlopigGekozenSpelerKleur = SpelerKleur.GEEL;
-		feedbackGekozenSpeler(knopGeel);
+		if (knopGeel.isDisabled()) {
+
+		} else {
+			voorlopigGekozenSpelerKleur = SpelerKleur.GEEL;
+			feedbackGekozenSpeler(knopGeel);
+		}
 	}
 
 	@FXML
 	void knopGroenOnAction(ActionEvent event) {
-		voorlopigGekozenSpelerKleur = SpelerKleur.GROEN;
-		feedbackGekozenSpeler(knopGroen);
+		if (knopGroen.isDisabled()) {
+			
+		} else {
+			voorlopigGekozenSpelerKleur = SpelerKleur.GROEN;
+			feedbackGekozenSpeler(knopGroen);
+		}
 	}
 
 	@FXML
 	void knopOranjeOnAction(ActionEvent event) {
-		voorlopigGekozenSpelerKleur = SpelerKleur.ORANJE;
-		feedbackGekozenSpeler(knopOranje);
+		if (knopOranje.isDisabled()) {
+
+		} else {
+			voorlopigGekozenSpelerKleur = SpelerKleur.ORANJE;
+			feedbackGekozenSpeler(knopOranje);
+		}
 	}
 
 	@FXML
 	void knopRoodOnAction(ActionEvent event) {
-		voorlopigGekozenSpelerKleur = SpelerKleur.ROOD;
-		feedbackGekozenSpeler(knopRood);
+		if (knopRood.isDisabled()) {
+
+		} else {
+			voorlopigGekozenSpelerKleur = SpelerKleur.ROOD;
+			feedbackGekozenSpeler(knopRood);
+		}
 	}
 
 	@FXML
 	void knopWitOnAction(ActionEvent event) {
-		voorlopigGekozenSpelerKleur = SpelerKleur.WIT;
-		feedbackGekozenSpeler(knopWit);
+		if (knopWit.isDisabled()) {
+
+		} else {
+			voorlopigGekozenSpelerKleur = SpelerKleur.WIT;
+			feedbackGekozenSpeler(knopWit);
+		}
 	}
 
 	private List<Button> gekozenKleurButtons;
@@ -197,6 +217,7 @@ public class GebruikerKiesScherm extends BorderPane {
 	@FXML
 	void selecteerSpelerKnopOnAction(ActionEvent event) {
 
+		try {
 		if (!spelerGezocht) {
 			// speler heeft niet gezocht, normale index werkt
 			voorlopigGekozenSpelerNaam = lijstSpelers.getSelectionModel().getSelectedIndex();
@@ -220,7 +241,7 @@ public class GebruikerKiesScherm extends BorderPane {
 			 */
 
 			voorlopigGekozenSpelerNaam = alleSpelers.indexOf(gezochteSpeler);
-			//System.out.println(voorlopigGekozenSpelerNaam);
+			// System.out.println(voorlopigGekozenSpelerNaam);
 		}
 
 		dc.kiesSpelerEnKleur(voorlopigGekozenSpelerNaam, voorlopigGekozenSpelerKleur);
@@ -240,6 +261,16 @@ public class GebruikerKiesScherm extends BorderPane {
 			}
 		}
 		resetKnop.fire();
+		
+		}catch (IllegalArgumentException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Oeps een fout");
+			alert.setHeaderText("De 'selecteer deze speler' knop gaf een fout:");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			
+		}
+		
 	}
 
 	private void gekozenKleurKnopKleurGever(Button gekozenKleurKnop, Button kleurKnop) {
@@ -309,6 +340,10 @@ public class GebruikerKiesScherm extends BorderPane {
 		this.selecteerSpelerKnop.disarm();
 
 		overeenkomstigeLettersLabel.setVisible(false);
+		
+		voorlopigGekozenSpelerKleur = null;
+		voorlopigGekozenSpelerNaam = -1;
+		spelerGezocht = false;
 
 	}
 
@@ -375,6 +410,9 @@ public class GebruikerKiesScherm extends BorderPane {
 			kleurKnop.setDisable(false);
 		}
 
+		
+
+		
 		resetKnop.fire();
 	}
 
