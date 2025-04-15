@@ -269,6 +269,12 @@ public class GebruikerKiesScherm extends BorderPane {
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
 			
+		}catch (IndexOutOfBoundsException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Oeps een fout");
+			alert.setHeaderText("De 'selecteer deze speler' knop gaf een fout:");
+			alert.setContentText("Je hebt geen speler gekozen!");
+			alert.showAndWait();
 		}
 		
 	}

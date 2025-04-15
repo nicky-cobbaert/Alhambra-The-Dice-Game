@@ -39,7 +39,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ListView fx:id="lijstSpelers" prefHeight="140.0" prefWidth="331.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="6">
+            <ListView fx:id="lijstSpelers" fixedCellSize="25.0" prefHeight="140.0" prefWidth="331.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="6">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -50,7 +50,7 @@
             <Button fx:id="resetKnop" alignment="CENTER" mnemonicParsing="false" onAction="#resetKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Reset" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
             <Button fx:id="terugKnop" cancelButton="true" mnemonicParsing="false" onAction="#terugKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Terug" GridPane.columnIndex="1" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
             <Button fx:id="zoekKnop" alignment="CENTER" layoutX="684.0" layoutY="178.0" mnemonicParsing="false" onAction="#zoekKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Zoek" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-            <ListView fx:id="lijstGekozenSpelers" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" GridPane.rowSpan="6" />
+            <ListView fx:id="lijstGekozenSpelers" fixedCellSize="25.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" GridPane.rowSpan="6" />
             <Button fx:id="knopGroen" mnemonicParsing="false" onAction="#knopGroenOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #062400; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(15, 121, 9, 1) 51%,                           rgba(0, 255, 89, 1) 100%);" text="Groen" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.valignment="TOP" />
             <Button fx:id="knopBlauw" mnemonicParsing="false" onAction="#knopBlauwOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #020024; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(2, 0, 36, 1) 0%,                           rgba(9, 9, 121, 1) 51%,                           rgba(0, 212, 255, 1) 100%);" text="Blauw" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
             <Button fx:id="knopWit" mnemonicParsing="false" onAction="#knopWitOnAction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #3d3d3d; -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,                           rgba(61, 61, 61, 1) 0%,                           rgba(173, 172, 177, 1) 26%,                           rgba(236, 236, 236, 1) 53%,                           rgba(245, 245, 245, 1) 70%,                           rgba(251, 251, 251, 1) 88%,                           rgba(255, 255, 255, 1) 100%);;" text="Wit" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
