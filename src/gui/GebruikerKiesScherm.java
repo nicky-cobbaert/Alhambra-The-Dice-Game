@@ -220,7 +220,7 @@ public class GebruikerKiesScherm extends BorderPane {
 			 */
 
 			voorlopigGekozenSpelerNaam = alleSpelers.indexOf(gezochteSpeler);
-			System.out.println(voorlopigGekozenSpelerNaam);
+			//System.out.println(voorlopigGekozenSpelerNaam);
 		}
 
 		dc.kiesSpelerEnKleur(voorlopigGekozenSpelerNaam, voorlopigGekozenSpelerKleur);
