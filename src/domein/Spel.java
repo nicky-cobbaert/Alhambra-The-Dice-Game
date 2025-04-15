@@ -146,7 +146,7 @@ public class Spel {
 		}
 		}
 		for (Speler sp : gekozenSpelers) {
-			sp.maakZetstenenAan(zetsteenAantal);
+			sp.maakZetstenenAan(zetsteenAantal,spelbord.getResultatenGebied());
 		}
 	}
 

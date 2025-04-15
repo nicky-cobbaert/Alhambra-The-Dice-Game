@@ -3,9 +3,11 @@ package domein;
 public class Zetsteen {
 
 	private int positie;
+	private ResultatenGebied resultatenGebied;
 
-	public Zetsteen() {
-
+	public Zetsteen(ResultatenGebied resultatenGebied) {
+		this.resultatenGebied = resultatenGebied;
+		
 	}
 
 	/**
@@ -35,6 +37,7 @@ public class Zetsteen {
 		}
 
 		this.positie = positie;
+		resultatenGebied.plaatsZetsteenNeer(this);
 	}
 
 	public int getPositie() { // Snel getter toegevoegd voor mijn methode

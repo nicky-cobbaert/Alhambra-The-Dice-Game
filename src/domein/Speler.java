@@ -114,11 +114,11 @@ public class Speler {
 		this.gebouwstenen = gebouwstenen;
 	}
 
-	public void maakZetstenenAan(int aantalZetstenen) {
+	public void maakZetstenenAan(int aantalZetstenen, ResultatenGebied resultatenGebied) {
 		List<Zetsteen> zetstenen = new ArrayList<Zetsteen>();
 
 		for (int i = 0; i < aantalZetstenen; i++) {
-			Zetsteen zetsteen = new Zetsteen();
+			Zetsteen zetsteen = new Zetsteen(resultatenGebied);
 			zetstenen.add(zetsteen);
 		}
 		setZetstenen(zetstenen);
