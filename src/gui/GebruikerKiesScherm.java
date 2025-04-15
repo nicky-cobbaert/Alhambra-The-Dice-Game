@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import domein.DomeinController;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,7 @@ public class GebruikerKiesScherm extends BorderPane {
 	private MainMenuScherm mms;
 	private SpelerKleur voorlopigGekozenSpelerKleur;
 	private int voorlopigGekozenSpelerNaam;
+	private boolean spelerGezocht = false;
 
 	@FXML
 	private Label overeenkomstigeLettersLabel;
@@ -95,101 +97,6 @@ public class GebruikerKiesScherm extends BorderPane {
 	@FXML
 	private Button gekozenKleur5;
 
-	private List<Button> gekozenKleurButtons;
-
-	private void loadFxmlScreen(String name) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
-		loader.setRoot(this);
-		loader.setController(this);
-		try {
-			loader.load();
-		} catch (IOException ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
-	public GebruikerKiesScherm(DomeinController dc, char taal, MainMenuScherm mainMenu) {
-		this.dc = dc;
-		dc.maakNieuwSpel();
-		loadFxmlScreen("GebruikerKiesScherm.fxml");
-		setTaal(taal);
-		this.mms = mainMenu;
-
-		gekozenKleurButtons = new ArrayList<Button>(Arrays.asList(gekozenKleur0, gekozenKleur1, gekozenKleur2,
-				gekozenKleur3, gekozenKleur4, gekozenKleur5));
-
-		resetKnop.fire();
-
-	}
-
-	private void setTaal(char taal) {
-		this.taal = taal;
-	}
-
-	@FXML
-	void zoekKnopOnAction(ActionEvent event) {
-		try {
-			if (zoekBalk.getText() == null || zoekBalk.getText().isBlank()) {
-				throw new IllegalArgumentException("Dit is geen geldige naam!");
-			}
-
-			String gezochteNaam = zoekBalk.getText();
-			Map<String, Object> zoekResultaat = dc.zoekDezeSpeler(gezochteNaam);
-
-			@SuppressWarnings("unchecked")
-			List<String> goedeNamen = (List<String>) zoekResultaat.get("overeenkomstigeNamen");
-			Integer aantalOvereenkomstigeLetter = (Integer) zoekResultaat.get("meesteLetters");
-
-			lijstSpelers.setItems(FXCollections.observableArrayList(goedeNamen));
-
-			overeenkomstigeLettersLabel
-					.setText(String.format("aantal overeenkomstige letters: %d", aantalOvereenkomstigeLetter));
-
-			if (goedeNamen.isEmpty()) {
-				overeenkomstigeLettersLabel.setText("Sorry, er werd geen overeenkomstige naam gevonden...");
-			}
-
-			overeenkomstigeLettersLabel.setVisible(true);
-
-		} catch (IllegalArgumentException e) {
-			zoekBalk.setText(e.getMessage());
-		}
-	}
-
-	@FXML
-	void selecteerSpelerKnopOnAction(ActionEvent event) {
-
-		voorlopigGekozenSpelerNaam = lijstSpelers.getSelectionModel().getSelectedIndex();
-		dc.kiesSpelerEnKleur(voorlopigGekozenSpelerNaam, voorlopigGekozenSpelerKleur);
-
-		// de knop op plaats index krijgt een kleur die meegegeven wordt -> hier dus de
-		// selecteerdknop want die heeft de juiste kleur!
-		int index = (dc.geefGekozenSpelers().size() - 1);
-		System.out.println(index);
-		gekozenKleurKnopKleurGever(gekozenKleurButtons.get(index), this.selecteerSpelerKnop);
-
-		resetKnop.fire();
-	}
-
-	private void gekozenKleurKnopKleurGever(Button gekozenKleurKnop, Button kleurKnop) {
-		gekozenKleurKnop.setStyle(kleurKnop.getStyle() + ";-fx-border-radius: 0px;"
-				+ "-fx-border-color: transparent; -fx-border-width: 0px;" + "-fx-effect: null;");
-		gekozenKleurKnop.setTextFill(kleurKnop.getTextFill());
-
-	}
-
-	@FXML
-	void terugKnopOnAction(ActionEvent event) {
-		mms.terugNaarMain(taal);
-	}
-
-	@FXML
-	void knopBlauwOnAction(ActionEvent event) {
-		voorlopigGekozenSpelerKleur = SpelerKleur.BLAUW;
-		feedbackGekozenSpeler(knopBlauw);
-
-	}
-
 	@FXML
 	void knopGeelOnAction(ActionEvent event) {
 		voorlopigGekozenSpelerKleur = SpelerKleur.GEEL;
@@ -220,6 +127,140 @@ public class GebruikerKiesScherm extends BorderPane {
 		feedbackGekozenSpeler(knopWit);
 	}
 
+	private List<Button> gekozenKleurButtons;
+	private List<Button> kleurButtons;
+
+	private void loadFxmlScreen(String name) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+		loader.setRoot(this);
+		loader.setController(this);
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+
+	public GebruikerKiesScherm(DomeinController dc, char taal, MainMenuScherm mainMenu) {
+		this.dc = dc;
+		dc.maakNieuwSpel();
+		loadFxmlScreen("GebruikerKiesScherm.fxml");
+		setTaal(taal);
+		this.mms = mainMenu;
+
+		gekozenKleurButtons = new ArrayList<Button>(Arrays.asList(gekozenKleur0, gekozenKleur1, gekozenKleur2,
+				gekozenKleur3, gekozenKleur4, gekozenKleur5));
+
+		kleurButtons = new ArrayList<Button>(
+				Arrays.asList(knopBlauw, knopGeel, knopGroen, knopOranje, knopRood, knopWit));
+
+		resetKnop.fire();
+
+	}
+
+	private void setTaal(char taal) {
+		this.taal = taal;
+	}
+
+	@FXML
+	void zoekKnopOnAction(ActionEvent event) {
+		try {
+			if (zoekBalk.getText() == null || zoekBalk.getText().isBlank()) {
+				throw new IllegalArgumentException("Dit is geen geldige naam!");
+			}
+
+			String gezochteNaam = zoekBalk.getText();
+			Map<String, Object> zoekResultaat = dc.zoekDezeSpeler(gezochteNaam);
+
+			@SuppressWarnings("unchecked")
+			List<String> goedeNamen = (List<String>) zoekResultaat.get("overeenkomstigeNamen");
+			Integer aantalOvereenkomstigeLetter = (Integer) zoekResultaat.get("meesteLetters");
+
+			lijstSpelers.setItems(FXCollections.observableArrayList(goedeNamen));
+
+			overeenkomstigeLettersLabel
+					.setText(String.format("aantal overeenkomstige letters: %d", aantalOvereenkomstigeLetter));
+
+			if (goedeNamen.isEmpty()) {
+				overeenkomstigeLettersLabel.setText("Sorry, er werd geen overeenkomstige naam gevonden...");
+			} else {
+				spelerGezocht = true;
+			}
+
+			overeenkomstigeLettersLabel.setVisible(true);
+
+		} catch (IllegalArgumentException e) {
+			zoekBalk.setText(e.getMessage());
+		}
+	}
+
+	@FXML
+	void selecteerSpelerKnopOnAction(ActionEvent event) {
+
+		if (!spelerGezocht) {
+			// speler heeft niet gezocht, normale index werkt
+			voorlopigGekozenSpelerNaam = lijstSpelers.getSelectionModel().getSelectedIndex();
+		} else {
+			// normale index zal een verkeerde speler geven, dus ander algoritme
+
+			String gezochteSpeler = lijstSpelers.getSelectionModel().getSelectedItem();
+
+			/*
+			 * om de index in de lijstSpelers te vinden gebruik ik de indexOf-methode van
+			 * een observablelist
+			 */
+
+			lijstAlleSpelersGenereren();
+			ObservableList<String> alleSpelers = lijstSpelers.getItems();
+
+			/*
+			 * debugger System.out.println(gezochteSpeler);
+			 * 
+			 * for (String loper : alleSpelers) { System.out.println(loper); }
+			 */
+
+			voorlopigGekozenSpelerNaam = alleSpelers.indexOf(gezochteSpeler);
+			System.out.println(voorlopigGekozenSpelerNaam);
+		}
+
+		dc.kiesSpelerEnKleur(voorlopigGekozenSpelerNaam, voorlopigGekozenSpelerKleur);
+
+		// de knop op plaats index krijgt een kleur die meegegeven wordt -> hier dus de
+		// selecteerdknop want die heeft de juiste kleur!
+		int index = (dc.geefGekozenSpelers().size() - 1);
+
+		gekozenKleurKnopKleurGever(gekozenKleurButtons.get(index), this.selecteerSpelerKnop);
+
+		// de knop (kleur) die gekozen is zal disabled worden
+		// :werkt door te kijken welke knop niet in de gekozenKleuren-lijst zit
+		for (Button kleurKnop : kleurButtons) {
+			if (!(dc.geefBeschikbareSpelerKleuren().contains(SpelerKleur.valueOf(kleurKnop.getText().toUpperCase())))) {
+				kleurKnop.setDisable(true);
+				kleurKnop.disarm();
+			}
+		}
+		resetKnop.fire();
+	}
+
+	private void gekozenKleurKnopKleurGever(Button gekozenKleurKnop, Button kleurKnop) {
+		gekozenKleurKnop.setStyle(kleurKnop.getStyle() + ";-fx-border-radius: 0px;"
+				+ "-fx-border-color: transparent; -fx-border-width: 0px;" + "-fx-effect: null;");
+		gekozenKleurKnop.setTextFill(kleurKnop.getTextFill());
+
+	}
+
+	@FXML
+	void terugKnopOnAction(ActionEvent event) {
+		mms.terugNaarMain(taal);
+	}
+
+	@FXML
+	void knopBlauwOnAction(ActionEvent event) {
+		voorlopigGekozenSpelerKleur = SpelerKleur.BLAUW;
+		feedbackGekozenSpeler(knopBlauw);
+
+	}
+
 	private void feedbackGekozenSpeler(Button voorlopigeKleur) {
 
 		selecteerSpelerKnop.setStyle(voorlopigeKleur.getStyle()
@@ -234,17 +275,8 @@ public class GebruikerKiesScherm extends BorderPane {
 	void resetKnopOnAction(ActionEvent event) {
 
 		// lijstje maken van alle spelers--------------------------------------
-		AtomicInteger indexAlleSpelers = new AtomicInteger(1);
 
-		List<String> alleSpelers = new ArrayList<String>();
-		dc.geefBeschikbareSpelers().forEach(speler -> {
-			alleSpelers.add(String.format(("%d. %s - %d"), indexAlleSpelers.getAndIncrement()
-			// ik gebruik hier deze methode om
-			// toch de index te kunnen verhogen
-					, speler.gebruikersnaam(), speler.geboortejaar()));
-		});
-
-		lijstSpelers.setItems(FXCollections.observableArrayList(alleSpelers));
+		lijstAlleSpelersGenereren();
 
 		// einde lijstje maken--------------------------------------------------
 
@@ -272,7 +304,29 @@ public class GebruikerKiesScherm extends BorderPane {
 		selecteerSpelerKnop.setText("Kies deze speler");
 		// einde knop stijl terugkeren---------------------------------------------
 
+		// de resetknop disarmed de selecteerSpelerKnop omdat er anders meerdere keren
+		// dezelfde kleur kan ingegeven worden
+		this.selecteerSpelerKnop.disarm();
+
 		overeenkomstigeLettersLabel.setVisible(false);
+
+	}
+
+	private void lijstAlleSpelersGenereren() {
+		// aparte methode omdat zowel de resetKnopOnAction en
+		// selecteerSpelerKnopOnAction dezelfde code gebruiken
+
+		AtomicInteger indexAlleSpelers = new AtomicInteger(1);
+
+		List<String> alleSpelers = new ArrayList<String>();
+		dc.geefBeschikbareSpelers().forEach(speler -> {
+			alleSpelers.add(String.format(("%d. %s - %d"), indexAlleSpelers.getAndIncrement()
+			// ik gebruik hier deze methode om
+			// toch de index te kunnen verhogen
+					, speler.gebruikersnaam(), speler.geboortejaar()));
+		});
+
+		lijstSpelers.setItems(FXCollections.observableArrayList(alleSpelers));
 
 	}
 
@@ -283,9 +337,7 @@ public class GebruikerKiesScherm extends BorderPane {
 			if (dc.geefGekozenSpelers().size() < 3 || dc.geefGekozenSpelers().size() > 6) {
 				throw new IllegalArgumentException("Er moeten minstens 3 spelers , maximum 6 spelers deelnemen!");
 			}
-			
-			
-			
+
 			this.setBackground(null);
 			SpelbordScherm sbs = new SpelbordScherm(dc);
 			this.setCenter(sbs);
@@ -317,6 +369,10 @@ public class GebruikerKiesScherm extends BorderPane {
 
 		for (int i = 0; i < 6; i++) {
 			gekozenKleurKnopKleurGever(gekozenKleurButtons.get(i), gekozenKleurResetter);
+		}
+
+		for (Button kleurKnop : kleurButtons) {
+			kleurKnop.setDisable(false);
 		}
 
 		resetKnop.fire();

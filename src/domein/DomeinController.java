@@ -40,12 +40,14 @@ public class DomeinController {
 	public void kiesSpelerEnKleur(int s, SpelerKleur kleur) {
 		spel.kiesSpeler(s, kleur); // s is de plaats in de arrayList!
 	}
-	
-	/*public void verwijderSpelerEnKleur(int s, SpelerKleur kleur) {
-		spel.verwijderGekozenSpeler(s, kleur); // s is de plaats in de arrayList!
-		
-	
-	}*/
+
+	/*
+	 * public void verwijderSpelerEnKleur(int s, SpelerKleur kleur) {
+	 * spel.verwijderGekozenSpeler(s, kleur); // s is de plaats in de arrayList!
+	 * 
+	 * 
+	 * }
+	 */
 
 	public List<SpelerDTO> geefBeschikbareSpelers() {
 
@@ -85,7 +87,7 @@ public class DomeinController {
 			throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
 		}
 	}
-	
+
 	public static String kleurGeverGuiEditie(SpelerKleur kleur) {
 
 		switch (kleur.toString().toLowerCase()) {
@@ -105,7 +107,6 @@ public class DomeinController {
 			throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
 		}
 	}
-
 
 	public List<SpelerDTO> geefGekozenSpelers() {
 		List<Speler> speler = spel.getGekozenSpelers();
@@ -147,7 +148,6 @@ public class DomeinController {
 		return zetSpelersOmNaarSpelerDTOs(speler);
 	}
 
-
 	public boolean getIsEindeSpel() {
 		return spel.getIsEindeSpel();
 	}
@@ -178,10 +178,14 @@ public class DomeinController {
 	public Map<String, Object> zoekDezeSpeler(String onzeNaam) {
 
 		List<String> overeenkomstigeNamen = new ArrayList<>();
+		List<Integer> indexenVanDeNamen = new ArrayList<>();// anders werkt de zoekfucntie niet
+		List<Integer> geboorteDatums = new ArrayList<>();
+		int naamindex = 0;
 
 		int meesteLetters = 0;
 
 		for (SpelerDTO naamVanLijst : geefBeschikbareSpelers()) {
+			++naamindex;
 
 			int gelijkeLetters = 0;
 
@@ -202,19 +206,35 @@ public class DomeinController {
 
 			if (gelijkeLetters == meesteLetters) {
 				overeenkomstigeNamen.add(naamVanLijst.gebruikersnaam());
+				indexenVanDeNamen.add(naamindex);
+				geboorteDatums.add(naamVanLijst.geboortejaar());
 				meesteLetters = gelijkeLetters;
 			} else if (gelijkeLetters > meesteLetters) {
 				overeenkomstigeNamen.clear();
 				overeenkomstigeNamen.add(naamVanLijst.gebruikersnaam());
+				indexenVanDeNamen.clear();
+				indexenVanDeNamen.add(naamindex);
+				geboorteDatums.clear();
+				geboorteDatums.add(naamVanLijst.geboortejaar());
 				meesteLetters = gelijkeLetters;
 			}
 		} // einde for-lus voor alle spelers --------------------------------------
 
-		Map<String, Object> resultaat = new HashMap<>();
-        resultaat.put("overeenkomstigeNamen", overeenkomstigeNamen);
-        resultaat.put("meesteLetters", meesteLetters);
+		// alles samenvoegen---------
+		List<String> zoekResultaat = new ArrayList<String>();
+		for (int i = 0; i < overeenkomstigeNamen.size(); i++) {
 
-		
+			zoekResultaat.add(String.format("%d. %s - %d", indexenVanDeNamen.get(i), overeenkomstigeNamen.get(i),
+					geboorteDatums.get(i)));
+
+		}
+
+		// ----------------------------
+
+		Map<String, Object> resultaat = new HashMap<>();
+		resultaat.put("overeenkomstigeNamen", zoekResultaat);
+		resultaat.put("meesteLetters", meesteLetters);
+
 		return resultaat;
 
 	}
@@ -222,7 +242,7 @@ public class DomeinController {
 	public int geefWaardeVanPositie(int positie) {
 		return spel.geefWaardeVanPositie(positie);
 	}
-	
+
 }
 
 //TestCommit
