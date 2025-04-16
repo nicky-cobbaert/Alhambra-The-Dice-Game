@@ -46,6 +46,8 @@ public class SpelbordScherm extends BorderPane {
 	private boolean statusDobbelsteenNulDrie = false;
 	private boolean statusDobbelsteenEenDrie = false;
 	
+	private int aantalWorpen = 0;
+	
 	private void loadFxmlScreen(String name) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 		loader.setRoot(this);
@@ -187,6 +189,19 @@ public class SpelbordScherm extends BorderPane {
     
     @FXML
     void RolKnopKlik(ActionEvent event) {
+        if (aantalWorpen >= 3) {
+            // Disable de rolknop na 3 worpen
+            RolKnop.setDisable(true);
+            System.out.println("Je hebt al 3 keer gegooid! De knop is uitgeschakeld.");
+            disableDobbelstenen(true);
+            return; 
+        }
+        if (aantalWorpen == 0) {
+            // Eerste worp? Dan dobbelstenen aanklikbaar maken.
+            disableDobbelstenen(false);
+        }
+        aantalWorpen++;
+        
     	for(int i = 1; i<=8; i++) {
     		switch (i) {
     		case 1 : if (statusDobbelsteenNulNul == false) {
@@ -232,10 +247,56 @@ public class SpelbordScherm extends BorderPane {
     		}
     	}
     }
+    private void disableDobbelstenen(boolean disable) {
+        dobbelsteenNulNul.setDisable(disable);
+        dobbelsteenEenNul.setDisable(disable);
+        dobbelsteenNulEen.setDisable(disable);
+        dobbelsteenEenEen.setDisable(disable);
+        dobbelsteenNulTwee.setDisable(disable);
+        dobbelsteenEenTwee.setDisable(disable);
+        dobbelsteenNulDrie.setDisable(disable);
+        dobbelsteenEenDrie.setDisable(disable);
+    }
+    private void resetVoorVolgendeSpeler() {
+        aantalWorpen = 0;
+        RolKnop.setDisable(false);
+        
+        // Reset dobbelsteenstatussen
+        statusDobbelsteenNulNul = false;
+        statusDobbelsteenEenNul = false;
+        statusDobbelsteenNulEen = false;
+        statusDobbelsteenEenEen = false;
+        statusDobbelsteenNulTwee = false;
+        statusDobbelsteenEenTwee = false;
+        statusDobbelsteenNulDrie = false;
+        statusDobbelsteenEenDrie = false;
+
+        // Reset afbeeldingen van dobbelstenen
+        if (kleurNulNul != null)
+            dobbelsteenNulNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen" + kleurNulNul + ".png").toExternalForm()));
+        if (kleurEenNul != null)
+            dobbelsteenEenNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen" + kleurEenNul + ".png").toExternalForm()));
+        if (kleurNulEen != null)
+            dobbelsteenNulEen.setImage(new Image(getClass().getResource("/images/Dobbelsteen" + kleurNulEen + ".png").toExternalForm()));
+        if (kleurEenEen != null)
+            dobbelsteenEenEen.setImage(new Image(getClass().getResource("/images/Dobbelsteen" + kleurEenEen + ".png").toExternalForm()));
+        if (kleurNulTwee != null)
+            dobbelsteenNulTwee.setImage(new Image(getClass().getResource("/images/Dobbelsteen" + kleurNulTwee + ".png").toExternalForm()));
+        if (kleurEenTwee != null)
+            dobbelsteenEenTwee.setImage(new Image(getClass().getResource("/images/Dobbelsteen" + kleurEenTwee + ".png").toExternalForm()));
+        if (kleurNulDrie != null)
+            dobbelsteenNulDrie.setImage(new Image(getClass().getResource("/images/Dobbelsteen" + kleurNulDrie + ".png").toExternalForm()));
+        if (kleurEenDrie != null)
+            dobbelsteenEenDrie.setImage(new Image(getClass().getResource("/images/Dobbelsteen" + kleurEenDrie + ".png").toExternalForm()));
+
+        // Dobbelstenen weer actief maken
+     //   disableDobbelstenen(false);
+    }
     
     @FXML
     void SpeelKnopKlik(ActionEvent event) {
     	System.out.println("Knop \"Speel\" is ingedrukt");
+    	resetVoorVolgendeSpeler();
 //    	System.out.println(kleurNulNul);
 //    	System.out.println(kleurEenNul);
 //    	System.out.println(kleurNulEen);
@@ -248,8 +309,11 @@ public class SpelbordScherm extends BorderPane {
 
     @FXML
     void dobbelsteenNulNulKlik(MouseEvent event) {
+        if (kleurNulNul == null) {
+            // Nog niet gegooid, dus stoppen
+            return;
+        }
     	System.out.println("1");
-   	
     	if (statusDobbelsteenNulNul == false) {
     		dobbelsteenNulNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+kleurNulNul+"select.png").toExternalForm()));
     		statusDobbelsteenNulNul=true; //Dobbelsteen wordt geselecteerd
@@ -262,6 +326,10 @@ public class SpelbordScherm extends BorderPane {
     
     @FXML
     void dobbelsteenEenNulKlik(MouseEvent event) {
+        if (kleurEenNul == null) {
+            // Nog niet gegooid, dus stoppen
+            return;
+        }
     	System.out.println("2");
     	
     	if (statusDobbelsteenEenNul == false) {
@@ -275,6 +343,10 @@ public class SpelbordScherm extends BorderPane {
     
     @FXML
     void dobbelsteenNulEenKlik(MouseEvent event) {
+        if (kleurNulEen == null) {
+            // Nog niet gegooid, dus stoppen
+            return;
+        }
     	System.out.println("3");
     	
     	if (statusDobbelsteenNulEen == false) {
@@ -288,6 +360,10 @@ public class SpelbordScherm extends BorderPane {
     
     @FXML
     void dobbelsteenEenEenKlik(MouseEvent event) {
+        if (kleurEenEen == null) {
+            // Nog niet gegooid, dus stoppen
+            return;
+        }
     	System.out.println("4");
     	
     	if (statusDobbelsteenEenEen == false) {
@@ -301,6 +377,10 @@ public class SpelbordScherm extends BorderPane {
     
     @FXML
     void dobbelsteenNulTweeKlik(MouseEvent event) {
+        if (kleurNulTwee == null) {
+            // Nog niet gegooid, dus stoppen
+            return;
+        }
     	System.out.println("5");
     	
     	if (statusDobbelsteenNulTwee == false) {
@@ -314,6 +394,10 @@ public class SpelbordScherm extends BorderPane {
     
     @FXML
     void dobbelsteenEenTweeKlik(MouseEvent event) {
+        if (kleurEenTwee == null) {
+            // Nog niet gegooid, dus stoppen
+            return;
+        }
     	System.out.println("6");
     	
     	if (statusDobbelsteenEenTwee == false) {
@@ -327,6 +411,10 @@ public class SpelbordScherm extends BorderPane {
     
     @FXML
     void dobbelsteenNulDrieKlik(MouseEvent event) {
+        if (kleurNulDrie == null) {
+            // Nog niet gegooid, dus stoppen
+            return;
+        }
     	System.out.println("7");
     	
     	if (statusDobbelsteenNulDrie == false) {
@@ -340,6 +428,10 @@ public class SpelbordScherm extends BorderPane {
     
     @FXML
     void dobbelsteenEenDrieKlik(MouseEvent event) {
+        if (kleurEenDrie == null) {
+            // Nog niet gegooid, dus stoppen
+            return;
+        }
     	System.out.println("8");
     	
     	if (statusDobbelsteenEenDrie == false) {
