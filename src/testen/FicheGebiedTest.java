@@ -32,8 +32,7 @@ private FicheGebied ficheGebied;
     @ValueSource(ints = {-5, 7, 85}) 
     void plaatsFicheNeer_OnmogelijkePositie_WerptException(int positie) {
         Fiche fiche = new Fiche(ficheGebied);
-        fiche.setPositie(positie);
-        assertThrows(IllegalArgumentException.class, () -> ficheGebied.plaatsFicheNeer(fiche));
+        assertThrows(IllegalArgumentException.class, () -> ficheGebied.plaatsFicheNeer(fiche,positie));
     }
     
     @Test
@@ -41,8 +40,7 @@ private FicheGebied ficheGebied;
         Fiche fiche1 = new Fiche(ficheGebied);
         fiche1.plaatsNeer(1);
         Fiche fiche2 = new Fiche(ficheGebied);
-        fiche2.setPositie(1);
-        assertThrows(IllegalArgumentException.class, () -> ficheGebied.plaatsFicheNeer(fiche2));
+        assertThrows(IllegalArgumentException.class, () -> ficheGebied.plaatsFicheNeer(fiche2,1));
     }
 
 }

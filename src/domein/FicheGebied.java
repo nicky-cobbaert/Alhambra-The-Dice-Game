@@ -28,7 +28,7 @@ public class FicheGebied implements Placeable {
 
 	@Override
 	public boolean isPlaatsBaar(int positie) {
-		if(positie < 0 && positie > 6) {
+		if(positie < 0 || positie > 6) {
 		return false;
 		}
 		for(Fiche f : fiches) {

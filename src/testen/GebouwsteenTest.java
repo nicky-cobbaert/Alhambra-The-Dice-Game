@@ -68,12 +68,15 @@ public class GebouwsteenTest {
 		Gebouwsteen g2 = new Gebouwsteen(gebouwpuntenGebied);
 		Gebouwsteen g3 = new Gebouwsteen(gebouwpuntenGebied);
 		Gebouwsteen g4 = new Gebouwsteen(gebouwpuntenGebied);
+		
 		g1.plaatsNeer(CORRECTE_POSITIE);
 		g2.plaatsNeer(CORRECTE_POSITIE);
 		g3.plaatsNeer(CORRECTE_POSITIE);
 		g4.plaatsNeer(CORRECTE_POSITIE);
+		
 		g2.verplaats(1);
 		g3.verplaats(1);
+		
 		assertEquals(1, g1.getVolgorde());
 		assertEquals(1, g2.getVolgorde());
 		assertEquals(2, g3.getVolgorde());

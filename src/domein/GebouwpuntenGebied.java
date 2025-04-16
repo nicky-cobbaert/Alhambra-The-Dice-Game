@@ -43,15 +43,11 @@ public class GebouwpuntenGebied implements Placeable{
 		gebouwsteen.setPositie(huidigePositie + verplaatsing);
 		gebouwsteen.setVolgorde(1);
 		for(Gebouwsteen g: gebouwstenen) {
-			if(g.getPositie() == huidigePositie) {
-				if(g.getVolgorde() >= huidigeVolgorde) {
-					g.setVolgorde(g.getVolgorde() - 1);
-				}
-			} else {
-				if(g.getPositie() == huidigePositie + verplaatsing) {
-					if (g.getVolgorde() >= gebouwsteen.getVolgorde()) {
+			if(g.getPositie() == huidigePositie &&g.getVolgorde() >= huidigeVolgorde) {
+				g.setVolgorde(g.getVolgorde() - 1);
+				} else {
+					if(g.getPositie() == huidigePositie + verplaatsing && g.getVolgorde() >= gebouwsteen.getVolgorde()&& !(g == gebouwsteen)) {
 						gebouwsteen.plaatsNaast(g.getVolgorde());
-					}
 				}
 			}
 		}
