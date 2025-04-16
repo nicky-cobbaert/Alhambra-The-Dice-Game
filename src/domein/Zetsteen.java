@@ -36,8 +36,15 @@ public class Zetsteen {
 			throw new IllegalArgumentException("De horizontale positie moet tussen 1 en 3 liggen!");
 		}
 
+		resultatenGebied.plaatsZetsteenNeer(this,positie);
+	}
+	
+	public void gaVanHetSpelbord() {
+		this.positie = 0;
+	}
+	
+	public void setPositie(int positie) {
 		this.positie = positie;
-		resultatenGebied.plaatsZetsteenNeer(this);
 	}
 
 	public int getPositie() { // Snel getter toegevoegd voor mijn methode

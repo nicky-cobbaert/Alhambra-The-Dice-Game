@@ -11,8 +11,7 @@ public class ResultatenGebied implements Placeable{ // relatie met Zetsteen nog 
 		zetstenen = new ArrayList<Zetsteen>();
 	}
 
-	public void plaatsZetsteenNeer(Zetsteen zetsteen) {	
-		int positie = zetsteen.getPositie();
+	public void plaatsZetsteenNeer(Zetsteen zetsteen,int positie) {	
 
         if (!isPlaatsBaar(positie)) { 
             throw new IllegalArgumentException("Deze positie is onmogelijk!");
@@ -20,12 +19,20 @@ public class ResultatenGebied implements Placeable{ // relatie met Zetsteen nog 
 
         for (Zetsteen z : zetstenen) {
             if (z.getPositie() == positie) {
-                throw new IllegalArgumentException("Er is al een gebouwsteen op deze positie!");
+                throw new IllegalArgumentException("Er is al een zetsteen op deze positie!");
             }
         }
-
+        
+        zetsteen.setPositie(positie);
         zetstenen.add(zetsteen);
 		
+	}
+	
+	public void maakHetGebiedLeeg() {
+		for(Zetsteen z: zetstenen) {
+			z.gaVanHetSpelbord();
+		}
+		this.zetstenen = new ArrayList<Zetsteen>();
 	}
 
 	@Override
