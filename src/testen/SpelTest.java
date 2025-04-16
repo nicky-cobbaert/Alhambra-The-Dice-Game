@@ -268,7 +268,7 @@ class SpelTest {
 
 		spel.startSpel();
 
-		assertEquals(5, spel.geefAantalZetstenen());
+		assertEquals(5, spel.getAantalZetstenen());
 
 	}
 
@@ -286,7 +286,7 @@ class SpelTest {
 
 		spel.startSpel();
 
-		assertEquals(4, spel.geefAantalZetstenen());
+		assertEquals(4, spel.getAantalZetstenen());
 
 	}
 
@@ -305,7 +305,7 @@ class SpelTest {
 
 		spel.startSpel();
 
-		assertEquals(3, spel.geefAantalZetstenen());
+		assertEquals(3, spel.getAantalZetstenen());
 
 	}
 
@@ -325,7 +325,7 @@ class SpelTest {
 
 		spel.startSpel();
 
-		assertEquals(3, spel.geefAantalZetstenen());
+		assertEquals(3, spel.getAantalZetstenen());
 
 	}
 

@@ -27,7 +27,7 @@ public class GebouwsteenTest {
 	void correctePositie_PlaatsNeer_AssertsEquals(int positie) {
 		Gebouwsteen g = new Gebouwsteen(gebouwpuntenGebied);
 		g.plaatsNeer(positie);
-		assertEquals(g.getPositie(), positie);
+		assertEquals(positie, g.getPositie());
 	}
 	
 	@ParameterizedTest
@@ -43,8 +43,8 @@ public class GebouwsteenTest {
 		g1.plaatsNeer(CORRECTE_POSITIE);
 		Gebouwsteen g2 = new Gebouwsteen(gebouwpuntenGebied);
 		g2.plaatsNeer(CORRECTE_POSITIE);
-		assertEquals(g1.getVolgorde(), 1);
-		assertEquals(g2.getVolgorde(), 2);
+		assertEquals(1, g1.getVolgorde());
+		assertEquals(2, g2.getVolgorde());
 	}
 	
 	@ParameterizedTest
@@ -53,7 +53,7 @@ public class GebouwsteenTest {
 		Gebouwsteen g = new Gebouwsteen(gebouwpuntenGebied);
 		g.plaatsNeer(CORRECTE_POSITIE);
 		g.verplaats(verplaatsing);
-		assertEquals(g.getPositie(), CORRECTE_POSITIE + verplaatsing);
+		assertEquals(CORRECTE_POSITIE + verplaatsing,g.getPositie());
 	}
 	@ParameterizedTest
 	@ValueSource(ints = {-3,0,4,7})

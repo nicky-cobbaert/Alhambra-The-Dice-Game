@@ -51,7 +51,7 @@ public class DomeinController {
 
 	public List<SpelerDTO> geefBeschikbareSpelers() {
 
-		List<Speler> speler = spel.geefBeschikbareSpelers();
+		List<Speler> speler = spel.getBeschikbareSpelers();
 		return zetSpelersOmNaarSpelerDTOs(speler);
 
 	}
@@ -123,7 +123,7 @@ public class DomeinController {
 	}
 
 	public int geefAantalZetstenen() {
-		return spel.geefAantalZetstenen();
+		return spel.getAantalZetstenen();
 	}
 
 	public void updateGewonnen() {

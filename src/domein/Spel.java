@@ -19,7 +19,6 @@ public class Spel {
 	private StartspelerFiche startspelerfiche;
 	private Spelbord spelbord;
 	private List<Bonusfiche> bonusfiches;
-	private List<Bonusfiche> geplaatsteBonusfiches;
 	private List<Speler> winnaar;
 	private int ronde = 0;
 	private boolean isEindeSpel = false;
@@ -124,7 +123,7 @@ public class Spel {
 		}
 	}
 
-	public int geefAantalZetstenen() {
+	public int getAantalZetstenen() {
 
 		return gekozenSpelers.get(0).getZetstenen().size();
 	}
@@ -161,7 +160,7 @@ public class Spel {
 		return startSpeler.getGebruikersnaam();
 	}
 
-	public List<Speler> geefBeschikbareSpelers() {
+	public List<Speler> getBeschikbareSpelers() {
 		return beschikbareSpelers;
 	}
 
