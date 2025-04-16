@@ -296,6 +296,7 @@ public class SpelbordScherm extends BorderPane {
     @FXML
     void SpeelKnopKlik(ActionEvent event) {
     	System.out.println("Knop \"Speel\" is ingedrukt");
+    	disableDobbelstenen(true);
     	resetVoorVolgendeSpeler();
 //    	System.out.println(kleurNulNul);
 //    	System.out.println(kleurEenNul);
