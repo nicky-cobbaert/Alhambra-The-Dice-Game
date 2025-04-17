@@ -43,30 +43,5 @@ public class FicheGebied implements Placeable {
 		return fiches;
 	}
 	
-	public int geefWaardeVanPositie(int positie) {
-//		Fiche f=null;
-//		
-//		for (Fiche gezet : gezettefiches) {
-//			if (gezet.getPositie()==positie) {
-//				f=gezet;
-//			}
-//		}
-//		if (f instanceof Bonusfiche bonus) {
-//			return bonus.getWaarde(); 
-//		} else {
-//			return 0; //startspelerfiche!
-//		}
-		
-		for (Fiche fich : fiches) {
-			if (fich.getPositie()==positie) {
-				if (fich instanceof Bonusfiche bonus) {
-					return bonus.getWaarde(); 
-				} else {
-					return 0; //startspelerfiche!
-				}
-			}
-		}
-		return 0;
-	}
 
 }

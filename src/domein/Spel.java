@@ -299,10 +299,6 @@ public class Spel {
 	public int getAantalKeerGerold() {
 		return this.aantalKeerGerold;
 	}
-
-	public int geefWaardeVanPositie(int positie) {
-		return spelbord.geefWaardeVanPositie(positie);
-	}
 	
 	public List<Fiche> getGezetteFiches() {
 		return spelbord.getFicheGebied().getGezettefiches();

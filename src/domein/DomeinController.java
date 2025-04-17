@@ -236,10 +236,6 @@ public class DomeinController {
 	public void resetVoorVolgendeSpeler() {
 		spel.resetVoorVolgendeSpeler();
 	}
-
-	public int geefWaardeVanPositie(int positie) {
-		return spel.geefWaardeVanPositie(positie);
-	}
 	
 	public int getAantalKeerGerold() {
 		return spel.getAantalKeerGerold();
