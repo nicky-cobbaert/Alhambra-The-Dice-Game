@@ -2,10 +2,8 @@ package domein;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
 
 public class Spel {
@@ -20,8 +18,9 @@ public class Spel {
 	private Spelbord spelbord;
 	private List<Bonusfiche> bonusfiches;
 	private List<Speler> winnaar;
-	private int ronde = 0;
-	private boolean isEindeSpel = false;
+	private int ronde;
+	private boolean isEindeSpel;
+	private int aantalKeerGerold;
 
 	public Spel() {
 
@@ -53,6 +52,10 @@ public class Spel {
 		this.beschikbareSpelers = new ArrayList<>();
 
 		this.gekozenSpelers = new ArrayList<>();
+		
+		this.isEindeSpel = false;
+		
+		this.ronde = 0;
 	}
 
 	public void setBeschikbareSpelers(List<Speler> spelers) {
@@ -69,7 +72,7 @@ public class Spel {
 
 	public void kiesSpeler(int speler, SpelerKleur kleur) {
 
-		if (gekozenSpelers.size() >= 6) { // Onnodige code, is opgevangen in de console zelf met een break
+		if (gekozenSpelers.size() > 6) { // Onnodige code, is opgevangen in de console zelf met een break
 			throw new IllegalArgumentException("Er mogen maximaal 6 spelers meedoen.");
 		}
 		if (kleur == null /* moet niet meer omdat we met enum werken 'Jelle'|| kleur.isBlank() */) { // onnodige code
@@ -106,6 +109,7 @@ public class Spel {
 		// size > 6 -> Exception!
 		geefSpelersZetstenen();
 		geefSpelerGebouwstenen();
+		this.aantalKeerGerold = 0;
 
 		SecureRandom rand = new SecureRandom();
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
@@ -213,7 +217,6 @@ public class Spel {
 
 	// 1 fiches worden aangelegd
 	public void startRonde() {
-		// TODO UC3 code
 		ronde++;
 		// UC3 -> Bonusfiches + startspelersfiche van positie veranderen
 		SecureRandom random = new SecureRandom();
@@ -262,9 +265,39 @@ public class Spel {
 		return isEindeSpel;
 	}
 
-	public DobbelsteenKleur rol(int i) {
-		dobbelstenen.get(i).dobbel();
-		return dobbelstenen.get(i).getDobbelsteenKleur();
+	public boolean rolDobbelstenen() {
+		if(aantalKeerGerold < 3) {
+			for(Dobbelsteen d:dobbelstenen) {
+				d.dobbel();
+			}
+			aantalKeerGerold ++;
+			return true;
+		}
+		return false;
+	}
+	
+	public void resetVoorVolgendeSpeler() {
+		for(Dobbelsteen d:dobbelstenen) {
+			d.setNogRollen(true);
+		}
+		this.aantalKeerGerold = 0;
+	}
+	
+	public boolean veranderStatusNogRollenDobbelsteen(int index) {
+		Dobbelsteen dobbelsteen = dobbelstenen.get(index);
+		if(dobbelsteen.getNogRollen() == false) {
+			dobbelsteen.setNogRollen(true);
+		}else {
+			dobbelsteen.setNogRollen(false);
+		}
+		return dobbelsteen.getNogRollen();
+	}
+	public List<Dobbelsteen> getDobbelstenen(){
+		return this.dobbelstenen;
+	}
+	
+	public int getAantalKeerGerold() {
+		return this.aantalKeerGerold;
 	}
 
 	public int geefWaardeVanPositie(int positie) {

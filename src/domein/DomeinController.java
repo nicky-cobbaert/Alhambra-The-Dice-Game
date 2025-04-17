@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dto.DobbelsteenDTO;
 import dto.SpelerDTO;
 import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
@@ -33,6 +34,9 @@ public class DomeinController {
 		spel.startSpel();
 	}
 
+	public void startRonde() {
+		spel.startRonde();
+	}
 //    public List<Speler> geefAlleSpelers() { 
 //    	return spelerRepo.geefAlleSpelers();
 //    }
@@ -152,10 +156,6 @@ public class DomeinController {
 		return spel.getIsEindeSpel();
 	}
 
-	public DobbelsteenKleur rol(int i) {
-		return spel.rol(i - 1);
-	}
-
 	public Map<String, Object> zoekDezeSpeler(String onzeNaam) {
 
 		List<String> overeenkomstigeNamen = new ArrayList<>();
@@ -219,9 +219,33 @@ public class DomeinController {
 		return resultaat;
 
 	}
+	
+	public List<DobbelsteenDTO> getDobbelstenenDTOs(){
+		List<DobbelsteenDTO> dobbelsteenDTOs = new ArrayList<DobbelsteenDTO>();
+		for(Dobbelsteen d:spel.getDobbelstenen()) {
+			DobbelsteenDTO dobbelDTO = new DobbelsteenDTO(d.getDobbelsteenKleur(), d.getNogRollen());
+			dobbelsteenDTOs.add(dobbelDTO);
+		}
+		return dobbelsteenDTOs;
+	}
+	
+	public boolean veranderStatusNogRollenDobbelsteen(int index) {
+		return spel.veranderStatusNogRollenDobbelsteen(index);
+	}
+	public void resetVoorVolgendeSpeler() {
+		spel.resetVoorVolgendeSpeler();
+	}
 
 	public int geefWaardeVanPositie(int positie) {
 		return spel.geefWaardeVanPositie(positie);
+	}
+	
+	public int getAantalKeerGerold() {
+		return spel.getAantalKeerGerold();
+	}
+	
+	public boolean rolDobbelstenen() {
+		return spel.rolDobbelstenen();
 	}
 
 }

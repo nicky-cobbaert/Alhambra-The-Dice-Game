@@ -7,9 +7,18 @@ import utils.DobbelsteenKleur;
 public class Dobbelsteen {
 
 	private DobbelsteenKleur kleur;
+	private boolean nogRollen;
 
 	public Dobbelsteen() {
-
+		this.nogRollen = true;
+	}
+	
+	public void setNogRollen(boolean nogRollen) {
+		this.nogRollen = nogRollen;
+	}
+	
+	public boolean getNogRollen() {
+		return this.nogRollen;
 	}
 
 	public DobbelsteenKleur getDobbelsteenKleur() {
@@ -17,8 +26,10 @@ public class Dobbelsteen {
 	}
 
 	public void dobbel() {
-		int index = new SecureRandom().nextInt(0, DobbelsteenKleur.values().length);
-		this.kleur = DobbelsteenKleur.values()[index];
+		if(nogRollen) {
+			int index = new SecureRandom().nextInt(0, DobbelsteenKleur.values().length);
+			this.kleur = DobbelsteenKleur.values()[index];
+		}
 	}
 
 }
