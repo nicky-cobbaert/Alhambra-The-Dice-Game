@@ -24,6 +24,10 @@ public class Dobbelsteen {
 	public DobbelsteenKleur getDobbelsteenKleur() {
 		return this.kleur;
 	}
+	
+	public void setDobbelsteenKleur(DobbelsteenKleur kleur) {
+		this.kleur = kleur;
+	}
 
 	public void dobbel() {
 		if(nogRollen) {

@@ -279,6 +279,7 @@ public class Spel {
 	public void resetVoorVolgendeSpeler() {
 		for(Dobbelsteen d:dobbelstenen) {
 			d.setNogRollen(true);
+			d.setDobbelsteenKleur(null);
 		}
 		this.aantalKeerGerold = 0;
 	}
