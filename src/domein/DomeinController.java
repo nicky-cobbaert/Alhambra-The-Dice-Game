@@ -258,6 +258,18 @@ public class DomeinController {
 		}
 		return ficheDTOs;
 	}
+	
+	public void beïndigBeurt(DobbelsteenKleur kleur) {
+		spel.beïndigBeurt(kleur);
+	}
+	
+	public void beïndigRonde() {
+		spel.beïndigRonde();
+	}
+	
+	public void beïndigSpel() {
+		spel.beïndigSpel();
+	}
 
 }
 

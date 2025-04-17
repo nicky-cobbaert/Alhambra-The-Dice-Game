@@ -54,6 +54,15 @@ public class ResultatenGebied implements Placeable{ // relatie met Zetsteen nog 
 		return zetstenen;
 	}
 
+	public List<Zetsteen> getVooresteZetstenen(int ronde, int positieKleur) {
+		List<Zetsteen> zetstenen = new ArrayList<Zetsteen>();
+		for(Zetsteen z:zetstenen) {
+			int currPositie = z.getPositie();
+			
+		}
+		return zetstenen;
+	}
+
 	
 
 }

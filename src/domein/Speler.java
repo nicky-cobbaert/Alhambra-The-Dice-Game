@@ -149,6 +149,9 @@ public class Speler {
 		setGebouwstenen(null);
 		
 	}
+	public List<Gebouwsteen> getGebouwstenen() {
+		return gebouwstenen;
+	}
 
 	@Override
 	public int hashCode() {

@@ -70,4 +70,58 @@ public class GebouwpuntenGebied implements Placeable{
 		return gebouwstenen;
 	}
 
+
+	public List<Gebouwsteen> getVooresteGebouwstenen(int ronde,int kleur) {
+		List<Gebouwsteen> vooresteGebouwstenen = new ArrayList<Gebouwsteen>();
+		int eerstePlaats = 0;
+		for(Gebouwsteen g:gebouwstenen) {
+			if(g.getPositie()/100 == kleur) {
+				int currVakje = g.getPositie()%10; 
+				if(!(currVakje == 0)) {
+					if(vooresteGebouwstenen.size() == 0) {
+						vooresteGebouwstenen.add(g);
+						eerstePlaats = currVakje;
+					}else {
+						if(vooresteGebouwstenen.size() < ronde) {
+							if(currVakje > eerstePlaats) {
+								vooresteGebouwstenen.addFirst(g);
+								eerstePlaats = currVakje;
+							}
+							if(currVakje < eerstePlaats) {
+								int index = 0;
+								for(Gebouwsteen vooresteGebouwsteen:vooresteGebouwstenen) {
+									if(vooresteGebouwsteen.getPositie() < currVakje) {
+										vooresteGebouwstenen.add(index, g);
+									}
+									if(vooresteGebouwsteen.getPositie() == currVakje && g.getVolgorde() < vooresteGebouwsteen.getVolgorde()) {
+										vooresteGebouwstenen.add(index,g);
+									}
+									if(index + 1 == vooresteGebouwstenen.size()) {
+										vooresteGebouwstenen.add(index, g);
+									}
+									index ++;
+								}
+							}
+							if(currVakje == eerstePlaats) {
+								int index = 0;
+								for(Gebouwsteen vooresteGebouwsteen:vooresteGebouwstenen) {
+									if(vooresteGebouwsteen.getPositie() == currVakje && g.getVolgorde() < vooresteGebouwsteen.getVolgorde()) {
+										vooresteGebouwstenen.add(index,g);
+									}
+									if(index + 1 == vooresteGebouwstenen.size()) {
+										vooresteGebouwstenen.add(index, g);
+									}
+									index ++;
+								}
+							}
+						}
+						//TODO als alle gebouwstenen al gevuld zijn
+					}
+				}
+			}
+			
+		}
+		return vooresteGebouwstenen;
+	}
+
 }

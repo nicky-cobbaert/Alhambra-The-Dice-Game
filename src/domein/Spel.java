@@ -4,6 +4,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
 
 public class Spel {
@@ -303,6 +304,61 @@ public class Spel {
 	
 	public List<Fiche> getGezetteFiches() {
 		return spelbord.getFicheGebied().getGezettefiches();
+	}
+	public void beïndigBeurt(DobbelsteenKleur kleur) {
+		
+	}
+	
+	public void beïndigRonde() {
+		verzetDeGebouwstenen();
+		geefSpelersPunten();
+	}
+	private int berekenPunten(int plaats,int positieKleur) {
+		int positie = plaats; //1 is altijd kleinste (“slechtste”), 2 is het middelste en 3 altijd het grootste (“beste”) => omgedraaid dan in de voorbeelden!
+		int x = positieKleur; //XYZ getallensysteem
+		int res=0;
+
+		 if (positie == 1) {
+		     res = x;
+		 } else {
+		     res = x + ((positie-1)*8 - 1);
+		 }
+		 return res;
+	}
+	private void geefSpelersPunten() {
+		for(int positieKleur = 1;positieKleur <= 6;positieKleur ++) {
+			List<Gebouwsteen> gebouwstenen = spelbord.getGebouwpuntenGebied().getVooresteGebouwstenen(ronde,positieKleur);
+			for(Speler s:gekozenSpelers) {
+				int plaats = 0;
+				for(Gebouwsteen g:gebouwstenen) {
+					plaats ++;
+					if(s.getGebouwstenen().contains(g)) {
+						s.voegPuntenToe(berekenPunten(gebouwstenen.size() - plaats + 1,positieKleur));
+					}
+				}
+			}
+		}
+		
+	}
+	private void verzetDeGebouwstenen() {
+		for(int positieKleur = 1;positieKleur <= 6;positieKleur ++) {
+			List<Zetsteen> zetstenen = spelbord.getResultatenGebied().getVooresteZetstenen(ronde, positieKleur);
+			for(Speler s:gekozenSpelers) {
+				int plaats = 0;
+				int verplaatsing = 0;
+				for(Zetsteen z:zetstenen) {
+					plaats ++;
+					if(s.getZetstenen().contains(z)) {
+						if(plaats == 1) {
+							verplaatsing += 2;
+						}else {
+							verplaatsing += 1;
+						}
+					}
+				}
+				s.verplaatsGebouwsteen(positieKleur, verplaatsing);
+			}
+		}
 	}
 
 }
