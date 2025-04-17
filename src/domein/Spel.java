@@ -327,7 +327,7 @@ public class Spel {
 	}
 	private void geefSpelersPunten() {
 		for(int positieKleur = 1;positieKleur <= 6;positieKleur ++) {
-			List<Gebouwsteen> gebouwstenen = spelbord.getGebouwpuntenGebied().getVooresteGebouwstenen(ronde,positieKleur);
+			List<Gebouwsteen> gebouwstenen = spelbord.getGebouwpuntenGebied().getVoorsteGebouwstenen(ronde,positieKleur);
 			for(Speler s:gekozenSpelers) {
 				int plaats = 0;
 				for(Gebouwsteen g:gebouwstenen) {
@@ -342,7 +342,7 @@ public class Spel {
 	}
 	private void verzetDeGebouwstenen() {
 		for(int positieKleur = 1;positieKleur <= 6;positieKleur ++) {
-			List<Zetsteen> zetstenen = spelbord.getResultatenGebied().getVooresteZetstenen(ronde, positieKleur);
+			List<Zetsteen> zetstenen = spelbord.getResultatenGebied().getVoorsteZetstenen(ronde, positieKleur);
 			for(Speler s:gekozenSpelers) {
 				int plaats = 0;
 				int verplaatsing = 0;

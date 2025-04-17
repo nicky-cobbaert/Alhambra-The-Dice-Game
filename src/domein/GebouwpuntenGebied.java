@@ -71,45 +71,45 @@ public class GebouwpuntenGebied implements Placeable{
 	}
 
 
-	public List<Gebouwsteen> getVooresteGebouwstenen(int ronde,int kleur) {
-		List<Gebouwsteen> vooresteGebouwstenen = new ArrayList<Gebouwsteen>();
+	public List<Gebouwsteen> getVoorsteGebouwstenen(int ronde,int kleur) {
+		List<Gebouwsteen> voorsteGebouwstenen = new ArrayList<Gebouwsteen>();
 		int eerstePlaats = 0;
 		for(Gebouwsteen g:gebouwstenen) {
 			if(g.getPositie()/100 == kleur) {
 				int currVakje = g.getPositie()%10; 
 				if(!(currVakje == 0)) {
-					if(vooresteGebouwstenen.size() == 0) {
-						vooresteGebouwstenen.add(g);
+					if(voorsteGebouwstenen.size() == 0) {
+						voorsteGebouwstenen.add(g);
 						eerstePlaats = currVakje;
 					}else {
-						if(vooresteGebouwstenen.size() < ronde) {
+						if(voorsteGebouwstenen.size() < ronde) {
 							if(currVakje > eerstePlaats) {
-								vooresteGebouwstenen.addFirst(g);
+								voorsteGebouwstenen.addFirst(g);
 								eerstePlaats = currVakje;
 							}
 							if(currVakje < eerstePlaats) {
 								int index = 0;
-								for(Gebouwsteen vooresteGebouwsteen:vooresteGebouwstenen) {
+								for(Gebouwsteen vooresteGebouwsteen:voorsteGebouwstenen) {
 									if(vooresteGebouwsteen.getPositie() < currVakje) {
-										vooresteGebouwstenen.add(index, g);
+										voorsteGebouwstenen.add(index, g);
 									}
 									if(vooresteGebouwsteen.getPositie() == currVakje && g.getVolgorde() < vooresteGebouwsteen.getVolgorde()) {
-										vooresteGebouwstenen.add(index,g);
+										voorsteGebouwstenen.add(index,g);
 									}
-									if(index + 1 == vooresteGebouwstenen.size()) {
-										vooresteGebouwstenen.add(index, g);
+									if(index + 1 == voorsteGebouwstenen.size()) {
+										voorsteGebouwstenen.add(index, g);
 									}
 									index ++;
 								}
 							}
 							if(currVakje == eerstePlaats) {
 								int index = 0;
-								for(Gebouwsteen vooresteGebouwsteen:vooresteGebouwstenen) {
-									if(vooresteGebouwsteen.getPositie() == currVakje && g.getVolgorde() < vooresteGebouwsteen.getVolgorde()) {
-										vooresteGebouwstenen.add(index,g);
+								for(Gebouwsteen voorsteGebouwsteen:voorsteGebouwstenen) {
+									if(voorsteGebouwsteen.getPositie() == currVakje && g.getVolgorde() < voorsteGebouwsteen.getVolgorde()) {
+										voorsteGebouwstenen.add(index,g);
 									}
-									if(index + 1 == vooresteGebouwstenen.size()) {
-										vooresteGebouwstenen.add(index, g);
+									if(index + 1 == voorsteGebouwstenen.size()) {
+										voorsteGebouwstenen.add(index, g);
 									}
 									index ++;
 								}
@@ -121,7 +121,7 @@ public class GebouwpuntenGebied implements Placeable{
 			}
 			
 		}
-		return vooresteGebouwstenen;
+		return voorsteGebouwstenen;
 	}
 
 }
