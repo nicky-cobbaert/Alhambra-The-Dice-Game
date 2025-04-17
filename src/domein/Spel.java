@@ -303,5 +303,9 @@ public class Spel {
 	public int geefWaardeVanPositie(int positie) {
 		return spelbord.geefWaardeVanPositie(positie);
 	}
+	
+	public List<Fiche> getGezetteFiches() {
+		return spelbord.getFicheGebied().getGezettefiches();
+	}
 
 }

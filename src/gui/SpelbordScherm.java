@@ -6,6 +6,7 @@ import java.util.List;
 
 import domein.DomeinController;
 import dto.DobbelsteenDTO;
+import dto.FicheDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,7 @@ public class SpelbordScherm extends BorderPane {
 
 	private final DomeinController dc;
 	private List<ImageView> dobbelImages;
+	private List<ImageView> ficheImages;
 	
 	
 	private void loadFxmlScreen(String name) {
@@ -59,6 +61,14 @@ public class SpelbordScherm extends BorderPane {
         dobbelImages.add(dobbelsteenEenDrie);
         clearImages(dobbelImages);
         SpeelKnop.setDisable(true);
+        ficheImages = new ArrayList<ImageView>();
+        ficheImages.add(fiche0);
+        ficheImages.add(fiche1);
+        ficheImages.add(fiche2);
+        ficheImages.add(fiche3);
+        ficheImages.add(fiche4);
+        ficheImages.add(fiche5);
+        plaatsFiches();
 		
 		//SpelTest
 //		dc.maakNieuwSpel();
@@ -160,19 +170,22 @@ public class SpelbordScherm extends BorderPane {
 
 
     private void plaatsFiches() {
-    	for(int i=1;i<7;i++) {
-    		int waarde = dc.geefWaardeVanPositie(i);
+    	List<FicheDTO> ficheDTOs = dc.getGeplaatsteFicheDTOs();
+    	for(int i = 1;i <= 6;i ++) {
+    		int indexVanFiche = 0;
+    		int teller = 0;
+    		for(FicheDTO f:ficheDTOs) {
+    			if(f.positie() == i) {
+    				indexVanFiche = teller;
+    				break;
+    			}
+    			teller ++;
+    		}
+    		ficheImages.get(i-1).setImage(new Image(getClass().getResource(welkeFiche(ficheDTOs.get(indexVanFiche).waarde())).toExternalForm()));
     		
-    		switch (i) { //Welke fiche je moet aanpassen
-    		case 1 : fiche0.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
-    		case 2 : fiche1.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
-    		case 3 : fiche2.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
-    		case 4 : fiche3.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
-    		case 5 : fiche4.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
-    		case 6 : fiche5.setImage(new Image(getClass().getResource(welkeFiche(waarde)).toExternalForm()));
     		}
     	}
-    }
+    
     
     private String welkeFiche(int waarde) {
     	switch (waarde) { //Welke waarde bij de fiche

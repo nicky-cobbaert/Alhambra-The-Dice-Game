@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import dto.DobbelsteenDTO;
+import dto.FicheDTO;
 import dto.SpelerDTO;
 import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
@@ -246,6 +247,20 @@ public class DomeinController {
 	
 	public boolean rolDobbelstenen() {
 		return spel.rolDobbelstenen();
+	}
+	
+	public List<FicheDTO> getGeplaatsteFicheDTOs(){
+		List<FicheDTO> ficheDTOs = new ArrayList<FicheDTO>(); 
+		for(Fiche f:spel.getGezetteFiches()) {
+			FicheDTO ficheDTO;
+			if(f instanceof Bonusfiche bf) {
+				ficheDTO = new FicheDTO(bf.getPositie(), bf.getWaarde());
+			}else {
+				ficheDTO = new FicheDTO(f.getPositie(), 0);
+			}
+			ficheDTOs.add(ficheDTO);
+		}
+		return ficheDTOs;
 	}
 
 }
