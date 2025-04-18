@@ -328,15 +328,18 @@ public class Spel {
 	private void geefSpelersPunten() {
 		for(int positieKleur = 1;positieKleur <= 6;positieKleur ++) {
 			List<Gebouwsteen> gebouwstenen = spelbord.getGebouwpuntenGebied().getVoorsteGebouwstenen(ronde,positieKleur);
-			for(Speler s:gekozenSpelers) {
-				int plaats = 0;
-				for(Gebouwsteen g:gebouwstenen) {
-					plaats ++;
-					if(s.getGebouwstenen().contains(g)) {
-						s.voegPuntenToe(berekenPunten(gebouwstenen.size() - plaats + 1,positieKleur));
+			if(gebouwstenen.size() != 0) {
+				for(Speler s:gekozenSpelers) {
+					int plaats = 0;
+					for(Gebouwsteen g:gebouwstenen) {
+						plaats ++;
+						if(s.getGebouwstenen().contains(g)) {
+							s.voegPuntenToe(berekenPunten(gebouwstenen.size() - plaats + 1,positieKleur));
+						}
 					}
 				}
 			}
+			
 		}
 		
 	}
