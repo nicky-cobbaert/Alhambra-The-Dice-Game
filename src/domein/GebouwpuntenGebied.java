@@ -132,7 +132,9 @@ public class GebouwpuntenGebied implements Placeable{
 						}
 						
 					}
-					else{
+					else{/*
+							als het nog niet compleet vol is
+					 		*/
 						if(voorsteGebouwstenen.size() == 0) {
 							voorsteGebouwstenen.addFirst(g);
 							eerstePlaats = currVakje;

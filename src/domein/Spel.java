@@ -345,7 +345,7 @@ public class Spel {
 	}
 	private void verzetDeGebouwstenen() {
 		for(int positieKleur = 1;positieKleur <= 6;positieKleur ++) {
-			List<Zetsteen> zetstenen = spelbord.getResultatenGebied().getVoorsteZetstenen(ronde, positieKleur);
+			List<Zetsteen> zetstenen = spelbord.getResultatenGebied().getVoorsteZetstenen(positieKleur);
 			for(Speler s:gekozenSpelers) {
 				int plaats = 0;
 				int verplaatsing = 0;
