@@ -54,13 +54,45 @@ public class ResultatenGebied implements Placeable{ // relatie met Zetsteen nog 
 		return zetstenen;
 	}
 
-	public List<Zetsteen> getVoorsteZetstenen(int ronde, int positieKleur) {
-		List<Zetsteen> zetstenen = new ArrayList<Zetsteen>();
+	public List<Zetsteen> getVoorsteZetstenen(int positieKleur) {
+		List<Zetsteen> voorsteZetstenen = new ArrayList<Zetsteen>();
 		for(Zetsteen z:zetstenen) {
 			int currPositie = z.getPositie();
+			if(currPositie/100 == positieKleur) {
+				if(voorsteZetstenen.size() == 2) {
+					for(int index = 0;index < 2;index ++) {
+						if(currPositie/ 10 % 10 > voorsteZetstenen.get(index).getPositie()/ 10 % 10) {
+							voorsteZetstenen.add(index,z);
+							voorsteZetstenen.removeLast();
+							break;
+						}
+						if(currPositie/ 10 % 10 == voorsteZetstenen.get(index).getPositie()/ 10 % 10 && currPositie % 10 < voorsteZetstenen.get(index).getPositie() % 10) {
+							voorsteZetstenen.add(index,z);
+							voorsteZetstenen.removeLast();
+							break;
+						}
+					}
+				}
+				
+				if(voorsteZetstenen.size() == 1) {
+					if(currPositie/ 10 % 10 > voorsteZetstenen.get(0).getPositie()/ 10 % 10) {
+						voorsteZetstenen.addFirst(z);
+					}else {
+						if(currPositie/ 10 % 10 == voorsteZetstenen.get(0).getPositie()/ 10 % 10 && currPositie % 10 < voorsteZetstenen.get(0).getPositie() % 10) {
+							voorsteZetstenen.addFirst(z);
+						}else {
+							voorsteZetstenen.addLast(z);
+						}
+					}
+				}
+				if(voorsteZetstenen.size() == 0) {
+					voorsteZetstenen.addFirst(z);
+				}
+				
+			}
 			
 		}
-		return zetstenen;
+		return voorsteZetstenen;
 	}
 
 	
