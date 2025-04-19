@@ -82,7 +82,7 @@ public class SpelbordScherm extends BorderPane {
 //		RolKnopKlik(null);
 //		plaatsFiches();
 		//Code voor de achtergrond
-//		Image spelbordPNG = new Image(getClass().getResource("/images/AlhambraStad.png").toExternalForm(), true);
+//		Image spelbordPNG = new Image(getClass().getResource("/images/bordTest.png").toExternalForm(), true);
 //		
 //		BackgroundSize backgroundSize = new BackgroundSize(
 //				100, 100, true, true, true, false

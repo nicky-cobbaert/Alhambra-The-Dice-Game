@@ -34,8 +34,8 @@ public class MainMenuScherm extends BorderPane {
 	public MainMenuScherm(DomeinController dc, char taal) {
 		this.dc = dc;
 		loadFxmlScreen("MainMenuScherm.fxml");
-		MenuBar menubar = buildMenuBar();
-		setTop(menubar);
+//		MenuBar menubar = buildMenuBar();
+//		setTop(menubar);
 		setTaal(taal);
 		setAchtergrondMarkt();
 	}
@@ -49,16 +49,16 @@ public class MainMenuScherm extends BorderPane {
 	private void setTaal(char taal) {
 		this.taal = taal;
 
-		if (this.taal == 'N') {
-			nl.setDisable(true);
-//			nl.setText("NL gekozen"); //Dit is altijd een mogelijkheid, om duidelijkheid te scheppen voor de gebruiker!
-			eng.setDisable(false);
-		}
-		if (this.taal == 'E') {
-			eng.setDisable(true);
-//			eng.setText("ENG gekozen"); //Dit is altijd een mogelijkheid, om duidelijkheid te scheppen voor de gebruiker!
-			nl.setDisable(false);
-		}
+//		if (this.taal == 'N') {
+//			nl.setDisable(true);
+////			nl.setText("NL gekozen"); //Dit is altijd een mogelijkheid, om duidelijkheid te scheppen voor de gebruiker!
+//			eng.setDisable(false);
+//		}
+//		if (this.taal == 'E') {
+//			eng.setDisable(true);
+////			eng.setText("ENG gekozen"); //Dit is altijd een mogelijkheid, om duidelijkheid te scheppen voor de gebruiker!
+//			nl.setDisable(false);
+//		}
 	}
 
 	private MenuBar buildMenuBar() {
