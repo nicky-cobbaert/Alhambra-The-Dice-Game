@@ -25,6 +25,11 @@ public class FicheGebied implements Placeable {
         fiches.add(fiche);
 		
 	}
+	
+	public void haalFicheWeg(Fiche f){
+		fiches.remove(f);
+		f.setPositie(0);
+	}
 
 	@Override
 	public boolean isPlaatsBaar(int positie) {

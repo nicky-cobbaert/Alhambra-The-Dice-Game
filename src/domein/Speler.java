@@ -14,6 +14,7 @@ public class Speler {
 	private List<Zetsteen> zetstenen;
 	private List<Gebouwsteen> gebouwstenen;
 	private int punten;
+	private boolean isStartSpeler;
 
 	/*
 	 * private List<Gebouwsteen> gebouwstenen
@@ -30,6 +31,7 @@ public class Speler {
 		setGeboortejaar(geboortejaar);
 		setAantalGewonnen(aantalGewonnen);
 		setAantalGespeeld(aantalGespeeld);
+		setIsStartSpeler(false);
 	}
 
 	public String getGebruikersnaam() {
@@ -147,10 +149,21 @@ public class Speler {
 		setKleur(null);
 		setZetstenen(null);
 		setGebouwstenen(null);
+		setPunten(0);
+		setIsStartSpeler(false);
 		
+	}
+	private void setPunten(int punten) {
+		this.punten = punten;
 	}
 	public List<Gebouwsteen> getGebouwstenen() {
 		return gebouwstenen;
+	}
+	public boolean getIsStartSpeler() {
+		return isStartSpeler;
+	}
+	public void setIsStartSpeler(boolean isStartSpeler) {
+		this.isStartSpeler = isStartSpeler;
 	}
 
 	@Override
