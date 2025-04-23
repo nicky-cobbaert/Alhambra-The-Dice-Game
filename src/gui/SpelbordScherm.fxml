@@ -35,7 +35,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <GridPane>
+                  <GridPane gridLinesVisible="true">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -58,13 +58,13 @@
                               <Image url="@../images/DobbelsteenGrijs.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="fiche3" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                        <ImageView fx:id="fiche3" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/FicheEen.png" />
                            </image></ImageView>
                      </children>
                   </GridPane>
-                  <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
+                  <GridPane gridLinesVisible="true" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -87,13 +87,13 @@
                               <Image url="@../images/DobbelsteenGroen.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="fiche4" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                        <ImageView fx:id="fiche4" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/FicheTwee.png" />
                            </image></ImageView>
                      </children>
                   </GridPane>
-                  <GridPane layoutX="111.0" layoutY="10.0" GridPane.columnIndex="2">
+                  <GridPane gridLinesVisible="true" layoutX="111.0" layoutY="10.0" GridPane.columnIndex="2">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -116,7 +116,7 @@
                               <Image url="@../images/DobbelsteenPaars.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="fiche5" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                        <ImageView fx:id="fiche5" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/FicheEen.png" />
                            </image></ImageView>
@@ -259,7 +259,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <GridPane>
+                  <GridPane gridLinesVisible="true">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -282,13 +282,13 @@
                               <Image url="@../images/DobbelsteenBLAUW.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="fiche0" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                        <ImageView fx:id="fiche0" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/FicheTwee.png" />
                            </image></ImageView>
                      </children>
                   </GridPane>
-                  <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
+                  <GridPane gridLinesVisible="true" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -311,13 +311,13 @@
                               <Image url="@../images/DobbelsteenRood.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="fiche1" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                        <ImageView fx:id="fiche1" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/StartspelerFiche.png" />
                            </image></ImageView>
                      </children>
                   </GridPane>
-                  <GridPane fx:id="test" layoutX="111.0" layoutY="10.0" GridPane.columnIndex="2">
+                  <GridPane fx:id="test" gridLinesVisible="true" layoutX="111.0" layoutY="10.0" GridPane.columnIndex="2">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -340,7 +340,7 @@
                               <Image url="@../images/DobbelsteenBruin.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="fiche2" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                        <ImageView fx:id="fiche2" fitHeight="34.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../images/FicheDrie.png" />
                            </image></ImageView>

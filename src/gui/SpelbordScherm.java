@@ -81,6 +81,7 @@ public class SpelbordScherm extends BorderPane {
 //		
 //		RolKnopKlik(null);
 //		plaatsFiches();
+        
 		//Code voor de achtergrond
 //		Image spelbordPNG = new Image(getClass().getResource("/images/bordTest.png").toExternalForm(), true);
 //		
