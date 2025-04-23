@@ -63,6 +63,9 @@ public class WelkomTaalScherm extends BorderPane {
     @FXML
     void KnopENGklik(ActionEvent event) {
         // Geeft engels mee als taal!
+    	//this.setBackground(null);
+      //  mainMenu = new MainMenuScherm(dc, 'E');
+       // this.setCenter(mainMenu);
     }
 
     @FXML

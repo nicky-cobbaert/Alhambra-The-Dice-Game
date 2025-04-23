@@ -1,6 +1,8 @@
 package gui;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import domein.DomeinController;
 import javafx.application.Platform;
@@ -133,6 +135,12 @@ public class MainMenuScherm extends BorderPane {
 
 	private void loadFxmlScreen(String name) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+		
+		// voor resource bundeles:
+		//Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
+	//	ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+	//	FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
+
 		loader.setRoot(this);
 		loader.setController(this);
 		try {
