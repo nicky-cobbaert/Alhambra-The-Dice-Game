@@ -125,6 +125,14 @@ public class Speler {
 		}
 		setZetstenen(zetstenen);
 	}
+	public void plaatsEenZetsteenNeer(int positie) {
+		for(Zetsteen z:zetstenen) {
+			if(z.getPositie() == 0) {
+				z.plaatsNeer(positie);
+				break;
+			}
+		}
+	}
 
 	public void maakGebouwstenenAan(GebouwpuntenGebied gebouwpuntenGebied) {
 		List<Gebouwsteen> gebouwstenen = new ArrayList<Gebouwsteen>();

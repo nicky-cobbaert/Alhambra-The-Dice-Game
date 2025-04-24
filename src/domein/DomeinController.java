@@ -233,9 +233,6 @@ public class DomeinController {
 	public boolean veranderStatusNogRollenDobbelsteen(int index) {
 		return spel.veranderStatusNogRollenDobbelsteen(index);
 	}
-	public void resetVoorVolgendeSpeler() {
-		spel.resetVoorVolgendeSpeler();
-	}
 	
 	public int getAantalKeerGerold() {
 		return spel.getAantalKeerGerold();

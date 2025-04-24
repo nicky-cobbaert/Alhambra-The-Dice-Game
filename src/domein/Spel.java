@@ -22,6 +22,7 @@ public class Spel {
 	private int ronde;
 	private boolean isEindeSpel;
 	private int aantalKeerGerold;
+	private Speler huidigeSpeler;
 
 	public Spel() {
 
@@ -307,7 +308,7 @@ public class Spel {
 		return false;
 	}
 	
-	public void resetVoorVolgendeSpeler() {// moet nog private worden want wordt enkel gedaan als er een nieuwe speler speelt dus als Beurt Eïndigt
+	private void resetVoorVolgendeSpeler() {// moet nog private worden want wordt enkel gedaan als er een nieuwe speler speelt dus als Beurt Eïndigt
 		for(Dobbelsteen d:dobbelstenen) {
 			d.setNogRollen(true);
 			d.setDobbelsteenKleur(null);
@@ -336,7 +337,30 @@ public class Spel {
 		return spelbord.getFicheGebied().getGezettefiches();
 	}
 	public void beïndigBeurt(DobbelsteenKleur kleur) {
-		
+		int positie = aantalKeerGerold;
+		boolean nogHerhalen = true;
+		positie += dobbelstenen.stream().filter(e -> e.getDobbelsteenKleur() == kleur).count() * 10;
+		switch(kleur) {
+			case BLAUW -> {positie += 100;}
+			case ROOD ->  {positie += 200;}
+			case BRUIN -> {positie += 300;}
+			case GRIJS -> {positie += 400;}
+			case GROEN -> {positie += 500;}
+			case PAARS -> {positie += 600;}
+		}
+		do {
+			try{
+				huidigeSpeler.plaatsEenZetsteenNeer(positie);
+				nogHerhalen = false;
+			}catch(IllegalArgumentException i){
+				if(positie % 10 == 3) {
+					positie -= 12;
+				}else {
+					positie += 1;
+				}
+			}
+		}while(nogHerhalen);
+		resetVoorVolgendeSpeler();
 	}
 	
 	public void beïndigRonde() {

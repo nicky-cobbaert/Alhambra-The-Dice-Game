@@ -296,8 +296,8 @@ public class SpelbordScherm extends BorderPane {
     		i.setImage(null);
     	}
     }
-    private void resetVoorVolgendeSpeler() {
-        dc.resetVoorVolgendeSpeler();
+    private void beïndigBeurt() {
+        dc.beïndigBeurt(null);;
         RolKnop.setDisable(false);
         SpeelKnop.setDisable(true);
         // Reset dobbelsteenstatussen
@@ -313,16 +313,8 @@ public class SpelbordScherm extends BorderPane {
     void SpeelKnopKlik(ActionEvent event) {
     	System.out.println("Knop \"Speel\" is ingedrukt");
     	disableDobbelstenen(true);
-    	resetVoorVolgendeSpeler();
     	
-//    	System.out.println(kleurNulNul);
-//    	System.out.println(kleurEenNul);
-//    	System.out.println(kleurNulEen);
-//    	System.out.println(kleurEenEen);
-//    	System.out.println(kleurNulTwee);
-//    	System.out.println(kleurEenTwee);
-//    	System.out.println(kleurNulDrie);
-//    	System.out.println(kleurEenDrie);
+    	//scherm waar je dobbelsteenkleur kan kiezen
     }
 
     @FXML
