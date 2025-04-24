@@ -14,8 +14,16 @@ public class StartUpGui extends Application {
 		Scene scene = new Scene(wts);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Alhambra: The Dice Game");
-		primaryStage.setMaximized(true);
+		primaryStage.setFullScreen(true);
 		primaryStage.show();
+		
+		primaryStage.widthProperty().addListener((obs, oud, nieuw) -> {
+		    primaryStage.setHeight(nieuw.doubleValue() * 9 / 16);
+		});
+
+		primaryStage.heightProperty().addListener((obs, oud, nieuw) -> {
+		    primaryStage.setWidth(nieuw.doubleValue() * 16 / 9);
+		});
 	}
 
 	public static void main(String[] args) {
