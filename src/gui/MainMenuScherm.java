@@ -95,7 +95,7 @@ public class MainMenuScherm extends BorderPane {
 	}
 
 	private void setAchtergrondMarkt() {
-		Image marktImage = new Image(getClass().getResource("/images/AchtergrondMarkt.png").toExternalForm());
+		Image marktImage = new Image(getClass().getResource("/images/MainMenuScherm.png").toExternalForm());
 
 		BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
 
