@@ -18,6 +18,18 @@ public class SpelerMapper {
     
     private static final String UPDATE_GEWONNEN = "UPDATE speler SET aantalGewonnen = aantalGewonnen + 1 WHERE gebruikers like ?";
     private static final String UPDATE_GESPEELD = "UPDATE speler SET aantalGespeeld = aantalGespeeld + 1 WHERE gebruikers like ?";
+    private List<Speler> offlineSpelers;
+    
+    public SpelerMapper() {
+    	offlineSpelers = new ArrayList<Speler>();
+		offlineSpelers.add(new Speler("JelleVH",2004));
+		offlineSpelers.add(new Speler("NickyCob", 2006));
+		offlineSpelers.add(new Speler("SverreL", 2006));
+		offlineSpelers.add(new Speler("LarsDW", 2006));
+		offlineSpelers.add(new Speler("WoutGh", 2006));
+		offlineSpelers.add(new Speler("NickyCob2", 2006));
+		offlineSpelers.add(new Speler("NickyCobExtra", 2006));
+	}
             
     public void voegToe(Speler speler) 
     {
@@ -64,25 +76,27 @@ public class SpelerMapper {
     // er moet nog mogelijk worden gemaakt om alle spelers te krijgen ui de database
     
     public List<Speler> geefAlleSpelers(){
-    	List<Speler> alleSpelers = new ArrayList<Speler>();
-    	try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-    			PreparedStatement query = conn.prepareStatement("SELECT * FROM speler")){
-    		try (ResultSet rs = query.executeQuery()) {
-    			
-    			while(rs.next())
-    			{
-    				String gebruikersnaam = rs.getString("Gebruikers");
-    				int geboortejaar = rs.getInt("geboortejaar");
-                    int aantalGewonnen = rs.getInt("aantalGewonnen");
-                    int aantalGespeeld = rs.getInt("aantalGespeeld");
-                    
-                    alleSpelers.add(new Speler(gebruikersnaam,geboortejaar,aantalGewonnen,aantalGespeeld));
-    			}
-    		}
-    	}catch (SQLException ex) {
-    		throw new RuntimeException(ex);
-    	}
-    	return alleSpelers;
+    	
+    	return offlineSpelers;
+//    	List<Speler> alleSpelers = new ArrayList<Speler>();
+//    	try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+//    			PreparedStatement query = conn.prepareStatement("SELECT * FROM speler")){
+//    		try (ResultSet rs = query.executeQuery()) {
+//    			
+//    			while(rs.next())
+//    			{
+//    				String gebruikersnaam = rs.getString("Gebruikers");
+//    				int geboortejaar = rs.getInt("geboortejaar");
+//                    int aantalGewonnen = rs.getInt("aantalGewonnen");
+//                    int aantalGespeeld = rs.getInt("aantalGespeeld");
+//                    
+//                    alleSpelers.add(new Speler(gebruikersnaam,geboortejaar,aantalGewonnen,aantalGespeeld));
+//    			}
+//    		}
+//    	}catch (SQLException ex) {
+//    		throw new RuntimeException(ex);
+//    	}
+//    	return alleSpelers;
     }
     
     public void updateGewonnen(String gebruikersnaam) {
