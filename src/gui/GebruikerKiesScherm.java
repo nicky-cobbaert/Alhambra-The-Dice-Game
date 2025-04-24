@@ -15,10 +15,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import utils.SpelerKleur;
 
@@ -176,6 +182,15 @@ public class GebruikerKiesScherm extends BorderPane {
 
 		resetKnop.fire();
 
+		//Achtergrondfoto!
+//		Image kiesImage = new Image(getClass().getResource("/images/iets.png").toExternalForm());
+//
+//		BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+//
+//		BackgroundImage achtergrond = new BackgroundImage(kiesImage, BackgroundRepeat.NO_REPEAT,
+//				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+//
+//		this.setBackground(new Background(achtergrond));
 	}
 
 	private void setTaal(char taal) {
