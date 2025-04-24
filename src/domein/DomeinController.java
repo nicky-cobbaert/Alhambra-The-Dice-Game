@@ -268,6 +268,10 @@ public class DomeinController {
 		spel.beïndigSpel();
 	}
 
+	public void startOfflineModus() {
+		spelerRepo.startOfflineModus();
+	}
+	
 }
 
 //TestCommit

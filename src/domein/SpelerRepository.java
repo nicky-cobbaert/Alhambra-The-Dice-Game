@@ -46,5 +46,10 @@ public class SpelerRepository {
     public void updateGespeeld(String gebruikersnaam) {
     	mapper.updateGespeeld(gebruikersnaam);
     }
+    
+    public void startOfflineModus() {
+    	mapper.startOfflineModus();
+    }
+    
 }
 
