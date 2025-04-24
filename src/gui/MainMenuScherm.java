@@ -1,27 +1,26 @@
 package gui;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.Optional;
 
 import domein.DomeinController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import persistentie.SpelerMapper;
 
 public class MainMenuScherm extends BorderPane {
 
@@ -32,6 +31,8 @@ public class MainMenuScherm extends BorderPane {
 
 	private MenuItem nl;
 	private MenuItem eng;
+
+	private boolean isOfflineButtonKlikbaar = true;
 
 	public MainMenuScherm(DomeinController dc, char taal) {
 		this.dc = dc;
@@ -44,6 +45,7 @@ public class MainMenuScherm extends BorderPane {
 		loadFxmlScreen("MainMenuScherm.fxml");
 		setTaal(taal);
 		setAchtergrondMarkt();
+		zetOfflineButtonUit();
 	}
 
 	private void setTaal(char taal) {
@@ -75,6 +77,8 @@ public class MainMenuScherm extends BorderPane {
 		this.setBackground(null);
 		rss = new RegistreerSpelerScherm(dc, taal, this);
 		this.setCenter(rss);
+
+		isOfflineButtonKlikbaar = false;
 	}
 
 	@FXML
@@ -82,6 +86,8 @@ public class MainMenuScherm extends BorderPane {
 		this.setBackground(null);
 		GebruikerKiesScherm gks = new GebruikerKiesScherm(dc, taal, this);
 		this.setCenter(gks);
+
+		isOfflineButtonKlikbaar = false;
 	}
 
 	@FXML
@@ -91,11 +97,11 @@ public class MainMenuScherm extends BorderPane {
 
 	private void loadFxmlScreen(String name) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
-		
+
 		// voor resource bundeles:
-		//Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
-	//	ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
-	//	FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
+		// Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
+		// ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		// FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
 
 		loader.setRoot(this);
 		loader.setController(this);
@@ -104,6 +110,37 @@ public class MainMenuScherm extends BorderPane {
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
+	}
+
+	@FXML
+	private Button offlineButton;
+
+	@FXML
+	void offlineButtonOnAction(ActionEvent event) {
+
+		Alert offlineModusAlert = new Alert(AlertType.CONFIRMATION);
+		offlineModusAlert.setTitle("Offline-Modus Activatiescherm");
+		offlineModusAlert.setHeaderText("Wilt u de Offline Modus inschakelen?");
+		offlineModusAlert.setContentText(
+				"Alhambra maakt normaal gezien gebruik van de VICHogent Servers. Mocht er een probleem zijn met verbinding, dan zou het een ramp zijn.\nMaar vrees niet! Door Offline-Modus aan te zetten kunt u blijven genieten van Alhambra, zelfs bij onvoorziene omstandigheden!\n\n\nEens de Offline-Modus aanstaan kan er niet meer gewisseld worden naar de VICHogent servers tot na de volgende herstart.");
+
+		Optional<ButtonType> resultaat = offlineModusAlert.showAndWait();
+
+		if (resultaat.isPresent() && resultaat.get() == ButtonType.OK) {
+			isOfflineButtonKlikbaar = false;
+			zetOfflineButtonUit();
+
+			dc.startOfflineModus();
+		}
+
+	}
+
+	private void zetOfflineButtonUit() {
+		if (!isOfflineButtonKlikbaar) {
+			offlineButton.disarm();
+			offlineButton.setDisable(true);
+		}
+
 	}
 
 }

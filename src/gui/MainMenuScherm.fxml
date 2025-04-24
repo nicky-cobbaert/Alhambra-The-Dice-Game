@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" type="BorderPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" type="BorderPane" xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -40,6 +40,11 @@
                                 <Font name="Algerian" size="20.0" />
                             </font>
                         </Button>
+                  <Button fx:id="offlineButton" mnemonicParsing="false" onAction="#offlineButtonOnAction" text="Offline">
+                     <font>
+                        <Font name="Algerian" size="12.0" />
+                     </font>
+                  </Button>
                     </children>
                     <GridPane.margin>
                         <Insets right="20.0" />

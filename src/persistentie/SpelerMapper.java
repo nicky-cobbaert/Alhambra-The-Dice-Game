@@ -34,12 +34,12 @@ public class SpelerMapper {
 				Statement stmt = conn.createStatement()) {
 			// de statement wordt gebruikt om commando's uit te voeren in sql
 
-			// code hier maakt tabelletje aan
+			// code hier maakt een sql tabelletje aan
 			stmt.execute("CREATE TABLE IF NOT EXISTS speler (" + "Gebruikers VARCHAR(255) PRIMARY KEY, "
 					+ "Geboortejaar INT, " + "AantalGewonnen INT, " + "AantalGespeeld INT)");
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Kon de offline databank niet initialiseren", e);
+			throw new RuntimeException("De offline databank kon niet worden geïnitialiseerd", e);
 		}
 	}
 

@@ -262,7 +262,7 @@ public class GebruikerKiesScherm extends BorderPane {
 		dc.kiesSpelerEnKleur(voorlopigGekozenSpelerNaam, voorlopigGekozenSpelerKleur);
 
 		// de knop op plaats index krijgt een kleur die meegegeven wordt -> hier dus de
-		// selecteerdknop want die heeft de juiste kleur!
+		// selecteerknop want die heeft de juiste kleur!
 		int index = (dc.geefGekozenSpelers().size() - 1);
 
 		gekozenKleurKnopKleurGever(gekozenKleurButtons.get(index), this.selecteerSpelerKnop);
