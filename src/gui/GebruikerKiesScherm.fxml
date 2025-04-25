@@ -44,7 +44,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ListView>
-            <Button fx:id="selecteerSpelerKnop" mnemonicParsing="false" onAction="#selecteerSpelerKnopOnAction" prefHeight="25.0" prefWidth="425.0" text="%selecteerspelerknop" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <Button fx:id="selecteerSpelerKnop" mnemonicParsing="false" onAction="#selecteerSpelerKnopOnAction" prefHeight="25.0" prefWidth="425.0" text="selecteerspelerknop" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
             <Label alignment="CENTER_RIGHT" text="%beschikbarespelers" translateX="2.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
             <TextField fx:id="zoekBalk" promptText="Zoek een speler:" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
             <Button fx:id="resetKnop" alignment="CENTER" mnemonicParsing="false" onAction="#resetKnopOnAction" prefHeight="25.0" prefWidth="60.0" text="Reset" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
