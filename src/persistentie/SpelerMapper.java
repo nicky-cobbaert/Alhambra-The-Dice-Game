@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domein.Speler;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 public class SpelerMapper {
 
@@ -27,17 +25,12 @@ public class SpelerMapper {
 	public static boolean offlineModus = false;
 
 	public void startOfflineModus() {
-		
-		try {
+
 		initialiseerLokaalSpelersBestand();
+		// de try catch vang een error op, voor er gewisseld wordt van databank
+
 		SpelerMapper.offlineModus = true;
-		}catch (RuntimeException e) {
-			Alert h2ModuleError = new Alert(AlertType.ERROR) ;//ik zet hier een catch, omdat anders het spel crasht, als de H2 module er niet is (om data naar van het speler bestand op te slaan) 
-			h2ModuleError.setTitle("Geen H2 module driver jar gevonden");
-			h2ModuleError.setHeaderText("Offline-Modus kan niet gestart worden!");
-			h2ModuleError.setContentText("De offline-modus maakt gebruik van de h2 module jar om informatie in te laden. Het spel kan dus niet gespeeld worden in offline modus zonder dit bestand.\n\n\nH2 Database Engine Download: https://github.com/h2database/h2database/releases/");
-			h2ModuleError.showAndWait();
-		}
+
 	}
 
 	private static void initialiseerLokaalSpelersBestand() {
