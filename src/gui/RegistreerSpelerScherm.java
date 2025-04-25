@@ -1,6 +1,8 @@
 package gui;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import domein.DomeinController;
 import exceptions.GebruikersnaamInGebruikException;
@@ -26,7 +28,10 @@ public class RegistreerSpelerScherm extends BorderPane{
 	private MainMenuScherm mms;
 
 	private void loadFxmlScreen(String name) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+		//FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
+	    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
 		loader.setRoot(this);
 		loader.setController(this);
 		try {
@@ -38,8 +43,9 @@ public class RegistreerSpelerScherm extends BorderPane{
 	
 	public RegistreerSpelerScherm(DomeinController dc, char taal, MainMenuScherm mainMenu) {
 		this.dc = dc;
-		loadFxmlScreen("RegistreerSpelerScherm.fxml");
 		setTaal(taal);
+		loadFxmlScreen("RegistreerSpelerScherm.fxml");
+		
 		this.mms = mainMenu;
 		setZwembad();
 		
