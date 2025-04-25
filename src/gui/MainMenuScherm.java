@@ -37,9 +37,9 @@ public class MainMenuScherm extends BorderPane {
 
 	public MainMenuScherm(DomeinController dc, char taal) {
 		this.dc = dc;
-	    setTaal(taal);
-	    loadFxmlScreen("MainMenuScherm.fxml");
-	    setAchtergrondMarkt();
+		setTaal(taal);
+		loadFxmlScreen("MainMenuScherm.fxml");
+		setAchtergrondMarkt();
 	}
 
 	public void terugNaarMain(char taal) {
@@ -111,18 +111,18 @@ public class MainMenuScherm extends BorderPane {
 //		} catch (IOException ex) {
 //			throw new RuntimeException(ex);
 //		}
-		
-		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
-	    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
-	    FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
 
-	    loader.setRoot(this);
-	    loader.setController(this);
-	    try {
-	        loader.load();
-	    } catch (IOException ex) {
-	        throw new RuntimeException(ex);
-	    }
+		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
+
+		loader.setRoot(this);
+		loader.setController(this);
+		try {
+			loader.load();
+		} catch (IOException ex) {
+			throw new RuntimeException(ex);
+		}
 	}
 
 	@FXML
@@ -143,7 +143,19 @@ public class MainMenuScherm extends BorderPane {
 			isOfflineButtonKlikbaar = false;
 			zetOfflineButtonUit();
 
-			dc.startOfflineModus();
+			try {
+				dc.startOfflineModus();
+			} catch (RuntimeException e) {
+
+				Alert h2ModuleError = new Alert(AlertType.ERROR);// ik zet hier een catch, omdat anders het spel crasht,
+																	// als de H2 module er niet is (om data naar van het
+																	// speler bestand op te slaan)
+				h2ModuleError.setTitle("Geen H2 module driver jar gevonden");
+				h2ModuleError.setHeaderText("Offline-Modus kan niet gestart worden!");
+				h2ModuleError.setContentText(
+						"De offline-modus maakt gebruik van de h2 module jar om informatie in te laden. Het spel kan dus niet gespeeld worden in offline modus zonder dit bestand.\n\n\nH2 Database Engine Download: https://github.com/h2database/h2database/releases/");
+				h2ModuleError.showAndWait();
+			}
 		}
 
 	}
