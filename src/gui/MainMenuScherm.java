@@ -1,7 +1,9 @@
 package gui;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import domein.DomeinController;
 import javafx.application.Platform;
@@ -20,7 +22,6 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
-import persistentie.SpelerMapper;
 
 public class MainMenuScherm extends BorderPane {
 
@@ -36,14 +37,14 @@ public class MainMenuScherm extends BorderPane {
 
 	public MainMenuScherm(DomeinController dc, char taal) {
 		this.dc = dc;
-		loadFxmlScreen("MainMenuScherm.fxml");
-		setTaal(taal);
-		setAchtergrondMarkt();
+	    setTaal(taal);
+	    loadFxmlScreen("MainMenuScherm.fxml");
+	    setAchtergrondMarkt();
 	}
 
 	public void terugNaarMain(char taal) {
-		loadFxmlScreen("MainMenuScherm.fxml");
 		setTaal(taal);
+		loadFxmlScreen("MainMenuScherm.fxml");
 		setAchtergrondMarkt();
 		zetOfflineButtonUit();
 	}
@@ -96,20 +97,32 @@ public class MainMenuScherm extends BorderPane {
 	}
 
 	private void loadFxmlScreen(String name) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 
 		// voor resource bundeles:
 		// Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
 		// ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		// FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
 
-		loader.setRoot(this);
-		loader.setController(this);
-		try {
-			loader.load();
-		} catch (IOException ex) {
-			throw new RuntimeException(ex);
-		}
+//		loader.setRoot(this);
+//		loader.setController(this);
+//		try {
+//			loader.load();
+//		} catch (IOException ex) {
+//			throw new RuntimeException(ex);
+//		}
+		
+		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
+	    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
+
+	    loader.setRoot(this);
+	    loader.setController(this);
+	    try {
+	        loader.load();
+	    } catch (IOException ex) {
+	        throw new RuntimeException(ex);
+	    }
 	}
 
 	@FXML

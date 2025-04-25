@@ -28,14 +28,14 @@
                 <VBox alignment="CENTER" spacing="30" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <children>
                        
-                        <Button fx:id="registreerKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="46.0" text="REGISTREER EEN SPELER">
+                        <Button fx:id="registreerKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="46.0" text="%registreer">
                             <font>
                                 <Font name="Algerian" size="20.0" />
                             </font>
                         </Button>
 
                        
-                        <Button fx:id="speelSpelKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false" onAction="#speelSpelKnopKlik" prefHeight="46.0" text="SPEEL EEN SPEL">
+                        <Button fx:id="speelSpelKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false" onAction="#speelSpelKnopKlik" prefHeight="46.0" text="%speel">
                             <font>
                                 <Font name="Algerian" size="20.0" />
                             </font>
@@ -52,7 +52,7 @@
                 </VBox>
 
                 
-                <Button fx:id="verlaatKnop" mnemonicParsing="false" onAction="#verlaatKnopKlik" prefHeight="25.0" prefWidth="145.0" text="VERLAAT DE STAD" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                <Button fx:id="verlaatKnop" mnemonicParsing="false" onAction="#verlaatKnopKlik" prefHeight="25.0" prefWidth="145.0" text="%verlaat" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                     <font>
                         <Font name="Algerian" size="14.0" />
                     </font>
