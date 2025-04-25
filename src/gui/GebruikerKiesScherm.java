@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import domein.DomeinController;
@@ -157,7 +159,10 @@ public class GebruikerKiesScherm extends BorderPane {
 	private List<Button> kleurButtons;
 
 	private void loadFxmlScreen(String name) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+		//FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
 		loader.setRoot(this);
 		loader.setController(this);
 		try {
@@ -170,8 +175,9 @@ public class GebruikerKiesScherm extends BorderPane {
 	public GebruikerKiesScherm(DomeinController dc, char taal, MainMenuScherm mainMenu) {
 		this.dc = dc;
 		dc.maakNieuwSpel();
-		loadFxmlScreen("GebruikerKiesScherm.fxml");
 		setTaal(taal);
+		loadFxmlScreen("GebruikerKiesScherm.fxml");
+		
 		this.mms = mainMenu;
 
 		gekozenKleurButtons = new ArrayList<Button>(Arrays.asList(gekozenKleur0, gekozenKleur1, gekozenKleur2,
@@ -319,7 +325,9 @@ public class GebruikerKiesScherm extends BorderPane {
 				+ "; -fx-border-color: TURQUOISE; -fx-border-width: 0.5px; -fx-border-radius: 2px; -fx-effect: dropshadow(gaussian, TURQUOISE, 10, 0.5, 0, 0);");
 		selecteerSpelerKnop.setTextFill(voorlopigeKleur.getTextFill());
 
+		//selecteerSpelerKnop.setText("Kies bovenstaande speler!");
 		selecteerSpelerKnop.setText("Kies bovenstaande speler!");
+		
 
 	}
 

@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" type="BorderPane" xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" type="BorderPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="17.0" />
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" percentWidth="35.0" />
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" percentWidth="38.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="12.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" percentWidth="38.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" percentWidth="40.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="10.0" />
             </columnConstraints>
             <rowConstraints>
@@ -28,7 +28,7 @@
                 <VBox alignment="CENTER" spacing="30" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <children>
                        
-                        <Button fx:id="registreerKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="46.0" text="%registreer">
+                        <Button fx:id="registreerKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="46.0" prefWidth="340.0" text="%registreer">
                             <font>
                                 <Font name="Algerian" size="20.0" />
                             </font>
