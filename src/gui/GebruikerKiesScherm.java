@@ -275,12 +275,23 @@ public class GebruikerKiesScherm extends BorderPane {
 
 		// de knop (kleur) die gekozen is zal disabled worden
 		// :werkt door te kijken welke knop niet in de gekozenKleuren-lijst zit
+		
+		
+//		for (Button kleurKnop : kleurButtons) {
+//			if (!(dc.geefBeschikbareSpelerKleuren().contains(SpelerKleur.valueOf(kleurKnop.getText().toUpperCase())))) {
+//				kleurKnop.setDisable(true);
+//				kleurKnop.disarm();
+//			}
+//		}
+		
 		for (Button kleurKnop : kleurButtons) {
-			if (!(dc.geefBeschikbareSpelerKleuren().contains(SpelerKleur.valueOf(kleurKnop.getText().toUpperCase())))) {
-				kleurKnop.setDisable(true);
-				kleurKnop.disarm();
-			}
+		    if (!(dc.geefBeschikbareSpelerKleuren().contains(geefSpelerKleurVanVertaling(kleurKnop.getText())))) {  // nieuwe code controleert of het engels is en zet om naar nederlands voor enum
+		        kleurKnop.setDisable(true);
+		        kleurKnop.disarm();
+		    }
 		}
+
+		
 		resetKnop.fire();
 		
 		}catch (IllegalArgumentException e) {
@@ -443,6 +454,36 @@ public class GebruikerKiesScherm extends BorderPane {
 
 		
 		resetKnop.fire();
+	}
+	
+	
+	// code die er voor zorgt dat de enum geen error geeft wanneer je een engelse naam doorstuurt 
+	// Vraag: Mag dit hier blijven staan of moet dit in de domein laag?
+	
+	private SpelerKleur geefSpelerKleurVanVertaling(String vertaling) {
+	    vertaling = vertaling.toLowerCase();
+	    switch (vertaling) {
+	        case "blauw":
+	        case "blue":
+	            return SpelerKleur.BLAUW;
+	        case "groen":
+	        case "green":
+	            return SpelerKleur.GROEN;
+	        case "wit":
+	        case "white":
+	            return SpelerKleur.WIT;
+	        case "rood":
+	        case "red":
+	            return SpelerKleur.ROOD;
+	        case "geel":
+	        case "yellow":
+	            return SpelerKleur.GEEL;
+	        case "oranje":
+	        case "orange":
+	            return SpelerKleur.ORANJE;
+	        default:
+	            throw new IllegalArgumentException("Onbekende kleur: " + vertaling);
+	    }
 	}
 
 }
