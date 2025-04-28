@@ -189,14 +189,14 @@ public class GebruikerKiesScherm extends BorderPane {
 		resetKnop.fire();
 
 		//Achtergrondfoto!
-//		Image kiesImage = new Image(getClass().getResource("/images/iets.png").toExternalForm());
-//
-//		BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
-//
-//		BackgroundImage achtergrond = new BackgroundImage(kiesImage, BackgroundRepeat.NO_REPEAT,
-//				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
-//
-//		this.setBackground(new Background(achtergrond));
+		Image kiesImage = new Image(getClass().getResource("/images/KiesSpelerScherm.png").toExternalForm());
+
+		BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+
+		BackgroundImage achtergrond = new BackgroundImage(kiesImage, BackgroundRepeat.NO_REPEAT,
+				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+
+		this.setBackground(new Background(achtergrond));
 	}
 
 	private void setTaal(char taal) {

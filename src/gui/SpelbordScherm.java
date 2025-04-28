@@ -330,6 +330,12 @@ public class SpelbordScherm extends BorderPane {
     void SpeelKnopKlik(ActionEvent event) {
     	System.out.println("Knop \"Speel\" is ingedrukt");
     	disableDobbelstenen(true);
+    	plaatsZetsteen(0,2,2,SpelerKleur.BLAUW);
+    	plaatsZetsteen(1,2,2,SpelerKleur.ROOD);
+    	plaatsZetsteen(2,2,2,SpelerKleur.ORANJE);//Bruin
+    	plaatsZetsteen(3,2,2,SpelerKleur.WIT);//Grijs
+    	plaatsZetsteen(4,2,2,SpelerKleur.GROEN);
+    	plaatsZetsteen(5,2,2,SpelerKleur.GEEL);//Paars
     	//scherm waar je dobbelsteenkleur kan kiezen
     }
     
