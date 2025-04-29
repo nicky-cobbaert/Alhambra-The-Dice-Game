@@ -13,7 +13,7 @@ public class Speler {
 	private SpelerKleur kleur;
 	private List<Zetsteen> zetstenen;
 	private List<Gebouwsteen> gebouwstenen;
-	private int punten;
+	private int punten = 0;
 	private boolean isStartSpeler;
 
 	/*

@@ -66,7 +66,7 @@ public class DomeinController {
 
 		for (Speler s : spelers) {
 			SpelerDTO sp = new SpelerDTO(s.getGebruikersnaam(), s.getGeboortejaar(), s.getAantalGespeeld(),
-					s.getAantalGewonnen(), s.getKleur());
+					s.getAantalGewonnen(), s.getKleur(), s.getPunten());
 			resultaat.add(sp);
 		}
 

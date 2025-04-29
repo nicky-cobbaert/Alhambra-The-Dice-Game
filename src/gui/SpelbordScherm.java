@@ -7,21 +7,22 @@ import java.util.List;
 import domein.DomeinController;
 import dto.DobbelsteenDTO;
 import dto.FicheDTO;
+import dto.SpelerDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import utils.SpelerKleur;
 
 
@@ -48,6 +49,7 @@ public class SpelbordScherm extends BorderPane {
 		dc.startSpel();
 		dc.startRonde();
 		loadFxmlScreen("SpelbordScherm.fxml");
+		zetSpelersBegin();
 		//plaatsFiches();
 		dobbelImages = new ArrayList<ImageView>();
         dobbelImages.add(dobbelsteenNulNul);
@@ -82,21 +84,21 @@ public class SpelbordScherm extends BorderPane {
 //		plaatsFiches();
         
 		//Code voor de achtergrond
-		Image spelbordPNG = new Image(getClass().getResource("/images/BeginAchtergrond.png").toExternalForm(), true);
-		
-		BackgroundSize backgroundSize = new BackgroundSize(
-				100, 100, true, true, true, false
-	    );
-
-	    BackgroundImage spelbord = new BackgroundImage(
-	    			spelbordPNG,
-	                BackgroundRepeat.NO_REPEAT,
-	                BackgroundRepeat.NO_REPEAT,
-	                BackgroundPosition.CENTER,
-	                backgroundSize
-	    );
-	    
-	    this.setBackground(new Background(spelbord));
+//		Image spelbordPNG = new Image(getClass().getResource("/images/BeginSpelbord.png").toExternalForm(), true);
+//		
+//		BackgroundSize backgroundSize = new BackgroundSize(
+//				100, 100, true, true, true, false
+//	    );
+//
+//	    BackgroundImage spelbord = new BackgroundImage(
+//	    			spelbordPNG,
+//	                BackgroundRepeat.NO_REPEAT,
+//	                BackgroundRepeat.NO_REPEAT,
+//	                BackgroundPosition.CENTER,
+//	                backgroundSize
+//	    );
+//	    
+//	    this.setBackground(new Background(spelbord));
 	}
 
 	@FXML
@@ -148,23 +150,60 @@ public class SpelbordScherm extends BorderPane {
     private ImageView dobbelsteenNulTwee;
 
     @FXML
-    private Label spelerDrie;
+	private VBox spelerBox;
 
-    @FXML
-    private Label spelerEen;
-
-    @FXML
-    private Label spelerTwee;
-
-    @FXML
-    private Label spelerVier;
-
-    @FXML
-    private Label spelerVijf;
-
-    @FXML
-    private Label spelerZes;
-
+    private void zetSpelersBegin() {
+    	List<SpelerDTO> gekozenSpelers = dc.geefGekozenSpelers();
+    	
+    	int aantalSpelers = gekozenSpelers.size();
+    	    	
+    	Label spelerEen = new Label(String.format("%s - %d punten",gekozenSpelers.get(0).gebruikersnaam(),gekozenSpelers.get(0).punten()));
+    	spelerBox.getChildren().add(spelerEen);
+    	geefLabelJuisteOpmaak(spelerEen,gekozenSpelers.get(0).kleur());
+    	
+    	Label spelerTwee = new Label(String.format("%s - %d punten",gekozenSpelers.get(1).gebruikersnaam(),gekozenSpelers.get(1).punten()));
+    	spelerBox.getChildren().add(spelerTwee);
+    	geefLabelJuisteOpmaak(spelerTwee,gekozenSpelers.get(1).kleur());
+    	
+    	Label spelerDrie = new Label(String.format("%s - %d punten",gekozenSpelers.get(2).gebruikersnaam(),gekozenSpelers.get(2).punten()));
+    	spelerBox.getChildren().add(spelerDrie);
+    	geefLabelJuisteOpmaak(spelerDrie,gekozenSpelers.get(2).kleur());
+    	
+    	if (aantalSpelers > 3) {
+    		Label spelerVier = new Label(String.format("%s - %d punten",gekozenSpelers.get(3).gebruikersnaam(),gekozenSpelers.get(3).punten()));
+        	spelerBox.getChildren().add(spelerVier);
+        	geefLabelJuisteOpmaak(spelerVier,gekozenSpelers.get(3).kleur());
+    	}
+    	if (aantalSpelers > 4) {
+    		Label spelerVijf = new Label(String.format("%s - %d punten",gekozenSpelers.get(4).gebruikersnaam(),gekozenSpelers.get(4).punten()));
+        	geefLabelJuisteOpmaak(spelerVijf,gekozenSpelers.get(4).kleur());
+        	spelerBox.getChildren().add(spelerVijf);
+    	}
+    	if (aantalSpelers > 5) {
+    		Label spelerZes = new Label(String.format("%s - %d punten",gekozenSpelers.get(5).gebruikersnaam(),gekozenSpelers.get(5).punten()));
+        	spelerBox.getChildren().add(spelerZes);
+        	geefLabelJuisteOpmaak(spelerZes,gekozenSpelers.get(5).kleur());
+    	}
+    }
+    
+    private void geefLabelJuisteOpmaak(Label lbl, SpelerKleur kleur) {
+    	int prefH = 358/dc.geefGekozenSpelers().size();
+    	    	
+    	lbl.setPrefHeight(prefH);
+    	lbl.setFont(Font.font("Algerian", 18));
+    	lbl.setAlignment(Pos.CENTER);
+    	lbl.setTextAlignment(TextAlignment.CENTER);
+    	lbl.setWrapText(true);
+    	switch (kleur) {
+    	case SpelerKleur.BLAUW -> lbl.setTextFill(Color.DODGERBLUE);
+    	case SpelerKleur.GROEN -> lbl.setTextFill(Color.LIMEGREEN);
+    	case SpelerKleur.WIT -> lbl.setTextFill(Color.WHITESMOKE);
+    	case SpelerKleur.GEEL -> lbl.setTextFill(Color.YELLOW);
+    	case SpelerKleur.ORANJE -> lbl.setTextFill(Color.ORANGE);
+    	case SpelerKleur.ROOD -> lbl.setTextFill(Color.RED);
+    	}
+    }
+    
     @FXML
     private Label welkeRonde;
     
@@ -233,51 +272,6 @@ public class SpelbordScherm extends BorderPane {
         for(int i = 0; i < 8; i ++) {
         	veranderNaarCorrecteDobbelsteen(dobbelDTOs.get(i),dobbelImages.get(i));
         }
-        
-//    	for(int i = 1; i<=8; i++) {
-//    		switch (i) {
-//    		case 1 : if (statusDobbelsteenNulNul == false) {
-//    			DobbelsteenKleur dk = dc.rol(i);
-//    			kleurNulNul = dk;
-//    			dobbelsteenNulNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
-//    		}
-//    		case 2 : if (statusDobbelsteenEenNul == false) {
-//    			DobbelsteenKleur dk = dc.rol(i);
-//    			kleurEenNul = dk;
-//    			dobbelsteenEenNul.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
-//    		}
-//    		case 3 : if (statusDobbelsteenNulEen == false) {
-//    			DobbelsteenKleur dk = dc.rol(i);
-//    			kleurNulEen = dk;
-//    			dobbelsteenNulEen.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
-//    		}
-//    		case 4 : if (statusDobbelsteenEenEen == false) {
-//    			DobbelsteenKleur dk = dc.rol(i);
-//    			kleurEenEen = dk;
-//    			dobbelsteenEenEen.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
-//    		}
-//    		case 5 : if (statusDobbelsteenNulTwee == false) {
-//    			DobbelsteenKleur dk = dc.rol(i);
-//    			kleurNulTwee = dk;
-//    			dobbelsteenNulTwee.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
-//    		}
-//    		case 6 : if (statusDobbelsteenEenTwee == false) {
-//    			DobbelsteenKleur dk = dc.rol(i);
-//    			kleurEenTwee = dk;
-//    			dobbelsteenEenTwee.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
-//    		}
-//    		case 7 : if (statusDobbelsteenNulDrie == false) {
-//    			DobbelsteenKleur dk = dc.rol(i);
-//    			kleurNulDrie = dk;
-//    			dobbelsteenNulDrie.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
-//    		}
-//    		case 8 : if (statusDobbelsteenEenDrie == false) {
-//    			DobbelsteenKleur dk = dc.rol(i);
-//    			kleurEenDrie = dk;
-//    			dobbelsteenEenDrie.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dk+".png").toExternalForm()));
-//    		}
-//    		}
-//    	}
     }
     
     private void veranderNaarCorrecteDobbelsteen(DobbelsteenDTO dobbelsteenDTO, ImageView imageView) {

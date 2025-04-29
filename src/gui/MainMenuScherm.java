@@ -51,6 +51,7 @@ public class MainMenuScherm extends BorderPane {
 		loadFxmlScreen("MainMenuScherm.fxml");
 		setAchtergrondMarkt();
 		zetOfflineButtonUit();
+		zetLeaderboard();
 	}
 
 	private void setTaal(char taal) {

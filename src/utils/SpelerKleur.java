@@ -1,6 +1,6 @@
 package utils;
 
-public enum SpelerKleur {BLAUW, GROEN, WIT, GEEL, ORANJE, ROOD;
+public enum SpelerKleur {BLAUW, GROEN, WIT, GEEL, ORANJE, ROOD
 	
 	
 
