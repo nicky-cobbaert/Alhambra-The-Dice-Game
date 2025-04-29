@@ -58,19 +58,14 @@ public class RegistreerSpelerScherm extends BorderPane{
 	
 	
 	private void setZwembad() {
-        Image zwembadImage = new Image(getClass().getResource("/images/Zwembad.png").toExternalForm());
+		Image kiesImage = new Image(getClass().getResource("/images/Registreer.png").toExternalForm());
 
-        BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+		BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
 
-        BackgroundImage achtergrond = new BackgroundImage(
-            zwembadImage,
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundRepeat.NO_REPEAT,
-            BackgroundPosition.CENTER,
-            size
-        );
+		BackgroundImage achtergrond = new BackgroundImage(kiesImage, BackgroundRepeat.NO_REPEAT,
+				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
 
-        this.setBackground(new Background(achtergrond));
+		this.setBackground(new Background(achtergrond));
     }
 	
 	@FXML

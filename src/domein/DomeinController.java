@@ -272,6 +272,10 @@ public class DomeinController {
 		spelerRepo.startOfflineModus();
 	}
 	
+	public List<SpelerDTO> geefLeaderboard(){
+		return zetSpelersOmNaarSpelerDTOs(spelerRepo.geefLeaderboard());
+	}
+	
 }
 
 //TestCommit

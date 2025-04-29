@@ -1,11 +1,13 @@
 package gui;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import domein.DomeinController;
+import dto.SpelerDTO;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -40,6 +43,7 @@ public class MainMenuScherm extends BorderPane {
 		setTaal(taal);
 		loadFxmlScreen("MainMenuScherm.fxml");
 		setAchtergrondMarkt();
+		zetLeaderboard();		
 	}
 
 	public void terugNaarMain(char taal) {
@@ -167,5 +171,40 @@ public class MainMenuScherm extends BorderPane {
 		}
 
 	}
+
+	  @FXML
+	    private Label leaderboardDrie;
+
+	    @FXML
+	    private Label leaderboardEen;
+
+	    @FXML
+	    private Label leaderboardTwee;
+
+	    @FXML
+	    private Label leaderboardVier;
+
+	    @FXML
+	    private Label leaderboardVijf;
+	    
+	    @FXML
+	    private Label leaderboard;
+	    
+	 private void zetLeaderboard() {
+		 List<SpelerDTO> lb = dc.geefLeaderboard();
+		 
+		 leaderboardEen.setWrapText(true);
+		 leaderboardTwee.setWrapText(true);
+		 leaderboardDrie.setWrapText(true);
+		 leaderboardVier.setWrapText(true);
+		 leaderboardVijf.setWrapText(true);
+		 
+		 //%n na het streepje is voor de # keer gewonnen eronder te zetten, wordt besproken of we dit doen of niet!
+		 leaderboardEen.setText(String.format("1. %s - %n%d keer gewonnen", lb.get(0).gebruikersnaam(),lb.get(0).aantalGewonnen()));
+		 leaderboardTwee.setText(String.format("2. %s - %n%d keer gewonnen", lb.get(1).gebruikersnaam(),lb.get(1).aantalGewonnen()));
+		 leaderboardDrie.setText(String.format("3. %s - %d keer gewonnen", lb.get(2).gebruikersnaam(),lb.get(2).aantalGewonnen()));
+		 leaderboardVier.setText(String.format("4. %s - %d keer gewonnen", lb.get(3).gebruikersnaam(),lb.get(3).aantalGewonnen()));
+		 leaderboardVijf.setText(String.format("5. %s - %d keer gewonnen", lb.get(4).gebruikersnaam(),lb.get(4).aantalGewonnen()));
+	 }
 
 }

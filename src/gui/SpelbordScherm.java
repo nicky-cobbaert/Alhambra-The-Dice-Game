@@ -22,7 +22,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
 
 
@@ -83,22 +82,40 @@ public class SpelbordScherm extends BorderPane {
 //		plaatsFiches();
         
 		//Code voor de achtergrond
-//		Image spelbordPNG = new Image(getClass().getResource("/images/bordTest.png").toExternalForm(), true);
-//		
-//		BackgroundSize backgroundSize = new BackgroundSize(
-//				100, 100, true, true, true, false
-//	    );
-//
-//	    BackgroundImage spelbord = new BackgroundImage(
-//	    			spelbordPNG,
-//	                BackgroundRepeat.NO_REPEAT,
-//	                BackgroundRepeat.NO_REPEAT,
-//	                BackgroundPosition.CENTER,
-//	                backgroundSize
-//	    );
-//	    
-//	    this.setBackground(new Background(spelbord));
+		Image spelbordPNG = new Image(getClass().getResource("/images/BeginAchtergrond.png").toExternalForm(), true);
+		
+		BackgroundSize backgroundSize = new BackgroundSize(
+				100, 100, true, true, true, false
+	    );
+
+	    BackgroundImage spelbord = new BackgroundImage(
+	    			spelbordPNG,
+	                BackgroundRepeat.NO_REPEAT,
+	                BackgroundRepeat.NO_REPEAT,
+	                BackgroundPosition.CENTER,
+	                backgroundSize
+	    );
+	    
+	    this.setBackground(new Background(spelbord));
 	}
+
+	@FXML
+	private GridPane BlauwResultaatGebied;
+	
+	@FXML
+	private GridPane BruinResultaatGebied;
+
+	@FXML
+	private GridPane GrijsResultaatGebied;
+	
+	@FXML
+	private GridPane GroenResultaatGebied;
+
+	@FXML
+	private GridPane PaarsResultaatGebied;
+	
+	@FXML
+    private GridPane RoodResultaatGebied;
 	
 	@FXML
     private Button RolKnop;
@@ -313,8 +330,39 @@ public class SpelbordScherm extends BorderPane {
     void SpeelKnopKlik(ActionEvent event) {
     	System.out.println("Knop \"Speel\" is ingedrukt");
     	disableDobbelstenen(true);
-    	
     	//scherm waar je dobbelsteenkleur kan kiezen
+    }
+    
+    private void plaatsZetsteen(int kleurBord, int kolom, int rij, SpelerKleur kleurZetsteen) { //kolom = in hoeveel keer, rij = hoeveel je gegooid hebt
+    	ImageView zetsteen = new ImageView(new Image(getClass().getResource("/images/Zetsteen"+kleurZetsteen+".png").toExternalForm(), true));
+    	zetsteen.setFitHeight(20);
+    	zetsteen.setFitWidth(20);
+    	if (kleurBord<=2) { //Bovenste helft!
+    		switch (kolom) {
+    		case 1 -> kolom = 3; // In de bovenste helft is de eerste kolom het slechtste (in 3 keer gegooid!
+    		case 3 -> kolom = 1;
+    		}
+    		switch (kolom) {
+        	case 1 -> zetsteen.setTranslateY(-5); //Staat in de eerste rij -> moet 5 pixels omhoog om mooi te passen
+        	case 3 -> zetsteen.setTranslateY(5); //Staat in de laatste rij -> moet 5 pixels naar beneden om mooi te passen
+        	}
+    		switch (kleurBord) {
+    		case 0 -> BlauwResultaatGebied.add(zetsteen, kolom-1, rij);
+    		case 1 -> RoodResultaatGebied.add(zetsteen, kolom-1, rij);
+    		case 2 -> BruinResultaatGebied.add(zetsteen, kolom-1, rij);
+    		}
+    	} else { //Onderste helft
+    		switch (kolom) {
+        	case 1 -> zetsteen.setTranslateY(-5); //Staat in de eerste rij -> moet 5 pixels omhoog om mooi te passen
+        	case 3 -> zetsteen.setTranslateY(5); //Staat in de laatste rij -> moet 5 pixels naar beneden om mooi te passen
+        	}
+    		switch (kleurBord) {
+    		case 3 -> GrijsResultaatGebied.add(zetsteen, kolom-1, 8-rij);
+    		case 4 -> GroenResultaatGebied.add(zetsteen, kolom-1, 8-rij);
+    		case 5 -> PaarsResultaatGebied.add(zetsteen, kolom-1, 8-rij);
+    		}
+    	}
+    	
     }
 
     @FXML

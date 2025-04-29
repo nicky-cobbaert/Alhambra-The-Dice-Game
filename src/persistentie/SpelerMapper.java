@@ -19,6 +19,8 @@ public class SpelerMapper {
 
 	private static final String UPDATE_GEWONNEN = "UPDATE speler SET aantalGewonnen = aantalGewonnen + 1 WHERE gebruikers like ?";
 	private static final String UPDATE_GESPEELD = "UPDATE speler SET aantalGespeeld = aantalGespeeld + 1 WHERE gebruikers like ?";
+	
+	private static final String GEEF_LEADERBOARD = "SELECT * FROM speler ORDER BY AantalGewonnen DESC";
 
 	// offline deel----------------------------------------------
 
@@ -153,5 +155,26 @@ public class SpelerMapper {
 		} catch (SQLException ex) {
 			throw new RuntimeException(ex);
 		}
+	}
+	public List<Speler> geefLeaderboard(){
+		List<Speler>leaderboard = new ArrayList<>();
+		try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
+				PreparedStatement query = conn.prepareStatement(GEEF_LEADERBOARD)){
+			try (ResultSet rs = query.executeQuery()) {
+				int i = 1;
+				while (rs.next() && i <=5) {
+					String gebruikersnaam = rs.getString("Gebruikers");
+					int geboortejaar = rs.getInt("geboortejaar");
+					int aantalGewonnen = rs.getInt("aantalGewonnen");
+					int aantalGespeeld = rs.getInt("aantalGespeeld");
+
+					i++;
+					leaderboard.add(new Speler(gebruikersnaam, geboortejaar, aantalGewonnen, aantalGespeeld));
+				}
+			}
+		} catch (SQLException ex) {
+			throw new RuntimeException(ex);
+		}
+		return leaderboard;
 	}
 }

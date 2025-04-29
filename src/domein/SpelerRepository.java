@@ -47,5 +47,9 @@ public class SpelerRepository {
 	public void startOfflineModus() {
 		mapper.startOfflineModus();
 	}
+	
+	public List<Speler> geefLeaderboard(){
+		return mapper.geefLeaderboard();
+	}
 
 }
