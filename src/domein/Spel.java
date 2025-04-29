@@ -361,11 +361,14 @@ public class Spel {
 			}
 		}while(nogHerhalen);
 		resetVoorVolgendeSpeler();
+		veranderHuidigeSpeler(0);
 	}
 	
 	public void beïndigRonde() {
 		verzetDeGebouwstenen();
 		geefSpelersPunten();
+		
+		veranderHuidigeSpeler(1);
 		
 	}
 	private int berekenPunten(int plaats,int positieKleur) {
@@ -429,6 +432,32 @@ public class Spel {
 			s.setIsStartSpeler(true);
 		}
 		spelbord.getFicheGebied().haalFicheWeg(spelbord.getFicheGebied().getGezettefiches().get(positieKleur));
+	}
+	private void veranderHuidigeSpeler(int type) {
+		//2 types mogelijk
+		//0 als het tijdens een ronde is
+		//1 als er een nieuwe ronde wordt gestart
+		if(type == 0) {
+			if(this.huidigeSpeler != this.startSpeler) {
+				int indexVanHuidigeSpeler = gekozenSpelers.indexOf(huidigeSpeler);
+				if(indexVanHuidigeSpeler + 1 == gekozenSpelers.size() || (indexVanHuidigeSpeler + 1 == gekozenSpelers.size() - 1 && gekozenSpelers.getLast().getIsStartSpeler())) {
+					beïndigRonde();
+				}
+				if(gekozenSpelers.get(indexVanHuidigeSpeler+1).getIsStartSpeler()) {
+					huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 2);
+				}else {
+					huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 1);
+				}
+			}else {
+				if(gekozenSpelers.getFirst().getIsStartSpeler()) {
+					huidigeSpeler = gekozenSpelers.get(1);
+				}else {
+					huidigeSpeler = gekozenSpelers.getFirst();
+				}
+			}
+		}else {
+			this.huidigeSpeler = this.startSpeler;
+		}
 	}
 	/*
 	 * alle code staat hierboven om een ronde te kunnen spelen
