@@ -32,6 +32,7 @@ public class MainMenuScherm extends BorderPane {
 	private final DomeinController dc;
 	private RegistreerSpelerScherm rss;
 	private BorderPane mainMenu;
+	private ResourceBundle bundle;
 
 	private MenuItem nl;
 	private MenuItem eng;
@@ -118,7 +119,8 @@ public class MainMenuScherm extends BorderPane {
 //		}
 
 		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
-		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		//ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		this.bundle = ResourceBundle.getBundle("messages", locale);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
 
 		loader.setRoot(this);
@@ -137,10 +139,9 @@ public class MainMenuScherm extends BorderPane {
 	void offlineButtonOnAction(ActionEvent event) {
 
 		Alert offlineModusAlert = new Alert(AlertType.CONFIRMATION);
-		offlineModusAlert.setTitle("Offline-Modus Activatiescherm");
-		offlineModusAlert.setHeaderText("Wilt u de Offline Modus inschakelen?");
-		offlineModusAlert.setContentText(
-				"Alhambra maakt normaal gezien gebruik van de VICHogent Servers. Mocht er een probleem zijn met verbinding, dan zou het een ramp zijn.\nMaar vrees niet! Door Offline-Modus aan te zetten kunt u blijven genieten van Alhambra, zelfs bij onvoorziene omstandigheden!\n\n\nEens de Offline-Modus aanstaan kan er niet meer gewisseld worden naar de VICHogent servers tot na de volgende herstart.");
+		offlineModusAlert.setTitle(bundle.getString("offline.activeer"));
+		offlineModusAlert.setHeaderText(bundle.getString("offline.confirm"));
+		offlineModusAlert.setContentText(bundle.getString("offline.uitleg"));
 
 		Optional<ButtonType> resultaat = offlineModusAlert.showAndWait();
 
@@ -155,10 +156,9 @@ public class MainMenuScherm extends BorderPane {
 				Alert h2ModuleError = new Alert(AlertType.ERROR);// ik zet hier een catch, omdat anders het spel crasht,
 																	// als de H2 module er niet is (om data naar van het
 																	// speler bestand op te slaan)
-				h2ModuleError.setTitle("Geen H2 module driver jar gevonden");
-				h2ModuleError.setHeaderText("Offline-Modus kan niet gestart worden!");
-				h2ModuleError.setContentText(
-						"De offline-modus maakt gebruik van de h2 module jar om informatie in te laden. Het spel kan dus niet gespeeld worden in offline modus zonder dit bestand.\n\n\nH2 Database Engine Download: https://github.com/h2database/h2database/releases/");
+				h2ModuleError.setTitle(bundle.getString("offline.jar"));
+				h2ModuleError.setHeaderText(bundle.getString("offline.error"));
+				h2ModuleError.setContentText(bundle.getString("offline.download"));
 				h2ModuleError.showAndWait();
 			}
 		}
@@ -201,11 +201,18 @@ public class MainMenuScherm extends BorderPane {
 		 leaderboardVijf.setWrapText(true);
 		 
 		 //%n na het streepje is voor de # keer gewonnen eronder te zetten, wordt besproken of we dit doen of niet!
-		 leaderboardEen.setText(String.format("1. %s - %n%d keer gewonnen", lb.get(0).gebruikersnaam(),lb.get(0).aantalGewonnen()));
-		 leaderboardTwee.setText(String.format("2. %s - %n%d keer gewonnen", lb.get(1).gebruikersnaam(),lb.get(1).aantalGewonnen()));
-		 leaderboardDrie.setText(String.format("3. %s - %d keer gewonnen", lb.get(2).gebruikersnaam(),lb.get(2).aantalGewonnen()));
-		 leaderboardVier.setText(String.format("4. %s - %d keer gewonnen", lb.get(3).gebruikersnaam(),lb.get(3).aantalGewonnen()));
-		 leaderboardVijf.setText(String.format("5. %s - %d keer gewonnen", lb.get(4).gebruikersnaam(),lb.get(4).aantalGewonnen()));
+//		 leaderboardEen.setText(String.format("1. %s - %n%d keer gewonnen", lb.get(0).gebruikersnaam(),lb.get(0).aantalGewonnen()));
+//		 leaderboardTwee.setText(String.format("2. %s - %n%d keer gewonnen", lb.get(1).gebruikersnaam(),lb.get(1).aantalGewonnen()));
+//		 leaderboardDrie.setText(String.format("3. %s - %d keer gewonnen", lb.get(2).gebruikersnaam(),lb.get(2).aantalGewonnen()));
+//		 leaderboardVier.setText(String.format("4. %s - %d keer gewonnen", lb.get(3).gebruikersnaam(),lb.get(3).aantalGewonnen()));
+//		 leaderboardVijf.setText(String.format("5. %s - %d keer gewonnen", lb.get(4).gebruikersnaam(),lb.get(4).aantalGewonnen()));
+		 
+		 leaderboardEen.setText(String.format(bundle.getString("leaderboard.regel"), 1, lb.get(0).gebruikersnaam(), lb.get(0).aantalGewonnen()));
+		 leaderboardTwee.setText(String.format(bundle.getString("leaderboard.regel"), 2, lb.get(1).gebruikersnaam(), lb.get(1).aantalGewonnen()));
+		 leaderboardDrie.setText(String.format(bundle.getString("leaderboard.regel"), 3, lb.get(2).gebruikersnaam(), lb.get(2).aantalGewonnen()));
+		 leaderboardVier.setText(String.format(bundle.getString("leaderboard.regel"), 4, lb.get(3).gebruikersnaam(), lb.get(3).aantalGewonnen()));
+		 leaderboardVijf.setText(String.format(bundle.getString("leaderboard.regel"), 5, lb.get(4).gebruikersnaam(), lb.get(4).aantalGewonnen()));
+
 	 }
 
 }
