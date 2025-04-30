@@ -7,6 +7,7 @@ import java.util.List;
 import domein.DomeinController;
 import dto.DobbelsteenDTO;
 import dto.FicheDTO;
+import dto.GebouwsteenDTO;
 import dto.SpelerDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -84,21 +90,21 @@ public class SpelbordScherm extends BorderPane {
 //		plaatsFiches();
         
 		//Code voor de achtergrond
-//		Image spelbordPNG = new Image(getClass().getResource("/images/BeginSpelbord.png").toExternalForm(), true);
-//		
-//		BackgroundSize backgroundSize = new BackgroundSize(
-//				100, 100, true, true, true, false
-//	    );
-//
-//	    BackgroundImage spelbord = new BackgroundImage(
-//	    			spelbordPNG,
-//	                BackgroundRepeat.NO_REPEAT,
-//	                BackgroundRepeat.NO_REPEAT,
-//	                BackgroundPosition.CENTER,
-//	                backgroundSize
-//	    );
-//	    
-//	    this.setBackground(new Background(spelbord));
+		Image spelbordPNG = new Image(getClass().getResource("/images/Spelbord.png").toExternalForm(), true);
+		
+		BackgroundSize backgroundSize = new BackgroundSize(
+				100, 100, true, true, true, false
+	    );
+
+	    BackgroundImage spelbord = new BackgroundImage(
+	    			spelbordPNG,
+	                BackgroundRepeat.NO_REPEAT,
+	                BackgroundRepeat.NO_REPEAT,
+	                BackgroundPosition.CENTER,
+	                backgroundSize
+	    );
+	    
+	    this.setBackground(new Background(spelbord));
 	}
 
 	@FXML
@@ -124,6 +130,9 @@ public class SpelbordScherm extends BorderPane {
 
     @FXML
     private Button SpeelKnop;
+    
+    @FXML
+    private GridPane gebouwsteenGebied;
 
     @FXML
     private ImageView dobbelsteenEenDrie;
@@ -324,7 +333,23 @@ public class SpelbordScherm extends BorderPane {
     void SpeelKnopKlik(ActionEvent event) {
     	System.out.println("Knop \"Speel\" is ingedrukt");
     	disableDobbelstenen(true);
-    	//scherm waar je dobbelsteenkleur kan kiezen
+    }
+    
+    private void plaatsGebouwstenen(List<GebouwsteenDTO> stenen, SpelerKleur kleur) {
+    	for(GebouwsteenDTO steen : stenen) {
+    		ImageView gebouwsteen = new ImageView(new Image(getClass().getResource("/images/"+kleur+"gebouwsteen.png").toExternalForm(), true));
+        	gebouwsteen.setFitHeight(30);
+        	gebouwsteen.setFitWidth(30);
+        	
+        	gebouwsteen.setViewOrder(steen.volgorde());
+        	
+        	int offset = (steen.volgorde()-1)*5;
+        	
+        	gebouwsteen.setTranslateX(offset);
+        	gebouwsteen.setTranslateY(offset);
+        	
+        	gebouwsteenGebied.add(gebouwsteen, (steen.positie()/10)-1, 10-steen.positie()%10);
+    	}
     }
     
     private void plaatsZetsteen(int kleurBord, int kolom, int rij, SpelerKleur kleurZetsteen) { //kolom = in hoeveel keer, rij = hoeveel je gegooid hebt
