@@ -43,9 +43,8 @@ public class WinnaarScherm extends GridPane {
 
 	public WinnaarScherm(DomeinController dc, char taal, MainMenuScherm mainMenu) {
 		this.dc = dc;
-		dc.maakNieuwSpel();
 		setTaal(taal);
-		loadFxmlScreen("GebruikerKiesScherm.fxml");
+		loadFxmlScreen("WinnaarScherm.fxml");
 
 		// labels aanvullen volgens punten-----------------------
 
@@ -61,11 +60,14 @@ public class WinnaarScherm extends GridPane {
 
 		String winnaars = "";
 
+		
+		//if statement kijkt of er meerdere winaars zijn
 		if (dc.geefWinnaars().size() == 1) {
 			winnaars = dc.geefWinnaars().get(0).gebruikersnaam();
 
 		} else {
 
+			//als er meerdere zijn itereert de iterator over alle winnaars
 			Iterator<SpelerDTO> it = new ArrayList<SpelerDTO>().iterator();
 
 			while (it.hasNext()) {
@@ -184,7 +186,7 @@ public class WinnaarScherm extends GridPane {
 	void bedanktKnopOnAction(ActionEvent event) {
 
 		Alert bedanktAlert = new Alert(AlertType.INFORMATION);
-		bedanktAlert.setTitle("Bedankt!");
+		bedanktAlert.setTitle("Bedankt om te spelen!");
 		bedanktAlert.setHeaderText("Credits:");
 		bedanktAlert.setContentText("Cobbaert Nicky\nDe Wever Lars\nGheysels Wout\nLippens Sverre\nVan Horen Jelle");
 		bedanktAlert.showAndWait();
