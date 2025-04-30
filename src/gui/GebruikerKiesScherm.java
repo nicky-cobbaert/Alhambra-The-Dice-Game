@@ -38,6 +38,7 @@ public class GebruikerKiesScherm extends BorderPane {
 	private SpelerKleur voorlopigGekozenSpelerKleur;
 	private int voorlopigGekozenSpelerNaam;
 	private boolean spelerGezocht = false;
+	private ResourceBundle bundle;
 
 	@FXML
 	private Label overeenkomstigeLettersLabel;
@@ -161,7 +162,8 @@ public class GebruikerKiesScherm extends BorderPane {
 	private void loadFxmlScreen(String name) {
 		//FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
-		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		//ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		this.bundle = ResourceBundle.getBundle("messages", locale);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
 		loader.setRoot(this);
 		loader.setController(this);
@@ -207,7 +209,7 @@ public class GebruikerKiesScherm extends BorderPane {
 	void zoekKnopOnAction(ActionEvent event) {
 		try {
 			if (zoekBalk.getText() == null || zoekBalk.getText().isBlank()) {
-				throw new IllegalArgumentException("Dit is geen geldige naam!");
+				throw new IllegalArgumentException(bundle.getString("error.foutenaam"));
 			}
 
 			String gezochteNaam = zoekBalk.getText();
@@ -220,10 +222,10 @@ public class GebruikerKiesScherm extends BorderPane {
 			lijstSpelers.setItems(FXCollections.observableArrayList(goedeNamen));
 
 			overeenkomstigeLettersLabel
-					.setText(String.format("aantal overeenkomstige letters: %d", aantalOvereenkomstigeLetter));
+					.setText(String.format(bundle.getString("label.overeenkomstigeLetters"), aantalOvereenkomstigeLetter));
 
 			if (goedeNamen.isEmpty()) {
-				overeenkomstigeLettersLabel.setText("Sorry, er werd geen overeenkomstige naam gevonden...");
+				overeenkomstigeLettersLabel.setText(bundle.getString("label.geenovereenkomst")); 
 			} else {
 				spelerGezocht = true;
 			}
@@ -296,16 +298,16 @@ public class GebruikerKiesScherm extends BorderPane {
 		
 		}catch (IllegalArgumentException e) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Oeps een fout");
-			alert.setHeaderText("De 'selecteer deze speler' knop gaf een fout:");
+			alert.setTitle(bundle.getString("error.fout"));
+			alert.setHeaderText(bundle.getString("error.selecteerSpeler"));
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
 			
 		}catch (IndexOutOfBoundsException e) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Oeps een fout");
-			alert.setHeaderText("De 'selecteer deze speler' knop gaf een fout:");
-			alert.setContentText("Je hebt geen speler gekozen!");
+			alert.setTitle(bundle.getString("error.fout"));
+			alert.setHeaderText(bundle.getString("error.selecteerSpeler"));
+			alert.setContentText(bundle.getString("error.geenSpeler"));
 			alert.showAndWait();
 		}
 		
@@ -337,7 +339,7 @@ public class GebruikerKiesScherm extends BorderPane {
 		selecteerSpelerKnop.setTextFill(voorlopigeKleur.getTextFill());
 
 		//selecteerSpelerKnop.setText("Kies bovenstaande speler!");
-		selecteerSpelerKnop.setText("Kies bovenstaande speler!");
+		selecteerSpelerKnop.setText(bundle.getString("button.kies"));
 		
 
 	}
@@ -372,7 +374,7 @@ public class GebruikerKiesScherm extends BorderPane {
 
 		selecteerSpelerKnop.setStyle(terugKnop.getStyle());
 		selecteerSpelerKnop.setTextFill(terugKnop.getTextFill());
-		selecteerSpelerKnop.setText("Kies deze speler");
+		selecteerSpelerKnop.setText(bundle.getString("button.kies1"));
 		// einde knop stijl terugkeren---------------------------------------------
 
 		// de resetknop disarmed de selecteerSpelerKnop omdat er anders meerdere keren
@@ -410,7 +412,7 @@ public class GebruikerKiesScherm extends BorderPane {
 
 		try {
 			if (dc.geefGekozenSpelers().size() < 3 || dc.geefGekozenSpelers().size() > 6) {
-				throw new IllegalArgumentException("Er moeten minstens 3 spelers , maximum 6 spelers deelnemen!");
+				throw new IllegalArgumentException(bundle.getString("error.teWeinigVeel"));
 			}
 
 			this.setBackground(null);
@@ -419,8 +421,8 @@ public class GebruikerKiesScherm extends BorderPane {
 
 		} catch (IllegalArgumentException e) {
 			Alert verkeerdAantalSpelers = new Alert(AlertType.ERROR);
-			verkeerdAantalSpelers.setTitle("Het Spel kan niet worden gestart");
-			verkeerdAantalSpelers.setHeaderText("Het Spel kan niet worden gestart.");
+			verkeerdAantalSpelers.setTitle(bundle.getString("error.start"));
+			verkeerdAantalSpelers.setHeaderText(bundle.getString("error.start"));
 			verkeerdAantalSpelers.setContentText(e.getMessage());
 			verkeerdAantalSpelers.showAndWait();
 		}
