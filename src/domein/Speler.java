@@ -41,7 +41,7 @@ public class Speler {
 	private void setGebruikersnaam(String gebruikersnaam) {
 		if (gebruikersnaam == null || gebruikersnaam.isEmpty() || gebruikersnaam.isBlank()
 				|| gebruikersnaam.length() < 6) {
-			throw new IllegalArgumentException("Ongeldige gebruikersnaam, uw gebruikersnaam moet minstens 6 karakters hebben!");
+			throw new IllegalArgumentException("gebruikersnaam.teKort");
 		}
 
 		this.gebruikersnaam = gebruikersnaam;
@@ -54,7 +54,7 @@ public class Speler {
 	private void setGeboortejaar(int geboortejaar) {
 		if (geboortejaar + 6 > HUIDIG_JAAR || geboortejaar + 100 < HUIDIG_JAAR) {
 			throw new IllegalArgumentException(
-					"Je moet tussen de leeftijd van 6 en 100 zijn om dit spel te mogen spelen");
+					"geboortedatum.ongeldig");
 		}
 		this.geboortejaar = geboortejaar;
 	}

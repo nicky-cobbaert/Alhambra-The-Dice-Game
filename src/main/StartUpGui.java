@@ -10,6 +10,7 @@ public class StartUpGui extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		DomeinController dc = new DomeinController();
+		dc.setGUIMode(true);
 		WelkomTaalScherm wts = new WelkomTaalScherm(dc);
 		Scene scene = new Scene(wts);
 		primaryStage.setScene(scene);

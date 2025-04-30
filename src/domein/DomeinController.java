@@ -15,16 +15,54 @@ public class DomeinController {
 
 	private final SpelerRepository spelerRepo;
 	private Spel spel;
+	private boolean isGUI; // Nodig voor vertaling, bepaald of je in cli zit (geen vertaling) of gui (wel vertaling)
+    
+    public DomeinController() {
+        spelerRepo = new SpelerRepository();
+        isGUI = false; // Default is cli
+    }
+    
+    public void setGUIMode(boolean isGUI) {
+        this.isGUI = isGUI;
+    }
+    
+    // Zorgt ervoor dat berichten in cli mooi worden weergegeven
+    private String translateErrorKey(String key) {
+        if (!isGUI) {
+            // Illegal argument exception word mooit gezet
+            Map<String, String> errorMessages = new HashMap<>();
+            errorMessages.put("gebruikersnaam.teKort", "Gebruikersnaam moet minimaal 6 karakters bevatten");
+            errorMessages.put("geboortedatum.ongeldig", "Je moet tussen de leeftijd van 6 en 100 zijn om dit spel te mogen spelen");
+            // Add other translations as needed
+            
+            return errorMessages.getOrDefault(key, key); // als er niks gevonden is default
+        }
+        return key; // In GUI mode wordt de sluitel naar resourcebundel gestuurd
+    }
+    
+    public void registreerSpeler(String gebruikersnaam, int geboortejaar) {
+        try {
+            Speler nieuweSpeler = new Speler(gebruikersnaam, geboortejaar);
+            spelerRepo.voegToe(nieuweSpeler);
+        } catch (IllegalArgumentException e) {
+            // Translate the error message if it's a key
+            String translatedMessage = translateErrorKey(e.getMessage());
+            throw new IllegalArgumentException(translatedMessage);
+        }
+    }
+	
+	
+	
 
-	public DomeinController() {
-		spelerRepo = new SpelerRepository();
-//        huidigeSpelers = new Speler();
-	}
-
-	public void registreerSpeler(String gebruikersnaam, int geboortejaar) {
-		Speler nieuweSpeler = new Speler(gebruikersnaam, geboortejaar);
-		spelerRepo.voegToe(nieuweSpeler);
-	}
+//	public DomeinController() {
+//		spelerRepo = new SpelerRepository();
+////        huidigeSpelers = new Speler();
+//	}
+//
+//	public void registreerSpeler(String gebruikersnaam, int geboortejaar) {
+//		Speler nieuweSpeler = new Speler(gebruikersnaam, geboortejaar);
+//		spelerRepo.voegToe(nieuweSpeler);
+//	}
 
 	public void maakNieuwSpel() {
 		spel = new Spel();
