@@ -5,7 +5,7 @@ import java.util.List;
 
 public class FicheGebied implements Placeable {
 	
-	private List<Fiche> fiches; // naam veranderen naar gewoon fiches?
+	private List<Fiche> fiches; 
 
 	public FicheGebied() {
 		fiches = new ArrayList<>();

@@ -7,20 +7,21 @@ import java.util.Objects;
 import utils.SpelerKleur;
 
 public class Speler {
+	
+	private List<Zetsteen> zetstenen;
+	private List<Gebouwsteen> gebouwstenen;
+	
+	private final static int HUIDIG_JAAR = 2025;
+	
 	private String gebruikersnaam;
 	private int geboortejaar;
 	private int aantalGewonnen, aantalGespeeld;
 	private SpelerKleur kleur;
-	private List<Zetsteen> zetstenen;
-	private List<Gebouwsteen> gebouwstenen;
 	private int punten = 0;
 	private boolean isStartSpeler;
 
-	/*
-	 * private List<Gebouwsteen> gebouwstenen
-	 */
 
-	private final static int HUIDIG_JAAR = 2025;
+	
 
 	public Speler(String gebruikersnaam, int geboortejaar) {
 		this(gebruikersnaam, geboortejaar, 0, 0);
@@ -73,6 +74,13 @@ public class Speler {
 	public int getAantalGespeeld() {
 		return aantalGespeeld;
 	}
+	
+	private void setAantalGespeeld(int aantalGespeeld) {
+		if (aantalGespeeld < 0) {
+			throw new IllegalArgumentException("Je moet een positief getal (of 0) aantal gespeelde spellen hebben");
+		}
+		this.aantalGespeeld = aantalGespeeld;
+	}
 
 	public void voegPuntenToe(int punten) {
 		this.punten += punten;
@@ -82,12 +90,7 @@ public class Speler {
 		return punten;
 	}
 
-	private void setAantalGespeeld(int aantalGespeeld) {
-		if (aantalGespeeld < 0) {
-			throw new IllegalArgumentException("Je moet een positief getal (of 0) aantal gespeelde spellen hebben");
-		}
-		this.aantalGespeeld = aantalGespeeld;
-	}
+	
 
 	public static List<SpelerKleur> geefAlleKleuren() {
 		List<SpelerKleur> spelerKleuren = new ArrayList<SpelerKleur>();

@@ -3,9 +3,9 @@ package domein;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultatenGebied implements Placeable{ // relatie met Zetsteen nog niet in orde op dcd? --> aangepast in dcd
+public class ResultatenGebied implements Placeable{ 
 
-	private List<Zetsteen> zetstenen; // relatie moet in pijl op dcd en niet als atribuut
+	private List<Zetsteen> zetstenen; 
 
 	public ResultatenGebied() {
 		zetstenen = new ArrayList<Zetsteen>();

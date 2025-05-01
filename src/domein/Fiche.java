@@ -20,20 +20,13 @@ public class Fiche {
 
 	public void plaatsNeer(int positie) {
 		
+		
+		// moet dit niet uit commentaar?
+		
 //		if (positie < 0 || positie > 6) {
 //			throw new IllegalArgumentException(String.format("Ongeldig fiche positie %d", positie));
 //		}
 		
-		// perongeluk zetsteen setter gemaakt hier ook verkeerde test
-//	        if (positie / 100 < 1 || positie / 100 > 6) {
-//	            throw new IllegalArgumentException("Ongeldige kleur: " + (positie / 100));
-//	        }
-//	        if ((positie / 10) % 10 < 1 || (positie / 10) % 10 > 8) {
-//	            throw new IllegalArgumentException("Ongeldig aantal gebouwen: " + ((positie / 10) % 10));
-//	        }
-//	        if (positie % 10 < 1 || positie % 10 > 3) {
-//	            throw new IllegalArgumentException("Ongeldig aantal worpen: " + (positie % 10));
-//	        }
 	        ficheGebied.plaatsFicheNeer(this,positie);
 	    }
 	}
