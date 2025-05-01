@@ -3,7 +3,6 @@ package gui;
 import java.io.IOException;
 
 import domein.DomeinController;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,8 +38,24 @@ public class KiesDobbelsteenKleurScherm extends GridPane {
 		this.dc = dc;
 		this.ss = ss;
 		loadFxmlScreen("KiesDobbelsteenKleurScherm.fxml");
+		zetKnopCorrect(blauweKleurKnop, DobbelsteenKleur.BLAUW);
+		zetKnopCorrect(bruineKleurKnop, DobbelsteenKleur.BRUIN);
+		zetKnopCorrect(grijzeKleurKnop, DobbelsteenKleur.GRIJS);
+		zetKnopCorrect(groeneKleurKnop, DobbelsteenKleur.GROEN);
+		zetKnopCorrect(paarseKleurKnop, DobbelsteenKleur.PAARS);
+		zetKnopCorrect(rodeKleurKnop, DobbelsteenKleur.ROOD);
 	}
 
+	
+	private void zetKnopCorrect(Button knop, DobbelsteenKleur kleur) {
+		long aantal = dc.getDobbelstenenDTOs().stream().
+				filter(e -> e.kleur().equals(kleur))
+				.count();
+		knop.setText(String.format("%s %d",
+				knop.getText(),aantal));
+		knop.setDisable(aantal == 0);
+		
+	}
 	private void loadFxmlScreen(String name) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 		loader.setRoot(this);
