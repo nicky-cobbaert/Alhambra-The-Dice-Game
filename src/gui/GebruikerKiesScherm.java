@@ -416,7 +416,7 @@ public class GebruikerKiesScherm extends BorderPane {
 			}
 
 			this.setBackground(null);
-			SpelbordScherm sbs = new SpelbordScherm(dc);
+			SpelbordScherm sbs = new SpelbordScherm(dc,taal);
 			this.setCenter(sbs);
 
 		} catch (IllegalArgumentException e) {

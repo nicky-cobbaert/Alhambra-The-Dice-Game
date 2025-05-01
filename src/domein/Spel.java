@@ -342,7 +342,7 @@ public class Spel {
 		int positie = aantalKeerGerold;
 		boolean nogHerhalen = true;
 		//moet weer uit commentaar als het werkt
-		//positie += dobbelstenen.stream().filter(e -> e.getDobbelsteenKleur() == kleur).count() * 10;
+		positie += dobbelstenen.stream().filter(e -> e.getDobbelsteenKleur() == kleur).count() * 10;
 		switch(kleur) {
 			case BLAUW -> {positie += 100;}
 			case ROOD  -> {positie += 200;}
