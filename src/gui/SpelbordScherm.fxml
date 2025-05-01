@@ -140,7 +140,7 @@
                         <Font name="Algerian" size="20.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="40.0" />
                      </GridPane.margin>
                   </Button>
                   <Button fx:id="RolKnop" alignment="CENTER" mnemonicParsing="false" onAction="#RolKnopKlik" prefHeight="9.0" prefWidth="64.0" text="Rol" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
@@ -148,20 +148,23 @@
                         <Font name="Algerian" size="20.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="40.0" />
                      </GridPane.margin>
                   </Button>
-                  <Label fx:id="welkeRonde" alignment="CENTER" prefHeight="62.0" prefWidth="123.0" text="Ronde1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Label fx:id="welkeRonde" alignment="CENTER" prefHeight="62.0" prefWidth="200.0" text="Ronde1" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
-                        <Font name="Algerian" size="25.0" />
+                        <Font name="Algerian" size="50.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets top="40.0" />
+                     </GridPane.margin>
                   </Label>
                   <VBox fx:id="spelerBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <padding>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                        <Insets bottom="5.0" left="25.0" right="25.0" top="5.0" />
                      </padding>
                   </VBox>
                   <GridPane GridPane.columnSpan="2" GridPane.rowIndex="2">

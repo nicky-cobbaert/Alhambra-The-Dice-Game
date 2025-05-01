@@ -199,16 +199,16 @@ public class SpelbordScherm extends BorderPane {
     	int prefH = 358/dc.geefGekozenSpelers().size();
     	    	
     	lbl.setPrefHeight(prefH);
-    	lbl.setFont(Font.font("Algerian", 18));
+    	lbl.setFont(Font.font("Algerian", 15));
     	lbl.setAlignment(Pos.CENTER);
     	lbl.setTextAlignment(TextAlignment.CENTER);
     	lbl.setWrapText(true);
     	switch (kleur) {
-    	case SpelerKleur.BLAUW -> lbl.setTextFill(Color.DODGERBLUE);
+    	case SpelerKleur.BLAUW -> lbl.setTextFill(Color.BLUE);
     	case SpelerKleur.GROEN -> lbl.setTextFill(Color.LIMEGREEN);
     	case SpelerKleur.WIT -> lbl.setTextFill(Color.WHITESMOKE);
     	case SpelerKleur.GEEL -> lbl.setTextFill(Color.YELLOW);
-    	case SpelerKleur.ORANJE -> lbl.setTextFill(Color.ORANGE);
+    	case SpelerKleur.ORANJE -> lbl.setTextFill(Color.color(1, 0.35, 0));
     	case SpelerKleur.ROOD -> lbl.setTextFill(Color.RED);
     	}
     }
