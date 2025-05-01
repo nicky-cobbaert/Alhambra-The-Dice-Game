@@ -269,9 +269,11 @@ public class SpelbordScherm extends BorderPane {
     	boolean gerold= dc.rolDobbelstenen();
     	if (dc.getAantalKeerGerold() >= 3)
     		RolKnop.setDisable(true);
+    		RolKnop.disarm(); //zonder disarm kan je enter duwen om te blijven rollen
         if (!gerold) {
             // Disable de rolknop na 3 worpen
             RolKnop.setDisable(true);
+            RolKnop.disarm(); 
             System.out.println("Je hebt al 3 keer gegooid! De knop is uitgeschakeld.");
             disableDobbelstenen(true);
         }

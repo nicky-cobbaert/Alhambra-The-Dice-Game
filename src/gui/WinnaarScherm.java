@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 import domein.DomeinController;
 import dto.SpelerDTO;
@@ -18,19 +16,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
 import utils.SpelerKleur;
 
-public class WinnaarScherm extends GridPane {
+public class WinnaarScherm extends BorderPane {
 
 	private final DomeinController dc;
-	private char taal;
-
 	private void loadFxmlScreen(String name) {
-		// FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
-		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
-		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 		loader.setRoot(this);
 		loader.setController(this);
 		try {
@@ -38,7 +31,6 @@ public class WinnaarScherm extends GridPane {
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
-
 	}
 
 	public WinnaarScherm(DomeinController dc, char taal, MainMenuScherm mainMenu) {
@@ -126,7 +118,6 @@ public class WinnaarScherm extends GridPane {
 	}
 
 	private void setTaal(char taal) {
-		this.taal = taal;
 	}
 
 	@FXML
