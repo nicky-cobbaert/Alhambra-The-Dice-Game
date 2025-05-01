@@ -7,7 +7,9 @@ import java.util.Map;
 
 import dto.DobbelsteenDTO;
 import dto.FicheDTO;
+import dto.GebouwsteenDTO;
 import dto.SpelerDTO;
+import dto.ZetsteenDTO;
 import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
 
@@ -103,12 +105,32 @@ public class DomeinController {
 		List<SpelerDTO> resultaat = new ArrayList<>();
 
 		for (Speler s : spelers) {
-			SpelerDTO sp = new SpelerDTO(s.getGebruikersnaam(), s.getGeboortejaar(), s.getAantalGespeeld(),
-					s.getAantalGewonnen(), s.getKleur(), s.getPunten());
+			SpelerDTO sp = zetSpelerOmNaarDTO(s);
 			resultaat.add(sp);
 		}
 
 		return resultaat;
+	}
+	
+	private List<ZetsteenDTO> zetZetsteenNaarDTO(List<Zetsteen> zetstenen){
+		List<ZetsteenDTO> zetsteenDTOs = new ArrayList<ZetsteenDTO>();
+		if (zetstenen == null) {
+			return null;
+		}
+		for(Zetsteen z:zetstenen) {
+			zetsteenDTOs.add(new ZetsteenDTO(z.getPositie()));
+		}
+		return zetsteenDTOs;
+	}
+	private List<GebouwsteenDTO> zetGebouwsteenNaarDTO(List<Gebouwsteen> gebouwstenen){
+		List<GebouwsteenDTO> gebouwsteenDTOs = new ArrayList<GebouwsteenDTO>();
+		if (gebouwstenen == null) {
+			return null;
+		}
+		for(Gebouwsteen g:gebouwstenen) {
+			gebouwsteenDTOs.add(new GebouwsteenDTO(g.getPositie(),g.getVolgorde()));
+		}
+		return gebouwsteenDTOs;
 	}
 
 	public static String kleurGever(SpelerKleur kleur) {
@@ -294,8 +316,8 @@ public class DomeinController {
 		return ficheDTOs;
 	}
 	
-	public void beïndigBeurt(DobbelsteenKleur kleur) {
-		spel.beïndigBeurt(kleur);
+	public SpelerDTO beïndigBeurt(DobbelsteenKleur kleur) {
+		return zetSpelerOmNaarDTO(spel.beïndigBeurt(kleur));
 	}
 	
 	public void beïndigRonde() {
@@ -312,6 +334,21 @@ public class DomeinController {
 	
 	public List<SpelerDTO> geefLeaderboard(){
 		return zetSpelersOmNaarSpelerDTOs(spelerRepo.geefLeaderboard());
+	}
+	
+	private SpelerDTO zetSpelerOmNaarDTO(Speler s) {
+		return new SpelerDTO(s.getGebruikersnaam(),s.getGeboortejaar(), s.getAantalGespeeld(),
+				s.getAantalGewonnen(), s.getKleur(),zetZetsteenNaarDTO(s.getZetstenen()),
+				zetGebouwsteenNaarDTO(s.getGebouwstenen()), s.getPunten());
+	}
+	
+	public SpelerDTO getHuidigeSpelerDTO() {
+		return zetSpelerOmNaarDTO(spel.getHuidigeSpeler());
+	}
+
+	public int getRonde() {
+		
+		return spel.getRonde();
 	}
 	
 }

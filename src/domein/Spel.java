@@ -112,14 +112,16 @@ public class Spel {
 		geefSpelersZetstenen();
 		geefSpelerGebouwstenen();
 		this.aantalKeerGerold = 0;
-
+		
 		SecureRandom rand = new SecureRandom();
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
+		startSpeler.setIsStartSpeler(true);
+		this.huidigeSpeler = this.startSpeler;
 	}
 
 	public void beïndigSpel() {
 		clearSpelersVanAttributenNaSpelEindigt();
-		// TODO UC3 code
+		
 
 	}
 
@@ -336,13 +338,14 @@ public class Spel {
 	public List<Fiche> getGezetteFiches() {
 		return spelbord.getFicheGebied().getGezettefiches();
 	}
-	public void beïndigBeurt(DobbelsteenKleur kleur) {
+	public Speler beïndigBeurt(DobbelsteenKleur kleur) {
 		int positie = aantalKeerGerold;
 		boolean nogHerhalen = true;
-		positie += dobbelstenen.stream().filter(e -> e.getDobbelsteenKleur() == kleur).count() * 10;
+		//moet weer uit commentaar als het werkt
+		//positie += dobbelstenen.stream().filter(e -> e.getDobbelsteenKleur() == kleur).count() * 10;
 		switch(kleur) {
 			case BLAUW -> {positie += 100;}
-			case ROOD ->  {positie += 200;}
+			case ROOD  -> {positie += 200;}
 			case BRUIN -> {positie += 300;}
 			case GRIJS -> {positie += 400;}
 			case GROEN -> {positie += 500;}
@@ -360,8 +363,10 @@ public class Spel {
 				}
 			}
 		}while(nogHerhalen);
+		Speler current = huidigeSpeler;
 		resetVoorVolgendeSpeler();
 		veranderHuidigeSpeler(0);
+		return current;
 	}
 	
 	public void beïndigRonde() {
@@ -445,20 +450,34 @@ public class Spel {
 				}
 				if(gekozenSpelers.get(indexVanHuidigeSpeler+1).getIsStartSpeler()) {
 					huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 2);
+					return;
 				}else {
 					huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 1);
+					return;
 				}
 			}else {
 				if(gekozenSpelers.getFirst().getIsStartSpeler()) {
 					huidigeSpeler = gekozenSpelers.get(1);
+					return;
 				}else {
 					huidigeSpeler = gekozenSpelers.getFirst();
+					return;
 				}
 			}
 		}else {
 			this.huidigeSpeler = this.startSpeler;
 		}
 	}
+
+	public Speler getHuidigeSpeler() {
+		return huidigeSpeler;
+	}
+
+	public int getRonde() {
+		
+		return ronde;
+	}
+	
 	/*
 	 * alle code staat hierboven om een ronde te kunnen spelen
 	 */

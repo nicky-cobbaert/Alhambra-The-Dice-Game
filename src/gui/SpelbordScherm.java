@@ -9,6 +9,7 @@ import dto.DobbelsteenDTO;
 import dto.FicheDTO;
 import dto.GebouwsteenDTO;
 import dto.SpelerDTO;
+import dto.ZetsteenDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -277,7 +278,11 @@ public class SpelbordScherm extends BorderPane {
         SpeelKnop.setDisable(false);
             // Eerste worp? Dan dobbelstenen aanklikbaar maken.
             disableDobbelstenen(false);
-        List<DobbelsteenDTO> dobbelDTOs = dc.getDobbelstenenDTOs();
+        zetAlleDobbelstenenNaarHunHuidigeImage();
+    }
+    
+    private void zetAlleDobbelstenenNaarHunHuidigeImage() {
+    	List<DobbelsteenDTO> dobbelDTOs = dc.getDobbelstenenDTOs();
         for(int i = 0; i < 8; i ++) {
         	veranderNaarCorrecteDobbelsteen(dobbelDTOs.get(i),dobbelImages.get(i));
         }
@@ -286,6 +291,7 @@ public class SpelbordScherm extends BorderPane {
     private void veranderNaarCorrecteDobbelsteen(DobbelsteenDTO dobbelsteenDTO, ImageView imageView) {
     	if(dobbelsteenDTO.kleur() == null) {
     		imageView.setImage(null);
+    		return;
     	}
     	if(dobbelsteenDTO.nogRollen()) {
     		imageView.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dobbelsteenDTO.kleur()+".png").toExternalForm()));
@@ -317,22 +323,28 @@ public class SpelbordScherm extends BorderPane {
     	}
     }
     private void beïndigBeurt() {
-        dc.beïndigBeurt(null);;
+    	//pop up om die kleur te kiezen
+    	//TODO
+    	//hier wordt het neergeplaatst
+         SpelerDTO huidigeSpelerDTO = dc.beïndigBeurt(dc.getDobbelstenenDTOs().getFirst().kleur());;
         RolKnop.setDisable(false);
         SpeelKnop.setDisable(true);
-        // Reset dobbelsteenstatussen
-        clearImages(dobbelImages);
-
         // Reset afbeeldingen van dobbelstenen
+        zetAlleDobbelstenenNaarHunHuidigeImage();
+      
         
+        ZetsteenDTO nieuweZetsteen = huidigeSpelerDTO.zetstenen().stream().filter(e -> e.positie() != 0).toList().getLast();
+        plaatsZetsteen(nieuweZetsteen.positie() / 100, nieuweZetsteen.positie() % 10, nieuweZetsteen.positie()/10%10, huidigeSpelerDTO.kleur());
         // Dobbelstenen weer actief maken
         disableDobbelstenen(false);
+        
     }
     
     @FXML
     void SpeelKnopKlik(ActionEvent event) {
     	System.out.println("Knop \"Speel\" is ingedrukt");
     	disableDobbelstenen(true);
+    	beïndigBeurt();
     }
     
     private void plaatsGebouwstenen(List<GebouwsteenDTO> stenen, SpelerKleur kleur) {
@@ -356,19 +368,20 @@ public class SpelbordScherm extends BorderPane {
     	ImageView zetsteen = new ImageView(new Image(getClass().getResource("/images/Zetsteen"+kleurZetsteen+".png").toExternalForm(), true));
     	zetsteen.setFitHeight(20);
     	zetsteen.setFitWidth(20);
-    	if (kleurBord<=2) { //Bovenste helft!
+    	if (kleurBord<=3) { //Bovenste helft!
+    		int kolomRelatief = kolom;
     		switch (kolom) {
-    		case 1 -> kolom = 3; // In de bovenste helft is de eerste kolom het slechtste (in 3 keer gegooid!
-    		case 3 -> kolom = 1;
+    		case 1 -> kolomRelatief = 3; // In de bovenste helft is de eerste kolom het slechtste (in 3 keer gegooid!
+    		case 3 -> kolomRelatief = 1;
     		}
     		switch (kolom) {
         	case 1 -> zetsteen.setTranslateY(-5); //Staat in de eerste rij -> moet 5 pixels omhoog om mooi te passen
         	case 3 -> zetsteen.setTranslateY(5); //Staat in de laatste rij -> moet 5 pixels naar beneden om mooi te passen
         	}
     		switch (kleurBord) {
-    		case 0 -> BlauwResultaatGebied.add(zetsteen, kolom-1, rij);
-    		case 1 -> RoodResultaatGebied.add(zetsteen, kolom-1, rij);
-    		case 2 -> BruinResultaatGebied.add(zetsteen, kolom-1, rij);
+    		case 1 -> BlauwResultaatGebied.add(zetsteen, kolomRelatief-1, rij);
+    		case 2 -> RoodResultaatGebied.add(zetsteen, kolomRelatief-1, rij);
+    		case 3 -> BruinResultaatGebied.add(zetsteen, kolomRelatief-1, rij);
     		}
     	} else { //Onderste helft
     		switch (kolom) {
@@ -376,9 +389,9 @@ public class SpelbordScherm extends BorderPane {
         	case 3 -> zetsteen.setTranslateY(5); //Staat in de laatste rij -> moet 5 pixels naar beneden om mooi te passen
         	}
     		switch (kleurBord) {
-    		case 3 -> GrijsResultaatGebied.add(zetsteen, kolom-1, 8-rij);
-    		case 4 -> GroenResultaatGebied.add(zetsteen, kolom-1, 8-rij);
-    		case 5 -> PaarsResultaatGebied.add(zetsteen, kolom-1, 8-rij);
+    		case 4 -> GrijsResultaatGebied.add(zetsteen, kolom-1, 8-rij);
+    		case 5 -> GroenResultaatGebied.add(zetsteen, kolom-1, 8-rij);
+    		case 6 -> PaarsResultaatGebied.add(zetsteen, kolom-1, 8-rij);
     		}
     	}
     	
