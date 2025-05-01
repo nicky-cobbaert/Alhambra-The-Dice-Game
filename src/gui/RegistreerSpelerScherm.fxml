@@ -16,6 +16,7 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="560.4000244140625" minWidth="10.0" prefWidth="370.2000244140625" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="566.1999999999999" minWidth="10.0" prefWidth="307.200048828125" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="506.8000183105469" minWidth="10.0" prefWidth="223.199951171875" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="506.8000183105469" minWidth="10.0" prefWidth="223.199951171875" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="212.79999389648438" minHeight="10.0" prefHeight="171.2000244140625" vgrow="SOMETIMES" />
@@ -24,29 +25,19 @@
             <RowConstraints maxHeight="184.39999999999998" minHeight="10.0" prefHeight="184.39999999999998" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="18.0" prefWidth="900.0" text="%registreertext" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="580.0" text="%registreertext" translateY="20.0" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <font>
                   <Font name="Algerian" size="40.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="535.0" text="%naam" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Algerian" size="25.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="570.0" text="%datum" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Algerian" size="25.0" />
-               </font>
-            </Label>
-            <TextField fx:id="gebruikersnaamIngeven" prefHeight="26.0" prefWidth="396.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="geboortejaarIngeven" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="gaTerugKnop" alignment="CENTER" mnemonicParsing="false" onAction="#gaTerugKnopKlik" prefHeight="50.0" prefWidth="134.0" text="%terug" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+            <TextField fx:id="gebruikersnaamIngeven" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="448.0" promptText="%gebruikersnaam.placeholder" translateX="100.0" translateY="20.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <TextField fx:id="geboortejaarIngeven" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="448.0" promptText="%geboortejaar.placeholder" translateX="100.0" translateY="20.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+            <Button fx:id="gaTerugKnop" alignment="CENTER" mnemonicParsing="false" onAction="#gaTerugKnopKlik" prefHeight="50.0" prefWidth="229.0" text="%terug" translateX="20.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="registreerKnop" alignment="CENTER" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="50.0" prefWidth="229.0" text="%registreerknop" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+            <Button fx:id="registreerKnop" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="50.0" prefWidth="229.0" text="%registreerknop" translateX="240.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
