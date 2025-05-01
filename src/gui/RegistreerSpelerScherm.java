@@ -33,7 +33,7 @@ public class RegistreerSpelerScherm extends BorderPane{
 
 	private void loadFxmlScreen(String name) {
 		//FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
-		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
+		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("");
 	  //  ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 	    this.bundle = ResourceBundle.getBundle("messages", locale);
 	    FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);

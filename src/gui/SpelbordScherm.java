@@ -167,8 +167,21 @@ public class SpelbordScherm extends BorderPane {
 
     @FXML
 	private VBox spelerBox;
-
+    
+    private List<Label> labelsSpelers;
+    
+    private void veranderHuidigeSpeler() {
+    	int index = dc.geefGekozenSpelers().indexOf(dc.getHuidigeSpelerDTO());
+    	
+    	for (int i = 0;i<dc.geefGekozenSpelers().size();i++) {
+    		labelsSpelers.get(i).setUnderline((i == index ? true : false));
+    		labelsSpelers.get(i).setFont(Font.font("Algerian",(i == index ? 18 : 14)));
+    	}
+    }
+    
     private void zetSpelersBegin() {
+    	
+    	labelsSpelers = new ArrayList<>();
     	List<SpelerDTO> gekozenSpelers = dc.geefGekozenSpelers();
     	
     	int aantalSpelers = gekozenSpelers.size();
@@ -176,30 +189,37 @@ public class SpelbordScherm extends BorderPane {
     	Label spelerEen = new Label(String.format("%s - %d punten",gekozenSpelers.get(0).gebruikersnaam(),gekozenSpelers.get(0).punten()));
     	spelerBox.getChildren().add(spelerEen);
     	geefLabelJuisteOpmaak(spelerEen,gekozenSpelers.get(0).kleur());
+    	labelsSpelers.add(spelerEen);
     	
     	Label spelerTwee = new Label(String.format("%s - %d punten",gekozenSpelers.get(1).gebruikersnaam(),gekozenSpelers.get(1).punten()));
     	spelerBox.getChildren().add(spelerTwee);
     	geefLabelJuisteOpmaak(spelerTwee,gekozenSpelers.get(1).kleur());
+    	labelsSpelers.add(spelerTwee);
     	
     	Label spelerDrie = new Label(String.format("%s - %d punten",gekozenSpelers.get(2).gebruikersnaam(),gekozenSpelers.get(2).punten()));
     	spelerBox.getChildren().add(spelerDrie);
     	geefLabelJuisteOpmaak(spelerDrie,gekozenSpelers.get(2).kleur());
+    	labelsSpelers.add(spelerDrie);
     	
     	if (aantalSpelers > 3) {
     		Label spelerVier = new Label(String.format("%s - %d punten",gekozenSpelers.get(3).gebruikersnaam(),gekozenSpelers.get(3).punten()));
         	spelerBox.getChildren().add(spelerVier);
         	geefLabelJuisteOpmaak(spelerVier,gekozenSpelers.get(3).kleur());
+        	labelsSpelers.add(spelerVier);
     	}
     	if (aantalSpelers > 4) {
     		Label spelerVijf = new Label(String.format("%s - %d punten",gekozenSpelers.get(4).gebruikersnaam(),gekozenSpelers.get(4).punten()));
         	geefLabelJuisteOpmaak(spelerVijf,gekozenSpelers.get(4).kleur());
         	spelerBox.getChildren().add(spelerVijf);
+        	labelsSpelers.add(spelerVijf);
     	}
     	if (aantalSpelers > 5) {
     		Label spelerZes = new Label(String.format("%s - %d punten",gekozenSpelers.get(5).gebruikersnaam(),gekozenSpelers.get(5).punten()));
         	spelerBox.getChildren().add(spelerZes);
         	geefLabelJuisteOpmaak(spelerZes,gekozenSpelers.get(5).kleur());
+        	labelsSpelers.add(spelerZes);
     	}
+    	veranderHuidigeSpeler();
     }
     
     private void geefLabelJuisteOpmaak(Label lbl, SpelerKleur kleur) {
@@ -346,7 +366,7 @@ public class SpelbordScherm extends BorderPane {
         plaatsZetsteen(nieuweZetsteen.positie(), huidigeSpelerDTO.kleur());
         // Dobbelstenen weer actief maken
         disableDobbelstenen(false);
-        
+        veranderHuidigeSpeler();
     }
     
     private void plaatsZetsteen(int positie, SpelerKleur kleurZetsteen) { //kolom = in hoeveel keer, rij = hoeveel je gegooid hebt

@@ -118,7 +118,8 @@ public class MainMenuScherm extends BorderPane {
 //			throw new RuntimeException(ex);
 //		}
 
-		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("nl");
+		System.out.println(taal);
+		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("");
 		//ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		this.bundle = ResourceBundle.getBundle("messages", locale);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
