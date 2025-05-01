@@ -24,9 +24,11 @@ public class Spel {
 	private int aantalKeerGerold;
 	private Speler huidigeSpeler;
 
-	public Spel() {
+	public Spel(List<Speler> spelers) {
 
 		this.beschikbareKleuren = Speler.geefAlleKleuren();
+		
+		this.beschikbareSpelers = spelers;
 
 		/**
 		 * --Dobbelsteen, bonusfiches
@@ -51,7 +53,6 @@ public class Spel {
 		 * aanmaken-----------------------------------------------------------------
 		 */
 
-		this.beschikbareSpelers = new ArrayList<>();
 
 		this.gekozenSpelers = new ArrayList<>();
 		
@@ -81,9 +82,10 @@ public class Spel {
 			throw new IllegalArgumentException("Er is geen kleur gekozen");
 		}
 
-		beschikbareSpelers.get(speler).setKleur(kleur); // was niet zichtbaar*
-		gekozenSpelers.add(beschikbareSpelers.get(speler));
-		beschikbareSpelers.remove(speler);
+		Speler gekozenSpeler  = beschikbareSpelers.get(speler);// was niet zichtbaar*
+		gekozenSpeler.setKleur(kleur);
+		gekozenSpelers.add(gekozenSpeler);
+		beschikbareSpelers.remove(gekozenSpeler);
 		beschikbareKleuren.remove(kleur);
 		/*
 		beschikbareSpelers.sort(null);
@@ -116,7 +118,7 @@ public class Spel {
 		SecureRandom rand = new SecureRandom();
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
 		startSpeler.setIsStartSpeler(true);
-		this.huidigeSpeler = this.startSpeler;
+		startRonde();
 	}
 
 	public void beïndigSpel() {
@@ -164,8 +166,8 @@ public class Spel {
 		}
 	}
 
-	public String getStartSpeler() {
-		return startSpeler.getGebruikersnaam();
+	public Speler getStartSpeler() {
+		return startSpeler;
 	}
 
 	public List<Speler> getBeschikbareSpelers() {
@@ -242,7 +244,7 @@ public class Spel {
 		//}
 
 		// Code voor speelBeurt
-
+			veranderHuidigeSpeler(1);
 		if (ronde == 3) {
 			this.isEindeSpel = true;
 		}
@@ -280,13 +282,6 @@ public class Spel {
 		}
 	}
 
-	/*
-	 * TODO UC5 hier moet speelBeurt() komen ook opgesplitst
-	 */
-
-	/*
-	 * einde UC5 om een beurt te kunnen spelen
-	 */
 
 
 	
@@ -438,34 +433,42 @@ public class Spel {
 		}
 		spelbord.getFicheGebied().haalFicheWeg(spelbord.getFicheGebied().getGezettefiches().get(positieKleur));
 	}
-	private void veranderHuidigeSpeler(int type) {
+	public void veranderHuidigeSpeler(int type) {
 		//2 types mogelijk
 		//0 als het tijdens een ronde is
-		//1 als er een nieuwe ronde wordt gestart
+		//1 als er een nieuwe  cycle wordt gestart
+		int indexVanHuidigeSpeler = gekozenSpelers.indexOf(huidigeSpeler);
 		if(type == 0) {
-			if(this.huidigeSpeler != this.startSpeler) {
-				int indexVanHuidigeSpeler = gekozenSpelers.indexOf(huidigeSpeler);
-				if(indexVanHuidigeSpeler + 1 == gekozenSpelers.size() || (indexVanHuidigeSpeler + 1 == gekozenSpelers.size() - 1 && gekozenSpelers.getLast().getIsStartSpeler())) {
-					beïndigRonde();
-				}
-				if(gekozenSpelers.get(indexVanHuidigeSpeler+1).getIsStartSpeler()) {
-					huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 2);
-					return;
-				}else {
-					huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 1);
-					return;
-				}
-			}else {
-				if(gekozenSpelers.getFirst().getIsStartSpeler()) {
+			if(huidigeSpeler.getIsStartSpeler()) {
+				if(indexVanHuidigeSpeler == 0) {
 					huidigeSpeler = gekozenSpelers.get(1);
 					return;
 				}else {
-					huidigeSpeler = gekozenSpelers.getFirst();
+					huidigeSpeler = gekozenSpelers.get(0);
 					return;
 				}
+				
+				
+			}else {
+				if(indexVanHuidigeSpeler + 1 == gekozenSpelers.size()) {
+					veranderHuidigeSpeler(1);
+					return;
+				}
+				if((indexVanHuidigeSpeler + 2 == gekozenSpelers.size()&&gekozenSpelers.getLast().getIsStartSpeler())){
+					veranderHuidigeSpeler(1);
+					return;
+				}
+				if(gekozenSpelers.get(indexVanHuidigeSpeler + 1).getIsStartSpeler()) {
+					huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 2);
+					return;
+				}
+				huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 1);
+				return;
 			}
-		}else {
+		}
+		if(type == 1){
 			this.huidigeSpeler = this.startSpeler;
+			return;
 		}
 	}
 
@@ -477,8 +480,17 @@ public class Spel {
 		
 		return ronde;
 	}
+
+	public void setStartSpeler(Speler startSpeler) {
+		for(Speler s:gekozenSpelers) {
+			s.setIsStartSpeler(false);
+		}
+		this.startSpeler = startSpeler;
+		startSpeler.setIsStartSpeler(true);
+	}
 	
 	/*
 	 * alle code staat hierboven om een ronde te kunnen spelen
 	 */
+	
 }

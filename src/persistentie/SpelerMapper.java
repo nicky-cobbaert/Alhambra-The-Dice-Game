@@ -16,6 +16,7 @@ public class SpelerMapper {
 	private static final String INSERT_SPELER = "INSERT INTO speler (Gebruikers, Geboortejaar, AantalGewonnen, AantalGespeeld) VALUES (?, ?, ?, ?)";
 
 	private static final String GEEF_SPELER = "SELECT * FROM speler WHERE Gebruikers = ?";
+	private static final String GEEF_ALLE_SPELERS = "SELECT * FROM speler";
 
 	private static final String UPDATE_GEWONNEN = "UPDATE speler SET aantalGewonnen = aantalGewonnen + 1 WHERE gebruikers like ?";
 	private static final String UPDATE_GESPEELD = "UPDATE speler SET aantalGespeeld = aantalGespeeld + 1 WHERE gebruikers like ?";
@@ -115,7 +116,7 @@ public class SpelerMapper {
 		// return offlineSpelers;
 		List<Speler> alleSpelers = new ArrayList<Speler>();
 		try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL);
-				PreparedStatement query = conn.prepareStatement("SELECT * FROM speler")) {
+				PreparedStatement query = conn.prepareStatement(GEEF_ALLE_SPELERS)) {
 			try (ResultSet rs = query.executeQuery()) {
 
 				while (rs.next()) {

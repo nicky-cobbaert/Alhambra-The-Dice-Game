@@ -14,7 +14,7 @@ public class SpelerRepository {
 
 	public SpelerRepository() {
 		mapper = new SpelerMapper();
-		spelers = new ArrayList<Speler>();
+		spelers = this.mapper.geefAlleSpelers();
 	}
 
 	public void voegToe(Speler speler) {
@@ -31,9 +31,8 @@ public class SpelerRepository {
 
 	public List<Speler> geefAlleSpelers() {
 
-		List<Speler> alleSpelers = mapper.geefAlleSpelers();
 
-		return alleSpelers;
+		return mapper.geefAlleSpelers();
 	}
 
 	public void updateGewonnen(String gebruikersnaam) {

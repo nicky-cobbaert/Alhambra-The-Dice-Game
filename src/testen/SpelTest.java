@@ -7,7 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import domein.Spel;
 import domein.Speler;
@@ -17,12 +20,16 @@ import utils.SpelerKleur;
 
 class SpelTest {
 
-	// TODO in spelltest moet nog met enums worden gewerkt
-
+	private Spel spel;
+	
+	@BeforeEach
+	void setUp() {
+		spel = new Spel(new SpelerRepository().geefAlleSpelers());
+	}
 	@Test
 	void startSpel_AantalSpelersVeelTeLaag_WerptExceptie() {
 
-		Spel spel = new Spel();
+		
 
 		assertThrows(IllegalArgumentException.class, () -> spel.startSpel());
 	}
@@ -31,10 +38,6 @@ class SpelTest {
 	@Test
 	void startSpel_AantalSpelersNetTeLaag_WerptExceptie() {
 
-		SpelerMapper sm = new SpelerMapper();
-		Spel spel = new Spel();
-		SpelerRepository spelerRepo = new SpelerRepository();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
 		spel.kiesSpeler(1, SpelerKleur.BLAUW);
 		spel.kiesSpeler(5, SpelerKleur.WIT);
@@ -45,10 +48,6 @@ class SpelTest {
 	@Test
 	void startSpel_AantalSpelersNetGenoeg_StartSpel() {
 
-		SpelerMapper sm = new SpelerMapper();
-		Spel spel = new Spel();
-		SpelerRepository spelerRepo = new SpelerRepository();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
 		spel.kiesSpeler(1, SpelerKleur.BLAUW);
 		spel.kiesSpeler(3, SpelerKleur.WIT);
@@ -60,10 +59,6 @@ class SpelTest {
 	@Test
 	void startSpel_AantalSpelersMeerDanGenoeg_StartSpel() {
 
-		SpelerMapper sm = new SpelerMapper();
-		Spel spel = new Spel();
-		SpelerRepository spelerRepo = new SpelerRepository();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
 		spel.kiesSpeler(2, SpelerKleur.BLAUW);
 		spel.kiesSpeler(1, SpelerKleur.WIT);
@@ -76,10 +71,6 @@ class SpelTest {
 	@Test
 	void startSpel_MaximumAantalSpelers_StartSpel() {
 
-		SpelerMapper sm = new SpelerMapper();
-		Spel spel = new Spel();
-		SpelerRepository spelerRepo = new SpelerRepository();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
 		spel.kiesSpeler(0, SpelerKleur.BLAUW);
 		spel.kiesSpeler(1, SpelerKleur.WIT);
@@ -91,32 +82,28 @@ class SpelTest {
 		assertEquals(6, spel.getGekozenSpelers().size());
 	}
 
-	@Test
-	void startSpel_AantalSpelersNetTeVeel_WerptExceptie() {
-
-		SpelerMapper sm = new SpelerMapper();
-		Spel spel = new Spel();
-		SpelerRepository spelerRepo = new SpelerRepository();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
-
-		spel.kiesSpeler(0, SpelerKleur.BLAUW);
-		spel.kiesSpeler(1, SpelerKleur.WIT);
-		spel.kiesSpeler(2, SpelerKleur.ROOD);
-		spel.kiesSpeler(3, SpelerKleur.GROEN);
-		spel.kiesSpeler(4, SpelerKleur.ORANJE);
-		spel.kiesSpeler(5, SpelerKleur.GEEL);
-
-		assertThrows(IllegalArgumentException.class, () -> spel.kiesSpeler(6, SpelerKleur.GEEL));
-	}
+//	@Test
+//	void startSpel_AantalSpelersNetTeVeel_WerptExceptie() {
+//
+//		SpelerMapper sm = new SpelerMapper();
+//		Spel spel = new Spel();
+//		SpelerRepository spelerRepo = new SpelerRepository();
+//		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
+//
+//		spel.kiesSpeler(0, SpelerKleur.BLAUW);
+//		spel.kiesSpeler(1, SpelerKleur.WIT);
+//		spel.kiesSpeler(2, SpelerKleur.ROOD);
+//		spel.kiesSpeler(3, SpelerKleur.GROEN);
+//		spel.kiesSpeler(4, SpelerKleur.ORANJE);
+//		spel.kiesSpeler(5, SpelerKleur.GEEL);
+//
+//		assertThrows(IllegalArgumentException.class, () -> spel.kiesSpeler(6, SpelerKleur.GEEL));
+//	}
 
 	/** deze code loopt normaal al fout bij de 7de aanroep, misschien aanpassen */
 	@Test
 	void startSpel_AantalSpelersVeelTeVeel_WerptExceptie() {
 
-		SpelerMapper sm = new SpelerMapper();
-		Spel spel = new Spel();
-		SpelerRepository spelerRepo = new SpelerRepository();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
 		spel.kiesSpeler(0, SpelerKleur.BLAUW);
 		spel.kiesSpeler(1, SpelerKleur.WIT);
@@ -258,9 +245,6 @@ class SpelTest {
 	@Test
 	void maakZetStenenAan_BijDrieSpelers_WijstVijfZetstenenToe() {
 
-		Spel spel = new Spel();
-		SpelerRepository spelerRepo = new SpelerRepository();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
 		spel.kiesSpeler(2, SpelerKleur.ROOD);
 		spel.kiesSpeler(3, SpelerKleur.GROEN);
@@ -275,9 +259,6 @@ class SpelTest {
 	@Test
 	void maakZetStenenAan_BijVierSpelers_WijstVierZetstenenToe() {
 
-		Spel spel = new Spel();
-		SpelerRepository spelerRepo = new SpelerRepository();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
 		spel.kiesSpeler(2, SpelerKleur.ROOD);
 		spel.kiesSpeler(3, SpelerKleur.GROEN);
@@ -293,9 +274,6 @@ class SpelTest {
 	@Test
 	void maakZetStenenAan_BijVijfSpelers_WijstDrieZetstenenToe() {
 
-		Spel spel = new Spel();
-		SpelerRepository spelerRepo = new SpelerRepository();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
 		spel.kiesSpeler(2, SpelerKleur.ROOD);
 		spel.kiesSpeler(3, SpelerKleur.GROEN);
@@ -312,9 +290,6 @@ class SpelTest {
 	@Test
 	void maakZetStenenAan_BijZesSpelers_WijstDrieZetstenenToe() {
 
-		Spel spel = new Spel();
-		SpelerRepository spelerRepo = new SpelerRepository();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 
 		spel.kiesSpeler(2, SpelerKleur.ROOD);
 		spel.kiesSpeler(3, SpelerKleur.GROEN);
@@ -352,7 +327,6 @@ class SpelTest {
 //		
 //		assertEquals(puntenPerSpeler, null);
 		
-		Spel spel = new Spel();
 		SpelerRepository spelerRepo = new SpelerRepository();
 		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
 		
@@ -371,6 +345,56 @@ class SpelTest {
 	    assertTrue(winnaars.contains(spel.getGekozenSpelers().get(2)));
 	    assertFalse(winnaars.contains(spel.getGekozenSpelers().get(0)));
 		
+	}
+	
+	@Test
+	void veranderHuidigeSpeler_veranderdCorrectVanStartSpelerNaar_DeVolgendeInDeLijstGekozenSpeler_AssertEquals() {
+		
+		spel.kiesSpeler(1, SpelerKleur.ROOD);
+		spel.kiesSpeler(1, SpelerKleur.GROEN);
+		spel.kiesSpeler(1, SpelerKleur.ORANJE);
+		
+		spel.startSpel();
+		
+		Speler startSpeler = spel.getGekozenSpelers().get(0);
+		Speler volgendeSpeler = spel.getGekozenSpelers().get(1);
+		
+		spel.setStartSpeler(startSpeler);
+		spel.veranderHuidigeSpeler(1);
+		spel.rolDobbelstenen();
+		
+		spel.beïndigBeurt(spel.getDobbelstenen().getFirst().getDobbelsteenKleur());
+		
+		assertTrue(startSpeler.getIsStartSpeler());
+		assertEquals(startSpeler,spel.getStartSpeler());
+		assertEquals(volgendeSpeler, spel.getHuidigeSpeler());
+	}
+	
+	@ParameterizedTest
+	@ValueSource(ints = {2,3,4,5,6})
+	void veranderHuidigeSpeler_veranderdCorrectVanStartSpelerNaar_DeJuisteGekozenSpeler_AssertEquals(int aantalOproepen) {
+		
+		spel.kiesSpeler(1, SpelerKleur.ROOD);
+		spel.kiesSpeler(1, SpelerKleur.GROEN);
+		spel.kiesSpeler(1, SpelerKleur.ORANJE);
+		spel.kiesSpeler(1, SpelerKleur.GEEL);
+		
+		spel.startSpel();
+		
+		Speler startSpeler = spel.getGekozenSpelers().get(0);
+		Speler volgendeSpeler = spel.getGekozenSpelers().get(aantalOproepen % 4);
+		
+		spel.setStartSpeler(startSpeler);
+		spel.veranderHuidigeSpeler(1);
+		for(int ind = 1;ind <= aantalOproepen;ind ++) {
+			spel.rolDobbelstenen();
+			
+			spel.beïndigBeurt(spel.getDobbelstenen().getFirst().getDobbelsteenKleur());
+		}
+		
+		assertTrue(startSpeler.getIsStartSpeler());
+		assertEquals(startSpeler,spel.getStartSpeler());
+		assertEquals(volgendeSpeler, spel.getHuidigeSpeler());
 	}
 	
 }

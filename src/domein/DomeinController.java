@@ -67,8 +67,7 @@ public class DomeinController {
 //	}
 
 	public void maakNieuwSpel() {
-		spel = new Spel();
-		spel.setBeschikbareSpelers(spelerRepo.geefAlleSpelers());
+		spel = new Spel(spelerRepo.geefAlleSpelers());
 	}
 
 	public void startSpel() {
@@ -183,8 +182,8 @@ public class DomeinController {
 		return spel.getBeschikbareKleuren();
 	}
 
-	public String geefStartspeler() {
-		return spel.getStartSpeler();
+	public SpelerDTO geefStartspeler() {
+		return zetSpelerOmNaarDTO(spel.getStartSpeler());
 	}
 
 	public int geefAantalZetstenen() {
