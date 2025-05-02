@@ -93,7 +93,7 @@ public class SpelbordScherm extends BorderPane {
         zetsteenGebieden.add(GroenResultaatGebied);
         zetsteenGebieden.add(PaarsResultaatGebied);
         zetsteenGebieden.add(RoodResultaatGebied);
-        welkeRonde.setText(String.format("Ronde %d", dc.getRonde())); 
+        welkeRonde.setText(String.format("Ronde %d", dc.getRonde()+1)); 
 		
 		//SpelTest
 //		dc.maakNieuwSpel();
@@ -190,42 +190,67 @@ public class SpelbordScherm extends BorderPane {
     	}
     }
     
+    private void updateAantalZetstenen(SpelerDTO spelerVanVorigeRonde) {
+    	int aantalZetstenen = (int) spelerVanVorigeRonde.zetstenen().stream().filter(e -> e.positie()==0).count();
+    	labelsSpelers.get(dc.geefGekozenSpelers().indexOf(spelerVanVorigeRonde)).setText(String.format("%s - %d punten - %d %s",spelerVanVorigeRonde.gebruikersnaam(),spelerVanVorigeRonde.punten(),
+    			aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));;
+    }
+    
+    private void herzetSpelersNaRonde() {
+    	for (int i = 0; i<dc.geefGekozenSpelers().size();i++) {
+    		SpelerDTO speler = dc.geefGekozenSpelers().get(i);
+    		labelsSpelers.get(i).setText(String.format("%s - %d punten - %d zetstenen", speler.gebruikersnaam(),speler.punten(),dc.geefAantalZetstenen()));
+    	}
+    }
+    
     private void zetSpelersBegin() {
     	
     	labelsSpelers = new ArrayList<>();
     	List<SpelerDTO> gekozenSpelers = dc.geefGekozenSpelers();
     	
     	int aantalSpelers = gekozenSpelers.size();
-    	    	
-    	Label spelerEen = new Label(String.format("%s - %d punten",gekozenSpelers.get(0).gebruikersnaam(),gekozenSpelers.get(0).punten()));
+    	int aantalZetstenen = (int) gekozenSpelers.get(0).zetstenen().stream().filter(e -> e.positie()==0).count();
+    	Label spelerEen = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(0).gebruikersnaam(),gekozenSpelers.get(0).punten(),
+    			aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
     	spelerBox.getChildren().add(spelerEen);
     	geefLabelJuisteOpmaak(spelerEen,gekozenSpelers.get(0).kleur());
     	labelsSpelers.add(spelerEen);
     	
-    	Label spelerTwee = new Label(String.format("%s - %d punten",gekozenSpelers.get(1).gebruikersnaam(),gekozenSpelers.get(1).punten()));
+    	aantalZetstenen = (int) gekozenSpelers.get(1
+    			).zetstenen().stream().filter(e -> e.positie()==0).count();
+    	Label spelerTwee = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(1).gebruikersnaam(),gekozenSpelers.get(1).punten(),
+    			aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
     	spelerBox.getChildren().add(spelerTwee);
     	geefLabelJuisteOpmaak(spelerTwee,gekozenSpelers.get(1).kleur());
     	labelsSpelers.add(spelerTwee);
     	
-    	Label spelerDrie = new Label(String.format("%s - %d punten",gekozenSpelers.get(2).gebruikersnaam(),gekozenSpelers.get(2).punten()));
+    	aantalZetstenen = (int) gekozenSpelers.get(2).zetstenen().stream().filter(e -> e.positie()==0).count();
+    	Label spelerDrie = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(2).gebruikersnaam(),gekozenSpelers.get(2).punten(),
+    			aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
     	spelerBox.getChildren().add(spelerDrie);
     	geefLabelJuisteOpmaak(spelerDrie,gekozenSpelers.get(2).kleur());
     	labelsSpelers.add(spelerDrie);
     	
     	if (aantalSpelers > 3) {
-    		Label spelerVier = new Label(String.format("%s - %d punten",gekozenSpelers.get(3).gebruikersnaam(),gekozenSpelers.get(3).punten()));
+    		aantalZetstenen = (int) gekozenSpelers.get(3).zetstenen().stream().filter(e -> e.positie()==0).count();
+    		Label spelerVier = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(3).gebruikersnaam(),gekozenSpelers.get(3).punten(),
+    				aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
         	spelerBox.getChildren().add(spelerVier);
         	geefLabelJuisteOpmaak(spelerVier,gekozenSpelers.get(3).kleur());
         	labelsSpelers.add(spelerVier);
     	}
     	if (aantalSpelers > 4) {
-    		Label spelerVijf = new Label(String.format("%s - %d punten",gekozenSpelers.get(4).gebruikersnaam(),gekozenSpelers.get(4).punten()));
+    		aantalZetstenen = (int) gekozenSpelers.get(4).zetstenen().stream().filter(e -> e.positie()==0).count();
+    		Label spelerVijf = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(4).gebruikersnaam(),gekozenSpelers.get(4).punten(),
+    				aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
         	geefLabelJuisteOpmaak(spelerVijf,gekozenSpelers.get(4).kleur());
         	spelerBox.getChildren().add(spelerVijf);
         	labelsSpelers.add(spelerVijf);
     	}
     	if (aantalSpelers > 5) {
-    		Label spelerZes = new Label(String.format("%s - %d punten",gekozenSpelers.get(5).gebruikersnaam(),gekozenSpelers.get(5).punten()));
+    		aantalZetstenen = (int) gekozenSpelers.get(5).zetstenen().stream().filter(e -> e.positie()==0).count();
+    		Label spelerZes = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(5).gebruikersnaam(),gekozenSpelers.get(5).punten(),
+    				aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
         	spelerBox.getChildren().add(spelerZes);
         	geefLabelJuisteOpmaak(spelerZes,gekozenSpelers.get(5).kleur());
         	labelsSpelers.add(spelerZes);
@@ -382,11 +407,13 @@ public class SpelbordScherm extends BorderPane {
             }
         	beginRonde();
         }
+        updateAantalZetstenen(huidigeSpelerDTO);
         veranderHuidigeSpeler();
     }
     
     private void beginRonde() {
 		dc.startRonde();
+		herzetSpelersNaRonde();
 		plaatsFiches();
 	}
 
@@ -402,7 +429,7 @@ public class SpelbordScherm extends BorderPane {
     	dc.geefGekozenSpelers().
     	stream().
     	forEach(e -> plaatsGebouwstenen(e.gebouwtsenen(), e.kleur()));
-    	welkeRonde.setText(String.format("Ronde %d", dc.getRonde()));
+    	welkeRonde.setText(String.format("Ronde %d", dc.getRonde()+1));
     	
     	
 	}
@@ -471,8 +498,8 @@ public class SpelbordScherm extends BorderPane {
         	
         	gebouwsteen.setTranslateX(offset);
         	gebouwsteen.setTranslateY(offset);
-        	
-        	gebouwsteenGebied.add(gebouwsteen, (steen.positie()/10)-1, 10-steen.positie()%10);
+        	System.out.printf("%d %s%n",steen.positie(), kleur);
+        	gebouwsteenGebied.add(gebouwsteen, (steen.positie()/100)-1, 10-steen.positie()%10);
     		}
     	}
     }
