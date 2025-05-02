@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import domein.DomeinController;
 import dto.DobbelsteenDTO;
 import dto.FicheDTO;
@@ -14,11 +15,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -85,15 +84,20 @@ public class SpelbordScherm extends BorderPane {
         ficheImages.add(fiche3);
         ficheImages.add(fiche4);
         ficheImages.add(fiche5);
+        for(ImageView i:ficheImages) {
+        	i.setId("KEEP");
+        }
+        
         plaatsFiches();
         zetsteenGebieden = new ArrayList<GridPane>();
         zetsteenGebieden.add(BlauwResultaatGebied);
+        zetsteenGebieden.add(RoodResultaatGebied);
         zetsteenGebieden.add(BruinResultaatGebied);
         zetsteenGebieden.add(GrijsResultaatGebied);
         zetsteenGebieden.add(GroenResultaatGebied);
         zetsteenGebieden.add(PaarsResultaatGebied);
-        zetsteenGebieden.add(RoodResultaatGebied);
-        welkeRonde.setText(String.format("Ronde %d", dc.getRonde()+1)); 
+        welkeRonde.setText(String.format("Ronde %d", dc.getRonde()));
+        plaatsImagesGebouwen();
 		
 		//SpelTest
 //		dc.maakNieuwSpel();
@@ -123,6 +127,24 @@ public class SpelbordScherm extends BorderPane {
 	    );
 	    
 	    this.setBackground(new Background(spelbord));
+	}
+
+	private void plaatsImagesGebouwen() {
+		for(int index = 0;index <=5;index ++) {
+			plaatsNeer(zetsteenGebieden.get(index), DobbelsteenKleur.values()[index]);
+		}
+		
+	}
+	
+	private void plaatsNeer(GridPane gp,DobbelsteenKleur kleur) {
+		ImageView gebouw = new ImageView(getClass().getResource("/images/Dobbelsteen"+kleur+".png").toExternalForm());
+		gebouw.fitHeightProperty().set(34);
+		gebouw.fitWidthProperty().set(30);
+		gebouw.setId("KEEP");
+		switch(kleur) {
+		case ROOD,BLAUW,BRUIN -> gp.add(gebouw, 0, 0);
+		case GRIJS,PAARS,GROEN -> gp.add(gebouw,0,8);
+		}
 	}
 
 	@FXML
@@ -300,18 +322,9 @@ public class SpelbordScherm extends BorderPane {
 
     private void plaatsFiches() {
     	List<FicheDTO> ficheDTOs = dc.getGeplaatsteFicheDTOs();
-    	for(int i = 1;i <= 6;i ++) {
-    		int indexVanFiche = 0;
-    		int teller = 0;
-    		for(FicheDTO f:ficheDTOs) {
-    			if(f.positie() == i) {
-    				indexVanFiche = teller;
-    				break;
-    			}
-    			teller ++;
-    		}
-    		ficheImages.get(i-1).setImage(new Image(getClass().getResource(welkeFiche(ficheDTOs.get(indexVanFiche).waarde())).toExternalForm()));
-    		
+    	for(FicheDTO fDTO: ficheDTOs) {
+    		ficheImages.get(fDTO.positie() - 1).setImage(new Image(getClass().getResource(welkeFiche(fDTO.waarde())).toExternalForm()));
+
     		}
     	}
     
@@ -416,12 +429,20 @@ public class SpelbordScherm extends BorderPane {
 		herzetSpelersNaRonde();
 		plaatsFiches();
 	}
+    private void maakDeGebiedLeeg(GridPane gp) {
+    	for(javafx.scene.Node n:gp.getChildren()) {
+    		if(n.getId() != "KEEP") {
+    			n.setId("REMOVE");
+    		}
+    	}
+    	gp.getChildren().removeIf(e -> e.getId() == "REMOVE");
+    }
 
 	private void beïndigDeRonde() {
     	System.out.println("Ronde is klaar");
     	dc.beïndigRonde();
     	for(GridPane gp:zetsteenGebieden) {
-    		gp.getChildren().clear();
+    		maakDeGebiedLeeg(gp);;
     	}
     	if(gebouwsteenGebied.getChildren().size() != 0) {
     		gebouwsteenGebied.getChildren().clear();
@@ -430,7 +451,6 @@ public class SpelbordScherm extends BorderPane {
     	stream().
     	forEach(e -> plaatsGebouwstenen(e.gebouwtsenen(), e.kleur()));
     	welkeRonde.setText(String.format("Ronde %d", dc.getRonde()+1));
-    	
     	
 	}
 

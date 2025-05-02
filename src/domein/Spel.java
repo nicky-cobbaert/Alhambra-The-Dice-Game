@@ -223,27 +223,13 @@ public class Spel {
 
 	// 1 fiches worden aangelegd
 	public void startRonde() {
-		// UC3 -> Bonusfiches + startspelersfiche van positie veranderen
 		SecureRandom random = new SecureRandom();
-//		int positieStartSpelerFiche = random.nextInt(1, 7);
-//
-//		startspelerfiche.plaatsNeer(positieStartSpelerFiche);
-//		for (int i = 1; i <= 6; i++) {
-//			if (i != positieStartSpelerFiche) {
-//				int indexWaarde = random.nextInt(0, bonusfiches.size());
-//				bonusfiches.get(indexWaarde).plaatsNeer(i);
-//				bonusfiches.remove(indexWaarde);
-//			}
-//		}
-//		if(this.isEindeSpel) {
-//			beïndigSpel();
-//		}else {
+
 			plaatsStartSpelerFiche(random);
 			plaatsBonusFiches(random);
-		//}
-
-		// Code voor speelBeurt
+			
 			veranderHuidigeSpeler(1);
+			ronde ++;
 		if (ronde == 3) {
 			this.isEindeSpel = true;
 		}
@@ -273,9 +259,9 @@ public class Spel {
 	private void plaatsBonusFiches(SecureRandom rand) {
 		List<Integer> vrijePlaatsen = getVrijePlaatsen(spelbord.getFicheGebied().getGezettefiches());
 		if(vrijePlaatsen.size() != 0) {
-			for(Integer plaats:getVrijePlaatsen(spelbord.getFicheGebied().getGezettefiches())){
+			for(int plaats:getVrijePlaatsen(spelbord.getFicheGebied().getGezettefiches())){
 				int index = rand.nextInt(bonusfiches.size());
-				bonusfiches.get(index).plaatsNeer(plaats.intValue());
+				bonusfiches.get(index).plaatsNeer(plaats);
 				bonusfiches.remove(index);
 			}
 		}
@@ -369,7 +355,6 @@ public class Spel {
 		for(Speler s:gekozenSpelers) {
 			s.cleanUpNaRonde();
 		}
-		ronde ++;
 		veranderHuidigeSpeler(1);
 		
 	}
