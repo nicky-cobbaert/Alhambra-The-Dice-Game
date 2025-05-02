@@ -124,7 +124,7 @@ private Gebouwsteen g3;
     	g5.plaatsNeer(201);
     	g6.plaatsNeer(202);
     	g4.plaatsNeer(206);
-    	g2.plaatsNeer(209);//2
+    	g2.plaatsNeer(209);//2 
     	g3.plaatsNeer(208);//3
     	g7.plaatsNeer(202);
     	g8.plaatsNeer(207);

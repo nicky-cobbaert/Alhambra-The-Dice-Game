@@ -1,6 +1,8 @@
 package domein;
 
-public class Zetsteen {
+import java.util.Comparator;
+
+public class Zetsteen{
 
 	private int positie;
 	private ResultatenGebied resultatenGebied;
@@ -50,5 +52,5 @@ public class Zetsteen {
 	public int getPositie() { // Snel getter toegevoegd voor mijn methode
 		return positie;
 	}
-
+	
 }

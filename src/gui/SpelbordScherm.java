@@ -15,7 +15,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,6 +44,7 @@ public class SpelbordScherm extends BorderPane {
 	private final DomeinController dc;
 	private List<ImageView> dobbelImages;
 	private List<ImageView> ficheImages;
+	private List<GridPane> zetsteenGebieden;
 	
 	private char taal;
 	
@@ -60,12 +64,11 @@ public class SpelbordScherm extends BorderPane {
 		this.dc = dc;
 		this.taal = taal;
 		dc.startSpel();
-		dc.startRonde();
 		loadFxmlScreen("SpelbordScherm.fxml");
 		zetSpelersBegin();
 		//plaatsFiches();
 		dobbelImages = new ArrayList<ImageView>();
-        dobbelImages.add(dobbelsteenNulNul);
+        dobbelImages.add(dobbelsteenNulNul); 
         dobbelImages.add(dobbelsteenEenNul);
         dobbelImages.add(dobbelsteenNulEen);
         dobbelImages.add(dobbelsteenEenEen);
@@ -83,6 +86,14 @@ public class SpelbordScherm extends BorderPane {
         ficheImages.add(fiche4);
         ficheImages.add(fiche5);
         plaatsFiches();
+        zetsteenGebieden = new ArrayList<GridPane>();
+        zetsteenGebieden.add(BlauwResultaatGebied);
+        zetsteenGebieden.add(BruinResultaatGebied);
+        zetsteenGebieden.add(GrijsResultaatGebied);
+        zetsteenGebieden.add(GroenResultaatGebied);
+        zetsteenGebieden.add(PaarsResultaatGebied);
+        zetsteenGebieden.add(RoodResultaatGebied);
+        welkeRonde.setText(String.format("Ronde %d", dc.getRonde())); 
 		
 		//SpelTest
 //		dc.maakNieuwSpel();
@@ -352,24 +363,51 @@ public class SpelbordScherm extends BorderPane {
     }
     
     public void beïndigBeurt(DobbelsteenKleur kleur) {
-    	//pop up om die kleur te kiezen
-    	//TODO
     	//hier wordt het neergeplaatst
         SpelerDTO huidigeSpelerDTO = dc.beïndigBeurt(kleur);
         RolKnop.setDisable(false);
         SpeelKnop.setDisable(true);
         // Reset afbeeldingen van dobbelstenen
         zetAlleDobbelstenenNaarHunHuidigeImage();
-      
+        
         
         ZetsteenDTO nieuweZetsteen = huidigeSpelerDTO.zetstenen().stream().filter(e -> e.positie() != 0).toList().getLast();
         plaatsZetsteen(nieuweZetsteen.positie(), huidigeSpelerDTO.kleur());
         // Dobbelstenen weer actief maken
         disableDobbelstenen(false);
+        if(dc.isEindeVanDeRonde()) {
+        	beïndigDeRonde();
+        	if(dc.getIsEindeSpel()) {
+            	//hier komt het overwinningscherm dan
+            }
+        	beginRonde();
+        }
         veranderHuidigeSpeler();
     }
     
-    private void plaatsZetsteen(int positie, SpelerKleur kleurZetsteen) { //kolom = in hoeveel keer, rij = hoeveel je gegooid hebt
+    private void beginRonde() {
+		dc.startRonde();
+		plaatsFiches();
+	}
+
+	private void beïndigDeRonde() {
+    	System.out.println("Ronde is klaar");
+    	dc.beïndigRonde();
+    	for(GridPane gp:zetsteenGebieden) {
+    		gp.getChildren().clear();
+    	}
+    	if(gebouwsteenGebied.getChildren().size() != 0) {
+    		gebouwsteenGebied.getChildren().clear();
+    	}
+    	dc.geefGekozenSpelers().
+    	stream().
+    	forEach(e -> plaatsGebouwstenen(e.gebouwtsenen(), e.kleur()));
+    	welkeRonde.setText(String.format("Ronde %d", dc.getRonde()));
+    	
+    	
+	}
+
+	private void plaatsZetsteen(int positie, SpelerKleur kleurZetsteen) { //kolom = in hoeveel keer, rij = hoeveel je gegooid hebt
     	int kleurBord = positie/100,rij = (positie/10)%10,kolom = positie%10; 
     	ImageView zetsteen = new ImageView(new Image(getClass().getResource("/images/Zetsteen"+kleurZetsteen+".png").toExternalForm(), true));
     	zetsteen.setFitHeight(20);
@@ -422,6 +460,7 @@ public class SpelbordScherm extends BorderPane {
     
     private void plaatsGebouwstenen(List<GebouwsteenDTO> stenen, SpelerKleur kleur) {
     	for(GebouwsteenDTO steen : stenen) {
+    		if(steen.positie()%100 != 0) {
     		ImageView gebouwsteen = new ImageView(new Image(getClass().getResource("/images/"+kleur+"gebouwsteen.png").toExternalForm(), true));
         	gebouwsteen.setFitHeight(30);
         	gebouwsteen.setFitWidth(30);
@@ -434,6 +473,7 @@ public class SpelbordScherm extends BorderPane {
         	gebouwsteen.setTranslateY(offset);
         	
         	gebouwsteenGebied.add(gebouwsteen, (steen.positie()/10)-1, 10-steen.positie()%10);
+    		}
     	}
     }
 

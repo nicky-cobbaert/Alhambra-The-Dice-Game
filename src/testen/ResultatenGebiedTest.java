@@ -59,7 +59,7 @@ class ResultatenGebiedTest {
     	z3.plaatsNeer(222);
     	z4.plaatsNeer(232);
     	List<Zetsteen> vooresteZetstenen = resultatenGebied.getVoorsteZetstenen(2);
-    	assertTrue(vooresteZetstenen.contains(z1) && vooresteZetstenen.contains(z4));
+    	//assertTrue(vooresteZetstenen.contains(z1) && vooresteZetstenen.contains(z4)); gaat niemeer want streams geven een andere referentie
     	assertEquals(z1, vooresteZetstenen.get(0));
     	assertEquals(z4, vooresteZetstenen.get(1));
     }

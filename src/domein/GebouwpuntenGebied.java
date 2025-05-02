@@ -1,6 +1,7 @@
 package domein;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class GebouwpuntenGebied implements Placeable{
@@ -72,124 +73,15 @@ public class GebouwpuntenGebied implements Placeable{
 
 
 	public List<Gebouwsteen> getVoorsteGebouwstenen(int ronde,int kleur) {
-		List<Gebouwsteen> voorsteGebouwstenen = new ArrayList<Gebouwsteen>();
-		int eerstePlaats = 0;
-		boolean alGevuld = false;
-		for(Gebouwsteen g:gebouwstenen) {
-			int currVakje = g.getPositie()%10;
-			int currVolgorde = g.getVolgorde();
-			if(g.getPositie()/100 == kleur) {
-				if(!(g.getPositie()%10 == 0)) {
-					if(alGevuld) {
-						/*
-						 * als het al gevuld is 
-						 * */
-						if(currVakje > eerstePlaats) {
-							voorsteGebouwstenen.removeLast();
-							voorsteGebouwstenen.addFirst(g);
-							eerstePlaats = currVakje;
-						}
-						if(currVakje == eerstePlaats) {
-							if(!(currVolgorde < voorsteGebouwstenen.get(0).getVolgorde())) {
-							for(int index = 1;index < ronde;index ++) {
-								if(currVakje > voorsteGebouwstenen.get(index).getPositie()%10) {
-									voorsteGebouwstenen.removeLast();
-									voorsteGebouwstenen.add(index,g);
-									break;
-								}
-								if(currVakje == voorsteGebouwstenen.get(index).getPositie()%10) {
-									if(currVolgorde < voorsteGebouwstenen.get(index).getVolgorde()) {
-										voorsteGebouwstenen.removeLast();
-										voorsteGebouwstenen.add(index, g);
-										break;
-									}
-									
-								}
-								
-							}
-							if(currVolgorde < voorsteGebouwstenen.get(0).getVolgorde()) {
-								voorsteGebouwstenen.removeLast();
-								voorsteGebouwstenen.addFirst(g);
-							}
-							}
-						}
-						if(currVakje < eerstePlaats) {
-							for(int index = 1;index < ronde;index ++) {
-								if(currVakje > voorsteGebouwstenen.get(index).getPositie()%10) {
-									voorsteGebouwstenen.removeLast();
-									voorsteGebouwstenen.add(index, g);
-									break;
-								}
-								if(currVakje == voorsteGebouwstenen.get(index).getPositie()%10&&currVolgorde < voorsteGebouwstenen.get(index).getVolgorde()) {
-									voorsteGebouwstenen.removeLast();
-									voorsteGebouwstenen.add(index, g);
-									break;
-									
-									
-								}
-								
-							}
-						}
-						
-					}
-					else{/*
-							als het nog niet compleet vol is
-					 		*/
-						if(voorsteGebouwstenen.size() == 0) {
-							voorsteGebouwstenen.addFirst(g);
-							eerstePlaats = currVakje;
-						}else {
-							if(currVakje > eerstePlaats) {
-								voorsteGebouwstenen.addFirst(g);
-								eerstePlaats = currVakje;
-							}
-						
-							if(currVakje < eerstePlaats) {
-								int index = 0;
-								for(Gebouwsteen vooresteGebouwsteen:voorsteGebouwstenen) {
-									if(currVakje > vooresteGebouwsteen.getPositie()%10) {
-										voorsteGebouwstenen.add(index, g);
-										break;
-									}
-									if(vooresteGebouwsteen.getPositie()%10 == currVakje && g.getVolgorde() < vooresteGebouwsteen.getVolgorde()) {
-										voorsteGebouwstenen.add(index,g);
-										break;
-									}
-									if(index + 1 == voorsteGebouwstenen.size()) {
-										voorsteGebouwstenen.addLast(g);
-										break;
-									}
-									index ++;
-								}
-							}
-							if(currVakje == eerstePlaats) {
-								int index = 0;
-								for(Gebouwsteen voorsteGebouwsteen:voorsteGebouwstenen) {
-									if(index + 1 == voorsteGebouwstenen.size()) {
-										voorsteGebouwstenen.addLast(g);
-										break;
-									}
-									if(voorsteGebouwsteen.getPositie()%10 == currVakje && g.getVolgorde() < voorsteGebouwsteen.getVolgorde()) {
-										voorsteGebouwstenen.add(index,g);
-										break;
-									}
-									
-									index ++;
-								}
-							}
-						}		
-					}
-				}
-			}
-			if(!alGevuld && ronde == voorsteGebouwstenen.size()) {
-				alGevuld = true;
-			}
-		}
+		return  gebouwstenen.stream()
+				.filter(e -> e.getPositie() %100!= 0)
+				.filter(e -> e.getPositie()/100 == kleur)
+				.sorted(Comparator.comparing(Gebouwsteen::getPositie).reversed().thenComparing(Gebouwsteen::getVolgorde))
+				.limit(ronde)
+				.toList();
+
 				
 			
-			
-		
-		return voorsteGebouwstenen;
 	}
 	
 }

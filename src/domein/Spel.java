@@ -58,7 +58,6 @@ public class Spel {
 		
 		this.isEindeSpel = false;
 		
-		this.ronde = 0;
 	}
 
 	public void setBeschikbareSpelers(List<Speler> spelers) {
@@ -114,6 +113,7 @@ public class Spel {
 		geefSpelersZetstenen();
 		geefSpelerGebouwstenen();
 		this.aantalKeerGerold = 0;
+		this.ronde = 0;
 		
 		SecureRandom rand = new SecureRandom();
 		startSpeler = gekozenSpelers.get(rand.nextInt(gekozenSpelers.size()));
@@ -238,7 +238,6 @@ public class Spel {
 //		if(this.isEindeSpel) {
 //			beïndigSpel();
 //		}else {
-			ronde ++;
 			plaatsStartSpelerFiche(random);
 			plaatsBonusFiches(random);
 		//}
@@ -367,7 +366,10 @@ public class Spel {
 	public void beïndigRonde() {
 		verzetDeGebouwstenen();
 		geefSpelersPunten();
-		
+		for(Speler s:gekozenSpelers) {
+			s.cleanUpNaRonde();
+		}
+		ronde ++;
 		veranderHuidigeSpeler(1);
 		
 	}
@@ -418,12 +420,18 @@ public class Spel {
 						}
 					}
 				}
-				s.verplaatsGebouwsteen(positieKleur, verplaatsing);
+				if(verplaatsing > 0){
+					s.verplaatsGebouwsteen(positieKleur, verplaatsing);
+				}
+				
 			}
 		}
 	}
 	private void geefBonus(Speler s,int positieKleur) {
-		if(spelbord.getFicheGebied().getGezettefiches().get(positieKleur) instanceof Bonusfiche b) {
+		Fiche gewonnenFiche = spelbord.getFicheGebied().getGezettefiches().stream().
+				filter(e -> e.getPositie() == positieKleur).
+				findFirst().get();
+		if(gewonnenFiche instanceof Bonusfiche b) {
 			s.voegPuntenToe(b.getWaarde());
 		}else {
 			for(Speler speler:gekozenSpelers) {
@@ -431,7 +439,7 @@ public class Spel {
 			}
 			s.setIsStartSpeler(true);
 		}
-		spelbord.getFicheGebied().haalFicheWeg(spelbord.getFicheGebied().getGezettefiches().get(positieKleur));
+		spelbord.getFicheGebied().haalFicheWeg(gewonnenFiche);
 	}
 	public void veranderHuidigeSpeler(int type) {
 		//2 types mogelijk
@@ -473,7 +481,7 @@ public class Spel {
 	}
 
 	public Speler getHuidigeSpeler() {
-		return huidigeSpeler;
+		return huidigeSpeler; 
 	}
 
 	public int getRonde() {

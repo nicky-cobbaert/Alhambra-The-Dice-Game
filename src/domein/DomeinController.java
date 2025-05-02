@@ -349,6 +349,18 @@ public class DomeinController {
 		
 		return spel.getRonde();
 	}
+
+	public boolean isEindeVanDeRonde() {
+		int hoeveelZijnNietGezet = spel.getGekozenSpelers().
+		stream().
+		mapToInt(e -> e.getZetstenen().stream().
+				mapToInt(z -> z.getPositie()).
+				filter(p -> p == 0).
+				findAny().
+				orElse(1)).
+		reduce(0,(x,y) -> x + y);
+		return hoeveelZijnNietGezet == spel.getGekozenSpelers().size();
+	}
 	
 }
 

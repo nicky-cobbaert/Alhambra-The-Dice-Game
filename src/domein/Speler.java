@@ -152,7 +152,13 @@ public class Speler {
 		for(Gebouwsteen g :gebouwstenen) {
 			if (g.getPositie()/100 == positie) {
 				g.verplaats(verplaatsing);
+				break;
 			}
+		}
+	}
+	public void cleanUpNaRonde() {
+		for(Zetsteen z:zetstenen) {
+			z.gaVanHetSpelbord();
 		}
 	}
 
