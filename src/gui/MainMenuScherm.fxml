@@ -26,10 +26,10 @@
             </rowConstraints>
             <children>
                 
-                <VBox alignment="CENTER" spacing="30" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <VBox alignment="CENTER" spacing="30" translateY="5.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                     <children>
                        
-                        <Button fx:id="registreerKnop" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="46.0" prefWidth="340.0" text="%registreer">
+                        <Button fx:id="registreerKnop" layoutY="100.0" maxWidth="350.0" minWidth="250.0" mnemonicParsing="false" onAction="#registreerKnopKlik" prefHeight="46.0" prefWidth="340.0" text="%registreer">
                             <font>
                                 <Font name="Algerian" size="20.0" />
                             </font>
@@ -68,19 +68,19 @@
                         <Font name="Algerian" size="35.0" />
                      </font>
                   </Label>
-                  <Label fx:id="leaderboardEen" alignment="CENTER" prefHeight="70.0" prefWidth="340.0" text="Label" textAlignment="CENTER" textOverrun="CLIP">
+                  <Label fx:id="leaderboardEen" alignment="CENTER" prefHeight="70.0" prefWidth="340.0" style="-fx-border-width: 2px 0 2px 0; -fx-border-color: black; -fx-border-style: solid;" text="Label" textAlignment="CENTER" textOverrun="CLIP">
                      <font>
                         <Font name="Algerian" size="25.0" />
                      </font></Label>
-                  <Label fx:id="leaderboardTwee" alignment="CENTER" prefHeight="70.0" prefWidth="340.0" text="Label" textAlignment="CENTER" textOverrun="CLIP">
+                  <Label fx:id="leaderboardTwee" alignment="CENTER" prefHeight="70.0" prefWidth="340.0" style="-fx-border-width: 0 0 2px 0; -fx-border-color: black; -fx-border-style: solid;" text="Label" textAlignment="CENTER" textOverrun="CLIP">
                      <font>
                         <Font name="Algerian" size="25.0" />
                      </font></Label>
-                  <Label fx:id="leaderboardDrie" alignment="CENTER" prefHeight="70.0" prefWidth="340.0" text="Label" textAlignment="CENTER" textOverrun="CLIP">
+                  <Label fx:id="leaderboardDrie" alignment="CENTER" prefHeight="70.0" prefWidth="340.0" style="-fx-border-width: 0 0 2px 0; -fx-border-color: black; -fx-border-style: solid;" text="Label" textAlignment="CENTER" textOverrun="CLIP">
                      <font>
                         <Font name="Algerian" size="25.0" />
                      </font></Label>
-                  <Label fx:id="leaderboardVier" alignment="CENTER" prefHeight="70.0" prefWidth="340.0" text="Label" textAlignment="CENTER" textOverrun="CLIP">
+                  <Label fx:id="leaderboardVier" alignment="CENTER" prefHeight="70.0" prefWidth="340.0" style="-fx-border-width: 0 0 2px 0; -fx-border-color: black; -fx-border-style: solid;" text="Label" textAlignment="CENTER" textOverrun="CLIP">
                      <font>
                         <Font name="Algerian" size="25.0" />
                      </font></Label>
