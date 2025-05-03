@@ -416,7 +416,8 @@ public class SpelbordScherm extends BorderPane {
         if(dc.isEindeVanDeRonde()) {
         	beïndigDeRonde();
         	if(dc.getIsEindeSpel()) {
-            	//hier komt het overwinningscherm dan
+            	WinnaarScherm ws = new WinnaarScherm(dc, taal);
+            	this.setCenter(ws);
         		return;
             }
         	beginRonde();
@@ -500,7 +501,6 @@ public class SpelbordScherm extends BorderPane {
     
     @FXML
     void SpeelKnopKlik(ActionEvent event) {
-    	System.out.println("Knop \"Speel\" is ingedrukt");
     	disableDobbelstenen(true);
     	this.setDisable(true);
     	kiesScherm();
@@ -528,7 +528,6 @@ public class SpelbordScherm extends BorderPane {
         	
         	gebouwsteen.setTranslateX(offset);
         	gebouwsteen.setTranslateY(offset);
-        	System.out.printf("%d %s%n",steen.positie(), kleur);
         	gebouwsteenGebied.add(gebouwsteen, (steen.positie()/100)-1, 10-steen.positie()%10);
     		}
     	}

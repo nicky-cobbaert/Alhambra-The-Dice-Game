@@ -22,6 +22,8 @@ import utils.SpelerKleur;
 public class WinnaarScherm extends BorderPane {
 
 	private final DomeinController dc;
+	private char taal;
+	
 	private void loadFxmlScreen(String name) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
 		loader.setRoot(this);
@@ -33,7 +35,7 @@ public class WinnaarScherm extends BorderPane {
 		}
 	}
 
-	public WinnaarScherm(DomeinController dc, char taal, MainMenuScherm mainMenu) {
+	public WinnaarScherm(DomeinController dc, char taal) {
 		this.dc = dc;
 		setTaal(taal);
 		loadFxmlScreen("WinnaarScherm.fxml");
@@ -118,6 +120,7 @@ public class WinnaarScherm extends BorderPane {
 	}
 
 	private void setTaal(char taal) {
+		this.taal = taal;
 	}
 
 	@FXML
