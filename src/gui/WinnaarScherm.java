@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import domein.DomeinController;
 import dto.SpelerDTO;
@@ -21,9 +23,16 @@ import utils.SpelerKleur;
 
 public class WinnaarScherm extends BorderPane {
 
+	private char taal;
 	private final DomeinController dc;
+	private ResourceBundle bundle;
+	
 	private void loadFxmlScreen(String name) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("");
+		//ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		this.bundle = ResourceBundle.getBundle("messages", locale);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
+		
 		loader.setRoot(this);
 		loader.setController(this);
 		try {
@@ -33,7 +42,7 @@ public class WinnaarScherm extends BorderPane {
 		}
 	}
 
-	public WinnaarScherm(DomeinController dc, char taal, MainMenuScherm mainMenu) {
+	public WinnaarScherm(DomeinController dc, char taal) {
 		this.dc = dc;
 		setTaal(taal);
 		loadFxmlScreen("WinnaarScherm.fxml");
@@ -118,6 +127,7 @@ public class WinnaarScherm extends BorderPane {
 	}
 
 	private void setTaal(char taal) {
+		this.taal=taal;
 	}
 
 	@FXML
@@ -175,12 +185,12 @@ public class WinnaarScherm extends BorderPane {
 
 	@FXML
 	void bedanktKnopOnAction(ActionEvent event) {
-
 		Alert bedanktAlert = new Alert(AlertType.INFORMATION);
-		bedanktAlert.setTitle("Bedankt om te spelen!");
-		bedanktAlert.setHeaderText("Credits:");
-		bedanktAlert.setContentText("Cobbaert Nicky\nDe Wever Lars\nGheysels Wout\nLippens Sverre\nVan Horen Jelle");
+		bedanktAlert.setTitle(bundle.getString("bedankt.title"));
+		bedanktAlert.setHeaderText(bundle.getString("bedankt.header"));
+		bedanktAlert.setContentText(bundle.getString("bedankt.content"));
 		bedanktAlert.showAndWait();
 	}
+
 
 }

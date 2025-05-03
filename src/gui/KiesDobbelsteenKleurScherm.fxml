@@ -28,11 +28,11 @@
       <RowConstraints minHeight="25.0" percentHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label contentDisplay="CENTER" text="Kies een gebouw kleur!" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
+      <Label contentDisplay="CENTER" text="%gebouwkleur.kies" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
          <font>
             <Font name="Algerian" size="25.0" />
          </font></Label>
-      <Button fx:id="blauweKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesBlauweKleur" text="BLAUW (PAVILJOEN)" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+      <Button fx:id="blauweKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesBlauweKleur" text="%BLAUW.PAVILJOEN" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <font>
             <Font name="Algerian" size="18.0" />
          </font></Button>
@@ -41,23 +41,23 @@
             <Image url="@../images/DobbelsteenBLAUW.png" />
          </image>
       </ImageView>
-      <Button fx:id="bruineKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesBruineKleur" text="BRUIN (ARCADE)" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <Button fx:id="bruineKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesBruineKleur" text="%BRUIN.ARCADE" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <font>
             <Font name="Algerian" size="18.0" />
          </font></Button>
-      <Button fx:id="groeneKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesGroeneKleur" text="GROEN (TUIN)" GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <Button fx:id="groeneKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesGroeneKleur" text="%GROEN.TUIN" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <font>
             <Font name="Algerian" size="18.0" />
          </font></Button>
-      <Button fx:id="rodeKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesRodeKleur" text="ROOD (HAREM)" GridPane.columnIndex="3" GridPane.rowIndex="2">
+      <Button fx:id="rodeKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesRodeKleur" text="%ROOD.HAREM" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <font>
             <Font name="Algerian" size="18.0" />
          </font></Button>
-      <Button fx:id="grijzeKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesGrijzeKleur" text="GRIJS (WONING)" GridPane.columnIndex="3" GridPane.rowIndex="4">
+      <Button fx:id="grijzeKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesGrijzeKleur" text="%GRIJS.WONING" GridPane.columnIndex="3" GridPane.rowIndex="4">
          <font>
             <Font name="Algerian" size="18.0" />
          </font></Button>
-      <Button fx:id="paarseKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesPaarseKleur" text="PAARS (TOREN)" GridPane.columnIndex="3" GridPane.rowIndex="6">
+      <Button fx:id="paarseKleurKnop" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#kiesPaarseKleur" text="%PAARS.TOREN" GridPane.columnIndex="3" GridPane.rowIndex="6">
          <font>
             <Font name="Algerian" size="18.0" />
          </font></Button>

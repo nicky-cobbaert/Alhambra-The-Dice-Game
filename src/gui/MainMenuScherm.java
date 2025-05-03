@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -25,6 +26,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class MainMenuScherm extends BorderPane {
 
@@ -54,6 +56,9 @@ public class MainMenuScherm extends BorderPane {
 		zetOfflineButtonUit();
 		zetLeaderboard();
 	}
+	
+	
+
 
 	private void setTaal(char taal) {
 		this.taal = taal;
@@ -69,7 +74,8 @@ public class MainMenuScherm extends BorderPane {
 
 		this.setBackground(new Background(achtergrond));
 	}
-
+	
+	
 	@FXML
 	private Button registreerKnop;
 

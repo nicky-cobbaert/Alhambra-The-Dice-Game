@@ -135,7 +135,7 @@
                   <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="273.3999938964844" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="SpeelKnop" mnemonicParsing="false" onAction="#SpeelKnopKlik" text="Speel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                  <Button fx:id="SpeelKnop" mnemonicParsing="false" onAction="#SpeelKnopKlik" text="%speel.knop" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Algerian" size="20.0" />
                      </font>
@@ -143,7 +143,7 @@
                         <Insets bottom="40.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="RolKnop" alignment="CENTER" mnemonicParsing="false" onAction="#RolKnopKlik" prefHeight="9.0" prefWidth="64.0" text="Rol" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                  <Button fx:id="RolKnop" alignment="CENTER" mnemonicParsing="false" onAction="#RolKnopKlik" prefHeight="9.0" prefWidth="64.0" text="%rol.knop" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Algerian" size="20.0" />
                      </font>

@@ -37,8 +37,8 @@
                   <Font size="39.0" />
                </font>
             </Label>
-            <Button fx:id="afsluitButton" mnemonicParsing="false" onAction="#afsluitButtonOnAction" prefHeight="50.0" prefWidth="250.0" text="Afsluiten" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-            <Button fx:id="bedanktKnop" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bedanktKnopOnAction" text="Bedankt om te spelen!" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+            <Button fx:id="afsluitButton" mnemonicParsing="false" onAction="#afsluitButtonOnAction" prefHeight="50.0" prefWidth="250.0" text="%afsluiten.knop" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+            <Button fx:id="bedanktKnop" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bedanktKnopOnAction" text="%bedankt.knop" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
             <Label fx:id="overzichtSpeler1" lineSpacing="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #F8F9FA;" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label fx:id="overzichtSpeler2" lineSpacing="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #F8F9FA;" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label fx:id="overzichtSpeler3" lineSpacing="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #F8F9FA;" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />

@@ -3,7 +3,8 @@ package gui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import domein.DomeinController;
 import dto.DobbelsteenDTO;
@@ -44,12 +45,17 @@ public class SpelbordScherm extends BorderPane {
 	private List<ImageView> dobbelImages;
 	private List<ImageView> ficheImages;
 	private List<GridPane> zetsteenGebieden;
+	private ResourceBundle bundle;
 	
 	private char taal;
 	
 	
 	private void loadFxmlScreen(String name) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+		//FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("");
+		//ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		this.bundle = ResourceBundle.getBundle("messages", locale);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(name), bundle);
 		loader.setRoot(this);
 		loader.setController(this);
 		try {
@@ -96,7 +102,8 @@ public class SpelbordScherm extends BorderPane {
         zetsteenGebieden.add(GrijsResultaatGebied);
         zetsteenGebieden.add(GroenResultaatGebied);
         zetsteenGebieden.add(PaarsResultaatGebied);
-        welkeRonde.setText(String.format("Ronde %d", dc.getRonde()));
+        welkeRonde.setText(String.format(bundle.getString("label.ronde"), dc.getRonde()));
+
         plaatsImagesGebouwen();
 		
 		//SpelTest
@@ -232,47 +239,51 @@ public class SpelbordScherm extends BorderPane {
     	
     	int aantalSpelers = gekozenSpelers.size();
     	int aantalZetstenen = (int) gekozenSpelers.get(0).zetstenen().stream().filter(e -> e.positie()==0).count();
-    	Label spelerEen = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(0).gebruikersnaam(),gekozenSpelers.get(0).punten(),
-    			aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
+    	Label spelerEen = new Label(String.format(bundle.getString("label.spelerStatus"),gekozenSpelers.get(0).gebruikersnaam(),gekozenSpelers.get(0).punten(),
+    			aantalZetstenen, bundle.getString((aantalZetstenen == 1) ? "label.zetsteen.enkel" : "label.zetsteen.meervoud")));
+//    	Label spelerEen = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(0).gebruikersnaam(),gekozenSpelers.get(0).punten(),
+//    			aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
     	spelerBox.getChildren().add(spelerEen);
     	geefLabelJuisteOpmaak(spelerEen,gekozenSpelers.get(0).kleur());
     	labelsSpelers.add(spelerEen);
     	
     	aantalZetstenen = (int) gekozenSpelers.get(1
     			).zetstenen().stream().filter(e -> e.positie()==0).count();
-    	Label spelerTwee = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(1).gebruikersnaam(),gekozenSpelers.get(1).punten(),
-    			aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
+    	Label spelerTwee = new Label(String.format(bundle.getString("label.spelerStatus"),gekozenSpelers.get(1).gebruikersnaam(),gekozenSpelers.get(1).punten(),
+    			aantalZetstenen, bundle.getString((aantalZetstenen == 1) ? "label.zetsteen.enkel" : "label.zetsteen.meervoud")));
+//    	Label spelerTwee = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(1).gebruikersnaam(),gekozenSpelers.get(1).punten(),
+//    			aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
     	spelerBox.getChildren().add(spelerTwee);
     	geefLabelJuisteOpmaak(spelerTwee,gekozenSpelers.get(1).kleur());
     	labelsSpelers.add(spelerTwee);
     	
     	aantalZetstenen = (int) gekozenSpelers.get(2).zetstenen().stream().filter(e -> e.positie()==0).count();
-    	Label spelerDrie = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(2).gebruikersnaam(),gekozenSpelers.get(2).punten(),
-    			aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
+    	Label spelerDrie = new Label(String.format(bundle.getString("label.spelerStatus"),gekozenSpelers.get(2).gebruikersnaam(),gekozenSpelers.get(2).punten(),
+    			aantalZetstenen, bundle.getString((aantalZetstenen == 1) ? "label.zetsteen.enkel" : "label.zetsteen.meervoud")));
     	spelerBox.getChildren().add(spelerDrie);
     	geefLabelJuisteOpmaak(spelerDrie,gekozenSpelers.get(2).kleur());
     	labelsSpelers.add(spelerDrie);
     	
     	if (aantalSpelers > 3) {
     		aantalZetstenen = (int) gekozenSpelers.get(3).zetstenen().stream().filter(e -> e.positie()==0).count();
-    		Label spelerVier = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(3).gebruikersnaam(),gekozenSpelers.get(3).punten(),
-    				aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
+    		Label spelerVier = new Label(String.format(bundle.getString("label.spelerStatus"),gekozenSpelers.get(3).gebruikersnaam(),gekozenSpelers.get(3).punten(),
+    				aantalZetstenen, bundle.getString((aantalZetstenen == 1) ? "label.zetsteen.enkel" : "label.zetsteen.meervoud")));
         	spelerBox.getChildren().add(spelerVier);
         	geefLabelJuisteOpmaak(spelerVier,gekozenSpelers.get(3).kleur());
         	labelsSpelers.add(spelerVier);
     	}
     	if (aantalSpelers > 4) {
     		aantalZetstenen = (int) gekozenSpelers.get(4).zetstenen().stream().filter(e -> e.positie()==0).count();
-    		Label spelerVijf = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(4).gebruikersnaam(),gekozenSpelers.get(4).punten(),
-    				aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
+    		Label spelerVijf = new Label(String.format(bundle.getString("label.spelerStatus"),gekozenSpelers.get(4).gebruikersnaam(),gekozenSpelers.get(4).punten(),
+    				aantalZetstenen, bundle.getString((aantalZetstenen == 1) ? "label.zetsteen.enkel" : "label.zetsteen.meervoud")));
         	geefLabelJuisteOpmaak(spelerVijf,gekozenSpelers.get(4).kleur());
         	spelerBox.getChildren().add(spelerVijf);
         	labelsSpelers.add(spelerVijf);
     	}
     	if (aantalSpelers > 5) {
     		aantalZetstenen = (int) gekozenSpelers.get(5).zetstenen().stream().filter(e -> e.positie()==0).count();
-    		Label spelerZes = new Label(String.format("%s - %d punten - %d %s",gekozenSpelers.get(5).gebruikersnaam(),gekozenSpelers.get(5).punten(),
-    				aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));
+    		Label spelerZes = new Label(String.format(bundle.getString("label.spelerStatus"),gekozenSpelers.get(5).gebruikersnaam(),gekozenSpelers.get(5).punten(),
+    				aantalZetstenen, bundle.getString((aantalZetstenen == 1) ? "label.zetsteen.enkel" : "label.zetsteen.meervoud")));
         	spelerBox.getChildren().add(spelerZes);
         	geefLabelJuisteOpmaak(spelerZes,gekozenSpelers.get(5).kleur());
         	labelsSpelers.add(spelerZes);
@@ -417,6 +428,9 @@ public class SpelbordScherm extends BorderPane {
         	beïndigDeRonde();
         	if(dc.getIsEindeSpel()) {
             	//hier komt het overwinningscherm dan
+        		WinnaarScherm ws = new WinnaarScherm(dc, taal);
+            	this.setCenter(ws);
+            	
         		return;
             }
         	beginRonde();
@@ -460,7 +474,8 @@ public class SpelbordScherm extends BorderPane {
     	dc.geefGekozenSpelers().
     	stream().
     	forEach(e -> plaatsGebouwstenen(e.gebouwtsenen(), e.kleur()));
-    	welkeRonde.setText(String.format("Ronde %d", dc.getRonde()+1));
+    	welkeRonde.setText(String.format(bundle.getString("label.ronde"), dc.getRonde() + 1));
+
     	
 	}
 
@@ -500,7 +515,7 @@ public class SpelbordScherm extends BorderPane {
     
     @FXML
     void SpeelKnopKlik(ActionEvent event) {
-    	System.out.println("Knop \"Speel\" is ingedrukt");
+    	
     	disableDobbelstenen(true);
     	this.setDisable(true);
     	kiesScherm();
@@ -528,7 +543,7 @@ public class SpelbordScherm extends BorderPane {
         	
         	gebouwsteen.setTranslateX(offset);
         	gebouwsteen.setTranslateY(offset);
-        	System.out.printf("%d %s%n",steen.positie(), kleur);
+        	
         	gebouwsteenGebied.add(gebouwsteen, (steen.positie()/100)-1, 10-steen.positie()%10);
     		}
     	}
