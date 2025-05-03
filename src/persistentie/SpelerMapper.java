@@ -25,15 +25,13 @@ public class SpelerMapper {
 
 	// offline deel----------------------------------------------
 
-	public static boolean offlineModus = false;
 
 	public void startOfflineModus() {
 
 		initialiseerLokaalSpelersBestand();
 		// de try catch vang een error op, voor er gewisseld wordt van databank
 
-		SpelerMapper.offlineModus = true;
-
+		Connectie.veranderUrlNaarOffline();
 	}
 
 	private static void initialiseerLokaalSpelersBestand() {
