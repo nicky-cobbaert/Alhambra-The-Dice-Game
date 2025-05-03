@@ -25,7 +25,11 @@ public class WinnaarScherm extends BorderPane {
 
 	private char taal;
 	private final DomeinController dc;
+<<<<<<< HEAD
 	private ResourceBundle bundle;
+=======
+	private char taal;
+>>>>>>> origin/main
 	
 	private void loadFxmlScreen(String name) {
 		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("");
@@ -127,7 +131,11 @@ public class WinnaarScherm extends BorderPane {
 	}
 
 	private void setTaal(char taal) {
+<<<<<<< HEAD
 		this.taal=taal;
+=======
+		this.taal = taal;
+>>>>>>> origin/main
 	}
 
 	@FXML
