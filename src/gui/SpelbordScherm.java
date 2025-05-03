@@ -16,10 +16,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -292,21 +292,31 @@ public class SpelbordScherm extends BorderPane {
     }
     
     private void geefLabelJuisteOpmaak(Label lbl, SpelerKleur kleur) {
-    	int prefH = 358/dc.geefGekozenSpelers().size();
-    	    	
-    	lbl.setPrefHeight(prefH);
-    	lbl.setFont(Font.font("Algerian", 15));
-    	lbl.setAlignment(Pos.CENTER);
-    	lbl.setTextAlignment(TextAlignment.CENTER);
-    	lbl.setWrapText(true);
-    	switch (kleur) {
-    	case SpelerKleur.BLAUW -> lbl.setTextFill(Color.BLUE);
-    	case SpelerKleur.GROEN -> lbl.setTextFill(Color.LIMEGREEN);
-    	case SpelerKleur.WIT -> lbl.setTextFill(Color.WHITESMOKE);
-    	case SpelerKleur.GEEL -> lbl.setTextFill(Color.YELLOW);
-    	case SpelerKleur.ORANJE -> lbl.setTextFill(Color.color(1, 0.35, 0));
-    	case SpelerKleur.ROOD -> lbl.setTextFill(Color.RED);
-    	}
+        int prefH = 358/dc.geefGekozenSpelers().size();
+
+        lbl.setPrefHeight(prefH);
+        lbl.setFont(Font.font("Algerian", 15));
+        lbl.setAlignment(Pos.CENTER);
+        lbl.setTextAlignment(TextAlignment.CENTER);
+        lbl.setWrapText(true);
+
+        // Stel een DropShadow effect in voor een rand rond de tekst
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(Color.BLACK);  // De rand (schaduw) moet zwart zijn
+        dropShadow.setOffsetX(1);         // Zet de offset van de schaduw
+        dropShadow.setOffsetY(1);         // Zet de offset van de schaduw
+        dropShadow.setRadius(0.5);          // Hoe ver de schaduw zich uitstrekt (kleine waarde voor een dunne rand)
+
+        lbl.setEffect(dropShadow);
+
+        switch (kleur) {
+        case SpelerKleur.BLAUW -> lbl.setTextFill(Color.BLUE);
+        case SpelerKleur.GROEN -> lbl.setTextFill(Color.LIMEGREEN);
+        case SpelerKleur.WIT -> lbl.setTextFill(Color.WHITESMOKE);
+        case SpelerKleur.GEEL -> lbl.setTextFill(Color.YELLOW);
+        case SpelerKleur.ORANJE -> lbl.setTextFill(Color.color(1, 0.35, 0));
+        case SpelerKleur.ROOD -> lbl.setTextFill(Color.RED);
+        }
     }
     
     @FXML
