@@ -100,8 +100,10 @@ public class KiesDobbelsteenKleurScherm extends GridPane {
     private void gekozen(DobbelsteenKleur kleur) {
     	Stage stage = (Stage) groeneKleurKnop.getScene().getWindow();
     	stage.close();
-    	
+    	ss.setDisable(false);
     	ss.beïndigBeurt(kleur);
+    	
+    	
     }
 
 

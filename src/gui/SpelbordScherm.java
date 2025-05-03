@@ -417,10 +417,20 @@ public class SpelbordScherm extends BorderPane {
         	beïndigDeRonde();
         	if(dc.getIsEindeSpel()) {
             	//hier komt het overwinningscherm dan
+        		return;
             }
         	beginRonde();
         }
-        updateAantalZetstenen(huidigeSpelerDTO);
+        try {
+        	updateAantalZetstenen(huidigeSpelerDTO);
+        }catch(Exception e) {
+        	final String huidigeSpelerGebruikersnaam = huidigeSpelerDTO.gebruikersnaam();
+        	huidigeSpelerDTO = dc.geefGekozenSpelers().stream()
+        			.filter(s -> s.gebruikersnaam() == huidigeSpelerGebruikersnaam)
+        			.findFirst().get();
+        	updateAantalZetstenen(huidigeSpelerDTO);
+        }
+        
         veranderHuidigeSpeler();
     }
     
@@ -429,7 +439,7 @@ public class SpelbordScherm extends BorderPane {
 		herzetSpelersNaRonde();
 		plaatsFiches();
 	}
-    private void maakDeGebiedLeeg(GridPane gp) {
+    private void maakHetGebiedLeeg(GridPane gp) {
     	for(javafx.scene.Node n:gp.getChildren()) {
     		if(n.getId() != "KEEP") {
     			n.setId("REMOVE");
@@ -442,7 +452,7 @@ public class SpelbordScherm extends BorderPane {
     	System.out.println("Ronde is klaar");
     	dc.beïndigRonde();
     	for(GridPane gp:zetsteenGebieden) {
-    		maakDeGebiedLeeg(gp);;
+    		maakHetGebiedLeeg(gp);;
     	}
     	if(gebouwsteenGebied.getChildren().size() != 0) {
     		gebouwsteenGebied.getChildren().clear();
@@ -492,7 +502,7 @@ public class SpelbordScherm extends BorderPane {
     void SpeelKnopKlik(ActionEvent event) {
     	System.out.println("Knop \"Speel\" is ingedrukt");
     	disableDobbelstenen(true);
-    	
+    	this.setDisable(true);
     	kiesScherm();
     }
     
