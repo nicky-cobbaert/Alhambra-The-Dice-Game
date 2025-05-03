@@ -64,14 +64,11 @@ public class KiesDobbelsteenKleurScherm extends GridPane {
 				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
 
 		this.setBackground(new Background(achtergrond));
-<<<<<<< HEAD
 	}
 	
 	
 	private void setTaal(char taal) {
 		this.taal = taal;
-=======
->>>>>>> origin/main
 	}
 
 	
