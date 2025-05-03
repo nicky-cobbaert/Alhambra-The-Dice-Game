@@ -26,7 +26,7 @@ public class SpelerMapper {
 	// offline deel----------------------------------------------
 
 
-	public void startOfflineModus() {
+	public static void startOfflineModus() {
 
 		initialiseerLokaalSpelersBestand();
 		// de try catch vang een error op, voor er gewisseld wordt van databank

@@ -1,5 +1,7 @@
 package domein;
 
+import java.net.ConnectException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +12,7 @@ import dto.FicheDTO;
 import dto.GebouwsteenDTO;
 import dto.SpelerDTO;
 import dto.ZetsteenDTO;
+import persistentie.SpelerMapper;
 import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
 
@@ -17,44 +20,66 @@ public class DomeinController {
 
 	private final SpelerRepository spelerRepo;
 	private Spel spel;
-	private boolean isGUI; // Nodig voor vertaling, bepaald of je in cli zit (geen vertaling) of gui (wel vertaling)
-    
-    public DomeinController() {
-        spelerRepo = new SpelerRepository();
-        isGUI = false; // Default is cli
-    }
-    
-    public void setGUIMode(boolean isGUI) {
-        this.isGUI = isGUI;
-    }
-    
-    // Zorgt ervoor dat berichten in cli mooi worden weergegeven
-    private String translateErrorKey(String key) {
-        if (!isGUI) {
-            // Illegal argument exception word mooit gezet
-            Map<String, String> errorMessages = new HashMap<>();
-            errorMessages.put("gebruikersnaam.teKort", "Gebruikersnaam moet minimaal 6 karakters bevatten");
-            errorMessages.put("geboortedatum.ongeldig", "Je moet tussen de leeftijd van 6 en 100 zijn om dit spel te mogen spelen");
-            // Add other translations as needed
-            
-            return errorMessages.getOrDefault(key, key); // als er niks gevonden is default
-        }
-        return key; // In GUI mode wordt de sluitel naar resourcebundel gestuurd
-    }
-    
-    public void registreerSpeler(String gebruikersnaam, int geboortejaar) {
-        try {
-            Speler nieuweSpeler = new Speler(gebruikersnaam, geboortejaar);
-            spelerRepo.voegToe(nieuweSpeler);
-        } catch (IllegalArgumentException e) {
-            // Translate the error message if it's a key
-            String translatedMessage = translateErrorKey(e.getMessage());
-            throw new IllegalArgumentException(translatedMessage);
-        }
-    }
-	
-	
-	
+	private boolean isGUI; // Nodig voor vertaling, bepaald of je in cli zit (geen vertaling) of gui (wel
+							// vertaling)
+
+	public DomeinController() {
+
+		// try catch dient voor de offlinemodus te starten als er geen verbinding met
+		// VICHogent is.
+
+		SpelerRepository tempSpelerRepo;// ik wou de spelerRepo final houden
+
+		try {
+			tempSpelerRepo = new SpelerRepository();
+
+		} catch (RuntimeException e) {
+			// als er geen internet is zal nu het programma automatisch offlinemode
+			// aanzetten
+
+			if (e.getCause() instanceof UnknownHostException || e.getCause() instanceof ConnectException
+					|| e.getMessage().contains("Communications link failure")) {
+				SpelerMapper.startOfflineModus();
+				tempSpelerRepo = new SpelerRepository();
+
+			} else {
+				throw e;
+			}
+		}
+
+		spelerRepo = tempSpelerRepo;
+		isGUI = false; // Default is cli
+	}
+
+	public void setGUIMode(boolean isGUI) {
+		this.isGUI = isGUI;
+	}
+
+	// Zorgt ervoor dat berichten in cli mooi worden weergegeven
+	private String translateErrorKey(String key) {
+		if (!isGUI) {
+			// Illegal argument exception word mooit gezet
+			Map<String, String> errorMessages = new HashMap<>();
+			errorMessages.put("gebruikersnaam.teKort", "Gebruikersnaam moet minimaal 6 karakters bevatten");
+			errorMessages.put("geboortedatum.ongeldig",
+					"Je moet tussen de leeftijd van 6 en 100 zijn om dit spel te mogen spelen");
+			// Add other translations as needed
+
+			return errorMessages.getOrDefault(key, key); // als er niks gevonden is default
+		}
+		return key; // In GUI mode wordt de sluitel naar resourcebundel gestuurd
+	}
+
+	public void registreerSpeler(String gebruikersnaam, int geboortejaar) {
+		try {
+			Speler nieuweSpeler = new Speler(gebruikersnaam, geboortejaar);
+			spelerRepo.voegToe(nieuweSpeler);
+		} catch (IllegalArgumentException e) {
+			// Translate the error message if it's a key
+			String translatedMessage = translateErrorKey(e.getMessage());
+			throw new IllegalArgumentException(translatedMessage);
+		}
+	}
 
 //	public DomeinController() {
 //		spelerRepo = new SpelerRepository();
@@ -77,6 +102,7 @@ public class DomeinController {
 	public void startRonde() {
 		spel.startRonde();
 	}
+
 //    public List<Speler> geefAlleSpelers() { 
 //    	return spelerRepo.geefAlleSpelers();
 //    }
@@ -110,24 +136,25 @@ public class DomeinController {
 
 		return resultaat;
 	}
-	
-	private List<ZetsteenDTO> zetZetsteenNaarDTO(List<Zetsteen> zetstenen){
+
+	private List<ZetsteenDTO> zetZetsteenNaarDTO(List<Zetsteen> zetstenen) {
 		List<ZetsteenDTO> zetsteenDTOs = new ArrayList<ZetsteenDTO>();
 		if (zetstenen == null) {
 			return null;
 		}
-		for(Zetsteen z:zetstenen) {
+		for (Zetsteen z : zetstenen) {
 			zetsteenDTOs.add(new ZetsteenDTO(z.getPositie()));
 		}
 		return zetsteenDTOs;
 	}
-	private List<GebouwsteenDTO> zetGebouwsteenNaarDTO(List<Gebouwsteen> gebouwstenen){
+
+	private List<GebouwsteenDTO> zetGebouwsteenNaarDTO(List<Gebouwsteen> gebouwstenen) {
 		List<GebouwsteenDTO> gebouwsteenDTOs = new ArrayList<GebouwsteenDTO>();
 		if (gebouwstenen == null) {
 			return null;
 		}
-		for(Gebouwsteen g:gebouwstenen) {
-			gebouwsteenDTOs.add(new GebouwsteenDTO(g.getPositie(),g.getVolgorde()));
+		for (Gebouwsteen g : gebouwstenen) {
+			gebouwsteenDTOs.add(new GebouwsteenDTO(g.getPositie(), g.getVolgorde()));
 		}
 		return gebouwsteenDTOs;
 	}
@@ -279,50 +306,50 @@ public class DomeinController {
 		return resultaat;
 
 	}
-	
-	public List<DobbelsteenDTO> getDobbelstenenDTOs(){
+
+	public List<DobbelsteenDTO> getDobbelstenenDTOs() {
 		List<DobbelsteenDTO> dobbelsteenDTOs = new ArrayList<DobbelsteenDTO>();
-		for(Dobbelsteen d:spel.getDobbelstenen()) {
+		for (Dobbelsteen d : spel.getDobbelstenen()) {
 			DobbelsteenDTO dobbelDTO = new DobbelsteenDTO(d.getDobbelsteenKleur(), d.getNogRollen());
 			dobbelsteenDTOs.add(dobbelDTO);
 		}
 		return dobbelsteenDTOs;
 	}
-	
+
 	public boolean veranderStatusNogRollenDobbelsteen(int index) {
 		return spel.veranderStatusNogRollenDobbelsteen(index);
 	}
-	
+
 	public int getAantalKeerGerold() {
 		return spel.getAantalKeerGerold();
 	}
-	
+
 	public boolean rolDobbelstenen() {
 		return spel.rolDobbelstenen();
 	}
-	
-	public List<FicheDTO> getGeplaatsteFicheDTOs(){
-		List<FicheDTO> ficheDTOs = new ArrayList<FicheDTO>(); 
-		for(Fiche f:spel.getGezetteFiches()) {
+
+	public List<FicheDTO> getGeplaatsteFicheDTOs() {
+		List<FicheDTO> ficheDTOs = new ArrayList<FicheDTO>();
+		for (Fiche f : spel.getGezetteFiches()) {
 			FicheDTO ficheDTO;
-			if(f instanceof Bonusfiche bf) {
+			if (f instanceof Bonusfiche bf) {
 				ficheDTO = new FicheDTO(bf.getPositie(), bf.getWaarde());
-			}else {
+			} else {
 				ficheDTO = new FicheDTO(f.getPositie(), 0);
 			}
 			ficheDTOs.add(ficheDTO);
 		}
 		return ficheDTOs;
 	}
-	
+
 	public SpelerDTO beïndigBeurt(DobbelsteenKleur kleur) {
 		return zetSpelerOmNaarDTO(spel.beïndigBeurt(kleur));
 	}
-	
+
 	public void beïndigRonde() {
 		spel.beïndigRonde();
 	}
-	
+
 	public void beïndigSpel() {
 		spel.beïndigSpel();
 	}
@@ -330,38 +357,33 @@ public class DomeinController {
 	public void startOfflineModus() {
 		spelerRepo.startOfflineModus();
 	}
-	
-	public List<SpelerDTO> geefLeaderboard(){
+
+	public List<SpelerDTO> geefLeaderboard() {
 		return zetSpelersOmNaarSpelerDTOs(spelerRepo.geefLeaderboard());
 	}
-	
+
 	private SpelerDTO zetSpelerOmNaarDTO(Speler s) {
-		return new SpelerDTO(s.getGebruikersnaam(),s.getGeboortejaar(), s.getAantalGespeeld(),
-				s.getAantalGewonnen(), s.getKleur(),zetZetsteenNaarDTO(s.getZetstenen()),
-				zetGebouwsteenNaarDTO(s.getGebouwstenen()), s.getPunten());
+		return new SpelerDTO(s.getGebruikersnaam(), s.getGeboortejaar(), s.getAantalGespeeld(), s.getAantalGewonnen(),
+				s.getKleur(), zetZetsteenNaarDTO(s.getZetstenen()), zetGebouwsteenNaarDTO(s.getGebouwstenen()),
+				s.getPunten());
 	}
-	
+
 	public SpelerDTO getHuidigeSpelerDTO() {
 		return zetSpelerOmNaarDTO(spel.getHuidigeSpeler());
 	}
 
 	public int getRonde() {
-		
+
 		return spel.getRonde();
 	}
 
 	public boolean isEindeVanDeRonde() {
-		int hoeveelZijnNietGezet = spel.getGekozenSpelers().
-		stream().
-		mapToInt(e -> e.getZetstenen().stream().
-				mapToInt(z -> z.getPositie()).
-				filter(p -> p == 0).
-				findAny().
-				orElse(1)).
-		reduce(0,(x,y) -> x + y);
+		int hoeveelZijnNietGezet = spel.getGekozenSpelers().stream().mapToInt(
+				e -> e.getZetstenen().stream().mapToInt(z -> z.getPositie()).filter(p -> p == 0).findAny().orElse(1))
+				.reduce(0, (x, y) -> x + y);
 		return hoeveelZijnNietGezet == spel.getGekozenSpelers().size();
 	}
-	
+
 }
 
 //TestCommit
