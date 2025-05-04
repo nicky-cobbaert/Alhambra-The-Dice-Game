@@ -17,8 +17,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import utils.SpelerKleur;
 
@@ -48,6 +54,22 @@ public class WinnaarScherm extends BorderPane {
 		setTaal(taal);
 		loadFxmlScreen("WinnaarScherm.fxml");
 
+		Image spelbordPNG = new Image(getClass().getResource("/images/WITgebouwsteen.png").toExternalForm(), true);
+		
+		BackgroundSize backgroundSize = new BackgroundSize(
+				100, 100, true, true, true, false
+	    );
+
+	    BackgroundImage spelbord = new BackgroundImage(
+	    			spelbordPNG,
+	                BackgroundRepeat.NO_REPEAT,
+	                BackgroundRepeat.NO_REPEAT,
+	                BackgroundPosition.CENTER,
+	                backgroundSize
+	    );
+	    
+	    this.setBackground(new Background(spelbord));
+		
 		// labels aanvullen volgens punten-----------------------
 
 		Label[] overzichtSpelers = { overzichtSpeler1, overzichtSpeler2, overzichtSpeler3, overzichtSpeler4,
@@ -89,7 +111,7 @@ public class WinnaarScherm extends BorderPane {
 		// stream om te overlopen, te sorteren op basis van punten en elke speler zijn
 		// plaatsLabel aanpast (zie hieronder)
 		spelers.stream().sorted(Comparator.comparing(SpelerDTO::punten)).forEach((e) -> {
-
+			
 			// innerklasse die de het label op index (op basis van punten) aanpast:
 			overzichtSpelers[spelers.indexOf(e)].setText(String.format("%10s %10d %10d %10d", e.gebruikersnaam(),
 					e.punten(), e.aantalGewonnen(), e.aantalGespeeld()));
@@ -101,7 +123,7 @@ public class WinnaarScherm extends BorderPane {
 		});
 
 		// afsluitknop een kleurtje geven-------------------------------
-
+		
 		afsluitButton.setStyle(kleurKiezer(dc.geefWinnaars().get(0).kleur()));
 
 		// afsluitknop kleuren einde-----------------------------------
@@ -180,8 +202,11 @@ public class WinnaarScherm extends BorderPane {
 	void afsluitButtonOnAction(ActionEvent event) {
 		// platform.exit vraagt om de javafx programmas rustig af te sluiten
 		// system.exit forceert alle jvm processen om te stoppen
-		Platform.exit();
-		System.exit(0);
+//		Platform.exit();
+//		System.exit(0);
+		
+		MainMenuScherm mms = new MainMenuScherm(dc, taal);
+		this.setCenter(mms);
 	}
 
 	@FXML

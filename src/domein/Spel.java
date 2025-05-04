@@ -122,9 +122,9 @@ public class Spel {
 	}
 
 	public void beïndigSpel() {
-		clearSpelersVanAttributenNaSpelEindigt();
+//		clearSpelersVanAttributenNaSpelEindigt();
 		
-
+		berekenWinnaar();
 	}
 
 	private void clearSpelersVanAttributenNaSpelEindigt() {
@@ -460,6 +460,15 @@ public class Spel {
 			}
 		}
 		if(type == 1){
+			Speler starter = new Speler("Onbekend",2000);
+			
+			for (Speler s : gekozenSpelers) {
+				if (s.getIsStartSpeler()==true) {
+					starter = s;
+				}
+			}
+			
+			this.startSpeler = starter;
 			this.huidigeSpeler = this.startSpeler;
 			return;
 		}
