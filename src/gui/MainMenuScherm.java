@@ -139,31 +139,48 @@ public class MainMenuScherm extends BorderPane {
 	@FXML
 	void offlineButtonOnAction(ActionEvent event) {
 
-		Alert offlineModusAlert = new Alert(AlertType.CONFIRMATION);
-		offlineModusAlert.setTitle(bundle.getString("offline.activeer"));
-		offlineModusAlert.setHeaderText(bundle.getString("offline.confirm"));
-		offlineModusAlert.setContentText(bundle.getString("offline.uitleg"));
+		Alert offlineModusAlert;
+		Optional<ButtonType> resultaat;
+		
+		if (dc.isOffline()) {
 
-		Optional<ButtonType> resultaat = offlineModusAlert.showAndWait();
+			offlineModusAlert = new Alert(AlertType.WARNING);
+			offlineModusAlert.setTitle(bundle.getString("offline.alAanTitle"));
+			offlineModusAlert.setHeaderText(bundle.getString("offline.alHeader"));
+			offlineModusAlert.setContentText(bundle.getString("offline.alAanUitleg"));
+			resultaat = offlineModusAlert.showAndWait();
+			
+		} else {
 
-		if (resultaat.isPresent() && resultaat.get() == ButtonType.OK) {
-			isOfflineButtonKlikbaar = false;
-			zetOfflineButtonUit();
+			offlineModusAlert = new Alert(AlertType.CONFIRMATION);
+			offlineModusAlert.setTitle(bundle.getString("offline.activeer"));
+			offlineModusAlert.setHeaderText(bundle.getString("offline.confirm"));
+			offlineModusAlert.setContentText(bundle.getString("offline.uitleg"));
 
-			try {
-				dc.startOfflineModus();
-			} catch (RuntimeException e) {
+			resultaat = offlineModusAlert.showAndWait();
 
-				Alert h2ModuleError = new Alert(AlertType.ERROR);// ik zet hier een catch, omdat anders het spel crasht,
-																	// als de H2 module er niet is (om data naar van het
-																	// speler bestand op te slaan)
-				h2ModuleError.setTitle(bundle.getString("offline.jar"));
-				h2ModuleError.setHeaderText(bundle.getString("offline.error"));
-				h2ModuleError.setContentText(bundle.getString("offline.download"));
-				h2ModuleError.showAndWait();
-			}
 		}
+			if (resultaat.isPresent() && resultaat.get() == ButtonType.OK) {
+				isOfflineButtonKlikbaar = false;
+				zetOfflineButtonUit();
 
+				try {
+					dc.startOfflineModus();
+				} catch (RuntimeException e) {
+
+					Alert h2ModuleError = new Alert(AlertType.ERROR);// ik zet hier een catch, omdat anders het spel
+																		// crasht,
+																		// als de H2 module er niet is (om data naar van
+																		// het
+																		// speler bestand op te slaan)
+					h2ModuleError.setTitle(bundle.getString("offline.jar"));
+					h2ModuleError.setHeaderText(bundle.getString("offline.error"));
+					h2ModuleError.setContentText(bundle.getString("offline.download"));
+					h2ModuleError.showAndWait();
+				}
+			
+
+		}
 	}
 
 	private void zetOfflineButtonUit() {
@@ -202,10 +219,9 @@ public class MainMenuScherm extends BorderPane {
 		leaderboardVijf.setWrapText(true);
 
 		String geenSpeler = bundle.getString("leaderboard.geenSpeler");
-		//string geenSpeler, wordt gebruikt in de offlinemodus als er nog geen spelers zijn (of als de databank leeg is)
-		
-		
-		
+		// string geenSpeler, wordt gebruikt in de offlinemodus als er nog geen spelers
+		// zijn (of als de databank leeg is)
+
 		// %n na het streepje is voor de # keer gewonnen eronder te zetten, wordt
 		// besproken of we dit doen of niet!
 //		 leaderboardEen.setText(String.format("1. %s - %n%d keer gewonnen", lb.get(0).gebruikersnaam(),lb.get(0).aantalGewonnen()));

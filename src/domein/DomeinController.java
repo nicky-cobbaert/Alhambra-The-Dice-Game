@@ -22,7 +22,8 @@ public class DomeinController {
 	private Spel spel;
 	private boolean isGUI; // Nodig voor vertaling, bepaald of je in cli zit (geen vertaling) of gui (wel
 							// vertaling)
-
+	private boolean isOffline;
+	
 	public DomeinController() {
 
 		// try catch dient voor de offlinemodus te starten als er geen verbinding met
@@ -32,7 +33,8 @@ public class DomeinController {
 
 		try {
 			tempSpelerRepo = new SpelerRepository();
-
+			isOffline = false;//niet echt nodig: jvm boolean is default false
+			
 		} catch (RuntimeException e) {
 			// als er geen internet is zal nu het programma automatisch offlinemode
 			// aanzetten
@@ -40,6 +42,7 @@ public class DomeinController {
 			if (e.getCause() instanceof UnknownHostException || e.getCause() instanceof ConnectException
 					|| e.getMessage().contains("Communications link failure")) {
 				SpelerMapper.startOfflineModus();
+				isOffline = true;
 				tempSpelerRepo = new SpelerRepository();
 
 			} else {
@@ -50,6 +53,11 @@ public class DomeinController {
 		spelerRepo = tempSpelerRepo;
 		isGUI = false; // Default is cli
 	}
+
+	public boolean isOffline() {
+		return isOffline;
+	}
+	
 
 	public void setGUIMode(boolean isGUI) {
 		this.isGUI = isGUI;
