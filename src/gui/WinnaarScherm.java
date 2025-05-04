@@ -54,7 +54,7 @@ public class WinnaarScherm extends BorderPane {
 		setTaal(taal);
 		loadFxmlScreen("WinnaarScherm.fxml");
 
-		Image spelbordPNG = new Image(getClass().getResource("/images/WITgebouwsteen.png").toExternalForm(), true);
+		Image spelbordPNG = new Image(getClass().getResource("/images/WinnaarScherm.png").toExternalForm(), true);
 		
 		BackgroundSize backgroundSize = new BackgroundSize(
 				100, 100, true, true, true, false

@@ -438,6 +438,8 @@ public class SpelbordScherm extends BorderPane {
         	beïndigDeRonde();
         	if(dc.getIsEindeSpel()) {
         		dc.beïndigSpel();
+        		dc.updateGespeeld();
+        		dc.updateGewonnen();
             	//hier komt het overwinningscherm dan
         		WinnaarScherm ws = new WinnaarScherm(dc, taal);
             	this.setCenter(ws);
