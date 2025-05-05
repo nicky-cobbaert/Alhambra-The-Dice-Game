@@ -225,9 +225,13 @@ public class Spel {
 	public void startRonde() {
 		SecureRandom random = new SecureRandom();
 
+		if (ronde ==2) {
+			plaatsBonusFiches(random);
+		} else {
 			plaatsStartSpelerFiche(random);
 			plaatsBonusFiches(random);
-			
+		}
+		
 			veranderHuidigeSpeler(1);
 			ronde ++;
 		if (ronde == 3) {
@@ -258,13 +262,13 @@ public class Spel {
 	
 	private void plaatsBonusFiches(SecureRandom rand) {
 		List<Integer> vrijePlaatsen = getVrijePlaatsen(spelbord.getFicheGebied().getGezettefiches());
-		if(vrijePlaatsen.size() != 0) {
+//		if(vrijePlaatsen.size() != 0) {
 			for(int plaats:getVrijePlaatsen(spelbord.getFicheGebied().getGezettefiches())){
 				int index = rand.nextInt(bonusfiches.size());
 				bonusfiches.get(index).plaatsNeer(plaats);
 				bonusfiches.remove(index);
 			}
-		}
+//		}
 	}
 
 
@@ -432,6 +436,15 @@ public class Spel {
 		//1 als er een nieuwe  cycle wordt gestart
 		int indexVanHuidigeSpeler = gekozenSpelers.indexOf(huidigeSpeler);
 		if(type == 0) {
+			
+			//3 4 1 2
+//			if(indexVanHuidigeSpeler == gekozenSpelers.size()-1) {
+//				huidigeSpeler = gekozenSpelers.getFirst();
+//			} else {
+//				huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler+1);
+//			}
+			
+			//3 1 2 4
 			if(huidigeSpeler.getIsStartSpeler()) {
 				if(indexVanHuidigeSpeler == 0) {
 					huidigeSpeler = gekozenSpelers.get(1);
