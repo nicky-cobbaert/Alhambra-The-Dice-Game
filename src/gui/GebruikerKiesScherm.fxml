@@ -55,7 +55,7 @@
             </Button>
             <Label alignment="CENTER_RIGHT" text="%beschikbarespelers" translateX="2.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <font>
-                  <Font name="Algerian" size="12.0" />
+                  <Font name="Algerian" size="15.0" />
                </font></Label>
             <TextField fx:id="zoekBalk" promptText="%zoekeenspeler" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
@@ -110,9 +110,9 @@
                </font></Button>
             <Label text="%gekozenspelers" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <font>
-                  <Font name="Algerian" size="14.0" />
+                  <Font name="Algerian" size="15.0" />
                </font></Label>
-            <Label prefHeight="46.0" prefWidth="300.0" text="%kiesuwspelers" translateX="7.0" translateY="20.0" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label alignment="CENTER" prefHeight="46.0" prefWidth="300.0" text="%kiesuwspelers" translateX="7.0" translateY="20.0" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Algerian" size="30.0" />
                </font>

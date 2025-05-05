@@ -191,7 +191,7 @@ public class GebruikerKiesScherm extends BorderPane {
 		resetKnop.fire();
 
 		//Achtergrondfoto!
-		Image kiesImage = new Image(getClass().getResource("/images/KiesSpelerScherm.png").toExternalForm());
+		Image kiesImage = new Image(getClass().getResource("/images/KiesSpelerSchermZon.png").toExternalForm());
 
 		BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
 
