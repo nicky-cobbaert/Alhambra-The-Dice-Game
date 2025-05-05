@@ -311,6 +311,8 @@ public class GebruikerKiesScherm extends BorderPane {
 			alert.showAndWait();
 		}
 		
+		lijstGekozenSpelers.setStyle("-fx-font-family: 'Algerian'; -fx-font-size: 13px;");
+		
 	}
 
 	private void gekozenKleurKnopKleurGever(Button gekozenKleurKnop, Button kleurKnop) {
@@ -402,9 +404,10 @@ public class GebruikerKiesScherm extends BorderPane {
 			// toch de index te kunnen verhogen
 					, speler.gebruikersnaam(), speler.geboortejaar()));
 		});
-
+		
 		lijstSpelers.setItems(FXCollections.observableArrayList(alleSpelers));
 
+		lijstSpelers.setStyle("-fx-font-family: 'Algerian'; -fx-font-size: 13px;");
 	}
 
 	@FXML
