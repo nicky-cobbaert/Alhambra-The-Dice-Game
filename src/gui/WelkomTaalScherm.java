@@ -35,7 +35,7 @@ public class WelkomTaalScherm extends BorderPane {
 
     private void setBackgroundImage() {
         Image backgroundImage = new Image(
-            getClass().getResource("/images/AlhambraStad.png").toExternalForm(),
+            getClass().getResource("/images/WelkomSchermPaint.png").toExternalForm(),
             0, 0, true, true  // preserve ratio, auto scale
         );
 
