@@ -370,7 +370,7 @@ public class SpelbordScherm extends BorderPane {
             // Disable de rolknop na 3 worpen
             RolKnop.setDisable(true);
             RolKnop.disarm(); 
-            System.out.println("Je hebt al 3 keer gegooid! De knop is uitgeschakeld.");
+//            System.out.println("Je hebt al 3 keer gegooid! De knop is uitgeschakeld.");
             disableDobbelstenen(true);
         }
         SpeelKnop.setDisable(false);
@@ -400,7 +400,6 @@ public class SpelbordScherm extends BorderPane {
     }
     
     private void veranderVanNogRollenDobbelsteen(ImageView i,int index) {
-    	System.out.println(index);
     	DobbelsteenDTO dobbelDTO = dc.getDobbelstenenDTOs().get(index);
     	if (dc.veranderStatusNogRollenDobbelsteen(index) == false) {//kijkt of de dobbelsteen nog mag rollen na status verandering
     		i.setImage(new Image(getClass().getResource("/images/Dobbelsteen"+dobbelDTO.kleur()+"select.png").toExternalForm()));

@@ -8,24 +8,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import domein.DomeinController;
 import dto.SpelerDTO;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import utils.SpelerKleur;
 
 public class WinnaarScherm extends BorderPane {
@@ -71,14 +72,13 @@ public class WinnaarScherm extends BorderPane {
 	    this.setBackground(new Background(spelbord));
 		
 		// labels aanvullen volgens punten-----------------------
-
-		Label[] overzichtSpelers = { overzichtSpeler1, overzichtSpeler2, overzichtSpeler3, overzichtSpeler4,
-				overzichtSpeler5, overzichtSpeler6 };
+	    
+	    List<SpelerDTO> gesorteerd = dc.geefGekozenSpelers().stream().sorted(Comparator.comparing(SpelerDTO::punten)).collect(Collectors.toList()).reversed();
 
 		// overzichtSpelersKleur is de plaats van de speler in de speler zijn bijhorende
 		// kleur
-		Label[] overzichtSpelersKleur = { overzichtSpelerKleur1, overzichtSpelerKleur2, overzichtSpelerKleur3,
-				overzichtSpelerKleur4, overzichtSpelerKleur5, overzichtSpelerKleur6 };
+//		Label[] overzichtSpelersKleur = { overzichtSpelerKleur1, overzichtSpelerKleur2, overzichtSpelerKleur3,
+//				overzichtSpelerKleur4, overzichtSpelerKleur5, overzichtSpelerKleur6 };
 
 		// speler label zijn tekstje aanmaken------------------------------
 
@@ -105,29 +105,53 @@ public class WinnaarScherm extends BorderPane {
 		// einde speler label zijn tekstje aanmaken------------------------------
 
 		gefeliciteerdLabel.setText(String.format("Gefeliciteerd, %s!", winnaars));
-
-		List<SpelerDTO> spelers = dc.geefGekozenSpelers();
-
+		
 		// stream om te overlopen, te sorteren op basis van punten en elke speler zijn
 		// plaatsLabel aanpast (zie hieronder)
-		spelers.stream().sorted(Comparator.comparing(SpelerDTO::punten)).forEach((e) -> {
-			
-			// innerklasse die de het label op index (op basis van punten) aanpast:
-			overzichtSpelers[spelers.indexOf(e)].setText(String.format("%10s %10d %10d %10d", e.gebruikersnaam(),
-					e.punten(), e.aantalGewonnen(), e.aantalGespeeld()));
-
-			// verder geeft de innerklasse ook een rang met behorende spelerkleur:
-			overzichtSpelersKleur[spelers.indexOf(e)].setText(String.format("%d", spelers.indexOf(e) + 1));
-			overzichtSpelersKleur[spelers.indexOf(e)].setStyle(kleurKiezer(e.kleur()));
-
-		});
-
-		// afsluitknop een kleurtje geven-------------------------------
 		
-		afsluitButton.setStyle(kleurKiezer(dc.geefWinnaars().get(0).kleur()));
-
-		// afsluitknop kleuren einde-----------------------------------
-
+			//Speler1
+			positie1.setText("1.");
+			geb1.setText(gesorteerd.get(0).gebruikersnaam());
+			punt1.setText(String.format("%d", gesorteerd.get(0).punten()));
+			gew1.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(0)) ? gesorteerd.get(0).aantalGewonnen()+1:gesorteerd.get(0).aantalGewonnen())));
+			ges1.setText(String.format("%d", gesorteerd.get(0).aantalGespeeld()));
+			//Speler2
+			positie2.setText("2.");
+			geb2.setText(gesorteerd.get(1).gebruikersnaam());
+			punt2.setText(String.format("%d", gesorteerd.get(1).punten()));
+			gew2.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(1)) ? gesorteerd.get(1).aantalGewonnen()+1:gesorteerd.get(1).aantalGewonnen())));
+			ges2.setText(String.format("%d", gesorteerd.get(1).aantalGespeeld()));
+			//Speler3
+			positie3.setText("3.");
+			geb3.setText(gesorteerd.get(2).gebruikersnaam());
+			punt3.setText(String.format("%d", gesorteerd.get(2).punten()));
+			gew3.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(2)) ? gesorteerd.get(2).aantalGewonnen()+1:gesorteerd.get(2).aantalGewonnen())));
+			ges3.setText(String.format("%d", gesorteerd.get(2).aantalGespeeld()));
+			
+		if (dc.geefGekozenSpelers().size()>3) {
+			//Speler4
+			positie4.setText("4.");
+			geb4.setText(gesorteerd.get(3).gebruikersnaam());
+			punt4.setText(String.format("%d", gesorteerd.get(3).punten()));
+			gew4.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(3)) ? gesorteerd.get(3).aantalGewonnen()+1:gesorteerd.get(3).aantalGewonnen())));
+			ges4.setText(String.format("%d", gesorteerd.get(3).aantalGespeeld()));
+		}
+	if (dc.geefGekozenSpelers().size()>4) {
+			//Speler5
+			positie5.setText("5.");
+			geb5.setText(gesorteerd.get(4).gebruikersnaam());
+			punt5.setText(String.format("%d", gesorteerd.get(4).punten()));
+			gew5.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(4)) ? gesorteerd.get(4).aantalGewonnen()+1:gesorteerd.get(4).aantalGewonnen())));
+			ges5.setText(String.format("%d", gesorteerd.get(4).aantalGespeeld()));
+		}
+	if (dc.geefGekozenSpelers().size()>5) {
+			//Speler6
+			positie6.setText("6.");
+			geb6.setText(gesorteerd.get(5).gebruikersnaam());
+			punt6.setText(String.format("%d", gesorteerd.get(5).punten()));
+			gew6.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(5)) ? gesorteerd.get(5).aantalGewonnen()+1:gesorteerd.get(5).aantalGewonnen())));
+			ges6.setText(String.format("%d", gesorteerd.get(5).aantalGespeeld()));
+		}
 	}
 
 	private String kleurKiezer(SpelerKleur kleur) {
@@ -155,51 +179,105 @@ public class WinnaarScherm extends BorderPane {
 
 	@FXML
 	private Button afsluitButton;
-
-	@FXML
-	private Label gefeliciteerdLabel;
-
+		
 	@FXML
 	private Button bedanktKnop;
+	
+	 	@FXML
+	    private Label geb1;
+
+	    @FXML
+	    private Label geb2;
+
+	    @FXML
+	    private Label geb3;
+
+	    @FXML
+	    private Label geb4;
+
+	    @FXML
+	    private Label geb5;
+
+	    @FXML
+	    private Label geb6;
+
+	    @FXML
+	    private Label gefeliciteerdLabel;
+
+	    @FXML
+	    private Label ges1;
+
+	    @FXML
+	    private Label ges2;
+
+	    @FXML
+	    private Label ges3;
+
+	    @FXML
+	    private Label ges4;
+
+	    @FXML
+	    private Label ges5;
+
+	    @FXML
+	    private Label ges6;
+
+	    @FXML
+	    private Label gew1;
+
+	    @FXML
+	    private Label gew2;
+
+	    @FXML
+	    private Label gew3;
+
+	    @FXML
+	    private Label gew4;
+
+	    @FXML
+	    private Label gew5;
+
+	    @FXML
+	    private Label gew6;
+
+	    @FXML
+	    private Label positie1;
+
+	    @FXML
+	    private Label positie2;
+
+	    @FXML
+	    private Label positie3;
+
+	    @FXML
+	    private Label positie4;
+
+	    @FXML
+	    private Label positie5;
+
+	    @FXML
+	    private Label positie6;
+
+	    @FXML
+	    private Label punt1;
+
+	    @FXML
+	    private Label punt2;
+
+	    @FXML
+	    private Label punt3;
+
+	    @FXML
+	    private Label punt4;
+
+	    @FXML
+	    private Label punt5;
+
+	    @FXML
+	    private Label punt6;
 
 	@FXML
-	private Label overzichtSpeler1;
-
-	@FXML
-	private Label overzichtSpeler2;
-
-	@FXML
-	private Label overzichtSpeler3;
-
-	@FXML
-	private Label overzichtSpeler4;
-
-	@FXML
-	private Label overzichtSpeler5;
-
-	@FXML
-	private Label overzichtSpeler6;
-
-	@FXML
-	private Label overzichtSpelerKleur1;
-
-	@FXML
-	private Label overzichtSpelerKleur2;
-
-	@FXML
-	private Label overzichtSpelerKleur3;
-
-	@FXML
-	private Label overzichtSpelerKleur4;
-
-	@FXML
-	private Label overzichtSpelerKleur5;
-
-	@FXML
-	private Label overzichtSpelerKleur6;
-
-	@FXML
-	void afsluitButtonOnAction(ActionEvent event) {
+	void afsluitKlik(ActionEvent event) {
 		// platform.exit vraagt om de javafx programmas rustig af te sluiten
 		// system.exit forceert alle jvm processen om te stoppen
 //		Platform.exit();
@@ -210,7 +288,7 @@ public class WinnaarScherm extends BorderPane {
 	}
 
 	@FXML
-	void bedanktKnopOnAction(ActionEvent event) {
+	 void bedanktKlik(ActionEvent event) {
 		Alert bedanktAlert = new Alert(AlertType.INFORMATION);
 		bedanktAlert.setTitle(bundle.getString("bedankt.title"));
 		bedanktAlert.setHeaderText(bundle.getString("bedankt.header"));
