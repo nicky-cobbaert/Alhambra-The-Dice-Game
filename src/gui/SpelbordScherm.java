@@ -477,7 +477,6 @@ public class SpelbordScherm extends BorderPane {
     }
 
 	private void beïndigDeRonde() {
-    	System.out.println("Ronde is klaar");
     	dc.beïndigRonde();
     	for(GridPane gp:zetsteenGebieden) {
     		maakHetGebiedLeeg(gp);;
