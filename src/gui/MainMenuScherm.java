@@ -17,7 +17,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -31,11 +30,7 @@ public class MainMenuScherm extends BorderPane {
 	private char taal;
 	private final DomeinController dc;
 	private RegistreerSpelerScherm rss;
-	private BorderPane mainMenu;
 	private ResourceBundle bundle;
-
-	private MenuItem nl;
-	private MenuItem eng;
 
 	private boolean isOfflineButtonKlikbaar = true;
 
