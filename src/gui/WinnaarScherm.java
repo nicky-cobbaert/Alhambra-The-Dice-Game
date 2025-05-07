@@ -103,7 +103,8 @@ public class WinnaarScherm extends BorderPane {
 
 		// einde speler label zijn tekstje aanmaken------------------------------
 
-		gefeliciteerdLabel.setText(String.format("Gefeliciteerd, %s!", winnaars));
+		//gefeliciteerdLabel.setText(String.format("Gefeliciteerd, %s!", winnaars));
+		gefeliciteerdLabel.setText(String.format(bundle.getString("gefeliciteerd"), winnaars));
 		
 		// stream om te overlopen, te sorteren op basis van punten en elke speler zijn
 		// plaatsLabel aanpast (zie hieronder)

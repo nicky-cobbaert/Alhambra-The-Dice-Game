@@ -52,23 +52,23 @@
                         <Font name="Algerian" size="55.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="240.0" text="positie" underline="true" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="240.0" text="%positie.winnaar" underline="true" GridPane.rowIndex="1">
                      <font>
                         <Font name="Algerian" size="25.0" />
                      </font></Label>
-                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="Gebruikersnaam" textAlignment="CENTER" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="%gebruikersnaam.winnaar" textAlignment="CENTER" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="Algerian" size="25.0" />
                      </font></Label>
-                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="Punten" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="%punten.winnaar" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font name="Algerian" size="25.0" />
                      </font></Label>
-                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="Keer Gewonnen" underline="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="%keergewonnen.winnaar" underline="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <font>
                         <Font name="Algerian" size="25.0" />
                      </font></Label>
-                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="Keer Gespeeld" underline="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="%keergespeeld.winnaar" underline="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <font>
                         <Font name="Algerian" size="25.0" />
                      </font></Label>
@@ -218,7 +218,7 @@
                   </Label>
                </children>
             </GridPane>
-            <Button fx:id="bedanktKnop" alignment="CENTER" mnemonicParsing="false" onAction="#bedanktKlik" prefHeight="47.0" prefWidth="200.0" text="bedankt knop" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <Button fx:id="bedanktKnop" alignment="CENTER" mnemonicParsing="false" onAction="#bedanktKlik" prefHeight="47.0" prefWidth="200.0" text="%bedankt.knop" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
@@ -226,7 +226,7 @@
                   <Insets bottom="40.0" left="350.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="afsluitButton" alignment="CENTER" mnemonicParsing="false" onAction="#afsluitKlik" prefHeight="47.0" prefWidth="200.0" text="afsluiten knop" GridPane.columnSpan="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+            <Button fx:id="afsluitButton" alignment="CENTER" mnemonicParsing="false" onAction="#afsluitKlik" prefHeight="47.0" prefWidth="200.0" text="%afsluiten.knop" GridPane.columnSpan="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Algerian" size="20.0" />
                </font>
