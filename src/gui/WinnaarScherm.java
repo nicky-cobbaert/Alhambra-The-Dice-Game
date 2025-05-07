@@ -112,18 +112,21 @@ public class WinnaarScherm extends BorderPane {
 			//Speler1
 			positie1.setText("1.");
 			geb1.setText(gesorteerd.get(0).gebruikersnaam());
+			geb1.setWrapText(true);
 			punt1.setText(String.format("%d", gesorteerd.get(0).punten()));
 			gew1.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(0)) ? gesorteerd.get(0).aantalGewonnen()+1:gesorteerd.get(0).aantalGewonnen())));
 			ges1.setText(String.format("%d", gesorteerd.get(0).aantalGespeeld()));
 			//Speler2
 			positie2.setText("2.");
 			geb2.setText(gesorteerd.get(1).gebruikersnaam());
+			geb2.setWrapText(true);
 			punt2.setText(String.format("%d", gesorteerd.get(1).punten()));
 			gew2.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(1)) ? gesorteerd.get(1).aantalGewonnen()+1:gesorteerd.get(1).aantalGewonnen())));
 			ges2.setText(String.format("%d", gesorteerd.get(1).aantalGespeeld()));
 			//Speler3
 			positie3.setText("3.");
 			geb3.setText(gesorteerd.get(2).gebruikersnaam());
+			geb3.setWrapText(true);
 			punt3.setText(String.format("%d", gesorteerd.get(2).punten()));
 			gew3.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(2)) ? gesorteerd.get(2).aantalGewonnen()+1:gesorteerd.get(2).aantalGewonnen())));
 			ges3.setText(String.format("%d", gesorteerd.get(2).aantalGespeeld()));
@@ -132,6 +135,7 @@ public class WinnaarScherm extends BorderPane {
 			//Speler4
 			positie4.setText("4.");
 			geb4.setText(gesorteerd.get(3).gebruikersnaam());
+			geb4.setWrapText(true);
 			punt4.setText(String.format("%d", gesorteerd.get(3).punten()));
 			gew4.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(3)) ? gesorteerd.get(3).aantalGewonnen()+1:gesorteerd.get(3).aantalGewonnen())));
 			ges4.setText(String.format("%d", gesorteerd.get(3).aantalGespeeld()));
@@ -140,6 +144,7 @@ public class WinnaarScherm extends BorderPane {
 			//Speler5
 			positie5.setText("5.");
 			geb5.setText(gesorteerd.get(4).gebruikersnaam());
+			geb5.setWrapText(true);
 			punt5.setText(String.format("%d", gesorteerd.get(4).punten()));
 			gew5.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(4)) ? gesorteerd.get(4).aantalGewonnen()+1:gesorteerd.get(4).aantalGewonnen())));
 			ges5.setText(String.format("%d", gesorteerd.get(4).aantalGespeeld()));
@@ -148,6 +153,7 @@ public class WinnaarScherm extends BorderPane {
 			//Speler6
 			positie6.setText("6.");
 			geb6.setText(gesorteerd.get(5).gebruikersnaam());
+			geb6.setWrapText(true);
 			punt6.setText(String.format("%d", gesorteerd.get(5).punten()));
 			gew6.setText(String.format("%d", (dc.geefWinnaars().contains(gesorteerd.get(5)) ? gesorteerd.get(5).aantalGewonnen()+1:gesorteerd.get(5).aantalGewonnen())));
 			ges6.setText(String.format("%d", gesorteerd.get(5).aantalGespeeld()));

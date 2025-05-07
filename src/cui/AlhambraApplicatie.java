@@ -148,16 +148,15 @@ public class AlhambraApplicatie {
 //			dc.speelRonde();
 //			System.out.printf("Ronde %d is gespeeld! %n", i); // plaatsvervanger voor UC4
 //		}
-		
-		int ronde=1;
+		//Dit is voor nadat het spel gestart is
+		System.out.printf("Ronde %d is gespeeld! %n",dc.getRonde());
 		
 		do {
 			dc.speelRonde();
-			System.out.printf("Ronde %d is gespeeld! %n",ronde);
-			ronde++;
+			System.out.printf("Ronde %d is gespeeld! %n",dc.getRonde());
 		}while (dc.getIsEindeSpel()== false);
 		
-		
+		dc.beïndigSpel();
 		
 		dc.updateGespeeld();
 		dc.updateGewonnen();

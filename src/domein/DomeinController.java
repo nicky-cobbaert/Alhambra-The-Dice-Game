@@ -2,6 +2,7 @@ package domein;
 
 import java.net.ConnectException;
 import java.net.UnknownHostException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -226,6 +227,7 @@ public class DomeinController {
 	}
 
 	public void updateGewonnen() {
+		
 		for (Speler s : spel.getWinnaar()) {
 			spelerRepo.updateGewonnen(s.getGebruikersnaam());
 		}
@@ -359,6 +361,13 @@ public class DomeinController {
 	}
 
 	public void beïndigSpel() {
+		if(isGUI==false) {
+			for(Speler s : spel.getGekozenSpelers()) {
+				SecureRandom sr = new SecureRandom();
+				s.voegPuntenToe(sr.nextInt(0, 100));
+			}
+		}
+		
 		spel.beïndigSpel();
 	}
 

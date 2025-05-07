@@ -221,14 +221,14 @@ public class SpelbordScherm extends BorderPane {
     
     private void updateAantalZetstenen(SpelerDTO spelerVanVorigeRonde) {
     	int aantalZetstenen = (int) spelerVanVorigeRonde.zetstenen().stream().filter(e -> e.positie()==0).count();
-    	labelsSpelers.get(dc.geefGekozenSpelers().indexOf(spelerVanVorigeRonde)).setText(String.format("%s - %d punten - %d %s",spelerVanVorigeRonde.gebruikersnaam(),spelerVanVorigeRonde.punten(),
+    	labelsSpelers.get(dc.geefGekozenSpelers().indexOf(spelerVanVorigeRonde)).setText(String.format(bundle.getString("label.spelerStatus"),spelerVanVorigeRonde.gebruikersnaam(),spelerVanVorigeRonde.punten(),
     			aantalZetstenen, (aantalZetstenen == 1)? "zetsteen":"zetstenen"));;
     }
     
     private void herzetSpelersNaRonde() {
     	for (int i = 0; i<dc.geefGekozenSpelers().size();i++) {
     		SpelerDTO speler = dc.geefGekozenSpelers().get(i);
-    		labelsSpelers.get(i).setText(String.format("%s - %d punten - %d zetstenen", speler.gebruikersnaam(),speler.punten(),dc.geefAantalZetstenen()));
+    		labelsSpelers.get(i).setText(String.format(bundle.getString("label.spelerStatus"), speler.gebruikersnaam(),speler.punten(),dc.geefAantalZetstenen(),"zetstenen"));
     	}
     }
     
