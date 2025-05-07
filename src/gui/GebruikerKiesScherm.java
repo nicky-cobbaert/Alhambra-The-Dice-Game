@@ -189,6 +189,7 @@ public class GebruikerKiesScherm extends BorderPane {
 				Arrays.asList(knopBlauw, knopGeel, knopGroen, knopOranje, knopRood, knopWit));
 
 		resetKnop.fire();
+		verdergaanKnop.setDisable(true);
 
 		//Achtergrondfoto!
 		Image kiesImage = new Image(getClass().getResource("/images/KiesSpelerSchermZon.png").toExternalForm());
@@ -293,8 +294,11 @@ public class GebruikerKiesScherm extends BorderPane {
 		    }
 		}
 
-		
+	
 		resetKnop.fire();
+		if(lijstGekozenSpelers.getItems().size() >= 3) {
+			verdergaanKnop.setDisable(false);
+		}
 		
 		}catch (IllegalArgumentException e) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -454,7 +458,7 @@ public class GebruikerKiesScherm extends BorderPane {
 		for (Button kleurKnop : kleurButtons) {
 			kleurKnop.setDisable(false);
 		}
-
+		verdergaanKnop.setDisable(true);
 		
 
 		
