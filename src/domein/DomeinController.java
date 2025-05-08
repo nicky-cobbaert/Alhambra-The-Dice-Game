@@ -73,6 +73,7 @@ public class DomeinController {
 			errorMessages.put("geboortedatum.ongeldig",
 					"Je moet tussen de leeftijd van 6 en 100 zijn om dit spel te mogen spelen");
 			errorMessages.put("kleur.exception", "Er is nog geen kleur geselecteerd");
+			errorMessages.put("spel.teveelSpelers", "Er mogen maximaal 6 spelers meedoen");
 			// Add other translations as needed
 
 			return errorMessages.getOrDefault(key, key); // als er niks gevonden is default

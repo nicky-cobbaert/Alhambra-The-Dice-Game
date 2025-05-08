@@ -304,7 +304,8 @@ public class GebruikerKiesScherm extends BorderPane {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle(bundle.getString("error.fout"));
 			alert.setHeaderText(bundle.getString("error.selecteerSpeler"));
-		    alert.setContentText(e.getMessage());
+		    //alert.setContentText(e.getMessage());
+			alert.setContentText(bundle.getString(e.getMessage()));
 			alert.showAndWait();
 			
 		}catch (IndexOutOfBoundsException e) {
