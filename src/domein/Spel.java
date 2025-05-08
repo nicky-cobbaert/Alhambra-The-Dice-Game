@@ -438,39 +438,39 @@ public class Spel {
 		if(type == 0) {
 			
 			//3 4 1 2
-//			if(indexVanHuidigeSpeler == gekozenSpelers.size()-1) {
-//				huidigeSpeler = gekozenSpelers.getFirst();
-//			} else {
-//				huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler+1);
-//			}
+			if(indexVanHuidigeSpeler == gekozenSpelers.size()-1) {
+				huidigeSpeler = gekozenSpelers.getFirst();
+			} else {
+				huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler+1);
+			}
 			
 			//3 1 2 4
-			if(huidigeSpeler.getIsStartSpeler()) {
-				if(indexVanHuidigeSpeler == 0) {
-					huidigeSpeler = gekozenSpelers.get(1);
-					return;
-				}else {
-					huidigeSpeler = gekozenSpelers.get(0);
-					return;
-				}
-				
-				
-			}else {
-				if(indexVanHuidigeSpeler + 1 == gekozenSpelers.size()) {
-					veranderHuidigeSpeler(1);
-					return;
-				}
-				if((indexVanHuidigeSpeler + 2 == gekozenSpelers.size()&&gekozenSpelers.getLast().getIsStartSpeler())){
-					veranderHuidigeSpeler(1);
-					return;
-				}
-				if(gekozenSpelers.get(indexVanHuidigeSpeler + 1).getIsStartSpeler()) {
-					huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 2);
-					return;
-				}
-				huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 1);
-				return;
-			}
+//			if(huidigeSpeler.getIsStartSpeler()) {
+//				if(indexVanHuidigeSpeler == 0) {
+//					huidigeSpeler = gekozenSpelers.get(1);
+//					return;
+//				}else {
+//					huidigeSpeler = gekozenSpelers.get(0);
+//					return;
+//				}
+//				
+//				
+//			}else {
+//				if(indexVanHuidigeSpeler + 1 == gekozenSpelers.size()) {
+//					veranderHuidigeSpeler(1);
+//					return;
+//				}
+//				if((indexVanHuidigeSpeler + 2 == gekozenSpelers.size()&&gekozenSpelers.getLast().getIsStartSpeler())){
+//					veranderHuidigeSpeler(1);
+//					return;
+//				}
+//				if(gekozenSpelers.get(indexVanHuidigeSpeler + 1).getIsStartSpeler()) {
+//					huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 2);
+//					return;
+//				}
+//				huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 1);
+//				return;
+//			}
 		}
 		if(type == 1){
 			Speler starter = new Speler("Onbekend",2000);
