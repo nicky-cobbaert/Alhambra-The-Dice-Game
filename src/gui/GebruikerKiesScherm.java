@@ -362,14 +362,27 @@ public class GebruikerKiesScherm extends BorderPane {
 		// lijstje maken van gekozen spelers-------------------------------------
 		AtomicInteger indexGekozenSpelers = new AtomicInteger(1); // Een beforeEach kan geen integer van buitenaf
 																	// gebruiken
-		List<String> gekozenSpelers = new ArrayList<String>();
+//		List<String> gekozenSpelers = new ArrayList<String>();
+//		dc.geefGekozenSpelers().forEach(speler -> {
+//			gekozenSpelers.add(String.format("%d. %s - %d:  %s", indexGekozenSpelers
+//					.getAndIncrement() /*
+//										 * ik gebruik hier deze methode om toch de index te kunnen verhogen
+//										 */
+//					, speler.gebruikersnaam(), speler.geboortejaar(), speler.kleur().toString().toLowerCase()));
+//		});
+		
+		List<String> gekozenSpelers = new ArrayList<>();
 		dc.geefGekozenSpelers().forEach(speler -> {
-			gekozenSpelers.add(String.format("%d. %s - %d:  %s", indexGekozenSpelers
-					.getAndIncrement() /*
-										 * ik gebruik hier deze methode om toch de index te kunnen verhogen
-										 */
-					, speler.gebruikersnaam(), speler.geboortejaar(), speler.kleur().toString().toLowerCase()));
+		    String kleurSleutel = speler.kleur().toString().toLowerCase();
+		    String vertaaldeKleur = bundle.getString(kleurSleutel); 
+		    gekozenSpelers.add(String.format("%d. %s - %d:  %s",
+		        indexGekozenSpelers.getAndIncrement(),
+		        speler.gebruikersnaam(),
+		        speler.geboortejaar(),
+		        vertaaldeKleur
+		    ));
 		});
+
 
 		lijstGekozenSpelers.setItems(FXCollections.observableArrayList(gekozenSpelers));
 
