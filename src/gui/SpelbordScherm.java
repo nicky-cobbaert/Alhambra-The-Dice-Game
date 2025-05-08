@@ -547,7 +547,7 @@ public class SpelbordScherm extends BorderPane {
     	KiesDobbelsteenKleurScherm kdks = new KiesDobbelsteenKleurScherm(dc, taal, this);
 		Scene scene = new Scene(kdks);
 		stage.setScene(scene);
-		stage.setTitle("Kies jouw kleur!");
+		stage.setTitle(bundle.getString("kleur.titel"));
 		stage.show();
     }
     
