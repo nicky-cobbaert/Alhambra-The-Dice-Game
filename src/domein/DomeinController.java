@@ -72,6 +72,7 @@ public class DomeinController {
 			errorMessages.put("gebruikersnaam.teKort", "Gebruikersnaam moet minimaal 6 karakters bevatten");
 			errorMessages.put("geboortedatum.ongeldig",
 					"Je moet tussen de leeftijd van 6 en 100 zijn om dit spel te mogen spelen");
+			errorMessages.put("kleur.exception", "Er is nog geen kleur geselecteerd");
 			// Add other translations as needed
 
 			return errorMessages.getOrDefault(key, key); // als er niks gevonden is default

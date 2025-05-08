@@ -78,7 +78,7 @@ public class Spel {
 			throw new IllegalArgumentException("Er mogen maximaal 6 spelers meedoen.");
 		}
 		if (kleur == null /* moet niet meer omdat we met enum werken 'Jelle'|| kleur.isBlank() */) { // onnodige code
-			throw new IllegalArgumentException("Er is geen kleur gekozen");
+			throw new IllegalArgumentException("kleur.exception");
 		}
 
 		Speler gekozenSpeler  = beschikbareSpelers.get(speler);// was niet zichtbaar*
