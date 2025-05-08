@@ -7,23 +7,91 @@ import java.util.List;
 import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
 
+/**
+ * De klasse {@code Spel} stelt het spel voor dat gespeeld wordt.
+ */
 public class Spel {
+	
+	/**
+	 * De lijst van alle beschikbare (niet-gekozen) kleuren.
+	 */
 	private final List<SpelerKleur> beschikbareKleuren;
+	
+	/**
+	 * De lijst van alle gekozen spelers.
+	 */
 	private final List<Speler> gekozenSpelers;
+	
+	/**
+	 * De lijst van alle beschikbare (niet-gekozen) spelers.
+	 */
 	private List<Speler> beschikbareSpelers;
+	
+	/**
+	 * De startspeler van de ronde.
+	 */
 	private Speler startSpeler;
+	
+	/**
+	 * Het maximaal aantal bonusfiches dat er in een spel kunnen zijn.
+	 */
 	private static final int MAXIMUM_AANTAL_BONUSFICHES = 16;
+	
+	/**
+	 * Het maximaal aantal dobbelstenen dat er in een spel kunnen zijn.
+	 */
 	private static final int MAXIMUM_AANTAL_DOBBELSTENEN = 8;
+	
+	/**
+	 * De lijst van alle dobbelstenen van het spel.
+	 */
 	private List<Dobbelsteen> dobbelstenen;
+	
+	/**
+	 * Dit is het startspelerfiche van het spel. Deze zal in ronde 1 en 2 willekeurig op een fichegebied geplaatst worden.
+	 */
 	private StartspelerFiche startspelerfiche;
+	
+	/**
+	 * Dit is het spelbord dat beschikt over alle gebieden.
+	 */
 	private Spelbord spelbord;
+	
+	/**
+	 * De lijst van alle bonusfiches. Deze zullen elke ronde op een fichegebied geplaatst worden.
+	 */
 	private List<Bonusfiche> bonusfiches;
+	
+	/**
+	 * De lijst van spelers die gewonnen hebben.
+	 */
 	private List<Speler> winnaar;
+	
+	/**
+	 * Dit geeft aan in welke ronde we zijn.
+	 */
 	private int ronde;
+	
+	/**
+	 * Dit geeft aan of het spel gedaan is of niet.
+	 */
 	private boolean isEindeSpel;
+	
+	/**
+	 * Dit geeft aan hoeveel keer de huidige speler al gerold heeft.
+	 */
 	private int aantalKeerGerold;
+	
+	/**
+	 * Dit geeft aan wie de huidige speler is.
+	 */
 	private Speler huidigeSpeler;
 
+	/**
+	 * Dit maakt een nieuw spel aan. Ook worden alle dobbelstenen, het spelbord, de bonusfiches, het startspelerfiche en de lijst van gekozen spelers aangemaakt.
+	 * 
+	 * @param spelers zijn alle spelers dat in de database staan.
+	 */
 	public Spel(List<Speler> spelers) {
 
 		this.beschikbareKleuren = Speler.geefAlleKleuren();
@@ -60,18 +128,39 @@ public class Spel {
 		
 	}
 
+	/**
+	 * Hiermee kan je de beschikbare spelers instellen op de nieuwe lijst dat deze methode binnenkrijgt.
+	 * 
+	 * @param spelers zijn alle beschikbare (niet-gekozen) spelers.
+	 */
 	public void setBeschikbareSpelers(List<Speler> spelers) {
 		this.beschikbareSpelers = spelers;
 	}
-
+	
+	/**
+	 * Dit geeft alle beschikbare (niet-gekozen) kleuren terug.
+	 * 
+	 * @return Alle beschikbare (niet-gekozen) kleuren.
+	 */
 	public List<SpelerKleur> getBeschikbareKleuren() {
 		return beschikbareKleuren;
 	}
 
+	/**
+	 * Dit geeft alle gekozen spelers terug.
+	 *
+	 * @return Alle gekozen spelers.
+	 */
 	public List<Speler> getGekozenSpelers() {
 		return gekozenSpelers;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param speler
+	 * @param kleur
+	 */
 	public void kiesSpeler(int speler, SpelerKleur kleur) {
 
 		if (gekozenSpelers.size() > 6) { // Onnodige code, is opgevangen in de console zelf met een break
@@ -86,30 +175,16 @@ public class Spel {
 		gekozenSpelers.add(gekozenSpeler);
 		beschikbareSpelers.remove(gekozenSpeler);
 		beschikbareKleuren.remove(kleur);
-		/*
-		beschikbareSpelers.sort(null);
-		gekozenSpelers.sort(null);
-		*/
+
 	}
 
-	/*public void verwijderGekozenSpeler(int speler, SpelerKleur kleur) {
-
-		gekozenSpelers.get(speler).setKleur(null);
-		beschikbareSpelers.add(gekozenSpelers.get(speler));
-		gekozenSpelers.remove(speler);
-		beschikbareKleuren.add(kleur);
-		/*
-		beschikbareSpelers.sort(null);
-		gekozenSpelers.sort(null);
-		
-	
-	}*/
-
+	/**
+	 * 
+	 */
 	public void startSpel() {
 		if (gekozenSpelers.size() < 3 || gekozenSpelers.size() > 6) {
 			throw new IllegalArgumentException("Er moeten minstens 3 spelers zijn om het spel te starten.");
 		}
-		// size > 6 -> Exception!
 		geefSpelersZetstenen();
 		geefSpelerGebouwstenen();
 		this.aantalKeerGerold = 0;
@@ -121,23 +196,26 @@ public class Spel {
 		startRonde();
 	}
 
+	/**
+	 * 
+	 */
 	public void beïndigSpel() {
-//		clearSpelersVanAttributenNaSpelEindigt();
-		
 		berekenWinnaar();
 	}
 
-	private void clearSpelersVanAttributenNaSpelEindigt() {
-		for (Speler sp : gekozenSpelers) {
-			sp.clearAttributenNaSpel();
-		}
-	}
-
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public int getAantalZetstenen() {
 
 		return gekozenSpelers.get(0).getZetstenen().size();
 	}
 
+	/**
+	 * 
+	 */
 	private void geefSpelersZetstenen() {
 		int zetsteenAantal;
 		switch (gekozenSpelers.size()) {
@@ -159,6 +237,9 @@ public class Spel {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void geefSpelerGebouwstenen() {
 		for (Speler sp : gekozenSpelers) {
 			sp.maakGebouwstenenAan(spelbord.getGebouwpuntenGebied());
@@ -166,22 +247,30 @@ public class Spel {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public Speler getStartSpeler() {
 		return startSpeler;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public List<Speler> getBeschikbareSpelers() {
 		return beschikbareSpelers;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public List<Speler> berekenWinnaar() {
-
-		// Dit is voor nu nog een secure random omdat we nog geen punten berekenen!
-
-//		  SecureRandom sr = new SecureRandom(); winnaar = new ArrayList<>();
-//		  winnaar.add(gekozenSpelers.get(sr.nextInt(0, gekozenSpelers.size()))); //Ditkunnen ook meerdere spelers zijn! 
-//		  return winnaar;
-
 		winnaar = new ArrayList<Speler>(); // Initialiseer het veld
 		int hoogstepunten = -1;
 
@@ -200,28 +289,9 @@ public class Spel {
 		return winnaar;
 	}
 
-//		List<Speler> spelersMetHoogstePunten = new ArrayList<Speler>();
-//
-//		for (Speler speler : gekozenSpelers) {
-//			if (speler.getPunten() > spelersMetHoogstePunten.get(0).getPunten()) {
-//				// .get(0) => er is normaal gezien maar 1 winnaar, anders hebben de andere
-//				// winnaars ook dezelfde punten.
-//				spelersMetHoogstePunten.clear();
-//				spelersMetHoogstePunten.add(speler);
-//			}
-//
-//			if (speler.getPunten() == spelersMetHoogstePunten.get(0).getPunten()) {
-//				spelersMetHoogstePunten.add(speler);
-//			}
-//		}
-//
-//		return spelersMetHoogstePunten;
-
-	/*
-	 * dit is de volgorde van hoe een ronde wordt gespeeld
+	/**
+	 * 
 	 */
-
-	// 1 fiches worden aangelegd
 	public void startRonde() {
 		SecureRandom random = new SecureRandom();
 
@@ -238,6 +308,12 @@ public class Spel {
 			this.isEindeSpel = true;
 		}
 	}
+	
+	/**
+	 * 
+	 * 
+	 * @param rand
+	 */
 	private void plaatsStartSpelerFiche(SecureRandom rand) {
 		if(startspelerfiche.getPositie() == 0) {
 			List<Fiche> fiches = spelbord.getFicheGebied().getGezettefiches();
@@ -245,6 +321,14 @@ public class Spel {
 			startspelerfiche.plaatsNeer(vrijePlaatsen.get(rand.nextInt(vrijePlaatsen.size())).intValue());
 		}
 	}
+	
+	/**
+	 * 
+	 * 
+	 * @param fiches
+	 * 
+	 * @return
+	 */
 	private List<Integer> getVrijePlaatsen(List<Fiche> fiches){
 		List<Integer> vrijePlaatsen = new ArrayList<Integer>();
 		for(int index = 1;index <= 6;index ++) {
@@ -260,29 +344,42 @@ public class Spel {
 		return vrijePlaatsen;
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param rand
+	 */
 	private void plaatsBonusFiches(SecureRandom rand) {
-		List<Integer> vrijePlaatsen = getVrijePlaatsen(spelbord.getFicheGebied().getGezettefiches());
-//		if(vrijePlaatsen.size() != 0) {
-			for(int plaats:getVrijePlaatsen(spelbord.getFicheGebied().getGezettefiches())){
-				int index = rand.nextInt(bonusfiches.size());
-				bonusfiches.get(index).plaatsNeer(plaats);
-				bonusfiches.remove(index);
-			}
-//		}
+		for(int plaats:getVrijePlaatsen(spelbord.getFicheGebied().getGezettefiches())){
+			int index = rand.nextInt(bonusfiches.size());
+			bonusfiches.get(index).plaatsNeer(plaats);
+			bonusfiches.remove(index);
+		}
 	}
 
-
-
-	
-
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public List<Speler> getWinnaar() {
 		return winnaar;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public boolean getIsEindeSpel() {
 		return isEindeSpel;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public boolean rolDobbelstenen() {
 		if(aantalKeerGerold < 3) {
 			for(Dobbelsteen d:dobbelstenen) {
@@ -294,6 +391,9 @@ public class Spel {
 		return false;
 	}
 	
+	/**
+	 * 
+	 */
 	private void resetVoorVolgendeSpeler() {// moet nog private worden want wordt enkel gedaan als er een nieuwe speler speelt dus als Beurt Eïndigt
 		for(Dobbelsteen d:dobbelstenen) {
 			d.setNogRollen(true);
@@ -302,6 +402,13 @@ public class Spel {
 		this.aantalKeerGerold = 0;
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param index
+	 * 
+	 * @return
+	 */
 	public boolean veranderStatusNogRollenDobbelsteen(int index) {
 		Dobbelsteen dobbelsteen = dobbelstenen.get(index);
 		if(dobbelsteen.getNogRollen() == false) {
@@ -311,17 +418,40 @@ public class Spel {
 		}
 		return dobbelsteen.getNogRollen();
 	}
+	
+	/**
+	 *
+	 * 
+	 * @return
+	 */
 	public List<Dobbelsteen> getDobbelstenen(){
 		return this.dobbelstenen;
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public int getAantalKeerGerold() {
 		return this.aantalKeerGerold;
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public List<Fiche> getGezetteFiches() {
 		return spelbord.getFicheGebied().getGezettefiches();
 	}
+	
+	/**
+	 * 
+	 * @param kleur
+	 * 
+	 * @return
+	 */
 	public Speler beïndigBeurt(DobbelsteenKleur kleur) {
 		int positie = aantalKeerGerold;
 		boolean nogHerhalen = true;
@@ -353,6 +483,9 @@ public class Spel {
 		return current;
 	}
 	
+	/**
+	 * 
+	 */
 	public void beïndigRonde() {
 		verzetDeGebouwstenen();
 		geefSpelersPunten();
@@ -360,8 +493,16 @@ public class Spel {
 			s.cleanUpNaRonde();
 		}
 		veranderHuidigeSpeler(1);
-		
 	}
+	
+	/**
+	 * 
+	 * 
+	 * @param plaats
+	 * @param positieKleur
+	 * 
+	 * @return
+	 */
 	private int berekenPunten(int plaats,int positieKleur) {
 		int positie = plaats; //1 is altijd kleinste (“slechtste”), 2 is het middelste en 3 altijd het grootste (“beste”) => omgedraaid dan in de voorbeelden!
 		int x = positieKleur; //XYZ getallensysteem
@@ -374,6 +515,10 @@ public class Spel {
 		 }
 		 return res;
 	}
+
+	/**
+	 * 
+	 */
 	private void geefSpelersPunten() {
 		for(int positieKleur = 1;positieKleur <= 6;positieKleur ++) {
 			List<Gebouwsteen> gebouwstenen = spelbord.getGebouwpuntenGebied().getVoorsteGebouwstenen(ronde,positieKleur);
@@ -392,6 +537,10 @@ public class Spel {
 		}
 		
 	}
+	
+	/**
+	 * 
+	 */
 	private void verzetDeGebouwstenen() {
 		for(int positieKleur = 1;positieKleur <= 6;positieKleur ++) {
 			List<Zetsteen> zetstenen = spelbord.getResultatenGebied().getVoorsteZetstenen(positieKleur);
@@ -416,6 +565,13 @@ public class Spel {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * 
+	 * @param s
+	 * @param positieKleur
+	 */
 	private void geefBonus(Speler s,int positieKleur) {
 		Fiche gewonnenFiche = spelbord.getFicheGebied().getGezettefiches().stream().
 				filter(e -> e.getPositie() == positieKleur).
@@ -430,6 +586,12 @@ public class Spel {
 		}
 		spelbord.getFicheGebied().haalFicheWeg(gewonnenFiche);
 	}
+
+	/**
+	 * 
+	 * 
+	 * @param type
+	 */
 	public void veranderHuidigeSpeler(int type) {
 		//2 types mogelijk
 		//0 als het tijdens een ronde is
@@ -443,34 +605,6 @@ public class Spel {
 			} else {
 				huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler+1);
 			}
-			
-			//3 1 2 4
-//			if(huidigeSpeler.getIsStartSpeler()) {
-//				if(indexVanHuidigeSpeler == 0) {
-//					huidigeSpeler = gekozenSpelers.get(1);
-//					return;
-//				}else {
-//					huidigeSpeler = gekozenSpelers.get(0);
-//					return;
-//				}
-//				
-//				
-//			}else {
-//				if(indexVanHuidigeSpeler + 1 == gekozenSpelers.size()) {
-//					veranderHuidigeSpeler(1);
-//					return;
-//				}
-//				if((indexVanHuidigeSpeler + 2 == gekozenSpelers.size()&&gekozenSpelers.getLast().getIsStartSpeler())){
-//					veranderHuidigeSpeler(1);
-//					return;
-//				}
-//				if(gekozenSpelers.get(indexVanHuidigeSpeler + 1).getIsStartSpeler()) {
-//					huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 2);
-//					return;
-//				}
-//				huidigeSpeler = gekozenSpelers.get(indexVanHuidigeSpeler + 1);
-//				return;
-//			}
 		}
 		if(type == 1){
 			Speler starter = new Speler("Onbekend",2000);
@@ -487,15 +621,29 @@ public class Spel {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public Speler getHuidigeSpeler() {
 		return huidigeSpeler; 
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public int getRonde() {
-		
 		return ronde;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param startSpeler
+	 */
 	public void setStartSpeler(Speler startSpeler) {
 		for(Speler s:gekozenSpelers) {
 			s.setIsStartSpeler(false);
@@ -503,9 +651,4 @@ public class Spel {
 		this.startSpeler = startSpeler;
 		startSpeler.setIsStartSpeler(true);
 	}
-	
-	/*
-	 * alle code staat hierboven om een ronde te kunnen spelen
-	 */
-	
 }
