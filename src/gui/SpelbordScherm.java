@@ -424,6 +424,7 @@ public class SpelbordScherm extends BorderPane {
     
     public void beïndigBeurt(DobbelsteenKleur kleur) {
     	//hier wordt het neergeplaatst
+    	this.setDisable(false);
         SpelerDTO huidigeSpelerDTO = dc.beïndigBeurt(kleur);
         RolKnop.setDisable(false);
         SpeelKnop.setDisable(true);
@@ -438,25 +439,38 @@ public class SpelbordScherm extends BorderPane {
         if(dc.isEindeVanDeRonde()) {
         	beïndigDeRonde();
         	if(dc.getIsEindeSpel()) {
+        		RolKnop.setDisable(true);
+        		SpeelKnop.setDisable(true);
+        		herzetSpelersNaRonde();
         		dc.beïndigSpel();
         		dc.updateGespeeld();
         		dc.updateGewonnen();
+        		for (Label l:labelsSpelers) {
+            		l.setUnderline(false);
+            		l.setFont(Font.font("Algerian",18));
+            	}
+        		welkeRonde.setText(String.format(bundle.getString("label.eindeSpel")));
         		
-        		this.setBackground(null);
             	//hier komt het overwinningscherm dan
+        		Stage stage = new Stage();
         		WinnaarScherm ws = new WinnaarScherm(dc, taal);
-            	this.setCenter(ws);
-            	
+        		Scene scene = new Scene(ws);
+        		stage.setScene(scene);
+        		stage.setTitle("Alhambra: The Dice Game");
+        		stage.show();
+        		stage.setFullScreen(true);
+        		
         		return;
             }
         	beginRonde();
+        	welkeRonde.setText(String.format(bundle.getString("label.ronde"), dc.getRonde()));
         }
         try {
         	updateAantalZetstenen(huidigeSpelerDTO);
         }catch(Exception e) {
         	final String huidigeSpelerGebruikersnaam = huidigeSpelerDTO.gebruikersnaam();
         	huidigeSpelerDTO = dc.geefGekozenSpelers().stream()
-        			.filter(s -> s.gebruikersnaam() == huidigeSpelerGebruikersnaam)
+        			.filter(s -> s.gebruikersnaam().equals(huidigeSpelerGebruikersnaam))
         			.findFirst().get();
         	updateAantalZetstenen(huidigeSpelerDTO);
         }
@@ -481,7 +495,7 @@ public class SpelbordScherm extends BorderPane {
 	private void beïndigDeRonde() {
 		Alert a = new Alert(AlertType.INFORMATION);
 		a.setTitle(String.format(bundle.getString("nieuwe.ronde"), dc.getRonde()));
-		a.setHeaderText(bundle.getString("ronde.header"));
+		a.setHeaderText(bundle.getString(dc.getIsEindeSpel()?"eindspel.header":"ronde.header"));
 		a.setContentText(bundle.getString("ronde.context"));
 		a.showAndWait();
 		
@@ -495,7 +509,7 @@ public class SpelbordScherm extends BorderPane {
     	dc.geefGekozenSpelers().
     	stream().
     	forEach(e -> plaatsGebouwstenen(e.gebouwtsenen(), e.kleur()));
-    	welkeRonde.setText(String.format(bundle.getString("label.ronde"), dc.getRonde() + 1));
+    	
 
     	
 	}
@@ -552,6 +566,9 @@ public class SpelbordScherm extends BorderPane {
 		stage.show();
 		stage.setOnCloseRequest(e -> {
 			this.setDisable(false);
+			if(dc.getAantalKeerGerold() >= 3) {
+				RolKnop.setDisable(true);
+			}
 			disableDobbelstenen(false);
 			SpeelKnop.setDisable(false);
 		});

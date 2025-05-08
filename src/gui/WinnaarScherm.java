@@ -290,6 +290,7 @@ public class WinnaarScherm extends BorderPane {
 //		System.exit(0);
 		
 		MainMenuScherm mms = new MainMenuScherm(dc, taal);
+		
 		this.setCenter(mms);
 	}
 
