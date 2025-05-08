@@ -538,6 +538,7 @@ public class SpelbordScherm extends BorderPane {
     void SpeelKnopKlik(ActionEvent event) {
     	
     	disableDobbelstenen(true);
+    	SpeelKnop.setDisable(true);
     	this.setDisable(true);
     	kiesScherm();
     }
@@ -549,6 +550,11 @@ public class SpelbordScherm extends BorderPane {
 		stage.setScene(scene);
 		stage.setTitle(bundle.getString("kleur.titel"));
 		stage.show();
+		stage.setOnCloseRequest(e -> {
+			this.setDisable(false);
+			disableDobbelstenen(false);
+			SpeelKnop.setDisable(false);
+		});
     }
     
     private void plaatsGebouwstenen(List<GebouwsteenDTO> stenen, SpelerKleur kleur) {

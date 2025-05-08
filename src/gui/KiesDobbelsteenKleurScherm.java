@@ -62,7 +62,6 @@ public class KiesDobbelsteenKleurScherm extends GridPane {
 
 		BackgroundImage achtergrond = new BackgroundImage(foto, BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
-
 		this.setBackground(new Background(achtergrond));
 	}
 	
@@ -129,7 +128,7 @@ public class KiesDobbelsteenKleurScherm extends GridPane {
     private void gekozen(DobbelsteenKleur kleur) {
     	Stage stage = (Stage) groeneKleurKnop.getScene().getWindow();
     	stage.close();
-    	ss.setDisable(false);
+    	//ss.setDisable(false);
     	ss.beïndigBeurt(kleur);
     	
     	
