@@ -156,10 +156,10 @@ public class Spel {
 	}
 
 	/**
+	 * Hier wordt er gechecked of er al teveel spelers zijn of er wel een kleur is gekozen. Daarna zal de speler uit de lijst gehaald worden door middel van de spelerint. De kleur zal ingesteld worden en de speler zal toegevoegd worden in de lijst van gekozen spelers. De speler en kleur zullen dan verwijderd worden uit de beschikbare lijsten.
 	 * 
-	 * 
-	 * @param speler
-	 * @param kleur
+	 * @param speler is de index van de gekozen speler in de spelerlijst.
+	 * @param kleur is de kleur die de speler gekozen heeft.
 	 */
 	public void kiesSpeler(int speler, SpelerKleur kleur) {
 
@@ -179,7 +179,7 @@ public class Spel {
 	}
 
 	/**
-	 * 
+	 * Er wordt gechecked of de juiste aantal spelers meespelen. Daarna zullen de spelers zetstenen en gebouwstenen krijgen. Het aantal keer gerold en de ronde zullen op 0 gezet worden. Daarna zal de startspeler random gekozen worden, dat wordt dan ook ingesteld bij die speler. Daarna zal een ronde gestart worden.
 	 */
 	public void startSpel() {
 		if (gekozenSpelers.size() < 3 || gekozenSpelers.size() > 6) {
@@ -197,16 +197,16 @@ public class Spel {
 	}
 
 	/**
-	 * 
+	 * Het spel is gedaan dus zal de winnaar berekent worden.
 	 */
 	public void beïndigSpel() {
 		berekenWinnaar();
 	}
 
 	/**
+	 * Dit geeft het aantal zetstenen van de eerste speler.
 	 * 
-	 * 
-	 * @return
+	 * @return Het aantal zetstenen van de eerste speler.
 	 */
 	public int getAantalZetstenen() {
 
@@ -214,7 +214,7 @@ public class Spel {
 	}
 
 	/**
-	 * 
+	 * Dit kijkt hoeveel zetstenen de spelers moeten krijgen. Uiteindelijk worden deze aangemaakt en aan een speler toegekent en aan een resultatenGebied.
 	 */
 	private void geefSpelersZetstenen() {
 		int zetsteenAantal;
@@ -238,7 +238,7 @@ public class Spel {
 	}
 
 	/**
-	 * 
+	 * Hiermee krijgen alle gekozen spelers hun gebouwstenen.
 	 */
 	private void geefSpelerGebouwstenen() {
 		for (Speler sp : gekozenSpelers) {
@@ -248,27 +248,27 @@ public class Spel {
 	}
 
 	/**
+	 * Dit geeft de startspeler van de ronde.
 	 * 
-	 * 
-	 * @return
+	 * @return De startspeler van de ronde
 	 */
 	public Speler getStartSpeler() {
 		return startSpeler;
 	}
 
 	/**
+	 * Dit geef alle beschikbare (niet-gekozen) spelers.
 	 * 
-	 * 
-	 * @return
+	 * @return De beschikbare (niet-gekozen) spelers.
 	 */
 	public List<Speler> getBeschikbareSpelers() {
 		return beschikbareSpelers;
 	}
 
 	/**
+	 * Hier worden de winnaars berekent, dit gebeurt door alle punten van elke gekozen speler te vergelijken met elkaar. Dit retourneert een lijst omdat er meerdere winnaars kunnen zijn (meerdere mensen met hetzelfde aantal punten).
 	 * 
-	 * 
-	 * @return
+	 * @return Een lijst van alle spelers met de hoogste score
 	 */
 	public List<Speler> berekenWinnaar() {
 		winnaar = new ArrayList<Speler>(); // Initialiseer het veld
@@ -290,7 +290,7 @@ public class Spel {
 	}
 
 	/**
-	 * 
+	 * Hier wordt de ronde begonnen, zolang het niet de laatste ronde is wordt er een startspelerfiche geplaatst en op alle andere plaatsen wordt een bonusfiche geplaatst. De ronde zal met 1 verhoogd worden. De huidige speler zal veranderd worden en als het de derde ronde is zal de isEindeSpel op true gezet worden zodat er geen ronde meer gespeeld zal worden.
 	 */
 	public void startRonde() {
 		SecureRandom random = new SecureRandom();
@@ -310,9 +310,9 @@ public class Spel {
 	}
 	
 	/**
+	 * Hier zal de startspeler op een willekeurige positie gezet worden.
 	 * 
-	 * 
-	 * @param rand
+	 * @param rand is een SecureRandom waarmee de positie bepaalt wordt.
 	 */
 	private void plaatsStartSpelerFiche(SecureRandom rand) {
 		if(startspelerfiche.getPositie() == 0) {
@@ -323,11 +323,11 @@ public class Spel {
 	}
 	
 	/**
+	 * Dit geeft alle vrije plaatsen op het fichegebied aan.
 	 * 
+	 * @param fiches zijn de gezette fiches in het fichegebied.
 	 * 
-	 * @param fiches
-	 * 
-	 * @return
+	 * @return Alle vrije plaatsen op het fichegebied.
 	 */
 	private List<Integer> getVrijePlaatsen(List<Fiche> fiches){
 		List<Integer> vrijePlaatsen = new ArrayList<Integer>();
@@ -345,9 +345,9 @@ public class Spel {
 	}
 	
 	/**
+	 * Hiermee worden de bonusfiches geplaatst op het spelbord. Deze wordt uit de lijst gekozen door een random getal als index te gebruiken.
 	 * 
-	 * 
-	 * @param rand
+	 * @param rand is een SecureRandom waarmee bepaalt wordt welk fiche er zal geplaatst worden.
 	 */
 	private void plaatsBonusFiches(SecureRandom rand) {
 		for(int plaats:getVrijePlaatsen(spelbord.getFicheGebied().getGezettefiches())){
@@ -358,27 +358,27 @@ public class Spel {
 	}
 
 	/**
+	 * Hiermee krijg je de winaar(s) van het spel.
 	 * 
-	 * 
-	 * @return
+	 * @return De winnaar(s) van het spel.
 	 */
 	public List<Speler> getWinnaar() {
 		return winnaar;
 	}
 
 	/**
+	 * Hiermee kom je te weten of het spel gedaan is of niet.
 	 * 
-	 * 
-	 * @return
+	 * @return Of het spel gedaan is.
 	 */
 	public boolean getIsEindeSpel() {
 		return isEindeSpel;
 	}
 
 	/**
+	 * Hiermee rol je de dobbelsteen zolang het aantalKeerGerold minder dan 3 is. Je gaat over alle 3 de dobbelstenen en rolt ze.
 	 * 
-	 * 
-	 * @return
+	 * @return Je geeft aan of het rollen gelukt is.
 	 */
 	public boolean rolDobbelstenen() {
 		if(aantalKeerGerold < 3) {
@@ -392,9 +392,9 @@ public class Spel {
 	}
 	
 	/**
-	 * 
+	 * Hiermee worden de dobbelstenen en het aantalKeerGerold terug gezet naar hun beginwaarde voor de volgende speler.
 	 */
-	private void resetVoorVolgendeSpeler() {// moet nog private worden want wordt enkel gedaan als er een nieuwe speler speelt dus als Beurt Eïndigt
+	private void resetVoorVolgendeSpeler() {
 		for(Dobbelsteen d:dobbelstenen) {
 			d.setNogRollen(true);
 			d.setDobbelsteenKleur(null);
@@ -403,11 +403,11 @@ public class Spel {
 	}
 	
 	/**
+	 * Hiermee verander je de status van de dobbelsteen. Als deze geselecteerd is betekent dat hij niet meer mag rollen als de speler wilt rollen met de andere dobbelstenen.
 	 * 
+	 * @param index is over welke dobbelsteen het gaat.
 	 * 
-	 * @param index
-	 * 
-	 * @return
+	 * @return De status van de gekozen dobbelsteen.
 	 */
 	public boolean veranderStatusNogRollenDobbelsteen(int index) {
 		Dobbelsteen dobbelsteen = dobbelstenen.get(index);
@@ -420,37 +420,41 @@ public class Spel {
 	}
 	
 	/**
-	 *
+	 * Hiermee krijg je alle dobbelstenen.
 	 * 
-	 * @return
+	 * @return Alle dobbelstenen.
 	 */
 	public List<Dobbelsteen> getDobbelstenen(){
 		return this.dobbelstenen;
 	}
 	
 	/**
+	 * Hiermee krijg je hoeveel keer er al met de dobbelstenen is gerold.
 	 * 
-	 * 
-	 * @return
+	 * @return Hoeveel keer er al gerold is.
 	 */
 	public int getAantalKeerGerold() {
 		return this.aantalKeerGerold;
 	}
 	
 	/**
+	 * Hiermee krijg je alle gezette fiches.
 	 * 
-	 * 
-	 * @return
+	 * @return Alle gezette fiches.
 	 */
 	public List<Fiche> getGezetteFiches() {
 		return spelbord.getFicheGebied().getGezettefiches();
 	}
 	
 	/**
+	 * Hiermee wordt een beurt beïndigt, de zetsteen wordt doormiddel van een positie geplaatst. De positie wordt als volgt berekent: Het is een getal met 3 (XYZ) cijfers, het honderdtal (X) wordt gezet naar zodat we weten op welke kleur de zetsteen uiteindelijk moet komen te staan.
+	 * Het tiental (Y) wordt gezet op hoeveel dobbelstenen je van de gekozen kleur hebt gerold. De eenheid (Z) is in hoeveel keer je gerold hebt. Bij het plaatsen van de zetsteen wordt er gekeken of die positie al dan niet bezet is.
+	 * Als deze positie bezet is zal de zetsteen naar de vorige positie geplaatst worden. Dit totdat de positie niet bezet is door een andere zetsteen. De speler van wie de zetsteen geplaatst is wordt geretourneerd
+	 * Daarna wordt alles gereset voor de volgende speler en wordt de huidige speler veranderd naar de volgende in de lijst.
 	 * 
-	 * @param kleur
+	 * @param kleur is de kleur van de dobbelsteen die ze gekozen hebben.
 	 * 
-	 * @return
+	 * @return De speler van wie de zetsteen geplaatst is.
 	 */
 	public Speler beïndigBeurt(DobbelsteenKleur kleur) {
 		int positie = aantalKeerGerold;
@@ -484,7 +488,7 @@ public class Spel {
 	}
 	
 	/**
-	 * 
+	 * Hier worden de zetstenen verwijderd en de gebouwstenen verplaatst. De spelers krijgen hun punten en de huidige speler zal naar de nieuwe startspeler gezet worden.
 	 */
 	public void beïndigRonde() {
 		verzetDeGebouwstenen();
@@ -496,12 +500,13 @@ public class Spel {
 	}
 	
 	/**
+	 * Hier worden de punten van de speler berekent, hiervoor maken we gebruik van de positie van een formule die gebruik maakt van op welke plaats de gebouwsteen stond (1 = slecht, 3 = beste) en het honderdtal van een positie die allebei worden meegegeven. 
+	 * De plaats laat ons ook meteen weten in welke ronde we zijn. Plaats 3 wordt niet opgeroepen in de 2de ronde omdat dan alleen de eerste 2 punten krijgen. Hierdoor konden we onze formule zo maken dat deze methode altijd het juiste aantal punten meegeeft.
 	 * 
+	 * @param plaats is de plaats van de gebouwsteen.
+	 * @param positieKleur is uit welke kolom (kleur) de gebouwsteen komt.
 	 * 
-	 * @param plaats
-	 * @param positieKleur
-	 * 
-	 * @return
+	 * @return Het aantal punten dat de speler moet krijgen.
 	 */
 	private int berekenPunten(int plaats,int positieKleur) {
 		int positie = plaats; //1 is altijd kleinste (“slechtste”), 2 is het middelste en 3 altijd het grootste (“beste”) => omgedraaid dan in de voorbeelden!
