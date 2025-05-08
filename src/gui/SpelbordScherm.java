@@ -17,6 +17,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -477,6 +479,12 @@ public class SpelbordScherm extends BorderPane {
     }
 
 	private void beïndigDeRonde() {
+		Alert a = new Alert(AlertType.INFORMATION);
+		a.setTitle(String.format(bundle.getString("nieuwe.ronde"), dc.getRonde()));
+		a.setHeaderText(bundle.getString("ronde.header"));
+		a.setContentText(bundle.getString("ronde.context"));
+		a.showAndWait();
+		
     	dc.beïndigRonde();
     	for(GridPane gp:zetsteenGebieden) {
     		maakHetGebiedLeeg(gp);;
