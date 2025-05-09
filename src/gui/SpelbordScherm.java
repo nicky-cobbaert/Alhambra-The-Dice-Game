@@ -450,15 +450,20 @@ public class SpelbordScherm extends BorderPane {
             		l.setFont(Font.font("Algerian",18));
             	}
         		welkeRonde.setText(String.format(bundle.getString("label.eindeSpel")));
+        		welkeRonde.setFont(Font.font("Algerian",40));
         		
             	//hier komt het overwinningscherm dan
         		Stage stage = new Stage();
-        		WinnaarScherm ws = new WinnaarScherm(dc, taal);
+        		WinnaarScherm ws = new WinnaarScherm(dc, taal,this);
         		Scene scene = new Scene(ws);
         		stage.setScene(scene);
         		stage.setTitle("Alhambra: The Dice Game");
         		stage.show();
-        		stage.setFullScreen(true);
+        		stage.setMaximized(true);
+        		
+        		stage.setOnCloseRequest(e -> {
+        			gaTerugNaarMainMenu();
+        		});
         		
         		return;
             }
@@ -476,6 +481,12 @@ public class SpelbordScherm extends BorderPane {
         }
         
         veranderHuidigeSpeler();
+    }
+    
+    //Deze is public zodat deze ook vanuit het winnaarscherm getoont kan worden.
+    public void gaTerugNaarMainMenu() {
+    	MainMenuScherm mms = new MainMenuScherm(dc,taal);
+    	this.setCenter(mms);
     }
     
     private void beginRonde() {

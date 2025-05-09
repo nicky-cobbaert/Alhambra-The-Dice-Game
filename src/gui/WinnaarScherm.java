@@ -26,6 +26,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import utils.SpelerKleur;
 
 public class WinnaarScherm extends BorderPane {
@@ -33,6 +34,7 @@ public class WinnaarScherm extends BorderPane {
 	private char taal;
 	private final DomeinController dc;
 	private ResourceBundle bundle;
+	private final SpelbordScherm ss;
 	
 	private void loadFxmlScreen(String name) {
 		Locale locale = (taal == 'E') ? Locale.ENGLISH : new Locale("");
@@ -49,8 +51,9 @@ public class WinnaarScherm extends BorderPane {
 		}
 	}
 
-	public WinnaarScherm(DomeinController dc, char taal) {
+	public WinnaarScherm(DomeinController dc, char taal, SpelbordScherm ss) {
 		this.dc = dc;
+		this.ss = ss;
 		setTaal(taal);
 		loadFxmlScreen("WinnaarScherm.fxml");
 
@@ -284,14 +287,10 @@ public class WinnaarScherm extends BorderPane {
 
 	@FXML
 	void afsluitKlik(ActionEvent event) {
-		// platform.exit vraagt om de javafx programmas rustig af te sluiten
-		// system.exit forceert alle jvm processen om te stoppen
-//		Platform.exit();
-//		System.exit(0);
+		Stage stage = (Stage) afsluitButton.getScene().getWindow();
+		stage.close();
 		
-		MainMenuScherm mms = new MainMenuScherm(dc, taal);
-		
-		this.setCenter(mms);
+		ss.gaTerugNaarMainMenu();
 	}
 
 	@FXML

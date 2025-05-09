@@ -135,7 +135,7 @@ public class AlhambraApplicatie {
 			}
 		} while (nogHerhalen);
 		System.out.println("Het spel is gestart!");
-		System.out.println("Startspeler: " + dc.geefStartspeler());
+		System.out.println("Startspeler: " + dc.geefStartspeler().gebruikersnaam());
 		System.out.println("Volgende spelers nemen deel aan dit spel: ");
 		for (SpelerDTO dto : dc.geefGekozenSpelers()) {
 			System.out.printf("Speler: %-20s kleur: %s%-6s%s geboortejaar: %d met aantal zetstenen: %d%n",
