@@ -65,7 +65,7 @@ public class DomeinController {
 	}
 
 	// Zorgt ervoor dat berichten in cli mooi worden weergegeven
-	private String translateErrorKey(String key) {
+	public String translateErrorKey(String key) {
 		if (!isGUI) {
 			// Illegal argument exception word mooit gezet
 			Map<String, String> errorMessages = new HashMap<>();
@@ -74,6 +74,7 @@ public class DomeinController {
 					"Je moet tussen de leeftijd van 6 en 100 zijn om dit spel te mogen spelen");
 			errorMessages.put("kleur.exception", "Er is nog geen kleur geselecteerd");
 			errorMessages.put("spel.teveelSpelers", "Er mogen maximaal 6 spelers meedoen");
+			errorMessages.put("gebruikersnaam.gebruik", "Deze gebruikersnaam is al in gebruik");
 			// Add other translations as needed
 
 			return errorMessages.getOrDefault(key, key); // als er niks gevonden is default

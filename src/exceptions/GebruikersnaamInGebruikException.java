@@ -4,7 +4,7 @@ public class GebruikersnaamInGebruikException extends RuntimeException
 {
 
 	public GebruikersnaamInGebruikException() {
-		super("Gebruikersnaam reeds in gebruik.");
+		super("gebruikersnaam.gebruik");
 	}
 
 	public GebruikersnaamInGebruikException(String message) {

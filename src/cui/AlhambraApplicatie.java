@@ -41,7 +41,7 @@ public class AlhambraApplicatie {
 				System.err.printf("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!%n");
 				input.nextLine();
 			} catch (IllegalArgumentException e) {
-				System.err.println(e.getMessage());
+				System.err.printf(dc.translateErrorKey(e.getMessage()));
 			}
 		} while (isGeldig);
 		System.out.printf("Bedankt om te spelen. Hopelijk tot een volgende keer!");
@@ -84,9 +84,9 @@ public class AlhambraApplicatie {
 			} catch (InputMismatchException e) {
 				System.err.println("Je gaf een foute invoer in, lees goed wat je moet ingeven. Probeer opnieuw!");
 			} catch (IllegalArgumentException e) {
-				System.err.println(e.getMessage());
+				System.err.println(dc.translateErrorKey(e.getMessage()));
 			} catch (GebruikersnaamInGebruikException e) {
-				System.err.println(e.getMessage());
+				System.err.println(dc.translateErrorKey(e.getMessage()));
 			}
 		} while (nogHerhalen);
 	}
