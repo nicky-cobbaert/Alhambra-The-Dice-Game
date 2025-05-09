@@ -354,6 +354,7 @@ public class GebruikerKiesScherm extends BorderPane {
 	@FXML
 	void resetKnopOnAction(ActionEvent event) {
 
+		zoekBalk.setText(null);
 		// lijstje maken van alle spelers--------------------------------------
 
 		lijstAlleSpelersGenereren();
