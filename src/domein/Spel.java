@@ -522,7 +522,9 @@ public class Spel {
 	}
 
 	/**
-	 * 
+	 * Hier worden alle voorste gebouwstenen (die dus in de punten zouden vallen) per kleur (gebouwsoort) opgehaald uit het Spelbord en worden deze in een lijst gestoken. 
+	 * Dan zullen de gebouwenstenen van elke speler opgehaald worden en wordt er gekeken of deze gebouwstenen in de lijst van voorste gebouwstenen staan.
+	 * De punten dat de gebouwstenen waard zouden zijn worden dan met {@link #berekenPunten(int, int)} berekent en toegevoegd aan de speler. 
 	 */
 	private void geefSpelersPunten() {
 		for(int positieKleur = 1;positieKleur <= 6;positieKleur ++) {
@@ -544,7 +546,10 @@ public class Spel {
 	}
 	
 	/**
-	 * 
+	 * Hier worden de 2 voorste zetstenen gehaald uit een resultatengebied van een kleur en in een lijst gestoken op volgorde waar de beste (hoogst gegooid met het minst aantal worden) als eerste in de lijst staat.
+	 * Elke speler zijn zetstenen worden bekeken of ze in deze lijst staan. Als ze als eerste in de lijst staat, dan zal de verplaatsingswaarde 2 worden, die persoon mag 2 plaaten omhoog gaan in dat kleurengebied.
+	 * Als deze als 2de in de lijst staat zal de verplaatsingswaarde maar 1 worden omdat hij dan 1 plaats omhoog mag in dat kleurengebied. Ook zal hij met {@link #geefBonus(Speler, int)} de voordelen van het bonusfiche krijgen dat bij die kleur lag in die ronde.
+	 * Als ze er niet bijzitten wordt er niets gedaan.
 	 */
 	private void verzetDeGebouwstenen() {
 		for(int positieKleur = 1;positieKleur <= 6;positieKleur ++) {
@@ -572,10 +577,13 @@ public class Spel {
 	}
 	
 	/**
+	 * Eerst wordt het gewonnen bonusfiche opgehaald uit het spelbord. Daarna kijken we over welk soort fiche het gaat. Is dit een bonusfiche? Dan zullen we de speler de waarde van dit bonusfiche als punten geven.
+	 * Is dit een startspelerfiche? Dan zullen we eerst zorgen dat bij iedereen staat dat ze geen startspeler zijn om ervoor te zorgen dat de startspeler van de vorige ronde niet terug mag beginnen. 
+	 * Daarna wordt er wel bijgehouden dat de speler die het startspelerfiche gewonnen heeft wel de volgende ronde startspeler is.
+	 * Daarna zullen we de fiches verwijderd zullen worden.
 	 * 
-	 * 
-	 * @param s
-	 * @param positieKleur
+	 * @param s is over welke speler het gaat.
+	 * @param positieKleur is over welk kleurengebied van het spelbord het gaat.
 	 */
 	private void geefBonus(Speler s,int positieKleur) {
 		Fiche gewonnenFiche = spelbord.getFicheGebied().getGezettefiches().stream().
@@ -593,9 +601,12 @@ public class Spel {
 	}
 
 	/**
+	 * We hebben 2 mogelijke scenario's waar we van huidige speler willen veranderen. Als de ronde al bezig is of als deze pas begint. 
+	 * Als de ronde al bezig is zullen we de index van de huidige speler pakken en daar eentje bij optellen zodat we aan de volgende speler in de lijst komen. 
+	 * Als de speler de laatste in de lijst is zullen we terug gaan naar het begin van de lijst en zal de eerste speler van de lijst de huidige speler worden.
+	 * Als we een ronde gaan beginnen willen we uiteraard dat de startspeler de huidige speler wordt. Hiervoor gaan we bij elke speler gaan kijken of hij/zij startspeler is. De persoon die startspeler is zal dan als huidige speler gezet worden.
 	 * 
-	 * 
-	 * @param type
+	 * @param type is wanneer in het spel we veranderen van huidige speler. Net als een ronde begint of tijdens een ronde.
 	 */
 	public void veranderHuidigeSpeler(int type) {
 		//2 types mogelijk
@@ -627,27 +638,27 @@ public class Spel {
 	}
 
 	/**
+	 * Hiermee geef je de huidige speler terug.
 	 * 
-	 * 
-	 * @return
+	 * @return De huidige speler.
 	 */
 	public Speler getHuidigeSpeler() {
 		return huidigeSpeler; 
 	}
 
 	/**
+	 * Hiermee geef je de huidige ronde van het spel terug.
 	 * 
-	 * 
-	 * @return
+	 * @return De huidige ronde van het spel.
 	 */
 	public int getRonde() {
 		return ronde;
 	}
 
 	/**
+	 * Hiermee wordt de startspeler van de huidige ronde op de juiste speler gezet. 
 	 * 
-	 * 
-	 * @param startSpeler
+	 * @param startSpeler is de startspeler van de huidige ronde.
 	 */
 	public void setStartSpeler(Speler startSpeler) {
 		for(Speler s:gekozenSpelers) {
