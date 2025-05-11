@@ -17,18 +17,56 @@ import persistentie.SpelerMapper;
 import utils.DobbelsteenKleur;
 import utils.SpelerKleur;
 
+/**
+ * De {@code DomeinController} vormt de brug tussen de gebruikersinterface (CLI of GUI)
+ * en de domeinlogica. Deze klasse beheert spelers, het spelverloop en de communicatie
+ * met de repository (in zowel online- als offlinemodus).
+ * <p>
+ * Afhankelijk van de modus (CLI of GUI) wordt foutafhandeling anders behandeld.
+ */
+
 public class DomeinController {
 
+    /**
+     * Repository die verantwoordelijk is voor het ophalen en opslaan van spelers.
+     */
+	
 	private final SpelerRepository spelerRepo;
+    
+	/**
+     * De instantie van het spel dat op dit moment wordt gespeeld.
+     */
+	
 	private Spel spel;
+	
+    /**
+     * Vlag die aanduidt of de GUI-versie wordt gebruikt.
+     * <p>
+     * Indien {@code true}, wordt vertaling gebruikt. Indien {@code false}, wordt aangenomen
+     * dat de CLI-versie draait en is vertaling niet van toepassing.
+     */
+	
 	private boolean isGUI; // Nodig voor vertaling, bepaald of je in cli zit (geen vertaling) of gui (wel
 							// vertaling)
+	
+    /**
+     * Vlag die aanduidt of de applicatie in offline modus draait.
+     */
+	
 	private boolean isOffline;
+	
+    /**
+     * Maakt een nieuwe {@code DomeinController} aan en probeert verbinding te maken
+     * met de online spelerrepository. Bij mislukken wordt automatisch overgeschakeld
+     * naar een offlinemodus.
+     */
 	
 	public DomeinController() {
 
 		// try catch dient voor de offlinemodus te starten als er geen verbinding met
 		// VICHogent is.
+		
+		
 
 		SpelerRepository tempSpelerRepo;// ik wou de spelerRepo final houden
 
@@ -55,17 +93,35 @@ public class DomeinController {
 		isGUI = false; // Default is cli
 	}
 
+    /**
+     * Geeft aan of het spel in offlinemodus draait.
+     * 
+     * @return {@code true} indien offline, anders {@code false}
+     */
+	
 	public boolean isOffline() {
 		return isOffline;
 	}
 	
-
+    /**
+     * Stelt in of de controller in GUI-modus werkt.
+     *
+     * @param isGUI {@code true} voor GUI, {@code false} voor CLI
+     */
+	
 	public void setGUIMode(boolean isGUI) {
 		this.isGUI = isGUI;
 	}
-
-	// Zorgt ervoor dat berichten in cli mooi worden weergegeven
+	
+    /**
+     * Vertaalt foutmeldingssleutels naar begrijpelijke boodschappen (alleen in CLI).
+     *
+     * @param key de foutmelding sleutel
+     * @return vertaalde foutboodschap of sleutel zelf indien niet gevonden
+     */
+	
 	public String translateErrorKey(String key) {
+		// Zorgt ervoor dat berichten in cli mooi worden weergegeven
 		if (!isGUI) {
 			// Illegal argument exception word mooit gezet
 			Map<String, String> errorMessages = new HashMap<>();
@@ -82,6 +138,14 @@ public class DomeinController {
 		return key; // In GUI mode wordt de sluitel naar resourcebundel gestuurd
 	}
 
+    /**
+     * Registreert een nieuwe speler en voegt die toe aan de repository.
+     *
+     * @param gebruikersnaam de naam van de speler
+     * @param geboortejaar het geboortejaar van de speler
+     * @throws IllegalArgumentException indien ongeldig
+     */
+	
 	public void registreerSpeler(String gebruikersnaam, int geboortejaar) {
 		try {
 			Speler nieuweSpeler = new Speler(gebruikersnaam, geboortejaar);
@@ -102,14 +166,26 @@ public class DomeinController {
 //		Speler nieuweSpeler = new Speler(gebruikersnaam, geboortejaar);
 //		spelerRepo.voegToe(nieuweSpeler);
 //	}
+	
+    /**
+     * Initialiseert een nieuw spel met de geregistreerde spelers.
+     */
 
 	public void maakNieuwSpel() {
 		spel = new Spel(spelerRepo.geefAlleSpelers());
 	}
+	
+    /**
+     * Start het spel (voorafgaand aan de eerste ronde).
+     */
 
 	public void startSpel() {
 		spel.startSpel();
 	}
+	
+    /**
+     * Start een nieuwe spelronde.
+     */
 
 	public void startRonde() {
 		spel.startRonde();
@@ -119,6 +195,14 @@ public class DomeinController {
 //    	return spelerRepo.geefAlleSpelers();
 //    }
 //    
+	
+    /**
+     * Kiest een speler en wijst een kleur toe.
+     *
+     * @param s index van de speler in de lijst
+     * @param kleur gewenste {@link SpelerKleur}
+     */
+	
 	public void kiesSpelerEnKleur(int s, SpelerKleur kleur) {
 		spel.kiesSpeler(s, kleur); // s is de plaats in de arrayList!
 	}
@@ -131,12 +215,26 @@ public class DomeinController {
 	 * }
 	 */
 
+	
+    /**
+     * Geeft een lijst van beschikbare spelers in DTO-vorm.
+     *
+     * @return lijst van beschikbare spelers
+     */
+	
 	public List<SpelerDTO> geefBeschikbareSpelers() {
 
 		List<Speler> speler = spel.getBeschikbareSpelers();
 		return zetSpelersOmNaarSpelerDTOs(speler);
 
 	}
+	
+	/**
+	 * Zet een lijst van Speler-objecten om naar een lijst van SpelerDTO’s.
+	 * 
+	 * @param spelers De lijst met spelers.
+	 * @return Een lijst met SpelerDTO-objecten.
+	 */
 
 	private List<SpelerDTO> zetSpelersOmNaarSpelerDTOs(List<Speler> spelers) {
 		List<SpelerDTO> resultaat = new ArrayList<>();
@@ -148,6 +246,13 @@ public class DomeinController {
 
 		return resultaat;
 	}
+	
+	/**
+	 * Zet een lijst van Zetsteen-objecten om naar een lijst van ZetsteenDTO’s.
+	 * 
+	 * @param zetstenen De lijst met zetstenen.
+	 * @return Een lijst met ZetsteenDTO-objecten, of null als de invoer null is.
+	 */
 
 	private List<ZetsteenDTO> zetZetsteenNaarDTO(List<Zetsteen> zetstenen) {
 		List<ZetsteenDTO> zetsteenDTOs = new ArrayList<ZetsteenDTO>();
@@ -159,6 +264,13 @@ public class DomeinController {
 		}
 		return zetsteenDTOs;
 	}
+	
+	/**
+	 * Zet een lijst van Gebouwsteen-objecten om naar een lijst van GebouwsteenDTO’s.
+	 * 
+	 * @param gebouwstenen De lijst met gebouwstenen.
+	 * @return Een lijst met GebouwsteenDTO-objecten, of null als de invoer null is.
+	 */
 
 	private List<GebouwsteenDTO> zetGebouwsteenNaarDTO(List<Gebouwsteen> gebouwstenen) {
 		List<GebouwsteenDTO> gebouwsteenDTOs = new ArrayList<GebouwsteenDTO>();
@@ -170,6 +282,14 @@ public class DomeinController {
 		}
 		return gebouwsteenDTOs;
 	}
+	
+	/**
+	 * Zet een SpelerKleur om naar een ANSI-kleurcode voor console-uitvoer.
+	 * 
+	 * @param kleur De SpelerKleur.
+	 * @return De ANSI-kleurcode als string.
+	 * @throws IllegalArgumentException Als de kleur niet beschikbaar is.
+	 */
 
 	public static String kleurGever(SpelerKleur kleur) {
 
@@ -190,6 +310,14 @@ public class DomeinController {
 			throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
 		}
 	}
+	
+	/**
+	 * Zet een SpelerKleur om naar een GUI-kleur in Engelse notatie.
+	 * 
+	 * @param kleur De SpelerKleur.
+	 * @return De stringrepresentatie van de kleur voor GUI.
+	 * @throws IllegalArgumentException Als de kleur niet beschikbaar is.
+	 */
 
 	public static String kleurGeverGuiEditie(SpelerKleur kleur) {
 
@@ -210,25 +338,53 @@ public class DomeinController {
 			throw new IllegalArgumentException("Deze kleur is niet beschikbaar.");
 		}
 	}
+	
+    /**
+     * Geeft een lijst van reeds gekozen spelers.
+     *
+     * @return lijst van gekozen spelers
+     */
 
 	public List<SpelerDTO> geefGekozenSpelers() {
 		List<Speler> speler = spel.getGekozenSpelers();
 		return zetSpelersOmNaarSpelerDTOs(speler);
 	}
+	
+    /**
+     * Geeft beschikbare spelerkleuren.
+     *
+     * @return lijst van beschikbare kleuren
+     */
 
 	public List<SpelerKleur> geefBeschikbareSpelerKleuren() {
 
 		return spel.getBeschikbareKleuren();
 	}
 
+    /**
+     * Geeft de startspeler.
+     *
+     * @return DTO van de startspeler
+     */
+	
 	public SpelerDTO geefStartspeler() {
 		return zetSpelerOmNaarDTO(spel.getStartSpeler());
 	}
+	
+    /**
+     * Geeft het aantal zetstenen in het spel.
+     *
+     * @return aantal zetstenen
+     */
 
 	public int geefAantalZetstenen() {
 		return spel.getAantalZetstenen();
 	}
 
+    /**
+     * Update de statistieken van spelers die gewonnen hebben.
+     */
+	
 	public void updateGewonnen() {
 		
 		for (Speler s : spel.getWinnaar()) {
@@ -236,25 +392,52 @@ public class DomeinController {
 		}
 
 	}
+	
+    /**
+     * Update de statistieken van alle spelers die het spel gespeeld hebben.
+     */
 
 	public void updateGespeeld() {
 		for (Speler s : spel.getGekozenSpelers()) {
 			spelerRepo.updateGespeeld(s.getGebruikersnaam());
 		}
 	}
+	
+	/**
+	 * Start een nieuwe ronde in het spel.
+	 */
 
 	public void speelRonde() {
 		spel.startRonde();
 	}
+	
+    /**
+     * Geeft een lijst met de winnaars van het huidige spel.
+     *
+     * @return lijst van winnaars
+     */
 
 	public List<SpelerDTO> geefWinnaars() {
 		List<Speler> speler = spel.getWinnaar();
 		return zetSpelersOmNaarSpelerDTOs(speler);
 	}
+	
+    /**
+     * Geeft aan of het spel ten einde is.
+     *
+     * @return {@code true} indien het spel gedaan is
+     */
 
 	public boolean getIsEindeSpel() {
 		return spel.getIsEindeSpel();
 	}
+	
+	/**
+	 * Zoekt een speler met een naam die het meest overeenkomt met de opgegeven naam.
+	 * 
+	 * @param onzeNaam De naam die gezocht wordt.
+	 * @return Een map met overeenkomstige namen (als lijst) en het aantal gelijke letters.
+	 */
 
 	public Map<String, Object> zoekDezeSpeler(String onzeNaam) {
 
@@ -319,6 +502,12 @@ public class DomeinController {
 		return resultaat;
 
 	}
+	
+    /**
+     * Geeft de dobbelstenen van het huidige spel in DTO-vorm.
+     *
+     * @return lijst met dobbelsteenDTOs
+     */
 
 	public List<DobbelsteenDTO> getDobbelstenenDTOs() {
 		List<DobbelsteenDTO> dobbelsteenDTOs = new ArrayList<DobbelsteenDTO>();
@@ -329,18 +518,43 @@ public class DomeinController {
 		return dobbelsteenDTOs;
 	}
 
+    /**
+     * Verandert de status van een dobbelsteen zodat hij niet opnieuw gegooid wordt.
+     *
+     * @param index index van de dobbelsteen
+     * @return {@code true} indien de status met succes werd gewijzigd
+     */
+	
 	public boolean veranderStatusNogRollenDobbelsteen(int index) {
 		return spel.veranderStatusNogRollenDobbelsteen(index);
 	}
 
+	/**
+	 * Geeft het aantal keren dat er is gerold in het spel.
+	 * 
+	 * @return Het aantal worpen.
+	 */
+	
 	public int getAantalKeerGerold() {
 		return spel.getAantalKeerGerold();
 	}
+	
+    /**
+     * Gooit de dobbelstenen voor deze beurt.
+     *
+     * @return {@code true} indien de dobbelstenen werden gegooid
+     */
 
 	public boolean rolDobbelstenen() {
 		return spel.rolDobbelstenen();
 	}
 
+    /**
+     * Geeft de geplaatste fiches als DTOs.
+     *
+     * @return lijst van ficheDTOs
+     */
+	
 	public List<FicheDTO> getGeplaatsteFicheDTOs() {
 		List<FicheDTO> ficheDTOs = new ArrayList<FicheDTO>();
 		for (Fiche f : spel.getGezetteFiches()) {
@@ -354,14 +568,29 @@ public class DomeinController {
 		}
 		return ficheDTOs;
 	}
+	
+    /**
+     * Laat een spelerbeurt eindigen.
+     *
+     * @param kleur kleur van de dobbelsteen die eindigt
+     * @return de volgende speler
+     */
 
 	public SpelerDTO beïndigBeurt(DobbelsteenKleur kleur) {
 		return zetSpelerOmNaarDTO(spel.beïndigBeurt(kleur));
 	}
+	
+    /**
+     * Beeïndigt de huidige ronde.
+     */
 
 	public void beïndigRonde() {
 		spel.beïndigRonde();
 	}
+	
+    /**
+     * Beeïndigt het spel en voegt eventueel willekeurige punten toe in CLI-modus.
+     */
 
 	public void beïndigSpel() {
 		if(isGUI==false) {
@@ -373,29 +602,64 @@ public class DomeinController {
 		
 		spel.beïndigSpel();
 	}
+	
+    /**
+     * Start offlinemodus expliciet.
+     */
 
 	public void startOfflineModus() {
 		spelerRepo.startOfflineModus();
 	}
+	
+    /**
+     * Geeft het leaderboard van gespeelde spellen.
+     *
+     * @return lijst van spelers gesorteerd op score
+     */
 
 	public List<SpelerDTO> geefLeaderboard() {
 		return zetSpelersOmNaarSpelerDTOs(spelerRepo.geefLeaderboard());
 	}
+	
+	/**
+	 * Zet een Speler-object om naar een SpelerDTO.
+	 * 
+	 * @param s Het Speler-object dat omgezet moet worden.
+	 * @return Een SpelerDTO met de gegevens van de speler.
+	 */
 
 	private SpelerDTO zetSpelerOmNaarDTO(Speler s) {
 		return new SpelerDTO(s.getGebruikersnaam(), s.getGeboortejaar(), s.getAantalGespeeld(), s.getAantalGewonnen(),
 				s.getKleur(), zetZetsteenNaarDTO(s.getZetstenen()), zetGebouwsteenNaarDTO(s.getGebouwstenen()),
 				s.getPunten());
 	}
+	
+    /**
+     * Geeft de huidige speler van het spel.
+     *
+     * @return spelerDTO van de huidige speler
+     */
 
 	public SpelerDTO getHuidigeSpelerDTO() {
 		return zetSpelerOmNaarDTO(spel.getHuidigeSpeler());
 	}
 
+    /**
+     * Geeft het nummer van de huidige ronde.
+     *
+     * @return ronde-nummer
+     */
+	
 	public int getRonde() {
 
 		return spel.getRonde();
 	}
+	
+    /**
+     * Controleert of de ronde afgelopen is (alle zetstenen geplaatst).
+     *
+     * @return {@code true} indien ronde beëindigd is
+     */
 
 	public boolean isEindeVanDeRonde() {
 		int hoeveelZijnNietGezet = spel.getGekozenSpelers().stream().mapToInt(
