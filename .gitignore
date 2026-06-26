@@ -2,3 +2,16 @@
 
 .classpath
 .project
+
+# Gradle
+.gradle/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
