@@ -31,4 +31,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Alhambra-Game-JAR
-        path: target/alhambra-dice-game.jar
+        path: target/alhambra-dice-game-1.0-SNAPSHOT.jar
