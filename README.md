@@ -29,9 +29,10 @@ Lastly, I want to thank my colleagues because the project wouldn't have been as 
 
 ## Instructions
 
-> [!IMPORTANT]
-> Installation requires some technical knowledge.
-> I am working on an executable file to make the experience better.
+### Maven package
+
+
+### manual setup
 
 The game was created with the intention to be run from an **IDE** (such as *Eclipse* or *IntelliJ*). 
 
@@ -39,9 +40,11 @@ The game was created with the intention to be run from an **IDE** (such as *Ecli
 2. Install the following dependencies:
     - [**JavaFX 21**](https://gluonhq.com/products/javafx/)
     - [**H2 Module**](https://github.com/h2database/h2database/releases/)
-    - **JUnit 5** 
+    - **MySQL Database Driver module**
+    - **JUnit 5**
 
-3. Install **JUnit 5** <br>
+3. Install **javafx 21** for **java sdk 21**
+4. Install **JUnit 5** <br>
     For *Eclipse*: 
     1. Right-click the project folder 
     2. Properties
@@ -51,7 +54,7 @@ The game was created with the intention to be run from an **IDE** (such as *Ecli
     6. Add Library
     7. JUnit 5
 
-4. Add **JavaFX** and the **H2 Module** to the project's *classpath*. <br>
+5. Add **H2 Module** and **MySQL Database Driver module** to the project's *classpath*. <br>
     For *Eclipse*: 
     1. Right-click the project folder 
     2. Properties
@@ -60,4 +63,4 @@ The game was created with the intention to be run from an **IDE** (such as *Ecli
     5. Modulepath
     6. Add external JARs
 
-5. Start the GUI or CLI version of the game. The main classes for these versions can be found in `src/main`.
+6. Start the GUI or CLI version of the game. The main classes for these versions can be found in `src/main`.
