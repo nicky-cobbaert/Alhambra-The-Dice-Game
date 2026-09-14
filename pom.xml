@@ -121,7 +121,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedArtifactAttached>false</shadedArtifactAttached>
                             <shadedClassifierName>executable</shadedClassifierName>
 
                             <!-- Prevents duplicate module-info.class and signature errors -->
