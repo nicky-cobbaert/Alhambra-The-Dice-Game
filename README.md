@@ -29,7 +29,32 @@ Lastly, I want to thank my colleagues because the project wouldn't have been as 
 
 ## Instructions
 
-### Maven package
+### .jar file (recommended for Windows users)
+
+1. Download the `.jar` file **for your operating system** in `https://github.com/nicky-cobbaert/Alhambra-The-Dice-Game/releases`.
+2. Double-click the `.jar` file to execute it.
+
+> [!attention]
+> The linux `.jar` file can be unstable depending on the distribution being used.
+
+### Setup using Maven (recommended for Linux and MacOS users)
+
+#### IDE version (GUI)
+
+1. Download or clone this repository.
+2. Use a IDE of choice to build the Maven dependencies.
+
+> [!example]
+> Eclipse:
+> 
+> 3. Import the (whole) repository as a Maven project (import -> import folder as Maven project)
+> 4. Go to the main-class (files inside `src/main`, preferably `main.launcher`) of choice and execute it (green play button).
+
+#### command line version
+
+1. Download or clone this repository.
+2. Build the Maven dependencies using: `mvn build`
+3. Execute the `main.launcher` class.
 
 
 ### manual setup
