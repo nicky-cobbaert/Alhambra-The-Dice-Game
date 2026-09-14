@@ -1,0 +1,36 @@
+name: Build and Attach JAR to Release
+
+# This workflow ONLY runs when you create a "Tag" (like v1.0.0)
+on:
+  push:
+    tags:
+      - 'v*' 
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Gives GitHub permission to create the release
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn -B clean package -DskipTests
+
+      # This renames the file to something clean, like "Alhambra-Game-v1.0.0.jar"
+      - name: Rename the JAR file
+        run: mv target/alhambra-dice-game-1.0-SNAPSHOT.jar target/Alhambra-Game-${{ github.ref_name }}.jar
+
+      # This attaches the file to your GitHub Release
+      - name: Create Release and Attach JAR
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/Alhambra-Game-${{ github.ref_name }}.jar
